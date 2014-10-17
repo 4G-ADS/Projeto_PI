@@ -1,5 +1,7 @@
 package com.fafica.projeto_pi.repositorio;
 
+import java.util.ArrayList;
+
 import com.fafica.projeto_pi.modelos.Pesquisador;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioPesquisador;
 
@@ -12,8 +14,9 @@ public class RepositorioPesquisador implements IRepositorioPesquisador{
 	}
 
 	@Override
-	public void listarPesquisadores() {
+	public ArrayList<Pesquisador> listarPesquisadores() {
 		System.out.println("Chegando ao repositorio listarPesquisadores");
+		return null;
 		
 	}
 

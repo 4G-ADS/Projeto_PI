@@ -1,5 +1,7 @@
 package com.fafica.projeto_pi.repositorio;
 
+import java.util.ArrayList;
+
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioInstituicao;
 
@@ -12,13 +14,14 @@ public class RepositorioIntituicao implements IRepositorioInstituicao{
 	}
 
 	@Override
-	public void listarInstituicao() {
+	public ArrayList<Instituicao> listarInstituicao() {
 		System.out.println("Chegando ao repositorio listarInstituicao");
+		return null;
 		
 	}
 
 	@Override
-	public Instituicao procurarInstituicao(int id) {
+	public Instituicao procurarInstituicao(int idInstiruicao) {
 		System.out.println("Chegando ao repositorio procurarInstituicao");
 		return null;
 	}
@@ -30,13 +33,13 @@ public class RepositorioIntituicao implements IRepositorioInstituicao{
 	}
 
 	@Override
-	public void removerInstituicao(int id) {
+	public void removerInstituicao(int idInstituicao) {
 		System.out.println("Chegando ao repositorio removerIntituicao");
 		
 	}
 
 	@Override
-	public boolean existeInstituicao(int id) {
+	public boolean existeInstituicao(int idInstituicao) {
 		System.out.println("Chegando ao repositorio exibirIntituicao");
 		return false;
 	}

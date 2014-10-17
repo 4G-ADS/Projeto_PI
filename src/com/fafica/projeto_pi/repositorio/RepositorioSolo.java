@@ -1,5 +1,7 @@
 package com.fafica.projeto_pi.repositorio;
 
+import java.util.ArrayList;
+
 import com.fafica.projeto_pi.modelos.Solo;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioSolo;
 
@@ -12,14 +14,15 @@ public class RepositorioSolo implements IRepositorioSolo{
 	}
 
 	@Override
-	public Solo procurarSolo(int id) {
+	public Solo procurarSolo(int idSolo) {
 		System.out.println("Chegando ao repositorio procurarSolo");
 		return null;
 	}
 
 	@Override
-	public void listarSolo() {
+	public ArrayList<Solo> listarSolo() {
 		System.out.println("Chegando ao repositorio listarSolos");
+		return null;
 		
 	}
 
@@ -30,13 +33,13 @@ public class RepositorioSolo implements IRepositorioSolo{
 	}
 
 	@Override
-	public void removerSolo(int id) {
+	public void removerSolo(int idSolo) {
 		System.out.println("Chegando ao repositorio removerSolo");
 		
 	}
 
 	@Override
-	public boolean existeSolo(int id) {
+	public boolean existeSolo(int idSolo) {
 		System.out.println("Chegando ao repositorio existeSolo");
 		return false;
 	}

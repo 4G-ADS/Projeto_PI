@@ -1,5 +1,7 @@
 package com.fafica.projeto_pi.repositorio;
 
+import java.util.ArrayList;
+
 import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioReserva;
 
@@ -18,8 +20,9 @@ public class RepositorioReserva implements IRepositorioReserva{
 	}
 
 	@Override
-	public void listarReserva() {
+	public ArrayList<Reserva> listarReserva() {
 		System.out.println("Chegando ao repositorio listarReserva");
+		return null;
 		
 	}
 
