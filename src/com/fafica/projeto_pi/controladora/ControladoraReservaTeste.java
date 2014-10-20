@@ -56,17 +56,23 @@ public class ControladoraReservaTeste {
 			this.repositorioPesquisador.cadastrarPesquisadores(pesquisador);
 		}
 		
-		for (Planta planta : reserva.getPlantas()) {
-			
-//			if(){
+//		
+//		for (Planta planta : reserva.getPlantas()) {
+//			
+//			Planta p1 = new Planta();
+//		
+//			
+//			
+//			if(planta.getTamanho() > 0 && planta.getTamanho() <= 1){
+//				PlantaPequena pequena = p1;
 //				this.repositorioPlantaPequenaPorte.cadastrarPlantaPequenoPorte(plantapequena);
-//			}else if(){
+//			}else if(planta.getTamanho() > 1 && planta.getTamanho() <= 3){
 //				this.repositorioPlanataMedioPorte.cadastrarPlantaMedioPorte(plantamedia);
-//			}else if(){
+//			}else if(planta.getTamanho() > 3){
 //				this.repositorioPlantaGrandePorte.cadastrarPlantaGrandePorte(plantagrande);
 //			}
-			
-		}
+//			
+//		}
 		
 		//lista de solos
 		for (Solo solo : reserva.getSolos()) {

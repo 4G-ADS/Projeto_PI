@@ -2,7 +2,7 @@ package com.fafica.projeto_pi.modelos;
 
 import java.awt.Image;
 
-public class Planta {
+public abstract class Planta {
 
 	private int idPlanta;
 	private String especie;

@@ -17,25 +17,25 @@ public class ControladoraSolos {
 	}
 
 	public void cadastrarSolo(Reserva reserva){
-		System.out.println("Panssando pelo cadastrarSolo em controladoraSolo");
+		System.out.println("Pansando pelo cadastrarSolo em controladoraSolo");
 		for (Solo solo : reserva.getSolos()) {
 			this.repositorioSolo.cadastrarSolo(solo);
 		}
 	}
 
 	public ArrayList<Solo> listarSolos(){
-		System.out.println("Panssando pelo listarSolo em controladoraSolo");
+		System.out.println("Pansando pelo listarSolo em controladoraSolo");
 		return this.repositorioSolo.listarSolo();
 	}
 	
 	public Solo editarSolos(Solo solo){
-		System.out.println("Panssando pelo editarSolo em controladoraSolo");
+		System.out.println("Pansando pelo editarSolo em controladoraSolo");
 		this.repositorioSolo.editarSolo(solo);
 		return solo;
 	}
 	
 	public void procurarSolos(int idSolo){
-		System.out.println("Panssando pelo procurarSolo em controladoraSolo");
+		System.out.println("Pansando pelo procurarSolo em controladoraSolo");
 		this.repositorioSolo.procurarSolo(idSolo);
 		
 	}
