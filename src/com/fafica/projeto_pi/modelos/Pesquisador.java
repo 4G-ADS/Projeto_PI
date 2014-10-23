@@ -2,22 +2,18 @@ package com.fafica.projeto_pi.modelos;
 
 public class Pesquisador {
 	
+	private int idReserva;
 	private int idPesquisador;
 	private String nome;
 	private String cpf;
 	private int idade;
 	private String tipo;
 	
-	//metodo toString
-	@Override
-	public String toString() {
-		return "Pesquisador [idPesquisador=" + idPesquisador + ", nome=" + nome
-				+ ", cpf=" + cpf + ", idade=" + idade + ", tipo=" + tipo + "]";
-	}
-	
 	//construtor com campos
-	public Pesquisador(int idPesquisador, String nome, String cpf, int idade,
+	public Pesquisador(int idReserva, int idPesquisador, String nome, String cpf, int idade,
 			String tipo) {
+		
+		this.idReserva = idReserva;
 		this.idPesquisador = idPesquisador;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -26,10 +22,18 @@ public class Pesquisador {
 	}
 	
 	//metodos gets e sets
+	public int getIdReserva() {
+		return idReserva;
+	}
+
+	public void setIdReserva(int idReserva) {
+		this.idReserva = idReserva;
+	}
+
 	public int getIdPesquisador() {
 		return idPesquisador;
 	}
-
+	
 	public void setIdPesquisador(int idPesquisador) {
 		this.idPesquisador = idPesquisador;
 	}
@@ -65,9 +69,15 @@ public class Pesquisador {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
 
 	
+	//metodo toString
+	@Override
+	public String toString() {
+		return "Pesquisador [idReserva=" + idReserva + ", idPesquisador="
+				+ idPesquisador + ", nome=" + nome + ", cpf=" + cpf
+				+ ", idade=" + idade + ", tipo=" + tipo + "]";
+	}
 	
 
 }

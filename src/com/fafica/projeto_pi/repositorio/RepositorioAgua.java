@@ -2,27 +2,27 @@ package com.fafica.projeto_pi.repositorio;
 
 import java.util.ArrayList;
 
-import com.fafica.projeto_pi.modelos.Agua;
+import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioAgua;
 
 public class RepositorioAgua implements IRepositorioAgua{
 
 	@Override
-	public void cadastrarAgua(Agua agua) {
+	public void cadastrarAgua(NascenteAgua agua) {
 		// TODO Auto-generated method stub
 		System.out.println("Chegando ao repositorio cadastrarAgua");
 		
 	}
 
 	@Override
-	public Agua procurarAgua(int idAgua) {
+	public NascenteAgua procurarAgua(int idAgua) {
 		// TODO Auto-generated method stub
 		System.out.println("Chegando ao repositorio ProcurarAgua");
 		return null;
 	}
 
 	@Override
-	public ArrayList<Agua> listaAgua() {
+	public ArrayList<NascenteAgua> listaAgua() {
 		System.out.println("Chegando ao repositorio listarAgua");
 		return null;
 		
@@ -35,7 +35,7 @@ public class RepositorioAgua implements IRepositorioAgua{
 	}
 
 	@Override
-	public void editarAgua(Agua agua) {
+	public void editarAgua(NascenteAgua agua) {
 		System.out.println("Chegando ao repositorio editarAgua");
 		
 	}

@@ -10,35 +10,33 @@ public class Reserva {
 	private double tamanho;
 	private double latitude;
 	private double longitude;
-	private List<Planta> Plantas;
+	private List<PlantaPequenoPorte> listaPlantaPequena;
+	private List<PlantaMedioPorte> listaPlantaMedia;
+	private List<PlantaGrandePorte> listaPlantaGrande;
 	private List<Solo> Solos;
-	private List<Agua> agua;
+	private List<NascenteAgua> nascenteAgua;
 	private List<Pesquisador> pesquisadores;
-
+	
 	public Reserva(int idReserva, String clima, String nome, double tamanho,
-			double latitude, double longitude, List<Pesquisador> pesquisadores,
-			List<Planta> plantas, List<Solo> solos, List<Agua> agua) {
+			double latitude, double longitude,
+			List<PlantaPequenoPorte> listaPlantaPequena,
+			List<PlantaMedioPorte> listaPlantaMedia,
+			List<PlantaGrandePorte> listaPlantaGrande,
+			List<Solo> solos,			
+			List<NascenteAgua> nascenteAgua, 
+			List<Pesquisador> pesquisadores) {
 		this.idReserva = idReserva;
 		this.clima = clima;
 		this.nome = nome;
 		this.tamanho = tamanho;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.listaPlantaPequena = listaPlantaPequena;
+		this.listaPlantaMedia = listaPlantaMedia;
+		this.listaPlantaGrande = listaPlantaGrande;
+		Solos = solos;
+		this.nascenteAgua = nascenteAgua;
 		this.pesquisadores = pesquisadores;
-		this.Plantas = plantas;
-		this.Solos = solos;
-		this.agua = agua;
-	}
-
-	public Reserva(int idReserva, String clima, String nome, double tamanho,
-			double latitude, double longitude) {
-		super();
-		this.idReserva = idReserva;
-		this.clima = clima;
-		this.nome = nome;
-		this.tamanho = tamanho;
-		this.latitude = latitude;
-		this.longitude = longitude;
 	}
 
 	public int getIdReserva() {
@@ -89,12 +87,28 @@ public class Reserva {
 		this.longitude = longitude;
 	}
 
-	public List<Planta> getPlantas() {
-		return Plantas;
+	public List<PlantaPequenoPorte> getListaPlantaPequena() {
+		return listaPlantaPequena;
 	}
 
-	public void setPlantas(List<Planta> plantas) {
-		Plantas = plantas;
+	public void setListaPlantaPequena(List<PlantaPequenoPorte> listaPlantaPequena) {
+		this.listaPlantaPequena = listaPlantaPequena;
+	}
+
+	public List<PlantaMedioPorte> getListaPlantaMedia() {
+		return listaPlantaMedia;
+	}
+
+	public void setListaPlantaMedia(List<PlantaMedioPorte> listaPlantaMedia) {
+		this.listaPlantaMedia = listaPlantaMedia;
+	}
+
+	public List<PlantaGrandePorte> getListaPlantaGrande() {
+		return listaPlantaGrande;
+	}
+
+	public void setListaPlantaGrande(List<PlantaGrandePorte> listaPlantaGrande) {
+		this.listaPlantaGrande = listaPlantaGrande;
 	}
 
 	public List<Solo> getSolos() {
@@ -105,12 +119,12 @@ public class Reserva {
 		Solos = solos;
 	}
 
-	public List<Agua> getAgua() {
-		return agua;
+	public List<NascenteAgua> getNascenteAgua() {
+		return nascenteAgua;
 	}
 
-	public void setAgua(List<Agua> agua) {
-		this.agua = agua;
+	public void setNascenteAgua(List<NascenteAgua> agua) {
+		this.nascenteAgua = agua;
 	}
 
 	public List<Pesquisador> getPesquisadores() {
@@ -125,8 +139,11 @@ public class Reserva {
 	public String toString() {
 		return "Reserva [idReserva=" + idReserva + ", clima=" + clima
 				+ ", nome=" + nome + ", tamanho=" + tamanho + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", Plantas="
-				+ Plantas + ", Solos=" + Solos + ", agua=" + agua
-				+ ", pesquisadores=" + pesquisadores + "]";
-	}
+				+ latitude + ", longitude=" + longitude
+				+ ", listaPlantaPequena=" + listaPlantaPequena
+				+ ", listaPlantaMedia=" + listaPlantaMedia
+				+ ", listaPlantaGrande=" + listaPlantaGrande + ", Solos="
+				+ Solos + ", nascenteAgua=" + nascenteAgua + ", pesquisadores=" + pesquisadores
+				+ "]";
+	}	
 }

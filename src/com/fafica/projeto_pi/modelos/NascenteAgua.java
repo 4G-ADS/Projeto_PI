@@ -1,21 +1,31 @@
 package com.fafica.projeto_pi.modelos;
 
-public class Agua {
+public class NascenteAgua {
 
+	private int idReserva;
 	private int idAgua;
-	private int latitude;
-	private int longitude;
+	private double latitude;
+	private double longitude;
 	private String nomeFonte;
 	private String tipo;
 
-	public Agua(int idAgua, int latitude, int longitude, String nomeFonte,
-			String tipo) {
+	public NascenteAgua(int idReserva, int idAgua, double latitude, double longitude,
+			String nomeFonte, String tipo) {
 
+		this.idReserva = idReserva;
 		this.idAgua = idAgua;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.nomeFonte = nomeFonte;
 		this.tipo = tipo;
+	}
+
+	public int getIdReserva() {
+		return idReserva;
+	}
+
+	public void setIdReserva(int idReserva) {
+		this.idReserva = idReserva;
 	}
 
 	public int getIdAgua() {
@@ -26,7 +36,7 @@ public class Agua {
 		this.idAgua = idAgua;
 	}
 
-	public int getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
@@ -34,7 +44,7 @@ public class Agua {
 		this.latitude = latitude;
 	}
 
-	public int getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
@@ -60,9 +70,9 @@ public class Agua {
 
 	@Override
 	public String toString() {
-		return "Agua [idAgua=" + idAgua + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", nomeFonte=" + nomeFonte
-				+ ", tipo=" + tipo + "]";
+		return "Agua [idReserva=" + idReserva + ", idAgua=" + idAgua
+				+ ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", nomeFonte=" + nomeFonte + ", tipo=" + tipo + "]";
 	}
 
 }

@@ -4,10 +4,23 @@ import java.awt.Image;
 
 public class PlantaGrandePorte extends Planta{
 
-	public PlantaGrandePorte(int idPlanta, String especie, String nome,
-			double tamanho, Image imagem) {
-		super(idPlanta, especie, nome, tamanho, imagem);
-		// TODO Auto-generated constructor stub
+	private int idPantaGrandePorte;
+	public PlantaGrandePorte(int idReserva, int idPlanta,
+			String especie, String nome,
+			double tamanho, Image imagem,int idPantaGrandePorte) {
+		super(idReserva, idPlanta, especie, nome, tamanho, imagem);
+		this.idPantaGrandePorte = idPantaGrandePorte;
+	}
+	public int getIdPantaGrandePorte() {
+		return idPantaGrandePorte;
+	}
+	public void setIdPantaGrandePorte(int idPantaGrandePorte) {
+		this.idPantaGrandePorte = idPantaGrandePorte;
+	}
+	@Override
+	public String toString() {
+		return "PlantaGrandePorte [idPantaGrandePorte=" + idPantaGrandePorte
+				+ "]";
 	}
 
 }

@@ -21,7 +21,7 @@ public class ControladoraInstituicao {
 		this.repositorioInstituicao.cadastrarInstituicao(instituicao);
 	}
 	
-	public ArrayList<Instituicao> listarIntituicao(){
+	public ArrayList<Instituicao> listarInstituicao(){
 		System.out.println("Panssando pelo listarInstituicao em controladoraInstituicao");
 		return this.repositorioInstituicao.listarInstituicao();		
 	}

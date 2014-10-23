@@ -4,21 +4,34 @@ import java.awt.Image;
 
 public abstract class Planta {
 
+	private int idReserva;
 	private int idPlanta;
 	private String especie;
 	private String nome;
 	private double tamanho;
 	private Image imagem;
 	
-	public Planta(int idPlanta, String especie, String nome, double tamanho,
+	public Planta(int idReserva, int idPlanta, String especie, String nome, double tamanho,
 			Image imagem) {
-		super();
+		this.idReserva = idReserva;
 		this.idPlanta = idPlanta;
 		this.especie = especie;
 		this.nome = nome;
 		this.tamanho = tamanho;
 		this.imagem = imagem;
 	}
+	
+	public int getIdReserva() {
+		return idReserva;
+	}
+
+
+
+	public void setIdReserva(int idReserva) {
+		this.idReserva = idReserva;
+	}
+
+
 
 	public int getIdPlanta() {
 		return idPlanta;
@@ -64,9 +77,9 @@ public abstract class Planta {
 
 	@Override
 	public String toString() {
-		return "Planta [idPlanta=" + idPlanta + ", especie=" + especie
-				+ ", nome=" + nome + ", tamanho=" + tamanho + ", imagem="
-				+ imagem + "]";
+		return "Planta [idReserva=" + idReserva + ", idPlanta=" + idPlanta
+				+ ", especie=" + especie + ", nome=" + nome + ", tamanho="
+				+ tamanho + ", imagem=" + imagem + "]";
 	}
 	
 }
