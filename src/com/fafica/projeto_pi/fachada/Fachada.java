@@ -4,14 +4,17 @@ import java.util.ArrayList;
 
 import com.fafica.projeto_pi.controladora.ControladoraInstituicao;
 import com.fafica.projeto_pi.controladora.ControladoraReserva;
+import com.fafica.projeto_pi.controladora.ControladoraUsuario;
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.Reserva;
+import com.fafica.projeto_pi.modelos.Usuario;
 
 public class Fachada {
 
 	private static Fachada instance = null;
 	private ControladoraReserva controladoraReserva;
 	private ControladoraInstituicao controladoraInstituicao;
+	private ControladoraUsuario  controladoraUsuario;
 
 	private Fachada() {
 	}
@@ -86,4 +89,31 @@ public class Fachada {
 		this.controladoraInstituicao.procurarInstituicao(idInstituicao);
 	}
 
+	
+	public void cadastrarUsuario(Usuario usuario) {
+		System.out.println("Passando pela Fachada cadastrarInstituicao");
+		this.controladoraUsuario = new ControladoraUsuario();
+		this.controladoraUsuario.cadastrarUsuario(usuario);
+	}
+
+
+	public void editarUsuario(Usuario usuario) {
+		System.out.println("Passando pela Fachada editarInstituicao");
+		this.controladoraUsuario = new ControladoraUsuario();
+		this.controladoraUsuario.editarUsuario(usuario);
+	}
+
+	public void removerUsuario(int idUsuario) {
+		System.out.println("Passando pela Fachada removerInstituicao");
+		this.controladoraUsuario = new ControladoraUsuario();
+		this.controladoraUsuario.removerUsuario(idUsuario);
+	}
+
+	public void procurarUsuario(int idUsuario) {
+		System.out.println("Passando pela Fachada procurarInstituicao");
+		this.controladoraUsuario = new ControladoraUsuario();
+		this.controladoraUsuario.procurarUsuario(idUsuario);
+	}
+	
+	
 }
