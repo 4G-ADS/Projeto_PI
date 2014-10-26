@@ -1,5 +1,7 @@
 package com.fafica.projeto_pi.controladora;
 
+import java.sql.SQLException;
+
 import com.fafica.projeto_pi.modelos.Usuario;
 import com.fafica.projeto_pi.repositorio.RepositorioUsuario;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioUsuario;
@@ -8,11 +10,11 @@ public class ControladoraUsuario {
 
 	IRepositorioUsuario repositorioUsuario;
 	
-	public ControladoraUsuario(){
+	public ControladoraUsuario() throws Exception{
 		this.repositorioUsuario = new RepositorioUsuario();
 	}
 	
-	public void cadastrarUsuario(Usuario usuario){
+	public void cadastrarUsuario(Usuario usuario) throws SQLException{
 		System.out.println("Passando pela controladoraUsuario CadastrarUsuario");
 		this.repositorioUsuario.cadastrarUsuario(usuario);
 	}

@@ -1,6 +1,8 @@
 package com.fafica.projeto_pi.controladora;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Pesquisador;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
@@ -8,14 +10,14 @@ import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
 import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
 import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
-import com.fafica.projeto_pi.repositorio.RepositorioAgua;
+import com.fafica.projeto_pi.repositorio.RepositorioNascenteAgua;
 import com.fafica.projeto_pi.repositorio.RepositorioPesquisador;
 import com.fafica.projeto_pi.repositorio.RepositorioPlantaGrandePorte;
 import com.fafica.projeto_pi.repositorio.RepositorioPlantaMedioPorte;
 import com.fafica.projeto_pi.repositorio.RepositorioPlantaPequenoPorte;
 import com.fafica.projeto_pi.repositorio.RepositorioReserva;
 import com.fafica.projeto_pi.repositorio.RepositorioSolo;
-import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioAgua;
+import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioNascenteAgua;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioPesquisador;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioPlantaGrandePorte;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioPlantaMedioPorte;
@@ -28,22 +30,22 @@ public class ControladoraReserva {
 	IRepositorioReserva repositorioReserva;
 	IRepositorioPesquisador repositorioPesquisador;
 	IRepositorioSolo repositorioSolo;
-	IRepositorioAgua repositorioAgua;
+	IRepositorioNascenteAgua repositorioNascenteAgua;
 	IRepositorioPlantaGrandePorte repositorioPlantaGrandePorte;
 	IRepositorioPlantaMedioPorte repositorioPlanataMedioPorte;
 	IRepositorioPlantaPequenoPorte repositorioPlantaPequenaPorte;
 
-	public ControladoraReserva() {
+	public ControladoraReserva() throws Exception {
 		this.repositorioReserva = new RepositorioReserva();
 		this.repositorioPesquisador = new RepositorioPesquisador();
 		this.repositorioSolo = new RepositorioSolo();
-		this.repositorioAgua = new RepositorioAgua();
+		this.repositorioNascenteAgua = new RepositorioNascenteAgua();
 		this.repositorioPlantaGrandePorte = new RepositorioPlantaGrandePorte();
 		this.repositorioPlanataMedioPorte = new RepositorioPlantaMedioPorte();
 		this.repositorioPlantaPequenaPorte = new RepositorioPlantaPequenoPorte();
 	}
 
-	public void cadastrarReserva(Reserva reserva) {
+	public void cadastrarReserva(Reserva reserva) throws SQLException {
 		System.out.println("Passando pela controladora de reserva");
 		// Aqui fazemos a chamada do repositorio no metodo cadastrar para
 		// inserir no banco
@@ -59,23 +61,23 @@ public class ControladoraReserva {
 			this.repositorioPesquisador.cadastrarPesquisadores(pesquisador);
 		}
 
-		// lista de Plantas de pequeno porte
-		for (PlantaPequenoPorte PlantaPequna : reserva.getListaPlantaPequena()) {
-			this.repositorioPlantaPequenaPorte
-					.cadastrarPlantaPequenoPorte(PlantaPequna);
-		}
-
-		// lista de plantas de medio porte
-		for (PlantaMedioPorte plantaMedia : reserva.getListaPlantaMedia()) {
-			this.repositorioPlanataMedioPorte
-					.cadastrarPlantaMedioPorte(plantaMedia);
-		}
-
-		// lista de planta de grande porte
-		for (PlantaGrandePorte plantaGrande : reserva.getListaPlantaGrande()) {
-			this.repositorioPlantaGrandePorte
-					.cadastrarPlantaGrandePorte(plantaGrande);
-		}
+//		// lista de Plantas de pequeno porte
+//		for (PlantaPequenoPorte PlantaPequna : reserva.getListaPlantaPequena()) {
+//			this.repositorioPlantaPequenaPorte
+//					.cadastrarPlantaPequenoPorte(PlantaPequna);
+//		}
+//
+//		// lista de plantas de medio porte
+//		for (PlantaMedioPorte plantaMedia : reserva.getListaPlantaMedia()) {
+//			this.repositorioPlanataMedioPorte
+//					.cadastrarPlantaMedioPorte(plantaMedia);
+//		}
+//
+//		// lista de planta de grande porte
+//		for (PlantaGrandePorte plantaGrande : reserva.getListaPlantaGrande()) {
+//			this.repositorioPlantaGrandePorte
+//					.cadastrarPlantaGrandePorte(plantaGrande);
+//		}
 
 		// lista de solos
 		for (Solo solo : reserva.getSolos()) {
@@ -84,12 +86,12 @@ public class ControladoraReserva {
 
 		// lista de nascentes
 		for (NascenteAgua agua : reserva.getNascenteAgua()) {
-			this.repositorioAgua.cadastrarAgua(agua);
+			this.repositorioNascenteAgua.cadastrarAgua(agua);
 		}
 
 	}
 
-	public ArrayList<Reserva> listarReservas() {		
+	public ArrayList<Reserva> listarReservas() throws SQLException {		
 		System.out.println("Passando pelo listarReservas");
 		return repositorioReserva.listarReserva();
 	}

@@ -38,6 +38,17 @@ public class Reserva {
 		this.nascenteAgua = nascenteAgua;
 		this.pesquisadores = pesquisadores;
 	}
+	
+	public Reserva(int idReserva, String clima, String nome, double tamanho,
+			double latitude, double longitude) {
+		this.idReserva = idReserva;
+		this.clima = clima;
+		this.nome = nome;
+		this.tamanho = tamanho;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		
+	}
 
 	public int getIdReserva() {
 		return idReserva;

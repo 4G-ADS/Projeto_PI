@@ -16,7 +16,7 @@ import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
 import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
 
-public class Teste {
+public class TesteCadastrar {
 
 	public static void main(String[] args) {
 
@@ -31,17 +31,17 @@ public class Teste {
 		listaPesquisadores.add(p3);
 		
 		ArrayList <Solo> listaSolos = new ArrayList<Solo>();
-		Solo s1 = new Solo(01, 01, "Arrenoso", 15.5, "Sem recursos");
-		Solo s2 = new Solo(01, 02, "Rochoso", 15.0, "Sem recursos");
-		Solo s3 = new Solo(01, 01, "Rochoso", 5.0, "Minerio de ferro");
+		Solo s1 = new Solo(01, "Arrenoso", 155, "Sem recursos");
+		Solo s2 = new Solo(02, "Rochoso", 150, "Sem recursos");
+		Solo s3 = new Solo(01, "Rochoso", 50, "Minerio de ferro");
 		listaSolos.add(s1);
 		listaSolos.add(s2);
 		listaSolos.add(s3);		
 		
 		ArrayList <NascenteAgua> listaNascentes = new ArrayList<NascenteAgua>();
-		NascenteAgua nA1 = new NascenteAgua(01, 01, 2222.12, 1212.22, "Fonte Serra1", "Agua Doce");
-		NascenteAgua nA2 = new NascenteAgua(01, 02, 2222.12, 1212.22, "Fonte Serra1", "Agua Doce");
-		NascenteAgua nA3 = new NascenteAgua(01, 03, 2222.12, 1212.22, "Fonte Serra1", "Agua Doce");
+		NascenteAgua nA1 = new NascenteAgua(01, 22, 122, "Fonte Serra1", "Agua Doce");
+		NascenteAgua nA2 = new NascenteAgua(02, 222, 121, "Fonte Serra1", "Agua Doce");
+		NascenteAgua nA3 = new NascenteAgua(03, 2222, 1222, "Fonte Serra1", "Agua Doce");
 		listaNascentes.add(nA1);
 		listaNascentes.add(nA2);
 		listaNascentes.add(nA3);
@@ -60,11 +60,21 @@ public class Teste {
 		PlantaGrandePorte pGP = new PlantaGrandePorte(01, 03, "", "PlantaGrande", 10.3, imagem, 01);
 		listaPlantaGrandePorte.add(pGP);
 		
-		Reserva reserva = new Reserva(01, "Tropical", "Serra1", 35.5, 333322.12, 2323213.2,
+		Reserva reserva = new Reserva(01, "Tropical", "Serra1", 35.5, 332, 232,
 				listaPlantaPequenoPorte, listaPlantaMedioPorte, listaPlantaGrandePorte,
 				listaSolos, listaNascentes, listaPesquisadores);
+	
 		
-		fachada.cadastrarReserva(reserva);
+		
+		
+		try {
+			fachada.cadastrarReserva(reserva);
+			System.out.println("Teste concluido com sucesso");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.err.println("Deu erro - Porra");
+		}
 
 	}
 

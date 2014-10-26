@@ -2,28 +2,20 @@ package com.fafica.projeto_pi.modelos;
 
 public class Solo {
 	
-	private int idReserva;
 	private int idSolo;
 	private String tipo;
 	private double tamanho;
 	private String resursos;
 	
-	public Solo(int idReserva, int idSolo, String tipo, double tamanho,
+	public Solo(int idSolo, String tipo, double tamanho,
 			String resursos) {
-		this.idReserva = idReserva;
+		
 		this.idSolo = idSolo;
 		this.tipo = tipo;
 		this.tamanho = tamanho;
 		this.resursos = resursos;
 	}
 
-	public int getIdReserva() {
-		return idReserva;
-	}
-
-	public void setIdReserva(int idReserva) {
-		this.idReserva = idReserva;
-	}
 
 	public int getIdSolo() {
 		return idSolo;
@@ -59,9 +51,8 @@ public class Solo {
 
 	@Override
 	public String toString() {
-		return "Solo [idReserva=" + idReserva + ", idSolo=" + idSolo
-				+ ", tipo=" + tipo + ", tamanho=" + tamanho + ", resursos="
-				+ resursos + "]";
+		return "Solo [idSolo=" + idSolo	+ ", tipo=" + tipo + ", tamanho=" + tamanho
+				+ ", resursos="	+ resursos + "]";
 	}		
 
 }

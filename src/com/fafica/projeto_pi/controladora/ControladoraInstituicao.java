@@ -1,5 +1,6 @@
 package com.fafica.projeto_pi.controladora;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto_pi.modelos.Instituicao;
@@ -10,18 +11,18 @@ public class ControladoraInstituicao {
 	
 	private IRepositorioInstituicao repositorioInstituicao;
 	
-	public ControladoraInstituicao(){
+	public ControladoraInstituicao() throws Exception{
 		
 		this.repositorioInstituicao = new RepositorioIntituicao();
 	}
 
 	
-	public void cadastrarInstituicao(Instituicao instituicao){
+	public void cadastrarInstituicao(Instituicao instituicao) throws SQLException{
 		System.out.println("Panssando pelo cadastrarInstituicao em controladoraInstituicao");
 		this.repositorioInstituicao.cadastrarInstituicao(instituicao);
 	}
 	
-	public ArrayList<Instituicao> listarInstituicao(){
+	public ArrayList<Instituicao> listarInstituicao() throws SQLException{
 		System.out.println("Panssando pelo listarInstituicao em controladoraInstituicao");
 		return this.repositorioInstituicao.listarInstituicao();		
 	}

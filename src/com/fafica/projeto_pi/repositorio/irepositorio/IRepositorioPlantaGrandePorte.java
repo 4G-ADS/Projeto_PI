@@ -1,12 +1,13 @@
 package com.fafica.projeto_pi.repositorio.irepositorio;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
 
 public interface IRepositorioPlantaGrandePorte {
 
-	public void cadastrarPlantaGrandePorte(PlantaGrandePorte plantagrande);
+	public void cadastrarPlantaGrandePorte(PlantaGrandePorte plantagrande) throws SQLException;
 	public PlantaGrandePorte procurarPlantaGrandePorte(int idPlantaGrande);
 	public ArrayList<PlantaGrandePorte> listarPlantaGrandePorte();
 	public void removerPlantaGrandePorte(int idPlantaGrande);
