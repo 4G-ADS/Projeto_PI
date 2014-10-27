@@ -41,7 +41,7 @@ public class RepositorioPesquisador implements IRepositorioPesquisador{
 			
 			if (database == Database.ORACLE) {
 				stmt = this.connection.prepareStatement(sql,
-						new String[] { "CLIENTE_ID" });
+						new String[] { "id_pesquisador" });
 
 			} else {
 				stmt = this.connection.prepareStatement(sql,
@@ -76,8 +76,9 @@ public class RepositorioPesquisador implements IRepositorioPesquisador{
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-				Pesquisador pesquisador =  new Pesquisador(resultSet.getInt("id_reserva"), resultSet.getInt("id_pesquisador"),
-						resultSet.getString("nome"), resultSet.getString("cpf"), resultSet.getInt("idade"), resultSet.getString("tipo"));
+				Pesquisador pesquisador =  new Pesquisador(resultSet.getInt("id_pesquisador"),
+						resultSet.getString("nome"), resultSet.getString("cpf"), resultSet.getInt("idade"),
+						resultSet.getString("tipo"));
 				
 				listaPesquisadores.add(pesquisador);
 				

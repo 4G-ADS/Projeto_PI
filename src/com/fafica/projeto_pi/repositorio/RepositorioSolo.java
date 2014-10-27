@@ -81,8 +81,8 @@ public class RepositorioSolo implements IRepositorioSolo{
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-				Solo solo =  new Solo(resultSet.getInt("id_solo"), resultSet.getString("nome"),
-						resultSet.getDouble("tamanho"),resultSet.getString("tipo"));
+				Solo solo =  new Solo(resultSet.getInt("id_solo"), resultSet.getString("tipo"),
+						resultSet.getDouble("tamanho"),resultSet.getString("recursos"));
 				
 				listaSolo.add(solo);
 				

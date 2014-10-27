@@ -77,7 +77,7 @@ public class RepositorioNascenteAgua implements IRepositorioNascenteAgua{
 	}
 
 	@Override
-	public ArrayList<NascenteAgua> listaAgua() throws SQLException {
+	public ArrayList<NascenteAgua> listarNascenteAgua() throws SQLException {
 		System.out.println("Chegando ao repositorio listarAgua");
 		ArrayList<NascenteAgua> listaNascenteAgua = new ArrayList<NascenteAgua>();
 		PreparedStatement stmt = null;
@@ -85,7 +85,7 @@ public class RepositorioNascenteAgua implements IRepositorioNascenteAgua{
 		String sql = "";
 		
 		try{
-			sql = "select * from NascenteAgua";
+			sql = "select * from Nascente_Agua";
 			stmt = this.connection.prepareStatement(sql);
 			resultSet = stmt.executeQuery();
 			

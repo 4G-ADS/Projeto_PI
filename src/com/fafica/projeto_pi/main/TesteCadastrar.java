@@ -1,19 +1,18 @@
 package com.fafica.projeto_pi.main;
 
-import java.awt.Image;
-import java.util.ArrayList;
+import java.awt.Image;import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import org.w3c.dom.ls.LSInput;
-
 import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Pesquisador;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
 import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
 import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
-import com.fafica.projeto_pi.modelos.Reserva;
+import com.fafica.projeto_pi.modelos.ReservaCaracteristicas;
+import com.fafica.projeto_pi.modelos.ReservaRecursos;
 import com.fafica.projeto_pi.modelos.Solo;
 
 public class TesteCadastrar {
@@ -21,11 +20,11 @@ public class TesteCadastrar {
 	public static void main(String[] args) {
 
 		Fachada fachada = Fachada.getInstace();
-		
+				
 		ArrayList <Pesquisador> listaPesquisadores = new ArrayList<Pesquisador>();
-		Pesquisador p1 = new Pesquisador(01, 01, "joao", "123.123.123-12", 20, "Geologo");
-		Pesquisador p2 = new Pesquisador(01, 02, "Paulo", "456.456.456-45", 20, "Biologo");
-		Pesquisador p3 = new Pesquisador(01, 03, "Ercoi", "789.789.789-78", 20, "Biologo");
+		Pesquisador p1 = new Pesquisador( 01, "joao", "123.123.123-12", 20, "Geologo");
+		Pesquisador p2 = new Pesquisador( 02, "Paulo", "456.456.456-45", 20, "Biologo");
+		Pesquisador p3 = new Pesquisador( 03, "Ercoi", "789.789.789-78", 20, "Biologo");
 		listaPesquisadores.add(p1);
 		listaPesquisadores.add(p2);
 		listaPesquisadores.add(p3);
@@ -60,15 +59,26 @@ public class TesteCadastrar {
 		PlantaGrandePorte pGP = new PlantaGrandePorte(01, 03, "", "PlantaGrande", 10.3, imagem, 01);
 		listaPlantaGrandePorte.add(pGP);
 		
-		Reserva reserva = new Reserva(01, "Tropical", "Serra1", 35.5, 332, 232,
-				listaPlantaPequenoPorte, listaPlantaMedioPorte, listaPlantaGrandePorte,
-				listaSolos, listaNascentes, listaPesquisadores);
+		ReservaCaracteristicas reservaCaracteristicas = new ReservaCaracteristicas(01, "Tropical", "Serra1", 35.5, 332, 232);
 	
+		ReservaRecursos reservaRecursos = new ReservaRecursos(listaPlantaPequenoPorte, listaPlantaMedioPorte, listaPlantaGrandePorte,
+				listaSolos, listaNascentes, listaPesquisadores);
 		
+		Instituicao instituicao = new Instituicao("Vale2", "mineradora", "123.123.123/12-12");
 		
 		
 		try {
-			fachada.cadastrarReserva(reserva);
+			fachada.cadastrarReservaCaracteristicas(reservaCaracteristicas);
+			
+			fachada.cadastrarPesquisadores(reservaRecursos);
+			fachada.cadastrarNascente(reservaRecursos);
+			fachada.cadastrarSolo(reservaRecursos);
+			fachada.cadastrarPlantaPequenoPorte(reservaRecursos);
+			fachada.cadastrarPlantaMedioPorte(reservaRecursos);
+			fachada.cadastrarPlantaGrandePorte(reservaRecursos);
+			fachada.cadastrarInstituicao(instituicao);
+			
+			
 			System.out.println("Teste concluido com sucesso");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

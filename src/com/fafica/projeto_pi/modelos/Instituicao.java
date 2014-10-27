@@ -9,8 +9,14 @@ public class Instituicao {
 	
 	//construtor
 	public Instituicao(int idInstituicao, String nome, String tipo, String cnpj) {
-		super();
 		this.idInstituicao = idInstituicao;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.cnpj = cnpj;
+	}
+	
+	
+	public Instituicao(String nome, String tipo, String cnpj) {
 		this.nome = nome;
 		this.tipo = tipo;
 		this.cnpj = cnpj;

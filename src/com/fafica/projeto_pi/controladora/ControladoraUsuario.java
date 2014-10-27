@@ -1,6 +1,7 @@
 package com.fafica.projeto_pi.controladora;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.fafica.projeto_pi.modelos.Usuario;
 import com.fafica.projeto_pi.repositorio.RepositorioUsuario;
@@ -19,6 +20,12 @@ public class ControladoraUsuario {
 		this.repositorioUsuario.cadastrarUsuario(usuario);
 	}
 
+	public ArrayList<Usuario> listarUsuarios() throws SQLException{
+		System.out.println("Passando pela controladoraUsuario listarUsuario");
+		return this.repositorioUsuario.listarUsuario();
+	}
+	
+	
 	public void editarUsuario(Usuario usuario){
 		System.out.println("Passando pela controladoraUsuario editarUsuario");
 		this.repositorioUsuario.editarUsuario(usuario);
