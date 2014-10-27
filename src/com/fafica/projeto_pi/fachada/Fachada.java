@@ -39,7 +39,7 @@ public class Fachada {
 		}
 		return Fachada.instance;
 	}
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void cadastrarReservaCaracteristicas(ReservaCaracteristicas reservaCaracteristicas) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarReserva");
 		this.controladoraReservaCaracteristicas = new ControladoraReservaCaracteristicas();
