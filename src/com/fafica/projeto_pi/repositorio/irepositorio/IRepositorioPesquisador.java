@@ -9,8 +9,9 @@ public interface IRepositorioPesquisador {
 
 	public void cadastrarPesquisadores(Pesquisador pesquisador) throws SQLException;
 	public ArrayList<Pesquisador> listarPesquisadores() throws SQLException;
-	public Pesquisador procurarPesquisadores(int idPesquisador);
-	public void editarPesquisadores(Pesquisador pesquisador);
-	public void removerPesquisadores(int idPesquisador);
+	public ArrayList<Pesquisador> listarPesquisadores(int idReserva) throws SQLException;
+	public Pesquisador procurarPesquisadores(int idPesquisador) throws SQLException;
+	public void editarPesquisadores(Pesquisador pesquisador) throws SQLException;
+	public void removerPesquisadores(int idPesquisador) throws SQLException;
 	public boolean existePesquisadores(int idPesquisador);
 }

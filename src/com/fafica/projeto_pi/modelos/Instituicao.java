@@ -1,28 +1,37 @@
 package com.fafica.projeto_pi.modelos;
 
 public class Instituicao {
-	
+
 	private int idInstituicao;
+	private int idReserva;
 	private String nome;
 	private String tipo;
 	private String cnpj;
-	
-	//construtor
+
+	// construtor
+	public Instituicao(String nome,
+			String tipo, String cnpj,int idreserva ) {
+		this.idReserva = idreserva;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.cnpj = cnpj;
+	}
+
 	public Instituicao(int idInstituicao, String nome, String tipo, String cnpj) {
+		super();
 		this.idInstituicao = idInstituicao;
 		this.nome = nome;
 		this.tipo = tipo;
 		this.cnpj = cnpj;
 	}
-	
-	
+
 	public Instituicao(String nome, String tipo, String cnpj) {
 		this.nome = nome;
 		this.tipo = tipo;
 		this.cnpj = cnpj;
 	}
-	
-	//gets e sets
+
+	// gets e sets
 	public int getIdInstituicao() {
 		return idInstituicao;
 	}
@@ -54,15 +63,21 @@ public class Instituicao {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	
-	//toString
+
+	public int getIdReserva() {
+		return idReserva;
+	}
+
+	public void setIdReserva(int idReserva) {
+		this.idReserva = idReserva;
+	}
+
+	// toString
 	@Override
 	public String toString() {
-		return "Instituicao [idInstituicao=" + idInstituicao + ", nome=" + nome
-				+ ", tipo=" + tipo + ", cnpj=" + cnpj + "]";
+		return "Instituicao [IdReserva=" + idReserva+ "idInstituicao="
+				+ idInstituicao + ", nome=" + nome + ", tipo=" + tipo
+				+ ", cnpj=" + cnpj + "]";
 	}
-	
-	
-	
 
 }

@@ -8,8 +8,9 @@ import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
 public interface IRepositorioPlantaMedioPorte {
 
 	public void cadastrarPlantaMedioPorte(PlantaMedioPorte plantamedia) throws SQLException;
-	public ArrayList<PlantaMedioPorte> listarPlantaMedioPorte();
-	public PlantaMedioPorte procurar(int idPlantaMedia);
-	public void removerPlantaMedioPorte(int idPlantaMedia);
+	public ArrayList<PlantaMedioPorte> listarPlantaMedioPorte() throws SQLException;
+	public ArrayList<PlantaMedioPorte> listarPlantaMedioPorte(int idReserva) throws SQLException;
+	public PlantaMedioPorte procurarPlantaMedia(int idPlantaMedia) throws SQLException;
+	public void removerPlantaMedioPorte(int idPlantaMedia) throws SQLException;
 	public boolean existePlantaMedioPorte(int idPlantaMedia);
 }

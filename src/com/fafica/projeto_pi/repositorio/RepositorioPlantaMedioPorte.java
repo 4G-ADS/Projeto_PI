@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
+import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
 import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioPlantaMedioPorte;
 
@@ -32,83 +33,151 @@ public class RepositorioPlantaMedioPorte implements IRepositorioPlantaMedioPorte
 	@Override
 	public void cadastrarPlantaMedioPorte(PlantaMedioPorte plantaMedia) throws SQLException {
 		System.out.println("Chegando ao RepositorioPlantaMedioPorte cadastrarPlantaMedioPorte");
-//		
-//		PreparedStatement stmt1 = null;	
-//		String sql1 = null;
-//		ResultSet resultSet1 = null;
-//		
-//		PreparedStatement stmt2 = null;	
-//		String sql2 = null;
-//		ResultSet resultSet2 = null;
-//				
-//			try {
-//				sql1 = "INSERT INTO Plantas(especie,nome,tamanho )values(?,?,?)";
-//				sql2 = "INSERT INTO Planta_Medio_porte(id_planta)values(?)";
-//				
-//				if (database == Database.ORACLE) {
-//					stmt1 = this.connection.prepareStatement(sql1,
-//							new String[] { "id_planta" });
-//					
-//					stmt2 = this.connection.prepareStatement(sql2,
-//							new String[] { "id_planta_media_porte" });
-//
-//				} else {
-//					stmt1 = this.connection.prepareStatement(sql1,
-//							Statement.RETURN_GENERATED_KEYS);
-//					stmt2 = this.connection.prepareStatement(sql2,
-//							Statement.RETURN_GENERATED_KEYS);
-//				}
-//				
-//				stmt1.setString(1, plantaMedia.getEspecie());
-//				stmt1.setString(2, plantaMedia.getNome());
-//				stmt1.setDouble(3, plantaMedia.getTamanho());
-//				
-//				stmt1.execute();
-//				
-//				resultSet1 = stmt1.getGeneratedKeys();
-//				
-//				int id = 0;
-//				while(resultSet1.next()){
-//					int idTeste = resultSet1.getInt("id_planta");
-//					if(idTeste != 0){
-//						id = idTeste;
-//					}
-//				}
-//				
-//
-//				
-//				if(id != 0){
-//				stmt2.setInt(1, id);
-//				}
-//				
-//				stmt2.execute();			
-//				resultSet2 = stmt2.getGeneratedKeys();
-//				
-//			} finally {
-//				stmt1.close();
-//				stmt2.close();
-//			}
-//
-//		
-//		
-	}
+		
+		PreparedStatement stmt = null;	
+		String sql = null;
+		ResultSet resultSet = null;
+		
+				
+			try {
+				sql = "INSERT INTO Planta_medio_porte(id_reserva,especie,nome,tamanho)values(?,?,?,?)";
 
-	@Override
-	public ArrayList<PlantaMedioPorte> listarPlantaMedioPorte() {
-		System.out.println("Chegando ao RepositorioPlantaMedioPorte listarPlantaMedioPorte");
-		return null;
+				
+				if (database == Database.ORACLE) {
+					stmt = this.connection.prepareStatement(sql,
+							new String[] { "id_planta_Medio_porte" });
+					
+
+
+				} else {
+					stmt = this.connection.prepareStatement(sql,
+							Statement.RETURN_GENERATED_KEYS);
+					
+
+				}
+				
+				stmt.setInt(1, plantaMedia.getIdReserva());
+				stmt.setString(2, plantaMedia.getEspecie());
+				stmt.setString(3, plantaMedia.getNome());
+				stmt.setDouble(4, plantaMedia.getTamanho());
+				
+				stmt.execute();
+				
+				resultSet = stmt.getGeneratedKeys();
+			
+
+				
+			} finally {
+				stmt.close();
+	
+			}
+
+		
 		
 	}
 
 	@Override
-	public PlantaMedioPorte procurar(int id) {
-		System.out.println("Chegando ao RepositorioPlantaMedioPorte procurarPlantaMedioPorte");
-		return null;
+	public ArrayList<PlantaMedioPorte> listarPlantaMedioPorte() throws SQLException {
+		System.out.println("Chegando ao RepositorioPlantaMedioPorte listarPlantaMedioPorte");
+		ArrayList<PlantaMedioPorte> listaPlanta = new ArrayList<PlantaMedioPorte>();
+		
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String sql = "";
+		
+		try{
+			sql = "select * from Planta_medio_porte ";
+			
+			stmt = this.connection.prepareStatement(sql);
+			resultSet = stmt.executeQuery();
+			
+			while(resultSet.next()){
+			
+				PlantaMedioPorte  plantaMedia = new PlantaMedioPorte(resultSet.getString("especie"), resultSet.getString("nome"),
+						resultSet.getDouble("tamanho"),resultSet.getInt("id_planta_medio_porte"));
+				listaPlanta.add(plantaMedia);
+				
+			}
+			
+		}finally{
+		
+			stmt.close();
+			resultSet.close();
+		}		
+		return listaPlanta;
+		
 	}
 
 	@Override
-	public void removerPlantaMedioPorte(int id) {
+	public ArrayList<PlantaMedioPorte> listarPlantaMedioPorte(int idReserva) throws SQLException {
+		System.out.println("Chegando ao RepositorioPlantaMedioPorte listarPlantaMedioPorte");
+		ArrayList<PlantaMedioPorte> listaPlanta = new ArrayList<PlantaMedioPorte>();
+		
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String sql = "";
+		
+		try{
+			sql = "select Planta_medio_porte.id_planta_medio_porte,Planta_medio_porte.nome,Planta_medio_porte.especie, ";
+			sql += "Planta_medio_porte.tamanho ";
+			sql += "from Reserva ";
+			sql += "inner join Planta_medio_porte ";
+			sql += "on Reserva.id_reserva = Planta_medio_porte.id_reserva ";
+			sql += "where Reserva.id_reserva = " + idReserva;
+			
+			stmt = this.connection.prepareStatement(sql);
+			resultSet = stmt.executeQuery();
+			
+			while(resultSet.next()){
+			
+				PlantaMedioPorte  plantaMedia = new PlantaMedioPorte(resultSet.getString("especie"), resultSet.getString("nome"),
+						resultSet.getDouble("tamanho"),resultSet.getInt("id_planta_medio_porte"));
+				listaPlanta.add(plantaMedia);
+				
+			}
+			
+		}finally{
+		
+			stmt.close();
+			resultSet.close();
+		}		
+		return listaPlanta;
+		
+	}
+	
+	
+	
+	@Override
+	public PlantaMedioPorte procurarPlantaMedia(int idPlantaMedia) throws SQLException {
+		System.out.println("Chegando ao RepositorioPlantaMedioPorte procurarPlantaMedioPorte");
+		PlantaMedioPorte plantaMedioProcura = null;
+		
+		ArrayList<PlantaMedioPorte> listarProcura = listarPlantaMedioPorte();
+		
+		for (PlantaMedioPorte plantaMedia : listarProcura) {
+			if(idPlantaMedia == plantaMedia.getIdPlantaMedioPorte()){
+				plantaMedioProcura = plantaMedia;
+			}
+		}
+		return plantaMedioProcura;
+	}
+
+	@Override
+	public void removerPlantaMedioPorte(int idPlantaMedia) throws SQLException {
 		System.out.println("Chegando ao RepositorioPlantaMedioPorte removerPlantaMedioPorte");
+
+		PreparedStatement stmt = null;
+		try {
+			String sql = "delete from Planta_medio_porte where id_planta_medio_porte = ?";
+			stmt = this.connection.prepareStatement(sql);
+			stmt.setInt(1, idPlantaMedia);
+			stmt.execute();
+			System.out.println("foi removido");
+		} finally {
+			stmt.close();
+		}
+
+	
 		
 	}
 

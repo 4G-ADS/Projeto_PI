@@ -5,40 +5,29 @@ import java.awt.Image;
 public abstract class Planta {
 
 	private int idReserva;
-	private int idPlanta;
 	private String especie;
 	private String nome;
 	private double tamanho;
-	private Image imagem;
-	
-	public Planta(int idReserva, int idPlanta, String especie, String nome, double tamanho,
-			Image imagem) {
+
+	public Planta(int idReserva, String especie, String nome, double tamanho) {
 		this.idReserva = idReserva;
-		this.idPlanta = idPlanta;
 		this.especie = especie;
 		this.nome = nome;
 		this.tamanho = tamanho;
-		this.imagem = imagem;
 	}
-	
+
+	public Planta(String especie, String nome, double tamanho) {
+		this.especie = especie;
+		this.nome = nome;
+		this.tamanho = tamanho;
+	}
+
 	public int getIdReserva() {
 		return idReserva;
 	}
 
-
-
 	public void setIdReserva(int idReserva) {
 		this.idReserva = idReserva;
-	}
-
-
-
-	public int getIdPlanta() {
-		return idPlanta;
-	}
-
-	public void setIdPlanta(int idPlanta) {
-		this.idPlanta = idPlanta;
 	}
 
 	public String getEspecie() {
@@ -64,22 +53,12 @@ public abstract class Planta {
 	public void setTamanho(double tamanho) {
 		this.tamanho = tamanho;
 	}
-	
-	
-	
-	public Image getImagem() {
-		return imagem;
-	}
 
-	public void setImagem(Image imagem) {
-		this.imagem = imagem;
-	}
 
 	@Override
 	public String toString() {
-		return "Planta [idReserva=" + idReserva + ", idPlanta=" + idPlanta
-				+ ", especie=" + especie + ", nome=" + nome + ", tamanho="
-				+ tamanho + ", imagem=" + imagem + "]";
+		return "Planta [idReserva=" + idReserva + ", especie=" + especie
+				+ ", nome=" + nome + ", tamanho=" + tamanho + "]";
 	}
-	
+
 }

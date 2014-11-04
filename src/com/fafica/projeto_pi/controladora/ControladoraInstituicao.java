@@ -27,17 +27,22 @@ public class ControladoraInstituicao {
 		return this.repositorioInstituicao.listarInstituicao();		
 	}
 	
-	public Instituicao procurarInstituicao(int idInstituicao){
+	public ArrayList<Instituicao> listarInstituicao(int idReserva) throws SQLException{
+		System.out.println("Panssando pelo listarInstituicao em controladoraInstituicao");
+		return this.repositorioInstituicao.listarInstituicao(idReserva);		
+	}
+	
+	public Instituicao procurarInstituicao(int idInstituicao)throws SQLException{
 		System.out.println("Panssando pelo procurarInstituicao em controladoraInstituicao");
 		return this.repositorioInstituicao.procurarInstituicao(idInstituicao);
 	}
 	
-	public void editarInstituicao(Instituicao instituicao){
+	public void editarInstituicao(Instituicao instituicao) throws SQLException{
 		System.out.println("Panssando pelo editarInstituicao em controladoraInstituicao");
 		this.repositorioInstituicao.editarInstituicao(instituicao);
 	}
 	
-	public void removerInstituicao(int idIntituicao){
+	public void removerInstituicao(int idIntituicao) throws SQLException{
 		System.out.println("Panssando pelo removerInstituicao em controladoraInstituicao");
 		this.repositorioInstituicao.removerInstituicao(idIntituicao);
 	}

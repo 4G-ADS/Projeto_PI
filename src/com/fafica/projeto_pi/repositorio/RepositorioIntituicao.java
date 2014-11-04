@@ -12,55 +12,58 @@ import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioInstituicao;
 
+public class RepositorioIntituicao implements IRepositorioInstituicao {
 
-public class RepositorioIntituicao implements IRepositorioInstituicao{
-
-	//variaveis para conexao
+	// variaveis para conexao
 	private Connection connection = null;
 	private int database = 0;
-		
-	//Os construtores vão dizer qual banco usar
+
+	// Os construtores vão dizer qual banco usar
 	public RepositorioIntituicao() throws Exception {
-	this.connection = Conexao.getConnection(Database.MYSQL);
-	this.database = Database.MYSQL;
+		this.connection = Conexao.getConnection(Database.MYSQL);
+		this.database = Database.MYSQL;
 	}
-	
-	public RepositorioIntituicao(int database) throws Exception{
+
+	public RepositorioIntituicao(int database) throws Exception {
 		this.connection = Conexao.getConnection(database);
 		this.database = database;
 	}
-	
-	
-	//Metodos do crud
+
+	// Metodos do crud
 	@Override
-	public void cadastrarInstituicao(Instituicao instituicao) throws SQLException {
+	public void cadastrarInstituicao(Instituicao instituicao)
+			throws SQLException {
 		System.out.println("Chegando ao repositorio cadastrarIntituicao");
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
 		String sql = "";
-		
+
 		try {
-			
-			sql = "INSERT INTO Instituicao(nome,cnpj,tipo) VALUES (?, ?, ?)";
-			if(database == Database.ORACLE){
-				stmt = this.connection.prepareStatement(sql,new String[] { "id_instituicao" });
-			}else{
-				stmt = this.connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+
+			sql = "INSERT INTO Instituicao(id_reserva,nome,cnpj,tipo) VALUES (?, ?, ?, ?)";
+			if (database == Database.ORACLE) {
+				stmt = this.connection.prepareStatement(sql,
+						new String[] { "id_instituicao" });
+			} else {
+				stmt = this.connection.prepareStatement(sql,
+						Statement.RETURN_GENERATED_KEYS);
 			}
-			
-			stmt.setString(1,instituicao.getNome());
-			stmt.setString(2,instituicao.getCnpj());
-			stmt.setString(3,instituicao.getTipo());
-			
+
+			stmt.setInt(1, instituicao.getIdReserva());
+			stmt.setString(2, instituicao.getNome());
+			stmt.setString(3, instituicao.getCnpj());
+			stmt.setString(4, instituicao.getTipo());
+
 			stmt.execute();
-			
+
 			resultSet = stmt.getGeneratedKeys();
 			System.out.println("INSERT CONCLUIDO COM SUCESSO");
 		} finally {
 			stmt.close();
-		}		
-		
+		}
+
 	}
+
 
 	@Override
 	public ArrayList<Instituicao> listarInstituicao() throws SQLException {
@@ -69,43 +72,125 @@ public class RepositorioIntituicao implements IRepositorioInstituicao{
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
 		String sql = "";
-		
+
 		try {
 			sql = "select * from Instituicao";
 			stmt = this.connection.prepareStatement(sql);
 			resultSet = stmt.executeQuery();
-			
-			while(resultSet.next()){
-				Instituicao instituicao = new Instituicao(resultSet.getInt("id_Instituicao"), resultSet.getString("nome"),
-						resultSet.getString("tipo"), resultSet.getString("cnpj"));
+
+			while (resultSet.next()) {
+				Instituicao instituicao = new Instituicao(
+						resultSet.getInt("id_Instituicao"),
+						resultSet.getString("nome"),
+						resultSet.getString("tipo"),
+						resultSet.getString("cnpj"));
 				listaInstituicao.add(instituicao);
 			}
-			
+
 		} finally {
 			stmt.close();
 			resultSet.close();
 		}
-		
-		return listaInstituicao;	
-		
+
+		return listaInstituicao;
+
 	}
 
 	@Override
-	public Instituicao procurarInstituicao(int idInstiruicao) {
+	public ArrayList<Instituicao> listarInstituicao(int idReserva)
+			throws SQLException {
+		System.out.println("Chegando ao repositorio listarInstituicao");
+		ArrayList<Instituicao> listaInstituicao = new ArrayList<Instituicao>();
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String sql = "";
+
+		try {
+			sql = "select Instituicao.id_instituicao, Instituicao.nome, Instituicao.tipo, Instituicao.cnpj ";
+			sql += "from Reserva ";
+			sql += "inner join Instituicao ";
+			sql += "on Reserva.id_reserva = Instituicao.id_reserva ";
+			sql += "where Reserva.id_reserva = " + idReserva;
+
+			stmt = this.connection.prepareStatement(sql);
+			resultSet = stmt.executeQuery();
+
+			while (resultSet.next()) {
+				Instituicao instituicao = new Instituicao(
+						resultSet.getInt("id_Instituicao"),
+						resultSet.getString("nome"),
+						resultSet.getString("tipo"),
+						resultSet.getString("cnpj"));
+				listaInstituicao.add(instituicao);
+			}
+
+		} finally {
+			stmt.close();
+			resultSet.close();
+		}
+
+		return listaInstituicao;
+
+	}
+
+	@Override
+	public Instituicao procurarInstituicao(int idInstituicao) throws SQLException {
 		System.out.println("Chegando ao repositorio procurarInstituicao");
-		return null;
+		Instituicao instituicaoProcura = null;
+		
+		ArrayList<Instituicao> listarProcura = listarInstituicao();
+		
+		for (Instituicao instituicao : listarProcura) {
+			if(idInstituicao == instituicao.getIdInstituicao()){
+				instituicaoProcura = instituicao;
+			}
+		}
+		return instituicaoProcura;
 	}
 
+
 	@Override
-	public void editarInstituicao(Instituicao instituicao) {
+	public void editarInstituicao(Instituicao instituicao) throws SQLException {
 		System.out.println("Chegando ao repositorio editarInstituicao");
-		
+		PreparedStatement stmt = null;
+		if(instituicao != null){
+			try{
+				String sql = "update Instituicao set nome = ? ,";
+				sql += "tipo = ? ,";
+				sql += "cnpj = ? ";
+				sql += "where id_instituicao = ?";
+				
+				stmt = this.connection.prepareStatement(sql);
+				
+				stmt.setString(1, instituicao.getNome());
+				stmt.setString(2, instituicao.getTipo());
+				stmt.setString(3, instituicao.getCnpj());
+				stmt.setInt(4, instituicao.getIdInstituicao());
+				
+				stmt.executeUpdate();			
+				System.out.println("Edição completada");
+			}finally{
+				stmt.close();
+			}
+		}
 	}
 
+	
 	@Override
-	public void removerInstituicao(int idInstituicao) {
+	public void removerInstituicao(int idInstituicao) throws SQLException {
 		System.out.println("Chegando ao repositorio removerIntituicao");
-		
+
+		PreparedStatement stmt = null;
+		try {
+			String sql = "delete from Instituicao where id_Instituicao = ?";
+			stmt = this.connection.prepareStatement(sql);
+			stmt.setInt(1, idInstituicao);
+			stmt.execute();
+			System.out.println("foi removido");
+		} finally {
+			stmt.close();
+		}
+
 	}
 
 	@Override

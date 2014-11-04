@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
+import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Solo;
 import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioSolo;
@@ -36,7 +37,7 @@ public class RepositorioSolo implements IRepositorioSolo{
 		ResultSet resultSet = null;
 		
 		try {
-			sql = "INSERT INTO Solo(tamanho,tipo,recursos)values(?,?,?)";
+			sql = "INSERT INTO Solo(id_reserva,tamanho,tipo,recursos)values(?,?,?,?)";
 			
 			
 			if (database == Database.ORACLE) {
@@ -46,9 +47,10 @@ public class RepositorioSolo implements IRepositorioSolo{
 				stmt = this.connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			}
 			
-			stmt.setDouble(1, solo.getTamanho());
-			stmt.setString(2, solo.getTipo());
-			stmt.setString(3, solo.getResursos());
+			stmt.setInt(1, solo.getIdReserva());
+			stmt.setDouble(2, solo.getTamanho());
+			stmt.setString(3, solo.getTipo());
+			stmt.setString(4, solo.getResursos());
 			
 			stmt.execute();
 			
@@ -62,9 +64,18 @@ public class RepositorioSolo implements IRepositorioSolo{
 	}
 
 	@Override
-	public Solo procurarSolo(int idSolo) {
+	public Solo procurarSolo(int idSolo) throws SQLException {
 		System.out.println("Chegando ao repositorio procurarSolo");
-		return null;
+		Solo soloProcura = null;
+		
+		ArrayList<Solo> listarProcura = listarSolo();
+		
+		for (Solo solo : listarProcura) {
+			if(idSolo == solo.getIdSolo()){
+				soloProcura = solo;
+			}
+		}
+		return soloProcura;
 	}
 
 	@Override
@@ -99,14 +110,83 @@ public class RepositorioSolo implements IRepositorioSolo{
 	}
 
 	@Override
-	public void editarSolo(Solo Solo) {
+	public ArrayList<Solo> listarSolo(int idReserva) throws SQLException {
+
+		System.out.println("Chegando ao repositorio listarSolos");
+		ArrayList<Solo> listaSolo = new ArrayList<Solo>();
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String sql = "";
+		
+		try{
+			sql = "select Solo.id_solo,Solo.recursos,Solo.tamanho,Solo.tipo ";
+			sql += "from Reserva ";
+			sql += "inner join Solo ";
+			sql += "on Reserva.id_reserva = Solo.id_reserva ";
+			sql += "where Reserva.id_reserva = " + idReserva;
+			stmt = this.connection.prepareStatement(sql);
+			resultSet = stmt.executeQuery();
+			
+			while(resultSet.next()){
+				Solo solo =  new Solo(resultSet.getInt("id_solo"), resultSet.getString("tipo"),
+						resultSet.getDouble("tamanho"),resultSet.getString("recursos"));
+				
+				listaSolo.add(solo);
+				
+			}
+			
+			
+		} finally{
+			stmt.close();
+			resultSet.close();
+		}
+		
+		return listaSolo;
+		
+	
+	}
+	
+	@Override
+	public void editarSolo(Solo solo) throws SQLException {
 		System.out.println("Chegando ao repositorio editarsolo");
+		PreparedStatement stmt = null;
+		if(solo != null){
+			try{
+				String sql = "update Solo set tamanho = ? ,";
+				sql += "tipo = ? ,";
+				sql += "recursos = ? ";
+				sql += "where id_solo = ?";
+				
+				stmt = this.connection.prepareStatement(sql);
+				
+				stmt.setDouble(1, solo.getTamanho());
+				stmt.setString(2, solo.getTipo());
+				stmt.setString(3, solo.getResursos());
+				stmt.setInt(4, solo.getIdSolo());
+				
+				stmt.executeUpdate();			
+				System.out.println("Edição completada");
+			}finally{
+				stmt.close();
+			}
+		}
 		
 	}
 
 	@Override
-	public void removerSolo(int idSolo) {
-		System.out.println("Chegando ao repositorio removerSolo");
+	public void removerSolo(int idSolo) throws SQLException {
+		System.out.println("Chegando ao repositorio removerSolo");		
+
+		PreparedStatement stmt = null;
+		try {
+			String sql = "delete from Solo where id_solo = ?";
+			stmt = this.connection.prepareStatement(sql);
+			stmt.setInt(1, idSolo);
+			stmt.execute();
+			System.out.println("foi removido");
+		} finally {
+			stmt.close();
+		}
 		
 	}
 

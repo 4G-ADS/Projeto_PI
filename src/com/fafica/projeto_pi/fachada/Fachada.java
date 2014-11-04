@@ -13,10 +13,13 @@ import com.fafica.projeto_pi.controladora.ControladoraUsuario;
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Pesquisador;
-import com.fafica.projeto_pi.modelos.ReservaCaracteristicas;
-import com.fafica.projeto_pi.modelos.ReservaRecursos;
+import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
+import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
+import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
 import com.fafica.projeto_pi.modelos.Usuario;
+import com.fafica.projeto_pi.repositorio.RepositorioPlantaPequenoPorte;
 
 public class Fachada {
 
@@ -39,24 +42,24 @@ public class Fachada {
 		}
 		return Fachada.instance;
 	}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void cadastrarReservaCaracteristicas(ReservaCaracteristicas reservaCaracteristicas) throws Exception {
+
+	public void cadastrarReservaCaracteristicas(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarReserva");
 		this.controladoraReservaCaracteristicas = new ControladoraReservaCaracteristicas();
-		this.controladoraReservaCaracteristicas.cadastrarReservaCaracteristicas(reservaCaracteristicas);
+		this.controladoraReservaCaracteristicas.cadastrarReservaCaracteristicas(reserva);
 	}
 
-	public ArrayList<ReservaCaracteristicas> listarReservaCaracteristicas() throws Exception {
+	public ArrayList<Reserva> listarReservaCaracteristicas() throws Exception {
 		System.out.println("Passando pela Fachada listarReserva");
 		this.controladoraReservaCaracteristicas = new ControladoraReservaCaracteristicas();
 		return this.controladoraReservaCaracteristicas.listarReservaCaracteristicas();
 
 	}
 
-	public void editarReservaCaracteristicas(ReservaCaracteristicas reservaCaracteristicas) throws Exception {
+	public void editarReservaCaracteristicas(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada editarReserva");
 		this.controladoraReservaCaracteristicas = new ControladoraReservaCaracteristicas();
-		this.controladoraReservaCaracteristicas.editarReservaCaracteristicas(reservaCaracteristicas);
+		this.controladoraReservaCaracteristicas.editarReservaCaracteristicas(reserva);
 	}
 
 	public void removerReservaCaracteristicas(int idReserva) throws Exception {
@@ -65,12 +68,14 @@ public class Fachada {
 		this.controladoraReservaCaracteristicas.removerReservaCaracteristicas(idReserva);
 	}
 
-	public void procurarReservaCaracteristicas(int idReserva) throws Exception {
+	public Reserva procurarReservaCaracteristicas(int idReserva) throws Exception {
 		System.out.println("Passando pela Fachada procurarReserva");
 		this.controladoraReservaCaracteristicas = new ControladoraReservaCaracteristicas();
-		this.controladoraReservaCaracteristicas.procurarReservaCaracteristicas(idReserva);
+		return this.controladoraReservaCaracteristicas.procurarReservaCaracteristicas(idReserva);
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public void cadastrarInstituicao(Instituicao instituicao) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarInstituicao");
 		this.controladoraInstituicao = new ControladoraInstituicao();
@@ -81,6 +86,13 @@ public class Fachada {
 		System.out.println("Passando pela Fachada listarInstituicao");
 		this.controladoraInstituicao = new ControladoraInstituicao();
 		return this.controladoraInstituicao.listarInstituicao();
+
+	}
+	
+	public ArrayList<Instituicao> listarInstituicao(int idReserva) throws Exception {
+		System.out.println("Passando pela Fachada listarInstituicao");
+		this.controladoraInstituicao = new ControladoraInstituicao();
+		return this.controladoraInstituicao.listarInstituicao(idReserva);
 
 	}
 
@@ -96,23 +108,30 @@ public class Fachada {
 		this.controladoraInstituicao.removerInstituicao(idInstituicao);
 	}
 
-	public void procurarInstituicao(int idInstituicao) throws Exception,SQLException {
+	public Instituicao procurarInstituicao(int idInstituicao) throws Exception,SQLException {
 		System.out.println("Passando pela Fachada procurarInstituicao");
 		this.controladoraInstituicao = new ControladoraInstituicao();
-		this.controladoraInstituicao.procurarInstituicao(idInstituicao);
+		return this.controladoraInstituicao.procurarInstituicao(idInstituicao);
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void cadastrarPesquisadores(ReservaRecursos reservaRecursos) throws Exception {
+	public void cadastrarPesquisadores(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarPesquisadores");
 		this.controladoraPesquisadores = new ControladorReservaPesquisadores();
-		this.controladoraPesquisadores.cadastrarPesquisadores(reservaRecursos);
+		this.controladoraPesquisadores.cadastrarPesquisadores(reserva);
 	}
 
 	public ArrayList<Pesquisador> listarPesquisador() throws Exception {
 		System.out.println("Passando pela Fachada listarPesquisador");
 		this.controladoraPesquisadores = new ControladorReservaPesquisadores();
 		return this.controladoraPesquisadores.listarPesquisadores();
+
+	}
+	
+	public ArrayList<Pesquisador> listarPesquisador(int idReserva) throws Exception {
+		System.out.println("Passando pela Fachada listarPesquisador");
+		this.controladoraPesquisadores = new ControladorReservaPesquisadores();
+		return this.controladoraPesquisadores.listarPesquisadores(idReserva);
 
 	}
 
@@ -128,24 +147,31 @@ public class Fachada {
 		this.controladoraPesquisadores.removerPesquisadores(idPesquisador);
 	}
 
-	public void procurarPesquisador(int idPesquisador) throws Exception,SQLException {
+	public Pesquisador procurarPesquisador(int idPesquisador) throws Exception,SQLException {
 		System.out.println("Passando pela Fachada procurarPesquisador");
 		this.controladoraPesquisadores = new ControladorReservaPesquisadores();
-		this.controladoraPesquisadores.procurarPesquisador(idPesquisador);
+		return this.controladoraPesquisadores.procurarPesquisador(idPesquisador);
 	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
-	public void cadastrarSolo(ReservaRecursos reservaRecursos) throws Exception {
+	public void cadastrarSolo(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarSolo");
 		this.controladoraSolos = new ControladorReservaSolo();
-		this.controladoraSolos.cadastrarSolo(reservaRecursos);
+		this.controladoraSolos.cadastrarSolo(reserva);
 	}
 
 	public ArrayList<Solo> listarSolo() throws Exception {
 		System.out.println("Passando pela Fachada listarSolo");
 		this.controladoraSolos = new ControladorReservaSolo();
 		return this.controladoraSolos.listarSolo();
+
+	}
+	
+	public ArrayList<Solo> listarSolo(int idReserva) throws Exception {
+		System.out.println("Passando pela Fachada listarSolo");
+		this.controladoraSolos = new ControladorReservaSolo();
+		return this.controladoraSolos.listarSolo(idReserva);
 
 	}
 
@@ -161,24 +187,31 @@ public class Fachada {
 		this.controladoraSolos.removerSolo(idSolo);
 	}
 
-	public void procurarSolo(int idSolo) throws Exception,SQLException {
+	public Solo procurarSolo(int idSolo) throws Exception,SQLException {
 		System.out.println("Passando pela Fachada procurarSolo");
 		this.controladoraSolos = new ControladorReservaSolo();
-		this.controladoraSolos.procurarSolo(idSolo);
+		return this.controladoraSolos.procurarSolo(idSolo);
 	}	
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void cadastrarNascente(ReservaRecursos reservaRecursos) throws Exception {
+	public void cadastrarNascente(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarNascenteAgua");
 		this.controladoraNascente = new ControladorReservaNascente();
-		this.controladoraNascente.cadastrarNascente(reservaRecursos);
+		this.controladoraNascente.cadastrarNascente(reserva);
 	}
 
 	public ArrayList<NascenteAgua> listarNascente() throws Exception {
 		System.out.println("Passando pela Fachada listarNascenteAgua");
 		this.controladoraNascente = new ControladorReservaNascente();
 		return this.controladoraNascente.listarNascentes();
+
+	}
+	
+	public ArrayList<NascenteAgua> listarNascente(int idReserva) throws Exception {
+		System.out.println("Passando pela Fachada listarNascenteAgua");
+		this.controladoraNascente = new ControladorReservaNascente();
+		return this.controladoraNascente.listarNascentes(idReserva);
 
 	}
 
@@ -194,31 +227,107 @@ public class Fachada {
 		this.controladoraNascente.removerNascente(idNascente);;
 	}
 
-	public void procurarNascente(int idNascente) throws Exception,SQLException {
+	public NascenteAgua procurarNascente(int idNascente) throws Exception,SQLException {
 		System.out.println("Passando pela Fachada procurarNascenteAgua");
 		this.controladoraNascente = new ControladorReservaNascente();
-		this.controladoraNascente.procurarNascente(idNascente);
+		return this.controladoraNascente.procurarNascente(idNascente);
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void cadastrarPlantaPequenoPorte(ReservaRecursos reservaRecursos) throws Exception {
+	public void cadastrarPlantaPequenoPorte(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarcadastrarPlantaPequenoPorte");
 		this.controladoraPlantas = new ControladorReservaPlantas();
-		this.controladoraPlantas.cadastrarPlantaPequenoPorte(reservaRecursos);
+		this.controladoraPlantas.cadastrarPlantaPequenoPorte(reserva);
 	}
 	
+	public ArrayList<PlantaPequenoPorte> listarPlantaPequena() throws Exception{
+		System.out.println("Pasando pela Fachada lsitarPlantaPequenoPorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return this.controladoraPlantas.listarPlantaPequena();
+	}
 
-	public void cadastrarPlantaMedioPorte(ReservaRecursos reservaRecursos) throws Exception {
+	public ArrayList<PlantaPequenoPorte> listarPlantaPequena(int idReserva) throws Exception{
+		System.out.println("Pasando pela Fachada listarPlantaPequenoPorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return this.controladoraPlantas.listarPlantaPequena(idReserva);
+	}
+	
+	public void removerPlantaPequenoPorte(int idPlantaPequena) throws Exception{
+		System.out.println("Passando pela Fachada removerPlantaPequenoPorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		this.controladoraPlantas.removerPlantaPequenoPorte(idPlantaPequena);
+		
+	}
+	
+	public PlantaPequenoPorte procurarPlantaPequena(int idPlantaPequena) throws Exception{
+		System.out.println("Passando pela fachada procurarPlantaPequena");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return controladoraPlantas.procurarPlantaPequena(idPlantaPequena);
+	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+	public void cadastrarPlantaMedioPorte(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarPlantaMedioPorte");
 		this.controladoraPlantas = new ControladorReservaPlantas();
-		this.controladoraPlantas.cadastrarPlantaMedioPorte(reservaRecursos);
+		this.controladoraPlantas.cadastrarPlantaMedioPorte(reserva);
+	}
+
+	public ArrayList<PlantaMedioPorte> listarPlantaMedia() throws Exception{
+		System.out.println("Pasando pela Fachada lsitarPlantaMedioPorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return this.controladoraPlantas.listarPlantaMedia();
+	}	
+	
+	public ArrayList<PlantaMedioPorte> listarPlantaMedia(int idReserva) throws Exception{
+		System.out.println("Pasando pela Fachada lsitarPlantaMedioPorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return this.controladoraPlantas.listarPlantaMedia(idReserva);
+	}	
+	
+	public void removerPlantaMedioPorte(int idPlantaMedia) throws Exception{
+		System.out.println("Passando pela Fachada removerPlantaMedioPorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		this.controladoraPlantas.removerPlantaMedioPorte(idPlantaMedia);
+		
 	}
 	
-	public void cadastrarPlantaGrandePorte(ReservaRecursos reservaRecursos) throws Exception {
+	public PlantaMedioPorte procurarPlantaMedia(int idPlantaMedia) throws Exception{
+		System.out.println("Passando pela fachada procurarPlantaPequena");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return controladoraPlantas.procurarPlantaMedia(idPlantaMedia);
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void cadastrarPlantaGrandePorte(Reserva reserva) throws Exception {
 		System.out.println("Passando pela Fachada cadastrarPlantaGrandePorte");
 		this.controladoraPlantas = new ControladorReservaPlantas();
-		this.controladoraPlantas.cadastrarPlantaGrandePorte(reservaRecursos);
+		this.controladoraPlantas.cadastrarPlantaGrandePorte(reserva);
+	}
+	
+	public ArrayList<PlantaGrandePorte> listarPlantaGrande() throws Exception{
+		System.out.println("Pasando pela Fachada lsitarPlantaGrandePorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return this.controladoraPlantas.listarPlantaGrande();
+	}
+	
+	public ArrayList<PlantaGrandePorte> listarPlantaGrande(int idReserva) throws Exception{
+		System.out.println("Pasando pela Fachada lsitarPlantaGrandePorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return this.controladoraPlantas.listarPlantaGrande(idReserva);
+	}
+	
+	public void removerPlantaGrandePorte(int idPlantaGrande) throws Exception{
+		System.out.println("Passando pela Fachada removerPlantaGrandePorte");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		this.controladoraPlantas.removerPlantaGrandePorte(idPlantaGrande);
+		
+	}
+	
+	public PlantaGrandePorte procurarPlantaGrande(int idPlantaGrande) throws Exception{
+		System.out.println("Passando pela fachada procurarPlantaGramde");
+		this.controladoraPlantas = new ControladorReservaPlantas();
+		return controladoraPlantas.procurarPlantaGrande(idPlantaGrande);
 	}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	

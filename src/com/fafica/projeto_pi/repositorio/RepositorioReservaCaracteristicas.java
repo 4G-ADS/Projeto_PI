@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
+import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
-import com.fafica.projeto_pi.modelos.ReservaCaracteristicas;
-import com.fafica.projeto_pi.modelos.ReservaRecursos;
-import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioReservaCaracteristicas;
+import com.fafica.projeto_pi.modelos.Reserva;
+import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioReserva;
 
-public class RepositorioReservaCaracteristicas implements IRepositorioReservaCaracteristicas{
+public class RepositorioReservaCaracteristicas implements IRepositorioReserva{
 
 	private Connection connection = null;
 	private int database = 0;
@@ -31,7 +31,7 @@ public class RepositorioReservaCaracteristicas implements IRepositorioReservaCar
 	}
 	
 	@Override
-	public void cadastrarReservaCaracteristicas(ReservaCaracteristicas reservaCaracteristicas) throws SQLException {
+	public void cadastrarReserva(Reserva reserva) throws SQLException {
 		System.out.println("Chegando ao repositorio cadastrarReserva");
 		PreparedStatement stmt = null;
 		String sql = "";
@@ -46,14 +46,22 @@ public class RepositorioReservaCaracteristicas implements IRepositorioReservaCar
 				stmt = this.connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			}
 			
-			stmt.setString(1,reservaCaracteristicas.getClima());
-			stmt.setDouble(2, reservaCaracteristicas.getLatitude());
-			stmt.setDouble(3, reservaCaracteristicas.getLongitude());
-			stmt.setString(4, reservaCaracteristicas.getNome());
-			stmt.setDouble(5, reservaCaracteristicas.getTamanho());
+			stmt.setString(1,reserva.getClima());
+			stmt.setDouble(2, reserva.getLatitude());
+			stmt.setDouble(3, reserva.getLongitude());
+			stmt.setString(4, reserva.getNome());
+			stmt.setDouble(5, reserva.getTamanho());
 			
 			stmt.execute();			
 			resultSet = stmt.getGeneratedKeys();
+			
+			int idReserva = 0;
+			while(resultSet.next()){
+				idReserva  = resultSet.getInt(1);
+			}
+			
+			reserva.setIdReserva(idReserva);
+			
 			System.out.println("INSERT FOI CONCLUIDO COM SUCESSO");
 		} finally {
 			stmt.close();
@@ -62,15 +70,24 @@ public class RepositorioReservaCaracteristicas implements IRepositorioReservaCar
 	}
 
 	@Override
-	public ReservaRecursos procurarReservaCaracteristicas(int id) {
+	public Reserva procurarReserva(int idReserva) throws SQLException {
 		System.out.println("Chegando ao repositorio procurarReserva");
-		return null;
+		Reserva reserva = null;
+		
+		ArrayList<Reserva> listarProcura = listarReserva();
+		
+		for (Reserva reservaProcura : listarProcura) {
+			if(idReserva == reservaProcura.getIdReserva()){
+				reserva = reservaProcura;
+			}
+		}
+		return reserva;
 	}
 
 	@Override
-	public ArrayList<ReservaCaracteristicas> listarReservaCaracteristicas() throws SQLException {
+	public ArrayList<Reserva> listarReserva() throws SQLException {
 		System.out.println("Chegando ao repositorio listarReserva");
-		ArrayList<ReservaCaracteristicas> listareservas = new ArrayList<ReservaCaracteristicas>();
+		ArrayList<Reserva> listareservas = new ArrayList<Reserva>();
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
 		String sql = "";
@@ -81,10 +98,10 @@ public class RepositorioReservaCaracteristicas implements IRepositorioReservaCar
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-				ReservaCaracteristicas reservaCaracteristicas =  new ReservaCaracteristicas(resultSet.getInt("id_reserva"),resultSet.getString("clima"),resultSet.getString("nome"),
+				Reserva reserva =  new Reserva(resultSet.getInt("id_reserva"),resultSet.getString("clima"),resultSet.getString("nome"),
 						resultSet.getDouble("tamanho"),resultSet.getDouble("latitude"),resultSet.getDouble("longitude"));
 				
-				listareservas.add(reservaCaracteristicas);
+				listareservas.add(reserva);
 				
 			}
 			
@@ -100,19 +117,57 @@ public class RepositorioReservaCaracteristicas implements IRepositorioReservaCar
 
 
 	@Override
-	public void editarReservaCaracteristicas(ReservaCaracteristicas reservaCaracteristicas) {
+	public void editarReserva(Reserva reserva) throws SQLException {
 		System.out.println("Chegando ao repositorio atualizarReserva");
+		PreparedStatement stmt = null;
+		if(reserva != null){
+			try{
+				String sql = "update Reserva set clima = ? ,";
+				sql += "Latitude = ? ,";
+				sql += "Longitude = ? ,";
+				sql += "nome = ? ,";
+				sql += "Tamanho = ? ";
+				sql += "where id_reserva = ?";
+				
+				stmt = this.connection.prepareStatement(sql);
+				
+				stmt.setString(1, reserva.getClima());
+				stmt.setDouble(2, reserva.getLatitude());
+				stmt.setDouble(3, reserva.getLongitude());
+				stmt.setString(4, reserva.getNome());
+				stmt.setDouble(5, reserva.getTamanho());
+				stmt.setInt(6, reserva.getIdReserva());
+				
+				stmt.executeUpdate();			
+				System.out.println("Edição completada");
+			}finally{
+				stmt.close();
+			}
+		}
 		
 	}
 
 	@Override
-	public void removerReservaCaracteristicas(int id) {
+	public void removerReserva(int idReserva) throws SQLException {
 		System.out.println("Chegando ao repositorio removerReserva");
+
+		PreparedStatement stmt = null;
+		try {
+			String sql = "delete from Reserva where idReserva = ?";
+			stmt = this.connection.prepareStatement(sql);
+			stmt.setInt(1, idReserva);
+			stmt.execute();
+			System.out.println("foi removido");
+		} finally {
+			stmt.close();
+		}
+
+	
 		
 	}
 
 	@Override
-	public boolean existeReservaCaracteristicas(int id) {
+	public boolean existeReserva(int id) {
 		System.out.println("Chegando ao repositorio existeReserva");
 		return false;
 	}

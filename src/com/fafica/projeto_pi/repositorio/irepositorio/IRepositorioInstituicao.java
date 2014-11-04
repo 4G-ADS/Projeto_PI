@@ -9,9 +9,12 @@ public interface IRepositorioInstituicao {
 
 		public void cadastrarInstituicao(Instituicao instituicao) throws SQLException;
 		public ArrayList<Instituicao> listarInstituicao() throws SQLException;
-		public Instituicao procurarInstituicao(int idInstituicao);
-		public void editarInstituicao(Instituicao instituicao);
-		public void removerInstituicao(int idInstituicao);
+		public ArrayList<Instituicao> listarInstituicao(int idReserva) throws SQLException;
+		public Instituicao procurarInstituicao(int idInstituicao) throws SQLException;
+		public void editarInstituicao(Instituicao instituicao) throws SQLException;
+		public void removerInstituicao(int idInstituicao) throws SQLException;
 		public boolean existeInstituicao(int idInstituicao);
-	
+		
+		
+		
 }

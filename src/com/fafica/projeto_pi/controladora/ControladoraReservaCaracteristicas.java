@@ -3,60 +3,57 @@ package com.fafica.projeto_pi.controladora;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.fafica.projeto_pi.modelos.ReservaCaracteristicas;
-import com.fafica.projeto_pi.modelos.ReservaRecursos;
+import com.fafica.projeto_pi.modelos.Reserva;
 
 import com.fafica.projeto_pi.repositorio.RepositorioReservaCaracteristicas;
 
-import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioReservaCaracteristicas;
+import com.fafica.projeto_pi.repositorio.irepositorio.IRepositorioReserva;
 
 public class ControladoraReservaCaracteristicas {
 
-	IRepositorioReservaCaracteristicas repositorioReservaCaracteristicas;
+	IRepositorioReserva repositorioReserva;
 
 	public ControladoraReservaCaracteristicas() throws Exception {
-		this.repositorioReservaCaracteristicas = new RepositorioReservaCaracteristicas();
+		this.repositorioReserva = new RepositorioReservaCaracteristicas();
 
 	}
 
 	public void cadastrarReservaCaracteristicas(
-			ReservaCaracteristicas reservaCaracteristicas) throws SQLException {
+			Reserva reserva) throws SQLException {
 		System.out.println("Passando pela controladora de reserva");
 		// Aqui fazemos a chamada do repositorio no metodo cadastrar para
 		// inserir no banco
-		this.repositorioReservaCaracteristicas
-				.cadastrarReservaCaracteristicas(reservaCaracteristicas);
+		this.repositorioReserva
+				.cadastrarReserva(reserva);
 
 	}
 
-	public ArrayList<ReservaCaracteristicas> listarReservaCaracteristicas()
+	public ArrayList<Reserva> listarReservaCaracteristicas()
 			throws SQLException {
 		System.out.println("Passando pelo listarReservas");
-		return repositorioReservaCaracteristicas.listarReservaCaracteristicas();
+		return repositorioReserva.listarReserva();
 	}
 
-	public ReservaRecursos procurarReservaCaracteristicas(int idReserva) {
+	public Reserva procurarReservaCaracteristicas(int idReserva) throws SQLException{
 		System.out.println("Passando pelo pelo procurarReserva");
-		return this.repositorioReservaCaracteristicas
-				.procurarReservaCaracteristicas(idReserva);
+		return this.repositorioReserva.procurarReserva(idReserva);
 	}
 
 	public void editarReservaCaracteristicas(
-			ReservaCaracteristicas reservaCaracteristicas) {
+			Reserva reserva) throws SQLException {
 		System.out.println("Passando pelo editarReservas");
-		this.repositorioReservaCaracteristicas
-				.editarReservaCaracteristicas(reservaCaracteristicas);
+		this.repositorioReserva.editarReserva(reserva);
 	}
 
-	public void removerReservaCaracteristicas(int idReserva) {
+	public void removerReservaCaracteristicas(int idReserva) throws SQLException {
 		System.out.println("Passando pelo removerReservas");
-		this.repositorioReservaCaracteristicas
-				.removerReservaCaracteristicas(idReserva);
+		this.repositorioReserva
+				.removerReserva(idReserva);
 	}
 
 	public boolean existeReservaCaracteristicas(int idReserva) {
 		System.out.println("Passando pelo existeReserva");
-		return this.repositorioReservaCaracteristicas
-				.existeReservaCaracteristicas(idReserva);
+		return this.repositorioReserva
+				.existeReserva(idReserva);
 	}
 }

@@ -8,10 +8,11 @@ import com.fafica.projeto_pi.modelos.NascenteAgua;
 public interface IRepositorioNascenteAgua {
 
 	public void cadastrarAgua(NascenteAgua agua) throws SQLException;
-	public NascenteAgua procurarAgua(int idAgua);
+	public NascenteAgua procurarAgua(int idAgua) throws SQLException;
 	public ArrayList<NascenteAgua> listarNascenteAgua() throws SQLException;
-	public void removerAgua(int idAgua);
-	public void editarAgua(NascenteAgua agua);
+	public ArrayList<NascenteAgua> listarNascenteAgua(int idReserva) throws SQLException;
+	public void removerAgua(int idAgua) throws SQLException;
+	public void editarAgua(NascenteAgua agua) throws SQLException;
 	public boolean existeAgua(int idAgua);
 	
 }
