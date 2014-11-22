@@ -23,11 +23,11 @@ public class TesteListar2 {
 //ok->		ArrayList<Solo> listaSolos = fachada.listarSolo(4);
 //ok->		ArrayList<PlantaGrandePorte> listaPlantasGrandes = fachada.listarPlantaGrande(4);
 //ok->		ArrayList<PlantaMedioPorte> listaPlantasMedio = fachada.listarPlantaMedia(4);
-			ArrayList<PlantaPequenoPorte> listaPlantasPequena = fachada.listarPlantaPequena(4);
+//			ArrayList<PlantaPequenoPorte> listaPlantasPequena = fachada.listarPlantaPequena(4);
 			
-			for (PlantaPequenoPorte planta : listaPlantasPequena) {
-			System.out.println(planta.toString());
-		}		
+//			for (PlantaPequenoPorte planta : listaPlantasPequena) {
+//			System.out.println(planta.toString());
+//		}		
 			
 			
 		} catch (Exception e) {

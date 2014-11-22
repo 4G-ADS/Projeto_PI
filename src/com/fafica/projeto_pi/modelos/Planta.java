@@ -1,6 +1,5 @@
 package com.fafica.projeto_pi.modelos;
 
-import java.awt.Image;
 
 public abstract class Planta {
 

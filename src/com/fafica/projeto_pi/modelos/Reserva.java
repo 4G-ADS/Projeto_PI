@@ -17,37 +17,7 @@ public class Reserva {
 	private List<NascenteAgua> nascenteAgua;
 	private List<Pesquisador> pesquisadores;
 
-	public Reserva( String clima, String nome, double tamanho,
-			double latitude, double longitude) {
-		this.clima = clima;
-		this.nome = nome;
-		this.tamanho = tamanho;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
 	
-	public Reserva(int idReserva, String clima, String nome, double tamanho,
-			double latitude, double longitude) {
-		super();
-		this.idReserva = idReserva;
-		this.clima = clima;
-		this.nome = nome;
-		this.tamanho = tamanho;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
-
-	public Reserva(List<PlantaPequenoPorte> listaPlantaPequena,
-			List<PlantaMedioPorte> listaPlantaMedia,
-			List<PlantaGrandePorte> listaPlantaGrande, List<Solo> solos,
-			List<NascenteAgua> nascenteAgua, List<Pesquisador> pesquisadores) {
-		this.listaPlantaPequena = listaPlantaPequena;
-		this.listaPlantaMedia = listaPlantaMedia;
-		this.listaPlantaGrande = listaPlantaGrande;
-		Solos = solos;
-		this.nascenteAgua = nascenteAgua;
-		this.pesquisadores = pesquisadores;
-	}
 
 	public Reserva(int idReserva, String clima, String nome, double tamanho,
 			double latitude, double longitude,
@@ -55,7 +25,6 @@ public class Reserva {
 			List<PlantaMedioPorte> listaPlantaMedia,
 			List<PlantaGrandePorte> listaPlantaGrande, List<Solo> solos,
 			List<NascenteAgua> nascenteAgua, List<Pesquisador> pesquisadores) {
-		super();
 		this.idReserva = idReserva;
 		this.clima = clima;
 		this.nome = nome;
@@ -70,6 +39,24 @@ public class Reserva {
 		this.pesquisadores = pesquisadores;
 	}
 
+	public Reserva(String clima, String nome, double tamanho,
+			double latitude, double longitude,
+			List<PlantaPequenoPorte> listaPlantaPequena,
+			List<PlantaMedioPorte> listaPlantaMedia,
+			List<PlantaGrandePorte> listaPlantaGrande, List<Solo> solos,
+			List<NascenteAgua> nascenteAgua, List<Pesquisador> pesquisadores) {
+		this.clima = clima;
+		this.nome = nome;
+		this.tamanho = tamanho;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.listaPlantaPequena = listaPlantaPequena;
+		this.listaPlantaMedia = listaPlantaMedia;
+		this.listaPlantaGrande = listaPlantaGrande;
+		Solos = solos;
+		this.nascenteAgua = nascenteAgua;
+		this.pesquisadores = pesquisadores;
+	}
 	public int getIdReserva() {
 		return idReserva;
 	}

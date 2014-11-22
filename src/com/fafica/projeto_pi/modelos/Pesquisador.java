@@ -7,34 +7,34 @@ public class Pesquisador {
 	private String nome;
 	private String cpf;
 	private int idade;
-	private String tipo;
+	private String profissao;
 
 	// construtor com campos
-	public Pesquisador( String nome,String cpf, int idade, String tipo,int idReserva) {
+	public Pesquisador( String nome,String cpf, int idade, String profissao,int idReserva) {
 		super();
 		this.idReserva = idReserva;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
-		this.tipo = tipo;
+		this.profissao = profissao;
 	}
 
 	public Pesquisador(int idPesquisador, String nome, String cpf, int idade,
-			String tipo) {
+			String profissao) {
 
 		this.idPesquisador = idPesquisador;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
-		this.tipo = tipo;
+		this.profissao = profissao;
 	}
 
-	public Pesquisador(String nome, String cpf, int idade, String tipo) {
+	public Pesquisador(String nome, String cpf, int idade, String profissao) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
-		this.tipo = tipo;
+		this.profissao = profissao;
 	}
 
 	// metodos gets e sets
@@ -71,12 +71,12 @@ public class Pesquisador {
 		this.idade = idade;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getProfissao() {
+		return profissao;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
 	}
 
 	public int getIdReserva() {
@@ -91,7 +91,7 @@ public class Pesquisador {
 	public String toString() {
 		return "Pesquisador [idPesquisador=" + idPesquisador + ", idReserva="
 				+ idReserva + ", nome=" + nome + ", cpf=" + cpf + ", idade="
-				+ idade + ", tipo=" + tipo + "]";
+				+ idade + ", profissao=" + profissao + "]";
 	}
 
 }

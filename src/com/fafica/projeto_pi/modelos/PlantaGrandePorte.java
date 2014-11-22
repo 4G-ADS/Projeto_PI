@@ -1,20 +1,18 @@
 package com.fafica.projeto_pi.modelos;
 
-import java.awt.Image;
 
 public class PlantaGrandePorte extends Planta{
 
 	private int idPantaGrandePorte;
-	public PlantaGrandePorte(String especie, String nome,
-			double tamanho,int idPantaGrandePorte) {
+	public PlantaGrandePorte(int idPantaGrandePorte,String especie, String nome,
+			double tamanho) {
 		super(especie, nome, tamanho);
 		this.idPantaGrandePorte = idPantaGrandePorte;
 
 	}
 	
 
-	public PlantaGrandePorte(int idReserva, String especie,String nome, double tamanho,
-			Image imagem) {
+	public PlantaGrandePorte(String especie,String nome, double tamanho,int idReserva) {
 		super(idReserva,especie, nome, tamanho);
 
 	}
