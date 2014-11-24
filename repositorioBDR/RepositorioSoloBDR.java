@@ -190,24 +190,4 @@ public class RepositorioSoloBDR implements IRepositorioSolo{
 		
 	}
 
-	@Override
-	public boolean existeSolo(Solo solo) throws SQLException {
-		System.out.println("Chegando ao repositorio existeSolo");
-
-		PreparedStatement stmt = null;
-		ResultSet resultSet = null;
-		String sql = "";
-		try {
-		sql = "select count(*) as existe from Solo where idSolo = ?";
-		stmt = this.connection.prepareStatement(sql);	
-		stmt.setInt(1, solo.getIdSolo());
-		resultSet.next();
-		if(resultSet.getInt("existe") == 0) return false;
-		else return true;
-		} finally {
-			stmt.close();
-		}
-	
-	}
-
 }

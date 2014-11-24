@@ -12,6 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CadastrarPlanta extends JFrame {
 
@@ -19,6 +24,7 @@ public class CadastrarPlanta extends JFrame {
 	private JTextField campoNome;
 	private JTextField campoEspecie;
 	private JTextField campoTamanho;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -62,44 +68,71 @@ public class CadastrarPlanta extends JFrame {
 		campoTamanho = new JTextField();
 		campoTamanho.setColumns(10);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Pequeno Porte", "Medio Porte", "Grande Porte"}));
+		
+		JButton btnCadastrar = new JButton("Voltar");
+		
+		JButton button = new JButton("Cadastrar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(31, Short.MAX_VALUE)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNome)
+							.addGap(26)
+							.addComponent(campoNome))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblEspcie)
+							.addGap(18)
+							.addComponent(campoEspecie))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblTamanho)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)))
+					.addGap(71)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblEspcie)
-						.addComponent(lblNome))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnCadastrar)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(campoEspecie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(lblTamanho)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
-							.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(19))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+							.addGap(12)))
+					.addGap(80))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(59)
+					.addGap(27)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNome)
-						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblEspcie)
-						.addComponent(campoEspecie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(campoEspecie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTamanho)
 						.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnCadastrar)
-					.addContainerGap(94, Short.MAX_VALUE))
+					.addGap(94)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(button)
+						.addComponent(btnCadastrar))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

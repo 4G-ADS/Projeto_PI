@@ -55,9 +55,9 @@ public class ControladoraInstituicao {
 		if (instituicao.getCnpj().equals("") == true)
 			throw new CampoObritarorioInvalidoException(
 					"Campo CPF � nulo ou inv�lido.");
-		if (!Validacao.validaCNPJ(instituicao.getCnpj()))
-			throw new CPFInvalidoException(instituicao.getCnpj());
-//		if (this.repositorioInstituicao.existeInstituicao(instituicao))
+//		if (!Validacao.validaCNPJ(instituicao.getCnpj()))
+//			throw new CPFInvalidoException(instituicao.getCnpj());
+//		if (this.repositorioInstituicao.existeInstituicao(instituicao) == true)
 //			throw new AdministradorJaCadastradoException();
 
 		if (banco == 1) {

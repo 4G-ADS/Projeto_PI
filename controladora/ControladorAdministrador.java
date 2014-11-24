@@ -55,8 +55,8 @@ public class ControladorAdministrador {
 		if (administrador.getNome().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Nome � nulo ou inv�lido.");
 		if (administrador.getCpf().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo CPF � nulo ou inv�lido.");
 		if (administrador.getSenha() ==0)	throw new CampoObritarorioInvalidoException("Campo Senha � nulo ou inv�lido.");
-		if (!Validacao.validaCPF(administrador.getCpf())) throw new CPFInvalidoException(administrador.getCpf());
-//		if (this.repositorioAdminstrador.existe(administrador))	throw new AdministradorJaCadastradoException();
+	//	if (!Validacao.validaCPF(administrador.getCpf())) throw new CPFInvalidoException(administrador.getCpf());
+	//	if (this.repositorioAdminstrador.existe(administrador) == true)	throw new AdministradorJaCadastradoException();
 		
 
 		if (banco == 1) {

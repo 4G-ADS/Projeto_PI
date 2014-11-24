@@ -165,28 +165,6 @@ public class RepositorioPlantaPequenoPorteBDR implements
 			stmt.close();
 		}
 
-	}
-
-	@Override
-	public boolean existePlantaPequenoPorte(PlantaPequenoPorte planta) throws SQLException {
-		System.out.println("Chegando ao RepositorioPlantaPequenoPorte existePlantaPequenoPorte");
-	
-
-		System.out.println("Chegando ao RepositorioPlantaMedioPorte existePlantaMedioPorte");
-
-		PreparedStatement stmt = null;
-		ResultSet resultSet = null;
-		String sql = "";
-		try {
-		sql = "select count(*) as existe from PlantaPequenoPorte where idPlanta = ?";
-		stmt = this.connection.prepareStatement(sql);	
-		stmt.setInt(1, planta.getIdPlantaPequenaPorte());
-		resultSet.next();
-		if(resultSet.getInt("existe") == 0) return false;
-		else return true;
-		} finally {
-			stmt.close();
-		}
 	
 	
 		

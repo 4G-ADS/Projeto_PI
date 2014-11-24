@@ -12,5 +12,5 @@ public interface IRepositorioPlantaPequenoPorte {
 	public ArrayList<PlantaPequenoPorte> listarPlantaPequenoPorte() throws SQLException;
 	public ArrayList<PlantaPequenoPorte> listarPlantaPequenoPorte(int idReserva) throws SQLException;
 	public void removerPlantaPequenoPorte(int idPlantaPequena) throws SQLException,PlantaNaoEncontradaException;
-	public boolean existePlantaPequenoPorte(PlantaPequenoPorte plantaPequena) throws SQLException;
+
 }

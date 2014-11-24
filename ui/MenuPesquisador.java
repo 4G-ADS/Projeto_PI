@@ -10,13 +10,20 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import com.fafica.projeto_pi.modelos.Reserva;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class MenuPesquisador extends JFrame {
 
 	private JPanel contentPane;
-
+	private Reserva reservaProvisoria;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -24,7 +31,7 @@ public class MenuPesquisador extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuPesquisador frame = new MenuPesquisador();
+					MenuPesquisador frame = new MenuPesquisador(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,60 +43,72 @@ public class MenuPesquisador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuPesquisador() {
+	public MenuPesquisador(Reserva reserva) {
+		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 457, 150);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton criarPesquisador = new JButton("Criar");
-		
 		JLabel lblPesquisador = new JLabel("Pesquisador");
 		lblPesquisador.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
-		JButton editarPesquisador = new JButton("Editar");
+		JButton btnExcluir = new JButton("Editar");
 		
-		JButton listarPesquisador = new JButton("Listar");
+		JButton btnVoltar = new JButton("Voltar");
 		
-		JButton btnExcluir = new JButton("Excluir");
+		JButton btnAdd = new JButton("Add");
 		
-		JButton btnProcurar = new JButton("Procurar");
+		JButton btnPerfil = new JButton("Perfil");
+		
+		JButton button = new JButton("Excluir");
+		
+		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(criarPesquisador)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(editarPesquisador)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(listarPesquisador)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnExcluir)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnProcurar))
-						.addGroup(gl_contentPane.createSequentialGroup()
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnExcluir)
+								.addComponent(btnPerfil, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addComponent(lblPesquisador)
-							.addGap(150))))
+							.addPreferredGap(ComponentPlacement.RELATED, 267, Short.MAX_VALUE))
+						.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+					.addGap(19))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(15)
 					.addComponent(lblPesquisador)
-					.addGap(26)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(criarPesquisador)
-						.addComponent(editarPesquisador)
-						.addComponent(listarPesquisador)
-						.addComponent(btnExcluir)
-						.addComponent(btnProcurar))
-					.addContainerGap(26, Short.MAX_VALUE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnAdd)
+							.addGap(18)
+							.addComponent(btnExcluir)
+							.addGap(18)
+							.addComponent(btnPerfil)
+							.addGap(18)
+							.addComponent(button)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+							.addGap(14)
+							.addComponent(btnVoltar)
+							.addGap(6))))
 		);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

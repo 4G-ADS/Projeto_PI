@@ -74,7 +74,7 @@ public class MenuPrincipal extends JFrame {
 					System.out.println(id);	
 					Reserva reservaProvisoria = Fachada.getInstace().procurarReserva(id);
 					
-					dispose();
+					
 					new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

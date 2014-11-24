@@ -170,6 +170,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdminstrador{
 		sql = "select count(*) as existe from administrador where cpf = ?";
 		stmt = this.connection.prepareStatement(sql);	
 		stmt.setString(1, adm.getCpf());
+		resultSet = stmt.executeQuery();
 		resultSet.next();
 		if(resultSet.getInt("existe") == 0) return false;
 		else return true;

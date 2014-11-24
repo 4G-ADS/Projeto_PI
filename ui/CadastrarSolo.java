@@ -75,7 +75,7 @@ public class CadastrarSolo extends JFrame {
 		btnTipo.setColumns(10);
 		
 		btnTamanho = new JTextField();
-		btnTamanho.setBounds(317, 69, 86, 28);
+		btnTamanho.setBounds(328, 69, 86, 28);
 		btnTamanho.setColumns(10);
 		
 		btnRecursos = new JTextField();

@@ -58,38 +58,38 @@ public class CadastrarPesquisador extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(22, 48, 41, 16);
+		lblNome.setBounds(10, 30, 41, 16);
 		contentPane.add(lblNome);
 		
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(36, 79, 27, 16);
+		lblCpf.setBounds(10, 81, 27, 16);
 		contentPane.add(lblCpf);
 		
 		JLabel lblIdade = new JLabel("Idade:");
-		lblIdade.setBounds(203, 79, 41, 16);
+		lblIdade.setBounds(221, 81, 41, 16);
 		contentPane.add(lblIdade);
 		
 		JLabel lblProfisso = new JLabel("Profissão:");
-		lblProfisso.setBounds(6, 124, 67, 16);
+		lblProfisso.setBounds(10, 125, 67, 16);
 		contentPane.add(lblProfisso);
 		
 		campoNome = new JTextField();
-		campoNome.setBounds(67, 42, 358, 28);
+		campoNome.setBounds(67, 24, 358, 28);
 		contentPane.add(campoNome);
 		campoNome.setColumns(10);
 		
 		campoCpf = new JTextField();
-		campoCpf.setBounds(67, 73, 134, 28);
+		campoCpf.setBounds(67, 75, 134, 28);
 		contentPane.add(campoCpf);
 		campoCpf.setColumns(10);
 		
 		campoIdade = new JTextField();
-		campoIdade.setBounds(251, 73, 60, 28);
+		campoIdade.setBounds(276, 75, 75, 28);
 		contentPane.add(campoIdade);
 		campoIdade.setColumns(10);
 		
 		campoProfissao = new JTextField();
-		campoProfissao.setBounds(69, 118, 222, 28);
+		campoProfissao.setBounds(67, 119, 284, 28);
 		contentPane.add(campoProfissao);
 		campoProfissao.setColumns(10);
 		
@@ -101,7 +101,7 @@ public class CadastrarPesquisador extends JFrame {
 				new CadastrarSolo(reservaProvisoria).setVisible(true);
 			}
 		});
-		btnCadastrar.setBounds(316, 221, 97, 29);
+		btnCadastrar.setBounds(328, 221, 97, 29);
 		contentPane.add(btnCadastrar);
 		
 		JButton btnNovo = new JButton("Novo");
@@ -121,7 +121,7 @@ public class CadastrarPesquisador extends JFrame {
 				listaPesquisador.add(p);
 			}
 		});
-		btnNovo.setBounds(214, 221, 97, 29);
+		btnNovo.setBounds(221, 221, 97, 29);
 		contentPane.add(btnNovo);
 	}
 }

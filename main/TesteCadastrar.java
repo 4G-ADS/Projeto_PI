@@ -74,13 +74,13 @@ public class TesteCadastrar {
 		
 			try {
 				Fachada.getInstace().cadastrarReserva(reserva);
+				instituicao.setIdReserva(reserva.getIdReserva());	
 				
-				
-				instituicao.setIdReserva(reserva.getIdReserva());			
 				Fachada.getInstace().cadastrarInstituicao(instituicao);			
 				
 				Fachada.getInstace().cadastrarAdministrardor(adm);
 				
+			
 				ArrayList<Administrador> lista = Fachada.getInstace().listarAdministrador();
 				for (Administrador admin : lista) {
 					System.out.println(admin.toString());

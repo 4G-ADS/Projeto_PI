@@ -14,5 +14,6 @@ public interface IRepositorioReserva {
 	public ArrayList<Reserva> listarReserva() throws SQLException, ReservaNaoEncontradaException;
 	public void editarReserva(Reserva reserva) throws SQLException, ReservaNaoEncontradaException;
 	public void removerReserva(int idReserva) throws SQLException, ReservaNaoEncontradaException;
-	public boolean existeReserva(Reserva reserva) throws SQLException;
+	ArrayList<Reserva> reculperarId() throws SQLException,
+			ReservaNaoEncontradaException;
 }

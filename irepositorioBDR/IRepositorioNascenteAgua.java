@@ -14,6 +14,5 @@ public interface IRepositorioNascenteAgua {
 	public ArrayList<NascenteAgua> listarNascenteAgua(int idReserva) throws SQLException;
 	public void removerAgua(int idAgua) throws SQLException,NascenteNaoEncontradaException;
 	public void editarAgua(NascenteAgua agua) throws SQLException,NascenteNaoEncontradaException;
-	public boolean existeAgua(NascenteAgua agua) throws SQLException;
 	
 }

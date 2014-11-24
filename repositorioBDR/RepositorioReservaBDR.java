@@ -91,7 +91,7 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 	}
 
 	@Override
-	public ArrayList<Reserva> listarReserva() throws SQLException,ReservaNaoEncontradaException{
+	public ArrayList<Reserva> reculperarId() throws SQLException,ReservaNaoEncontradaException{
 		System.out.println("Passando pela reserva listarReserva");
 		
 		ArrayList<Reserva> listaReservas = new ArrayList<Reserva>();
@@ -122,7 +122,41 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 
 		return listaReservas;
 	}
+	
+	@Override
+	public ArrayList<Reserva> listarReserva() throws SQLException,ReservaNaoEncontradaException{
+		System.out.println("Passando pela reserva listarReserva");
+		
+		ArrayList<Reserva> listaReservas = new ArrayList<Reserva>();
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String sql = "";
+		try {
 
+			sql = "select * from Reserva";
+			stmt = this.connection.prepareStatement(sql);
+			resultSet = stmt.executeQuery();
+
+			while (resultSet.next()) {
+				 
+				
+				
+				Reserva reserva = new Reserva(resultSet.getInt("id_reserva"),resultSet.getString("clima"),resultSet.getString("nome_reserva"),
+						resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
+				listaReservas.add(reserva);
+				
+			}
+
+		} finally {
+			stmt.close();
+			resultSet.close();
+		}
+
+		return listaReservas;
+	}
+	
+	
 	@Override
 	public Reserva recuperarReserva(int id_Reserva) throws SQLException ,ReservaNaoEncontradaException{
 		System.out.println("Chegando ao repositorio recuperarReserva");
@@ -276,22 +310,5 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 
 	}
 
-	@Override
-	public boolean existeReserva(Reserva reserva) throws SQLException {
-		System.out.println("Chegando ao repositorio existeReserva");
-		PreparedStatement stmt = null;
-		ResultSet resultSet = null;
-		String sql = "";
-		try {
-		sql = "select count(*) as existe from Reserva where idReserva = ?";
-		stmt = this.connection.prepareStatement(sql);	
-		stmt.setInt(1, reserva.getIdReserva());
-		resultSet.next();
-		if(resultSet.getInt("existe") == 0) return false;
-		else return true;
-		} finally {
-			stmt.close();
-		}
-	}
 
 }

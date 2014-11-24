@@ -207,25 +207,5 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 		}	
 	}
 
-	@Override
-	public boolean existeAgua(NascenteAgua agua) throws SQLException {
-		System.out.println("Chegando ao repositorio existeAgua");
-		PreparedStatement stmt = null;
-		ResultSet resultSet = null;
-		String sql = "";
-		try {
-		sql ="select count(*) as existe from Nascente_agua where = ?";
-		stmt = this.connection.prepareStatement(sql);
-		stmt.setInt(1, agua.getIdAgua());
-		resultSet.next();
-		if(resultSet.getInt("existe") ==0) return false;
-		else return true;
-		} finally {
-			
-		}
-		
-	}
-
-
 
 }

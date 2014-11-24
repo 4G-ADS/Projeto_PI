@@ -210,7 +210,9 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 		sql = "select count(*) as existe from Pesquisador where cpf = ?";
 		stmt = this.connection.prepareStatement(sql);	
 		stmt.setString(1, pesquisador.getCpf());
+		resultSet = stmt.executeQuery();
 		resultSet.next();
+		
 		if(resultSet.getInt("existe") == 0) return false;
 		else return true;
 		} finally {

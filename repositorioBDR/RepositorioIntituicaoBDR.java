@@ -205,6 +205,7 @@ public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
 			slq = "select count(*) as existe from instituicao where Cnpj = ?";
 			stmt = this.connection.prepareStatement(slq);
 			stmt.setString(1, instituicao.getCnpj());
+			resultSet = stmt.executeQuery();
 			resultSet.next();
 			if(resultSet.getInt("existe") == 0) return false;
 			else return true;			

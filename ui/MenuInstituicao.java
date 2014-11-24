@@ -7,13 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
+import com.fafica.projeto_pi.modelos.Reserva;
 
 public class MenuInstituicao extends JFrame {
 
 	private JPanel contentPane;
-
+	private Reserva reservaProvisoria;
 	/**
 	 * Launch the application.
 	 */

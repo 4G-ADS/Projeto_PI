@@ -14,5 +14,4 @@ public interface IRepositorioSolo {
 	public ArrayList<Solo> listarSolo(int idReserva) throws SQLException;
 	public void editarSolo(Solo Solo) throws SQLException,SoloNaoEncontradorException;
 	public void removerSolo(int idSolo) throws SQLException,SoloNaoEncontradorException;
-	public boolean existeSolo(Solo Solo) throws SQLException;
 }

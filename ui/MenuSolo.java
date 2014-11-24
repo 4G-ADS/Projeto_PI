@@ -13,9 +13,15 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 
+import com.fafica.projeto_pi.modelos.Reserva;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 public class MenuSolo extends JFrame {
 
 	private JPanel contentPane;
+	private Reserva reservaProvisoria;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -23,7 +29,7 @@ public class MenuSolo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuSolo frame = new MenuSolo();
+					MenuSolo frame = new MenuSolo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,9 +41,10 @@ public class MenuSolo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuSolo() {
+	public MenuSolo(Reserva reserva) {
+		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 150);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -45,27 +52,34 @@ public class MenuSolo extends JFrame {
 		
 		JLabel lblSolo = new JLabel("Solo");
 		lblSolo.setFont(new Font("Lucida Grande", Font.BOLD, 22));
-		lblSolo.setBounds(201, 6, 48, 27);
+		lblSolo.setBounds(10, 11, 48, 27);
 		contentPane.add(lblSolo);
 		
-		JButton button = new JButton("Criar");
-		button.setBounds(6, 59, 75, 29);
+		JButton button = new JButton("Voltar");
+		button.setBounds(342, 224, 73, 23);
 		contentPane.add(button);
 		
-		JButton button_1 = new JButton("Editar");
-		button_1.setBounds(87, 59, 80, 29);
+		JButton button_1 = new JButton("Add");
+		button_1.setBounds(20, 49, 63, 23);
 		contentPane.add(button_1);
 		
-		JButton button_2 = new JButton("Listar");
-		button_2.setBounds(173, 59, 79, 29);
+		JButton button_2 = new JButton("Perfil");
+		button_2.setBounds(20, 131, 63, 23);
 		contentPane.add(button_2);
 		
 		JButton button_3 = new JButton("Excluir");
-		button_3.setBounds(258, 59, 87, 29);
+		button_3.setBounds(20, 172, 63, 23);
 		contentPane.add(button_3);
 		
-		JButton button_4 = new JButton("Procurar");
-		button_4.setBounds(351, 59, 96, 29);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(127, 49, 288, 161);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		JButton button_4 = new JButton("Editar");
+		button_4.setBounds(20, 90, 61, 23);
 		contentPane.add(button_4);
 	}
 

@@ -70,7 +70,6 @@ public class ControladoraReserva {
 		if (reserva.getClima().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Clima � nulo ou inv�lido.");
 		if (reserva.getLatitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Latitude � nulo ou inv�lido.");
 		if (reserva.getLongitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Longitude � nulo ou inv�lido.");
-	//	if (this.repositorioReserva.existeReserva(reserva) == true)	throw new AdministradorJaCadastradoException();
 		
 		this.repositorioReserva.cadastrarReserva(reserva);
 		
@@ -83,8 +82,8 @@ public class ControladoraReserva {
 			if (pesquisador.getProfissao().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo profissao � nulo ou inv�lido.");
 			if (pesquisador.getIdade() == 0)	throw new CampoObritarorioInvalidoException("Campo idade � nulo ou inv�lido.");
 			if (pesquisador.getIdade() < 18) throw new IdadeInvalidoException();
-			if(!Validacao.validaCPF(pesquisador.getCpf())) throw new CPFInvalidoException(pesquisador.getCpf());
-		//	if(this.repositorioPesquisador.existe(pesquisador)) throw new PesquisadorJaCadastradoException();
+		//	if(!Validacao.validaCPF(pesquisador.getCpf())) throw new CPFInvalidoException(pesquisador.getCpf());
+		//	if(this.repositorioPesquisador.existe(pesquisador) == true) throw new PesquisadorJaCadastradoException();
 			
 			this.repositorioPesquisador.cadastrarPesquisadores(pesquisador);
 			
@@ -97,7 +96,7 @@ public class ControladoraReserva {
 			if (nascente.getTipo().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Nome � nulo ou inv�lido.");
 			if (nascente.getLatitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Latitude � nulo ou inv�lido.");
 			if (nascente.getLongitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Longitude � nulo ou inv�lido.");
-			//if(this.repositorioNascenteAgua.existeAgua(nascente)) throw new NascenteJaCadastradaException();
+	
 			
 			this.repositorioNascenteAgua.cadastrarAgua(nascente);
 		}
@@ -108,7 +107,7 @@ public class ControladoraReserva {
 			if (solo.getTipo().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Tipo � nulo ou inv�lido.");
 			if (solo.getResursos().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Tipo � nulo ou inv�lido.");
 			if (solo.getTamanho() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Tipo � nulo ou inv�lido.");
-			//if(this.repositorioSolo.existeSolo(solo)) throw new SoloJaCadastradoException();
+
 			
 			this.repositorioSolo.cadastrarSolo(solo);
 		}
@@ -119,7 +118,7 @@ public class ControladoraReserva {
 			if (plantaPequena.getNome().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Tipo � nulo ou inv�lido.");
 			if (plantaPequena.getEspecie().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Especie � nulo ou inv�lido.");
 			if (plantaPequena.getTamanho() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Tamanho � nulo ou inv�lido.");
-			//if (this.repositorioPlantaPequenoPorte.existePlantaPequenoPorte(plantaPequena))throw new PlantaJaCadastradaException();
+
 			
 			this.repositorioPlantaPequenoPorte.cadastrarPlantaPequenoPorte(plantaPequena);
 		}
@@ -130,7 +129,7 @@ public class ControladoraReserva {
 			if (plantaMedia.getNome().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Tipo � nulo ou inv�lido.");
 			if (plantaMedia.getEspecie().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Especie � nulo ou inv�lido.");
 			if (plantaMedia.getTamanho() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Tamanho � nulo ou inv�lido.");
-		//	if (this.repositorioPlantaMedioPorte.existePlantaMedioPorte(plantaMedia)) throw new PlantaJaCadastradaException();
+
 			
 			this.repositorioPlantaMedioPorte.cadastrarPlantaMedioPorte(plantaMedia);
 		}
@@ -141,7 +140,7 @@ public class ControladoraReserva {
 			if (plantaGrande.getNome().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Tipo � nulo ou inv�lido.");
 			if (plantaGrande.getEspecie().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Especie � nulo ou inv�lido.");
 			if (plantaGrande.getTamanho() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Tamanho � nulo ou inv�lido.");
-			//if (this.repositorioPlantaGrandePorte.existePlantaGrandePorte(plantaGrande))throw new PlantaJaCadastradaException();
+
 			
 			this.repositorioPlantaGrandePorte.cadastrarPlantaGrandePorte(plantaGrande);
 			

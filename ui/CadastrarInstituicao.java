@@ -13,6 +13,17 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import com.fafica.projeto_pi.excecoes.AdministradorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.CPFInvalidoException;
+import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
+import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Instituicao;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class CadastrarInstituicao extends JFrame {
 
 	private JPanel contentPane;
@@ -63,43 +74,84 @@ public class CadastrarInstituicao extends JFrame {
 		campoCNPJ.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	
+				try {
+					
+					
+					String nome = campoNome.getText();
+					String tipo = campoTipo.getText();
+					String cnpj = campoCNPJ.getText();
+					
+					Instituicao instituicao = new Instituicao(nome, tipo, cnpj);
+					Fachada.getInstace().cadastrarInstituicao(instituicao);
+					
+					dispose();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CampoObritarorioInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CPFInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (AdministradorJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(31)
+					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblTipo, Alignment.TRAILING)
-						.addComponent(lblNome, Alignment.TRAILING))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnCadastrar)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lblCnpj)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(campoCNPJ))
-							.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(17, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNome)
+								.addComponent(lblTipo))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(campoNome, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+									.addGap(13))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(campoCNPJ, Alignment.LEADING)
+										.addComponent(campoTipo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
+									.addContainerGap())))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnCadastrar)
+							.addContainerGap())
+						.addComponent(lblCnpj)))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(83)
+					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNome)
 						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTipo)
-						.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblCnpj)
 						.addComponent(campoCNPJ, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
 					.addComponent(btnCadastrar)
-					.addContainerGap(70, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
