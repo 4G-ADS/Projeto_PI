@@ -11,11 +11,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
 
 public class TelaPrincipalReserva extends JFrame {
 
@@ -29,7 +32,7 @@ public class TelaPrincipalReserva extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaPrincipalReserva frame = new TelaPrincipalReserva();
+					TelaPrincipalReserva frame = new TelaPrincipalReserva(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,47 +44,49 @@ public class TelaPrincipalReserva extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPrincipalReserva() {
+	public TelaPrincipalReserva(Reserva reserva) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnAddPesquisador = new JButton("Add Pesquisador");
+		JLabel labelNomeReserva = new JLabel(reserva.getNome());
 		
-		 
+		JLabel labelClima = new JLabel(reserva.getClima());
 		
-		JButton btnAddSolo = new JButton("Add Solo");
-		btnAddSolo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				dispose();
-//				new CadastrarSolo().setVisible(true);
-			}		
-		});
+		JLabel labelLatitude = new JLabel(String.valueOf(reserva.getLatitude()));
 		
-		JButton btnAddNasciente = new JButton("Add Nascente");
+		JLabel labelLongitude = new JLabel(String.valueOf(reserva.getLongitude()));
+		
+		JLabel labelTamanho = new JLabel(String.valueOf(reserva.getTamanho()));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnAddPesquisador)
-						.addComponent(btnAddSolo, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAddNasciente, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(285, Short.MAX_VALUE))
+					.addComponent(labelNomeReserva)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(labelClima)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(labelLatitude)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(labelLongitude)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(labelTamanho)
+					.addContainerGap(135, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(30)
-					.addComponent(btnAddPesquisador)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAddSolo)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnAddNasciente)
-					.addContainerGap(133, Short.MAX_VALUE))
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelNomeReserva)
+						.addComponent(labelClima)
+						.addComponent(labelLatitude)
+						.addComponent(labelLongitude)
+						.addComponent(labelTamanho))
+					.addContainerGap(226, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import com.fafica.projeto_pi.modelos.Reserva;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -30,7 +33,7 @@ public class CadastrarNascente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastrarNascente frame = new CadastrarNascente();
+					CadastrarNascente frame = new CadastrarNascente(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +45,7 @@ public class CadastrarNascente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarNascente() {
+	public CadastrarNascente(Reserva reserva) {
 		setTitle("Cadastrar Nascente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

@@ -29,6 +29,8 @@ public class CadastrarSolo extends JFrame {
 	private JTextField btnTipo;
 	private JTextField btnTamanho;
 	private JTextField btnRecursos;
+	private Reserva reservaProvisoria;
+	private ArrayList<Solo> listaSolo = new ArrayList<Solo>();
 
 	
 	/**
@@ -51,39 +53,42 @@ public class CadastrarSolo extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastrarSolo(Reserva reserva) {
+		reservaProvisoria = reserva;
 		setTitle("Cadastrar Solo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 243);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Tipo:");
-		lblNewLabel.setBounds(53, 75, 32, 16);
+		lblNewLabel.setBounds(24, 75, 32, 16);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
-		lblTamanho.setBounds(290, 75, 62, 16);
+		lblTamanho.setBounds(263, 75, 62, 16);
 		
 		JLabel lblRecursos = new JLabel("Recursos:");
-		lblRecursos.setBounds(24, 109, 61, 16);
+		lblRecursos.setBounds(5, 109, 61, 16);
 		
 		btnTipo = new JTextField();
-		btnTipo.setBounds(91, 69, 187, 28);
+		btnTipo.setBounds(66, 69, 187, 28);
 		btnTipo.setColumns(10);
 		
 		btnTamanho = new JTextField();
-		btnTamanho.setBounds(364, 69, 75, 28);
+		btnTamanho.setBounds(317, 69, 86, 28);
 		btnTamanho.setColumns(10);
 		
 		btnRecursos = new JTextField();
-		btnRecursos.setBounds(91, 103, 348, 28);
+		btnRecursos.setBounds(66, 103, 348, 28);
 		btnRecursos.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(91, 155, 104, 29);
+		btnCadastrar.setBounds(310, 221, 104, 29);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cadastroSolo();
+				reservaProvisoria.setSolos(listaSolo);
+				dispose();
+				new CadastrarNascente(reservaProvisoria).setVisible(true);
 			}
 		});
 		contentPane.setLayout(null);
@@ -94,28 +99,24 @@ public class CadastrarSolo extends JFrame {
 		contentPane.add(lblTamanho);
 		contentPane.add(btnTamanho);
 		contentPane.add(btnRecursos);
-	}
-	
-	public Solo cadastroSolo(){
-		Solo s = null;
-		try{
+		
+		JButton btnNovo = new JButton("Novo");
+		btnNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			
-			String tipo = btnTipo.getText();
-			Double tamanho = Double.parseDouble(btnTamanho.getText());
-			String recursos = btnRecursos.getText();
-			
-			s = new Solo(tipo, tamanho, recursos);
-			
-			btnTipo.setText("");
-			btnTamanho.setText("");
-			btnRecursos.setText("");
-			dispose();
-			new TelaPrincipalReserva().setVisible(true);
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return s;
+				String tipo = btnTipo.getText();
+				Double tamanho = Double.parseDouble(btnTamanho.getText());
+				String recursos = btnRecursos.getText();
+				
+			Solo s = new Solo(tipo, tamanho, recursos);
+			listaSolo.add(s);	
+				btnTipo.setText("");
+				btnTamanho.setText("");
+				btnRecursos.setText("");
+			}
+		});
+		btnNovo.setBounds(193, 224, 104, 29);
+		contentPane.add(btnNovo);
 	}
 	
 }
