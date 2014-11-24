@@ -18,10 +18,16 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.fafica.projeto_pi.excecoes.PesquisadorNaoEncontradoException;
+import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
+import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Administrador;
+import com.fafica.projeto_pi.modelos.Reserva;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MenuPrincipal extends JFrame {
 
@@ -59,6 +65,33 @@ public class MenuPrincipal extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		JButton btnCarregar = new JButton("Carregar Reserva");
+		btnCarregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					int id =	Integer.parseInt((table.getValueAt(table.getSelectedRow(), 0).toString()));
+					
+					System.out.println(id);	
+					Reserva reservaProvisoria = Fachada.getInstace().procurarReserva(id);
+					
+					dispose();
+					new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ReservaNaoEncontradaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PesquisadorNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		
 		JButton btnCriarReserva = new JButton("Criar Reserva");
 		btnCriarReserva.addActionListener(new ActionListener() {
@@ -119,15 +152,41 @@ public class MenuPrincipal extends JFrame {
 							.addComponent(btnCriarReserva)))
 					.addContainerGap())
 		);
+		String[][] listaReservaTabela = new String[100][2];
+		
+		try {
+			ArrayList<Reserva> listaReserva = Fachada.getInstace().listarReserva();
+			for (int i = 0; i < listaReservaTabela.length; i++) {
+				if(i < listaReserva.size()){
+				String id = String.valueOf(listaReserva.get(i).getIdReserva());
+				String nome = listaReserva.get(i).getNome();
+				listaReservaTabela[i][0] = id;
+				listaReservaTabela[i][1] = nome;
+				}
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ReservaNaoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		
+		
+		String colunas []= {"ID", "Reservas"};
+		
+		
+		
+		
+		
+		DefaultTableModel listar = new DefaultTableModel(listaReservaTabela,colunas);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "Reservas"
-			}
-		));
+		table.setModel(listar);
+		
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}

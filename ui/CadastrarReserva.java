@@ -90,7 +90,6 @@ public class CadastrarReserva extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				try {
 					
 					String clima = campoClima.getText();
 					String nome = campoNome.getText();
@@ -99,40 +98,8 @@ public class CadastrarReserva extends JFrame {
 					double longitude = Double.parseDouble(campoLongitude.getText());
 					Reserva reserva = new Reserva (clima, nome, tamanho, latitude, longitude);
 					
-					Fachada.getInstace().cadastrarReserva(reserva);
 					dispose();
-					
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (CampoObritarorioInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (AdministradorJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IdadeInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (CPFInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (PlantaJaCadastradaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (PesquisadorJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (NascenteJaCadastradaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SoloJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					new CadastrarPesquisador(reserva).setVisible(true);;
 			}
 		});
 		

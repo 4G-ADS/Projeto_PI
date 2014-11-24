@@ -96,6 +96,7 @@ public class CadastrarPesquisador extends JFrame {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				reservaProvisoria.setPesquisadores(listaPesquisador);
 				new CadastrarSolo(reservaProvisoria).setVisible(true);
 			}
@@ -112,6 +113,10 @@ public class CadastrarPesquisador extends JFrame {
 				int idade = Integer.parseInt(campoIdade.getText());
 				String profissao = campoProfissao.getText();
 				
+				campoNome.setText("");
+				campoCpf.setText("");
+				campoIdade.setText("");
+				campoProfissao.setText("");
 				Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
 				listaPesquisador.add(p);
 			}
