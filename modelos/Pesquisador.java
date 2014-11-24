@@ -60,7 +60,7 @@ public class Pesquisador {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		this.cpf = cpf.replaceAll("\\.|\\-|\\ ", "");
 	}
 
 	public int getIdade() {

@@ -56,7 +56,7 @@ public class ControladorAdministrador {
 		if (administrador.getCpf().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo CPF � nulo ou inv�lido.");
 		if (administrador.getSenha() ==0)	throw new CampoObritarorioInvalidoException("Campo Senha � nulo ou inv�lido.");
 		if (!Validacao.validaCPF(administrador.getCpf())) throw new CPFInvalidoException(administrador.getCpf());
-		if (this.repositorioAdminstrador.existe(administrador))	throw new AdministradorJaCadastradoException();
+//		if (this.repositorioAdminstrador.existe(administrador))	throw new AdministradorJaCadastradoException();
 		
 
 		if (banco == 1) {
@@ -125,23 +125,25 @@ public class ControladorAdministrador {
 		}
 	}
 
-	public void procurarAdministrardor(int idAdministrador)
+	public Administrador procurarAdministrardor(int idAdministrador)
 			throws SQLException, IOException,
 			AdministradorNaoEncontradoException {
 		System.out.println("Passando pela controladoraUsuario procurarUsuario");
-
+		Administrador adm = null;
 		if (banco == 1) {
-			this.repositorioAdminstrador.procurarAdministrador(idAdministrador);
+		adm =	this.repositorioAdminstrador.procurarAdministrador(idAdministrador);
 		} else if (banco == 2) {
-			this.repositorioAdministradorIO
+		adm =	this.repositorioAdministradorIO
 					.procurarAdministrador(idAdministrador);
 		} else if (banco == 3) {
-			this.repositorioAdministradorMAP
+		adm =	this.repositorioAdministradorMAP
 					.procurarAdministrador(idAdministrador);
 		} else if (banco == 4) {
-			this.repositorioAdministradorSET
+		adm =	this.repositorioAdministradorSET
 					.procurarAdministrador(idAdministrador);
-		}
+	}
+		
+		return adm;
 	}
 
 }

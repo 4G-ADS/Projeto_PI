@@ -42,7 +42,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdminstrador{
 		
 		if (database == Database.ORACLE) {
 			stmt = this.connection.prepareStatement(sql,
-					new String[] { "id_instituicao" });
+					new String[] { "id_administrador" });
 		} else {
 			stmt = this.connection.prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
@@ -72,11 +72,11 @@ public class RepositorioAdministradorBDR implements IRepositorioAdminstrador{
 			String sql = "";
 			
 			try {
-				sql = "update admisnistrador set login = ? ,";
+				sql = "update administrador set login = ? ,";
 				sql += "nome = ? ," ;
 				sql += "senha = ? ,";
 				sql += "cpf = ? ";
-				sql += "where id_adm = ?";
+				sql += "where id_administrador = ?";
 				
 				stmt = this.connection.prepareStatement(sql);
 				
@@ -100,7 +100,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdminstrador{
 		String sql = "";
 		try {
 		
-			sql = "delete form administrador where id_adm = ?";
+			sql = "delete form administrador where id_administrador = ?";
 			stmt = this.connection.prepareStatement(sql);
 			stmt.setInt(1, idAdministrardor);
 			
@@ -143,7 +143,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdminstrador{
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-				Administrador administrador =  new Administrador(resultSet.getInt("id_adm"),
+				Administrador administrador =  new Administrador(resultSet.getInt("id_administrador"),
 						resultSet.getString("nome"),resultSet.getString("login"),
 						resultSet.getString("cpf"),resultSet.getInt("senha"));
 				

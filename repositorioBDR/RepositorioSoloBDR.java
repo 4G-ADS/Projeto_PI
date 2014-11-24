@@ -152,10 +152,10 @@ public class RepositorioSoloBDR implements IRepositorioSolo{
 		PreparedStatement stmt = null;
 		if(solo != null){
 			try{
-				String sql = "update Solo set tamanho = ? ,";
+				String sql = "update Solo set tamanho_solo = ? ,";
 				sql += "tipo_solo = ? ,";
 				sql += "recursos_solo = ? ";
-				sql += "where id_solo_solo = ?";
+				sql += "where id_solo = ?";
 				
 				stmt = this.connection.prepareStatement(sql);
 				

@@ -9,14 +9,14 @@ public class TesteRemover {
 		Fachada fachada = Fachada.getInstace();
 		
 		try {
-	//ok->		fachada.removerInsituicao(1);
-	//ok->		fachada.removerNascente(1);
-	//ok->		fachada.removerPesquisador(1);
-	//ok->		fachada.removerSolo(2);
-	//??		fachada.removerReservaCaracteristicas(1);
-	//ok->		fachada.removerPlantaPequenoPorte(1);
-	//ok->		fachada.removerPlantaMedioPorte(1);
-	//ok->		fachada.removerPlantaGrandePorte(1);
+	//ok->		fachada.removerInsituicao(2);
+	//ok->		fachada.removerNascente(22);
+	//ok->		fachada.removerPesquisador(22);
+	//ok->		fachada.removerSolo(22);
+	//ok->		fachada.removerReserva(1);
+	//ok->		fachada.removerPlantaPequenoPorte(8);
+	//ok->		fachada.removerPlantaMedioPorte(8);
+	//ok->		fachada.removerPlantaGrandePorte(8);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

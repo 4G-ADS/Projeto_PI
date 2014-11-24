@@ -16,8 +16,17 @@ public class Reserva {
 	private List<Solo> Solos;
 	private List<NascenteAgua> nascenteAgua;
 	private List<Pesquisador> pesquisadores;
-
 	
+	public Reserva(int idReserva, String clima, String nome, double tamanho,
+			double latitude, double longitude) {
+		super();
+		this.idReserva = idReserva;
+		this.clima = clima;
+		this.nome = nome;
+		this.tamanho = tamanho;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
 	public Reserva(int idReserva, String clima, String nome, double tamanho,
 			double latitude, double longitude,

@@ -71,22 +71,6 @@ public class RepositorioPlantaPequenoPorteBDR implements
 	}
 
 	@Override
-	public PlantaPequenoPorte procurarPlantaPequenoPorte(int idPlantaPequena) throws SQLException {
-		System.out
-				.println("Chegando ao RepositorioPlantaPequenoPorte procurarPlantaPequenoPorte");
-		PlantaPequenoPorte plantaPequenoProcura = null;
-		
-		ArrayList<PlantaPequenoPorte> listarProcura = listarPlantaPequenoPorte();
-		
-		for (PlantaPequenoPorte plantaPequena : listarProcura) {
-			if(idPlantaPequena == plantaPequena.getIdPlantaPequenaPorte()){
-				plantaPequenoProcura = plantaPequena;
-			}
-		}
-		return plantaPequenoProcura;
-	}
-
-	@Override
 	public ArrayList<PlantaPequenoPorte> listarPlantaPequenoPorte() throws SQLException {
 		System.out.println("Chegando ao RepositorioPlantaPequenoPorte listarPlantaPequenoPortre");
 		
@@ -102,11 +86,11 @@ public class RepositorioPlantaPequenoPorteBDR implements
 			resultSet = stmt.executeQuery();
 
 			while(resultSet.next()){
-				PlantaPequenoPorte planta = new PlantaPequenoPorte(	resultSet.getString("nome_planta_pequeno_porte"),
-						resultSet.getString("especie_planta_pequeno_porte"), 
-						resultSet.getDouble("tamanho_planta_pequeno_porte"),
-						resultSet.getInt("id_planta_pequeno_porte"));
-				
+			
+				PlantaPequenoPorte planta = new PlantaPequenoPorte(	resultSet.getInt("id_planta_pequeno_porte"),
+						resultSet.getString("nome_planta_pequeno_porte"),
+						 resultSet.getString("especie_planta_pequeno_porte"),
+						 resultSet.getDouble("tamanho_planta_pequeno_porte"));
 				listaPlanta.add(planta);
 			}
 			
@@ -144,10 +128,10 @@ public class RepositorioPlantaPequenoPorteBDR implements
 			resultSet = stmt.executeQuery();
 
 			while(resultSet.next()){
-				PlantaPequenoPorte planta = new PlantaPequenoPorte(	resultSet.getString("nome_planta_pequeno_porte"),
-						resultSet.getString("especie_planta_pequeno_porte"),
-						resultSet.getDouble("tamanho_planta_pequeno_porte"),
-						resultSet.getInt("id_planta_pequeno_porte"));
+				PlantaPequenoPorte planta = new PlantaPequenoPorte(	resultSet.getInt("id_planta_pequeno_porte"),
+						resultSet.getString("nome_planta_pequeno_porte"),
+						 resultSet.getString("especie_planta_pequeno_porte"),
+						 resultSet.getDouble("tamanho_planta_pequeno_porte"));
 				
 				listaPlanta.add(planta);
 			}

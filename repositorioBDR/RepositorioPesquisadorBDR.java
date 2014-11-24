@@ -81,9 +81,9 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 			while (resultSet.next()) {
 				Pesquisador pesquisador = new Pesquisador(
 						resultSet.getInt("id_pesquisador"),
-						resultSet.getString("nome"),
+						resultSet.getString("nome_pesquisador"),
 						resultSet.getString("cpf"), resultSet.getInt("idade"),
-						resultSet.getString("tipo"));
+						resultSet.getString("profissao"));
 
 				listaPesquisadores.add(pesquisador);
 
@@ -109,7 +109,7 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 		String sql = "";
 
 		try {
-			sql = "select Pesquisador.id_pesquisador,Pesquisador.nome,Pesquisador.cpf,Pesquisador.idade,Pesquisador.tipo ";
+			sql = "select Pesquisador.id_pesquisador,Pesquisador.nome_pesquisador,Pesquisador.cpf,Pesquisador.idade,Pesquisador.profissao ";
 			sql += "from Reserva ";
 			sql += "inner join Pesquisador ";
 			sql += "on Reserva.id_reserva = Pesquisador.id_reserva ";
@@ -161,10 +161,10 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 		PreparedStatement stmt = null;
 		if (pesquisador != null) {
 			try {
-				String sql = "update Pesquisador set nome = ? ,";
+				String sql = "update Pesquisador set nome_pesquisador = ? ,";
 				sql += "cpf = ? ,";
 				sql += "idade = ? ,";
-				sql += "tipo = ? ";
+				sql += "profissao = ? ";
 				sql += "where id_pesquisador = ?";
 
 				stmt = this.connection.prepareStatement(sql);

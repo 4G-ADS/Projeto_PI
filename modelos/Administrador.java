@@ -1,7 +1,5 @@
 package com.fafica.projeto_pi.modelos;
 
-import java.util.Date;
-
 public class Administrador {
 
 	private int id;

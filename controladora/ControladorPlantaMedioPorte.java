@@ -37,11 +37,4 @@ public class ControladorPlantaMedioPorte {
 		
 	}
 	
-	public PlantaMedioPorte procurarPlantaMedia(int idPlantaMedia) throws SQLException, PlantaNaoEncontradaException ,Exception{
-		System.out.println("Passando pela controladora procurarPlantaMedia");
-		this.repositorioPlantaMediaPorte = new RepositorioPlantaMedioPorteBDR();
-		return repositorioPlantaMediaPorte.procurarPlantaMedia(idPlantaMedia);
-	}
-	
-	
 }

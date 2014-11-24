@@ -44,7 +44,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 					+ ",Nome_nascente_agua,Tipo_nascente_agua)values(?, ?,?,?,?)";
 			
 			if (database == Database.ORACLE) {
-				stmt = this.connection.prepareStatement(sql,new String[] { "id_nascente_agua" });
+				stmt = this.connection.prepareStatement(sql,new String[] { "id_agua" });
 
 			} else {
 				stmt = this.connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -98,7 +98,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-				NascenteAgua agua =  new NascenteAgua(resultSet.getInt("id_agua_nascente_agua"), 
+				NascenteAgua agua =  new NascenteAgua(resultSet.getInt("id_agua"), 
 						resultSet.getDouble("Latitude_nascente_agua"),resultSet.getDouble("Longitude_nascente_agua"), 
 						resultSet.getString("Nome_nascente_agua"), resultSet.getString("Tipo_nascente_agua"));
 				
@@ -128,7 +128,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 		String sql = "";
 		
 		try{
-			sql = "select nascente_agua.Nome_nascente_agua,nascente_agua.id_nascente_agua,"
+			sql = "select nascente_agua.Nome_nascente_agua,nascente_agua.id_agua,"
 					+ "nascente_agua.Latitude_nascente_agua"
 					+ ",nascente_agua.Longitude_nascente_agua,";
 			sql += "nascente_agua.Tipo_nascente_agua ";
@@ -140,7 +140,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-				NascenteAgua agua =  new NascenteAgua(resultSet.getInt("id_nascente_agua"),
+				NascenteAgua agua =  new NascenteAgua(resultSet.getInt("id_agua"),
 						resultSet.getDouble("Latitude_nascente_agua"),
 						resultSet.getDouble("Longitude_nascente_agua"), 
 						resultSet.getString("Nome_fonte_nascente_agua"), 
@@ -167,7 +167,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 		System.out.println("Chegando ao repositorio removerAgua");
 		PreparedStatement stmt = null;
 		try {
-			String sql = "delete from nascente_agua where id_nascente_agua = ?";
+			String sql = "delete from nascente_agua where id_agua = ?";
 			stmt = this.connection.prepareStatement(sql);
 			stmt.setInt(1, idAgua);
 			stmt.execute();
@@ -190,7 +190,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 				sql += "Longitude_nascente_agua = ? ,";
 				sql += "Nome_nascente_agua = ? ,";
 				sql += "Tipo_nascente_agua = ? ";
-				sql += "where id_nascente_agua = ?";
+				sql += "where id_agua = ?";
 				stmt = this.connection.prepareStatement(sql);
 				
 				stmt.setDouble(1, agua.getLatitude());

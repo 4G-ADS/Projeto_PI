@@ -169,10 +169,10 @@ public class Fachada {
 		this.controladorAdministrador.removerAdministrardor(idAdministrardor);
 	}
 
-	public void procurarAdministrador(int idAdministrardor) throws SQLException, IOException, AdministradorNaoEncontradoException,Exception {
+	public Administrador procurarAdministrador(int idAdministrardor) throws SQLException, IOException, AdministradorNaoEncontradoException,Exception {
 		System.out.println("Passando pela Fachada procurarInstituicao");
 		this.controladorAdministrador = new ControladorAdministrador();
-		this.controladorAdministrador.procurarAdministrardor(idAdministrardor);
+		return this.controladorAdministrador.procurarAdministrardor(idAdministrardor);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,13 +305,6 @@ public class Fachada {
 
 	}
 
-	public PlantaPequenoPorte procurarPlantaPequena(int idPlantaPequena) throws SQLException, PlantaNaoEncontradaException, Exception
-		{
-		System.out.println("Passando pela fachada procurarPlantaPequena");
-		this.controladoraPlantaPequenoPorte = new ControladorPlantaPequenoPorte();
-		return controladoraPlantaPequenoPorte
-				.procurarPlantaPequena(idPlantaPequena);
-	}
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public ArrayList<PlantaMedioPorte> listarPlantaMedia() throws SQLException, Exception {
@@ -333,11 +326,6 @@ public class Fachada {
 		
 	}
 	
-	public PlantaMedioPorte procurarPlantaMedia(int idPlantaMedia) throws SQLException, PlantaNaoEncontradaException, Exception {
-		System.out.println("Passando pela fachada procurarPlantaPequena");
-		this.controladorPlantaMedioPorte = new ControladorPlantaMedioPorte();
-		return controladorPlantaMedioPorte.procurarPlantaMedia(idPlantaMedia);
-	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public ArrayList<PlantaGrandePorte> listarPlantaGrande() throws SQLException, Exception {
@@ -359,11 +347,4 @@ public class Fachada {
 		
 	}
 	
-	public PlantaGrandePorte procurarPlantaGrande(int idPlantaGrande) throws SQLException, PlantaNaoEncontradaException, Exception{
-		System.out.println("Passando pela fachada procurarPlantaGramde");
-		this.controladoraPlantaGrandePorte = new ControladorPlantaGrandePorte();
-		return controladoraPlantaGrandePorte.procurarPlantaGrande(idPlantaGrande);
-	}
-	
-
 }

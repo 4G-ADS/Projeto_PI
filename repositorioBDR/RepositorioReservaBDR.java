@@ -171,7 +171,7 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 						resultSet.getString("recursos_solo"));
 
 				NascenteAgua nascente = new NascenteAgua(
-						resultSet.getInt("id_nascente_agua"),
+						resultSet.getInt("id_agua"),
 						resultSet.getDouble("Latitude_nascente_agua"),
 						resultSet.getDouble("Longitude_nascente_agua"),
 						resultSet.getString("Nome_nascente_agua"),

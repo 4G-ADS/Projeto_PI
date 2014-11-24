@@ -94,10 +94,10 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 			
 			while(resultSet.next()){
 			
-				PlantaMedioPorte  plantaMedia = new PlantaMedioPorte(resultSet.getString("especie_planta_medio_porte"),
+				PlantaMedioPorte  plantaMedia = new PlantaMedioPorte(resultSet.getInt("id_planta_medio_porte"),
+						resultSet.getString("especie_planta_medio_porte"),
 						resultSet.getString("nome_planta_medio_porte"),
-						resultSet.getDouble("tamanho_planta_medio_porte"),
-						resultSet.getInt("id_planta_medio_porte"));
+						resultSet.getDouble("tamanho_planta_medio_porte"));
 				listaPlanta.add(plantaMedia);
 				
 			}
@@ -135,10 +135,10 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 			
 			while(resultSet.next()){
 			
-				PlantaMedioPorte  plantaMedia = new PlantaMedioPorte(resultSet.getString("especie_planta_medio_porte"),
+				PlantaMedioPorte  plantaMedia = new PlantaMedioPorte(resultSet.getInt("id_planta_medio_porte"),
+						resultSet.getString("especie_planta_medio_porte"),
 						resultSet.getString("nome_planta_medio_porte"),
-						resultSet.getDouble("tamanho_planta_medio_porte"),
-						resultSet.getInt("id_planta_medio_porte"));
+						resultSet.getDouble("tamanho_planta_medio_porte"));
 				listaPlanta.add(plantaMedia);
 				
 			}
@@ -150,23 +150,6 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 		}		
 		return listaPlanta;
 		
-	}
-	
-	
-	
-	@Override
-	public PlantaMedioPorte procurarPlantaMedia(int idPlantaMedia) throws SQLException {
-		System.out.println("Chegando ao RepositorioPlantaMedioPorte procurarPlantaMedioPorte");
-		PlantaMedioPorte plantaMedioProcura = null;
-		
-		ArrayList<PlantaMedioPorte> listarProcura = listarPlantaMedioPorte();
-		
-		for (PlantaMedioPorte plantaMedia : listarProcura) {
-			if(idPlantaMedia == plantaMedia.getIdPlantaMedioPorte()){
-				plantaMedioProcura = plantaMedia;
-			}
-		}
-		return plantaMedioProcura;
 	}
 
 	@Override

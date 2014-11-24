@@ -37,10 +37,4 @@ public class ControladorPlantaGrandePorte {
 		
 	}
 	
-	public PlantaGrandePorte procurarPlantaGrande(int idPlantaGrande) throws SQLException, PlantaNaoEncontradaException ,Exception{
-		System.out.println("Passando pela controladora procurarPlantaGrande");
-		this.repositorioPlantaGrandePorte = new RepositorioPlantaGrandePorteBDR();
-		return repositorioPlantaGrandePorte.procurarPlantaGrandePorte(idPlantaGrande);
-	}
-	
 }

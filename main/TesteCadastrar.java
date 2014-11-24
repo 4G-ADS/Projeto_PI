@@ -1,7 +1,16 @@
 package com.fafica.projeto_pi.main;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.fafica.projeto_pi.excecoes.AdministradorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.CPFInvalidoException;
+import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
+import com.fafica.projeto_pi.excecoes.IdadeInvalidoException;
+import com.fafica.projeto_pi.excecoes.NascenteJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.PesquisadorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.PlantaJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.SoloJaCadastradoException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Administrador;
 import com.fafica.projeto_pi.modelos.Instituicao;
@@ -20,9 +29,9 @@ public class TesteCadastrar {
 
 				
 		ArrayList <Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
-		Pesquisador p1 = new Pesquisador( 01, "joao", "123.123.123-12", 20, "Geologo");
-		Pesquisador p2 = new Pesquisador( 02, "Paulo", "456.456.456-45", 20, "Biologo");
-		Pesquisador p3 = new Pesquisador( 03, "Erico", "789.789.789-78", 20, "Biologo");
+		Pesquisador p1 = new Pesquisador( 01, "joao", "104.845.104-60", 20, "Geologo");
+		Pesquisador p2 = new Pesquisador( 02, "Paulo", "104.845.104-60", 20, "Biologo");
+		Pesquisador p3 = new Pesquisador( 03, "Erico", "104.845.104-60", 20, "Biologo");
 		pesquisadores.add(p1);
 		pesquisadores.add(p2);
 		pesquisadores.add(p3);
@@ -55,31 +64,60 @@ public class TesteCadastrar {
 		PlantaGrandePorte pGP = new PlantaGrandePorte( "planta", "PlantaGrande", 10.3);
 		listaPlantaGrande.add(pGP);
 		
-		Reserva reserva = new Reserva("", "", 0, 0, 0, 
+		Reserva reserva = new Reserva("Serra12", "serra12", 10, 55, 10, 
 				listaPlantaPequena, listaPlantaMedia, listaPlantaGrande, solos, nascenteAgua, pesquisadores);	 
 		
-		Instituicao instituicao = new Instituicao("Vale2", "mineradora", "123.123.123/12-12");
+		Instituicao instituicao = new Instituicao("Vale2", "mineradora", "46.013.715/0001-80");
 		
-		Administrador adm = new Administrador("joao", "joao","123.123.123-12",1223);
+		Administrador adm = new Administrador("joao", "joao","104.845.104-60",1223);
 		
-		try {
-			Fachada.getInstace().cadastrarReserva(reserva);
-			
-			instituicao.setIdReserva(reserva.getIdReserva());			
-			Fachada.getInstace().cadastrarInstituicao(instituicao);			
-			
-			Fachada.getInstace().cadastrarAdministrardor(adm);
-			
-//			ArrayList<Administrador> lista = Fachada.getInstace().listarAdministrador();
-//			for (Administrador admin : lista) {
-//				System.out.println(admin.toString());
-//			}
-			System.out.println("Teste concluido com sucesso");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.err.println("Deu erro - Porra");
-		}
+		
+			try {
+				Fachada.getInstace().cadastrarReserva(reserva);
+				
+				
+				instituicao.setIdReserva(reserva.getIdReserva());			
+				Fachada.getInstace().cadastrarInstituicao(instituicao);			
+				
+				Fachada.getInstace().cadastrarAdministrardor(adm);
+				
+				ArrayList<Administrador> lista = Fachada.getInstace().listarAdministrador();
+				for (Administrador admin : lista) {
+					System.out.println(admin.toString());
+				}
+				System.out.println("Teste concluido com sucesso");
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (CampoObritarorioInvalidoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AdministradorJaCadastradoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IdadeInvalidoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (CPFInvalidoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (PlantaJaCadastradaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (PesquisadorJaCadastradoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NascenteJaCadastradaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SoloJaCadastradoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 	}
 

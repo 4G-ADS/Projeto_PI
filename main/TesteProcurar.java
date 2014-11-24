@@ -3,6 +3,7 @@ package com.fafica.projeto_pi.main;
 import java.sql.SQLException;
 
 import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Administrador;
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Pesquisador;
@@ -18,16 +19,19 @@ public class TesteProcurar {
 		Fachada fachada = Fachada.getInstace();
 		
 		try {
-//	Pesquisador p = fachada.procurarPesquisador(2);
-//	ok->	Instituicao i = fachada.procurarInstituicao(2);
-//	ok->	NascenteAgua n = fachada.procurarNascente(2);
-//	ok->	Reserva r = fachada.procurarReservaCaracteristicas(2);
-//	ok->	Solo s = fachada.procurarSolo(3);
-//  ok->	PlantaPequenoPorte p = fachada.procurarPlantaPequena(3);
-//	ok->	PlantaMedioPorte m = fachada.procurarPlantaMedia(1);
-//			PlantaGrandePorte g = fachada.procurarPlantaGrande(1);
-			
+//			Administrador a = fachada.procurarAdministrador(1);
+//			Pesquisador p = fachada.procurarPesquisador(22);
+//			Instituicao i = fachada.procurarInstituicao(2);
+//			NascenteAgua n = fachada.procurarNascente(22);
+//			Reserva r = fachada.procurarReserva(15);
+//			Solo s = fachada.procurarSolo(22);
+		
+//			System.out.println(a.toString());
 //			System.out.println(p.toString());
+//			System.out.println(i.toString());
+//			System.out.println(n.toString());
+//			System.out.println(r.toString());
+//			System.out.println(s.toString());
 			
 //		} catch (SQLException e) {
 			// TODO Auto-generated catch block

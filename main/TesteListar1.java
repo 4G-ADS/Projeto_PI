@@ -1,5 +1,7 @@
 package com.fafica.projeto_pi.main;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto_pi.fachada.Fachada;
@@ -20,50 +22,52 @@ public class TesteListar1 {
 		
 		
 		Fachada fachada = Fachada.getInstace();
-		try{
-// ok->	ArrayList<Instituicao> lista1 = fachada.listarInstituicao();
-// ok->	ArrayList<Reserva> listaReservas = fachada.listarReserva();
-
-		Reserva reserva = fachada.procurarReserva(14);	
+	
+		try {
+			ArrayList<Instituicao> lista1 = fachada.listarInstituicao();
+ 			Reserva reserva = fachada.procurarReserva(15);			
+			ArrayList<Administrador> listaAdministrador = fachada.listarAdministrador();
 			
-//	falta	ArrayList<Usuario> listaUsuarios = fachada.listarUsuario();
-//		
-//		
-//				
-//		for (Instituicao instituicao : lista1) {
-//		System.out.println(instituicao.toString());
-//	}
-//		for (Reserva reservas : listaReservas) {
-//		System.out.println(reservas.toString());
-//	}		
-		for (Pesquisador pesquisador : reserva.getPesquisadores()) {
-		System.out.println(pesquisador.toString());
-	}	
-		for (Solo solo : reserva.getSolos()) {
-		System.out.println(solo.toString());
-	}		
-		for (NascenteAgua nascenteAgua : reserva.getNascenteAgua()) {
-		System.out.println(nascenteAgua.toString());
-	}
-		for (PlantaPequenoPorte plantaPequenoPorte : reserva.getListaPlantaPequena()) {
-		System.out.println(plantaPequenoPorte.toString());
-	}
-		for (PlantaMedioPorte plantaMedioPorte : reserva.getListaPlantaMedia()) {
-		System.out.println(plantaMedioPorte.toString());
-	}
-		for (PlantaGrandePorte plantaGrandePorte : reserva.getListaPlantaGrande()) {
-		System.out.println(plantaGrandePorte.toString());
-	}
-		
-//			for(Usuario usuario : listaUsuarios) {
-//				System.out.println(usuario.toString());
-//			}		
+			
+					
+			for (Instituicao instituicao : lista1) {
+			System.out.println(instituicao.toString());
+		}
 
+			for (Administrador administrador : listaAdministrador) {
+			System.out.println(administrador.toString());	
+			}
+			
+			for (Pesquisador pesquisador : reserva.getPesquisadores()) {
+			System.out.println(pesquisador.toString());
+		}	
+			for (Solo solo : reserva.getSolos()) {
+			System.out.println(solo.toString());
+		}		
+			for (NascenteAgua nascenteAgua : reserva.getNascenteAgua()) {
+			System.out.println(nascenteAgua.toString());
+		}
+			for (PlantaPequenoPorte plantaPequenoPorte : reserva.getListaPlantaPequena()) {
+			System.out.println(plantaPequenoPorte.toString());
+		}
+			for (PlantaMedioPorte plantaMedioPorte : reserva.getListaPlantaMedia()) {
+			System.out.println(plantaMedioPorte.toString());
+		}
+			for (PlantaGrandePorte plantaGrandePorte : reserva.getListaPlantaGrande()) {
+			System.out.println(plantaGrandePorte.toString());
+		}
 
-		}catch(Exception e){
-			System.err.println("Deu Erro main");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		
 		
 	}

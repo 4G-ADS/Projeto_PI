@@ -46,10 +46,4 @@ public class ControladorPlantaPequenoPorte {
 		
 	}
 	
-	public PlantaPequenoPorte procurarPlantaPequena(int idPlantaPequena) throws SQLException, PlantaNaoEncontradaException ,Exception{
-		System.out.println("Passando pela controladora procurarPlantaPequena");
-		this.repositorioPlantaPequenaPorte = new RepositorioPlantaPequenoPorteBDR();
-		return repositorioPlantaPequenaPorte.procurarPlantaPequenoPorte(idPlantaPequena);
-	}
-	
 }

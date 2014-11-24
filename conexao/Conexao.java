@@ -17,11 +17,11 @@ public class Conexao {
 		
 		//podemos trabalhar com mais de um banco;
 		if (banco == Database.MYSQL) {
-			conexao = "jdbc:mysql://localhost/novoBanco";
+			conexao = "jdbc:mysql://localhost/bancodedados";
 			usuario = "root";
 			senha = "root";
 		} else if (banco == Database.ORACLE) {
-			conexao = "jdbc:postgresql://totvs11:5432/novoBanco";
+			conexao = "jdbc:postgresql://totvs11:5432/bancodedados";
 			usuario = "root";
 			senha = "root";
 		} else {

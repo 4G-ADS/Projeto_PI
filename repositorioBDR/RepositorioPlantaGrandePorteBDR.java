@@ -70,22 +70,6 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 	}
 
 	@Override
-	public PlantaGrandePorte procurarPlantaGrandePorte(int idPlantaGrande) throws SQLException {
-		System.out.println("Chegando ao RepositorioPlantaGrandePorte procurarPLantaGrandePorte");
-
-		PlantaGrandePorte plantaGrandeProcura = null;
-		
-		ArrayList<PlantaGrandePorte> listarProcura = listarPlantaGrandePorte();
-		
-		for (PlantaGrandePorte plantaGrande : listarProcura) {
-			if(idPlantaGrande == plantaGrande.getIdPantaGrandePorte()){
-				plantaGrandeProcura = plantaGrande;
-			}
-		}
-		return plantaGrandeProcura;
-	}
-
-	@Override
 	public ArrayList<PlantaGrandePorte> listarPlantaGrandePorte() throws SQLException {
 		System.out.println("Chegando ao RepositorioPlantaGrandePorte listarPLantaGrandePorte");
 
@@ -103,9 +87,10 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 			
 			while(resultSet.next()){
 			
-				PlantaGrandePorte  plantaGrande = new PlantaGrandePorte(resultSet.getString("especie_planta_grande_porte"), 
+				PlantaGrandePorte  plantaGrande = new PlantaGrandePorte(resultSet.getInt("id_planta_grande_porte"),
+						resultSet.getString("especie_planta_grande_porte"), 
 						resultSet.getString("nome_planta_grande_porte"),
-						resultSet.getDouble("tamanho_planta_grande_porte"),resultSet.getInt("id_planta_grande_porte"));
+						resultSet.getDouble("tamanho_planta_grande_porte"));
 				listaPlanta.add(plantaGrande);
 				
 			}
@@ -147,9 +132,12 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 			
 			while(resultSet.next()){
 			
-				PlantaGrandePorte  plantaGrande = new PlantaGrandePorte(resultSet.getString("especie_planta_grande_porte"),
+				PlantaGrandePorte  plantaGrande = new PlantaGrandePorte(resultSet.getInt("id_planta_grande_porte"),
+						resultSet.getString("especie_planta_grande_porte"), 
 						resultSet.getString("nome_planta_grande_porte"),
-						resultSet.getDouble("tamanho_planta_grande_porte"),resultSet.getInt("id_planta_grande_porte"));
+						resultSet.getDouble("tamanho_planta_grande_porte"));
+				listaPlanta.add(plantaGrande);
+				
 				listaPlanta.add(plantaGrande);
 				
 			}
