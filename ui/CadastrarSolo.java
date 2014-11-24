@@ -15,6 +15,7 @@ import javax.swing.JButton;
 
 import com.fafica.projeto_pi.controladora.ControladoraReserva;
 import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
 import com.fafica.projeto_pi.repositorioBDR.RepositorioSoloBDR;
 
@@ -37,7 +38,7 @@ public class CadastrarSolo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastrarSolo frame = new CadastrarSolo();
+					CadastrarSolo frame = new CadastrarSolo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +50,7 @@ public class CadastrarSolo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarSolo() {
+	public CadastrarSolo(Reserva reserva) {
 		setTitle("Cadastrar Solo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 243);

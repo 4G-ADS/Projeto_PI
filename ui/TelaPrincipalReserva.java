@@ -55,8 +55,8 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnAddSolo = new JButton("Add Solo");
 		btnAddSolo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new CadastrarSolo().setVisible(true);
+//				dispose();
+//				new CadastrarSolo().setVisible(true);
 			}		
 		});
 		

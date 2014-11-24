@@ -1,15 +1,18 @@
 package com.fafica.projeto_pi.ui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.GroupLayout;
-import javax.swing.JOptionPane;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Administrador;
@@ -18,11 +21,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class Login {
+import javax.swing.LayoutStyle.ComponentPlacement;
 
-	private JFrame frmTelaDeLogin;
-	private JTextField login;
+public class Login extends JFrame {
+
+	private JPanel contentPane;
 	private JTextField senha;
+	private JTextField login;
+	private JButton btnCadastrese;
+	private Administrador adm = null;
+
 
 	/**
 	 * Launch the application.
@@ -31,8 +39,8 @@ public class Login {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login window = new Login();
-					window.frmTelaDeLogin.setVisible(true);
+					Login frame = new Login();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,103 +49,95 @@ public class Login {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public Login() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmTelaDeLogin = new JFrame();
-		frmTelaDeLogin.setTitle("Tela de login");
-		frmTelaDeLogin.setBounds(100, 100, 450, 300);
-		frmTelaDeLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Login");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("Login");
-		
-		JLabel lblNewLabel_1 = new JLabel("Senha");
-		
-		login = new JTextField();
-		login.setColumns(10);
-		
-		senha = new JTextField();
-		senha.setColumns(10);
-		
-		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("Entrar");
+			
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+
 				System.out.println(verificarUsuario());
 				if(verificarUsuario() == true){
 					
-					frmTelaDeLogin.dispose();
-					new MenuPrincipal().setVisible(true);
+					dispose();
+					new MenuPrincipal(adm).setVisible(true);
 					
 				}else{
 					JOptionPane.showMessageDialog(null, "Usuario ou senha inválidos");
 				}
 				
 			}
-
-			
 		});
 		
-		JButton btnCadastrese = new JButton("Cadastre-se");
+		senha = new JTextField();
+		senha.setColumns(10);
+		
+		login = new JTextField();
+		login.setColumns(10);
+		
+		JLabel lblL = new JLabel("Login");
+		
+		JLabel lblSenha = new JLabel("Senha");
+		
+		btnCadastrese = new JButton("Cadastre-se");
 		btnCadastrese.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frmTelaDeLogin.dispose();
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
 				new CadastrarAdministrador().setVisible(true);
 			}
 		});
-		
-	
-		
-		GroupLayout groupLayout = new GroupLayout(frmTelaDeLogin.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(220)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel)
-						.addComponent(lblNewLabel_1))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(senha, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-						.addComponent(login, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
-					.addGap(25))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(306, Short.MAX_VALUE)
-					.addComponent(btnEntrar)
-					.addGap(65))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(46)
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(198, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblSenha, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(senha, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblL)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(login, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
 					.addComponent(btnCadastrese)
-					.addContainerGap(297, Short.MAX_VALUE))
+					.addContainerGap(325, Short.MAX_VALUE))
 		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(66)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(36)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(login, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel))
+						.addComponent(lblL))
 					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(senha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1))
+						.addComponent(lblSenha))
 					.addGap(18)
-					.addComponent(btnEntrar)
-					.addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+					.addComponent(btnNewButton)
+					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
 					.addComponent(btnCadastrese)
-					.addGap(31))
+					.addContainerGap())
 		);
-		frmTelaDeLogin.getContentPane().setLayout(groupLayout);
+		contentPane.setLayout(gl_contentPane);
 	}
-
+	
 	public boolean verificarUsuario() {
 		ArrayList<Administrador> listaAdm;
 		
@@ -145,7 +145,6 @@ public class Login {
 		
 		try {
 			listaAdm = Fachada.getInstace().listarAdministrador();
-			
 			for (Administrador administrador : listaAdm) {
 				System.out.println("Senha: " + administrador.getSenha());
 				
@@ -153,6 +152,7 @@ public class Login {
 						senha.getText().equals(String.valueOf(administrador.getSenha()))){
 					verifica = true;
 					System.out.println("aqui" + verifica);
+					adm = administrador;
 					break;
 				}
 				

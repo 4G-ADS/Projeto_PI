@@ -10,6 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import com.fafica.projeto_pi.modelos.Pesquisador;
+import com.fafica.projeto_pi.modelos.Reserva;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
 public class CadastrarPesquisador extends JFrame {
 
 	private JPanel contentPane;
@@ -18,6 +25,8 @@ public class CadastrarPesquisador extends JFrame {
 	private JTextField campoIdade;
 	private JTextField campoProfissao;
 	private JButton btnCadastrar;
+	private Reserva reservaProvisoria = null;
+	private ArrayList <Pesquisador> listaPesquisador = new ArrayList<Pesquisador>(); 
 
 	/**
 	 * Launch the application.
@@ -26,7 +35,7 @@ public class CadastrarPesquisador extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastrarPesquisador frame = new CadastrarPesquisador();
+					CadastrarPesquisador frame = new CadastrarPesquisador(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +47,8 @@ public class CadastrarPesquisador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarPesquisador() {
+	public CadastrarPesquisador(Reserva reserva) {
+		reservaProvisoria = reserva;
 		setTitle("Cadastrar Pesquisador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -84,8 +94,29 @@ public class CadastrarPesquisador extends JFrame {
 		campoProfissao.setColumns(10);
 		
 		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(67, 157, 97, 29);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reservaProvisoria.setPesquisadores(listaPesquisador);
+				new CadastrarSolo(reservaProvisoria).setVisible(true);
+			}
+		});
+		btnCadastrar.setBounds(316, 221, 97, 29);
 		contentPane.add(btnCadastrar);
-	}
+		
+		JButton btnNovo = new JButton("Novo");
+		btnNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
+				String nome = campoNome.getText();
+				String cpf = campoCpf.getText();
+				int idade = Integer.parseInt(campoIdade.getText());
+				String profissao = campoProfissao.getText();
+				
+				Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
+				listaPesquisador.add(p);
+			}
+		});
+		btnNovo.setBounds(214, 221, 97, 29);
+		contentPane.add(btnNovo);
+	}
 }
