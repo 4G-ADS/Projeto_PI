@@ -93,18 +93,29 @@ public class CadastrarPesquisador extends JFrame {
 		contentPane.add(campoProfissao);
 		campoProfissao.setColumns(10);
 		
-		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar = new JButton("Finalizar cadastro");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				if(listaPesquisador.size() == 0){
+//
+//					String nome = campoNome.getText();
+//					String cpf = campoCpf.getText();
+//					int idade = Integer.parseInt(campoIdade.getText());
+//					String profissao = campoProfissao.getText();
+//					
+//					Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
+//					listaPesquisador.add(p);
+//				}
+				
 				dispose();
 				reservaProvisoria.setPesquisadores(listaPesquisador);
 				new CadastrarSolo(reservaProvisoria).setVisible(true);
 			}
 		});
-		btnCadastrar.setBounds(328, 221, 97, 29);
+		btnCadastrar.setBounds(305, 221, 120, 29);
 		contentPane.add(btnCadastrar);
 		
-		JButton btnNovo = new JButton("Novo");
+		JButton btnNovo = new JButton("Cadastrar");
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -113,15 +124,17 @@ public class CadastrarPesquisador extends JFrame {
 				int idade = Integer.parseInt(campoIdade.getText());
 				String profissao = campoProfissao.getText();
 				
+				Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
+				listaPesquisador.add(p);
+				
 				campoNome.setText("");
 				campoCpf.setText("");
 				campoIdade.setText("");
 				campoProfissao.setText("");
-				Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
-				listaPesquisador.add(p);
+				
 			}
 		});
-		btnNovo.setBounds(221, 221, 97, 29);
+		btnNovo.setBounds(198, 221, 97, 29);
 		contentPane.add(btnNovo);
 	}
 }

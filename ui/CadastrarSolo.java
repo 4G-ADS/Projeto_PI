@@ -86,6 +86,17 @@ public class CadastrarSolo extends JFrame {
 		btnCadastrar.setBounds(310, 221, 104, 29);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(listaSolo.size() == 0){
+					
+				String tipo = btnTipo.getText();
+				Double tamanho = Double.parseDouble(btnTamanho.getText());
+				String recursos = btnRecursos.getText();
+					
+				Solo s = new Solo(tipo, tamanho, recursos);
+				listaSolo.add(s);
+				
+				}
+				
 				reservaProvisoria.setSolos(listaSolo);
 				dispose();
 				new CadastrarNascente(reservaProvisoria).setVisible(true);
@@ -108,8 +119,9 @@ public class CadastrarSolo extends JFrame {
 				Double tamanho = Double.parseDouble(btnTamanho.getText());
 				String recursos = btnRecursos.getText();
 				
-			Solo s = new Solo(tipo, tamanho, recursos);
-			listaSolo.add(s);	
+				Solo s = new Solo(tipo, tamanho, recursos);
+				listaSolo.add(s);	
+				
 				btnTipo.setText("");
 				btnTamanho.setText("");
 				btnRecursos.setText("");

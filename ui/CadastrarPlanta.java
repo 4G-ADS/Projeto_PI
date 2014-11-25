@@ -15,8 +15,20 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
+import javax.swing.JTextPane;
+
+import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
+import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
+import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
+import com.fafica.projeto_pi.modelos.Reserva;
+
+import javax.swing.JSpinner;
 
 public class CadastrarPlanta extends JFrame {
 
@@ -25,7 +37,10 @@ public class CadastrarPlanta extends JFrame {
 	private JTextField campoEspecie;
 	private JTextField campoTamanho;
 	private JComboBox comboBox;
-
+	private Reserva reservaProvisoria;
+	private ArrayList<PlantaPequenoPorte> listaPlantaPequena = new ArrayList<PlantaPequenoPorte>();
+	private ArrayList<PlantaMedioPorte> listaPlantaMedia = new ArrayList<PlantaMedioPorte>();
+	private ArrayList<PlantaGrandePorte> listaPlantaGrande = new ArrayList<PlantaGrandePorte>();
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +48,7 @@ public class CadastrarPlanta extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastrarPlanta frame = new CadastrarPlanta();
+					CadastrarPlanta frame = new CadastrarPlanta(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +60,7 @@ public class CadastrarPlanta extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarPlanta() {
+	public CadastrarPlanta(Reserva reserva) {
 		setTitle("Cadastrar Planta");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -71,22 +86,102 @@ public class CadastrarPlanta extends JFrame {
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Pequeno Porte", "Medio Porte", "Grande Porte"}));
 		
-		JButton btnCadastrar = new JButton("Voltar");
-		
 		JButton button = new JButton("Cadastrar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				String nome = campoNome.getText();
+				String especie = campoEspecie.getText();
+				int tamanho = Integer.parseInt(campoTamanho.getText());
 				
+				if(comboBox.getSelectedItem().equals("Pequeno Porte")){
+					
+					if(tamanho < 60 ){
+						System.out.println("pequeno");
+						
+					PlantaPequenoPorte planataPequena = new PlantaPequenoPorte(especie, nome, tamanho);
+					System.out.println(planataPequena.getNome());
+					
+					listaPlantaPequena.add(planataPequena);
+					
+					campoNome.setText("");
+					campoEspecie.setText("");
+					campoTamanho.setText("");
+					
+					}else{
+						JOptionPane.showMessageDialog(null, "para ser um planta de pequeno\n"
+														+ 	"porte tem que ter menos de 60 cm\n"
+														+ 	"Lembrando tamanho em cm");
+					}
+					
+					
+				}else if(comboBox.getSelectedItem().equals("Medio Porte")){
+					
+					if(tamanho > 60 && tamanho < 180 ){
+						System.out.println("medio");
+					PlantaMedioPorte planataMedia = new PlantaMedioPorte(especie, nome, tamanho);
+					System.out.println(planataMedia.getNome());
+					listaPlantaMedia.add(planataMedia);
+					
+					campoNome.setText("");
+					campoEspecie.setText("");
+					campoTamanho.setText("");
+					
+					}else{
+						JOptionPane.showMessageDialog(null, "para ser um planta de medio\n"
+														+ 	"porte tem que ter mais de 60 cm\n"
+														+ 	"e menor que 180 cm \n"
+														+ 	"Lembrando tamanho em cm");
+					}
+					
+					
+				}else if(comboBox.getSelectedItem().equals("Grande Porte")){
+					
+					if(tamanho > 180 ){
+						System.out.println("grande");
+					PlantaGrandePorte planataGrade = new PlantaGrandePorte(especie, nome, tamanho);
+					System.out.println(planataGrade.getNome());
+					listaPlantaGrande.add(planataGrade);
+					
+					campoNome.setText("");
+					campoEspecie.setText("");
+					campoTamanho.setText("");
+					
+					}else{
+						JOptionPane.showMessageDialog(null, "para ser um planta de pequeno\n"
+														+ 	"porte tem que ser maior que 180 cm\n"
+														+ 	"Lembrando tamanho em cm");
+					}
+				}	
+		}
+		});
+		
+		JButton btnCadastrar = new JButton("Finalizar cadastro");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				for (PlantaPequenoPorte plantaPequenoPorte : listaPlantaPequena) {
+					plantaPequenoPorte.getNome();
+				}
+				reservaProvisoria.setListaPlantaPequena(listaPlantaPequena);
+				
+				reservaProvisoria.setListaPlantaMedia(listaPlantaMedia);
+				reservaProvisoria.setListaPlantaGrande(listaPlantaGrande);
+				
+				dispose();
+				new TelaPrincipalReserva(reservaProvisoria);
 			}
 		});
+		
+		JTextPane txtpnObsObrigatorio = new JTextPane();
+		txtpnObsObrigatorio.setText("OBS: \u00E9 obrigatorio ter pelo menos uma planta de cada porte para poder finalizar o cadastro");
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblNome)
@@ -99,21 +194,21 @@ public class CadastrarPlanta extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblTamanho)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)))
-					.addGap(71)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-							.addGap(12)))
-					.addGap(80))
+							.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)))
+					.addGap(105)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+					.addGap(20))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(txtpnObsObrigatorio, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+					.addGap(61)
+					.addComponent(button, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCadastrar)
+					.addContainerGap(16, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(27)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
@@ -126,12 +221,14 @@ public class CadastrarPlanta extends JFrame {
 						.addComponent(campoEspecie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTamanho)
-						.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(94)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button)
-						.addComponent(btnCadastrar))
+						.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTamanho))
+					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(button)
+							.addComponent(btnCadastrar))
+						.addComponent(txtpnObsObrigatorio, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);

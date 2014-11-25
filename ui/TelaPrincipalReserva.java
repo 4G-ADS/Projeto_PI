@@ -11,11 +11,21 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.fafica.projeto_pi.excecoes.AdministradorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.CPFInvalidoException;
+import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
+import com.fafica.projeto_pi.excecoes.IdadeInvalidoException;
+import com.fafica.projeto_pi.excecoes.NascenteJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.PesquisadorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.PlantaJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.SoloJaCadastradoException;
+import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -66,6 +76,40 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CampoObritarorioInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (AdministradorJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IdadeInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CPFInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PlantaJaCadastradaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PesquisadorJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NascenteJaCadastradaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SoloJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});
@@ -73,7 +117,6 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnPesquisadores = new JButton("Pesquisadores");
 		btnPesquisadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
 				new MenuPesquisador(reservaProvisoria).setVisible(true);;
 			}
 		});
@@ -81,7 +124,6 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnNascentes = new JButton("Nascentes");
 		btnNascentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
 				new MenuNascente(reservaProvisoria).setVisible(true);
 			}
 		});
@@ -89,7 +131,6 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnPlantas = new JButton("Plantas");
 		btnPlantas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
 				new MenuPlanta(reservaProvisoria).setVisible(true);
 			}
 		});
@@ -97,7 +138,6 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnSolos = new JButton("Solos");
 		btnSolos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
 				new MenuSolo(reservaProvisoria).setVisible(true);
 				}
 		});
@@ -105,7 +145,7 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnInstituicao = new JButton("Instituicao");
 		btnInstituicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				new MenuInstituicao(reservaProvisoria).setVisible(true);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

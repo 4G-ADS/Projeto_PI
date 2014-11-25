@@ -28,6 +28,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JSpinner;
 
 public class MenuPrincipal extends JFrame {
 
@@ -113,8 +114,6 @@ public class MenuPrincipal extends JFrame {
 		JButton btnPerfil = new JButton("Perfil");
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				
 				new EditarAdministrador(administrador).setVisible(true);
 			}
 		});
@@ -176,11 +175,7 @@ public class MenuPrincipal extends JFrame {
 		}	
 		
 		
-		String colunas []= {"ID", "Reservas"};
-		
-		
-		
-		
+		String colunas []= {"ID", "Reservas"};		
 		
 		DefaultTableModel listar = new DefaultTableModel(listaReservaTabela,colunas);
 		

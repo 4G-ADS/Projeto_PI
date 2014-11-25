@@ -9,13 +9,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 
+import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
+import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Reserva;
+import com.fafica.projeto_pi.modelos.Solo;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.table.DefaultTableModel;
 
 public class MenuSolo extends JFrame {
 
@@ -48,39 +61,103 @@ public class MenuSolo extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JLabel lblSolo = new JLabel("Solo");
 		lblSolo.setFont(new Font("Lucida Grande", Font.BOLD, 22));
-		lblSolo.setBounds(10, 11, 48, 27);
-		contentPane.add(lblSolo);
 		
 		JButton button = new JButton("Voltar");
-		button.setBounds(342, 224, 73, 23);
-		contentPane.add(button);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JButton button_1 = new JButton("Add");
-		button_1.setBounds(20, 49, 63, 23);
-		contentPane.add(button_1);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		JButton button_2 = new JButton("Perfil");
-		button_2.setBounds(20, 131, 63, 23);
-		contentPane.add(button_2);
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		JButton button_3 = new JButton("Excluir");
-		button_3.setBounds(20, 172, 63, 23);
-		contentPane.add(button_3);
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(127, 49, 288, 161);
-		contentPane.add(scrollPane);
+		String[][] listaSoloTabela = new String[100][2];		
+		try {
+			ArrayList<Solo> listaSolos = Fachada.getInstace().listarSolo();
+			for (int i = 0; i < listaSoloTabela.length; i++) {
+				if(i < listaSolos.size()){
+				String id = String.valueOf(listaSolos.get(i).getIdSolo());
+				String nome = listaSolos.get(i).getTipo();
+				listaSoloTabela[i][0] = id;
+				listaSoloTabela[i][1] = nome;
+				}
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ReservaNaoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		
+		String colunas []= {"ID", "Solos"};	
+		DefaultTableModel listar = new DefaultTableModel(listaSoloTabela,colunas);
 		
 		table = new JTable();
-		scrollPane.setViewportView(table);
+		table.setModel(listar);
 		
-		JButton button_4 = new JButton("Editar");
-		button_4.setBounds(20, 90, 61, 23);
-		contentPane.add(button_4);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		scrollPane.setViewportView(table);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(5)
+					.addComponent(lblSolo, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(15)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(button_1, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+						.addComponent(button_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(button_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(35)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(337)
+					.addComponent(button, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(6)
+					.addComponent(lblSolo, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(button_1)
+							.addGap(11)
+							.addComponent(button_2)
+							.addGap(11)
+							.addComponent(button_3))
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
+					.addGap(14)
+					.addComponent(button))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 
 }

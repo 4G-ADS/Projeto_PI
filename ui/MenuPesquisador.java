@@ -15,9 +15,21 @@ import java.awt.Font;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
+import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Pesquisador;
 import com.fafica.projeto_pi.modelos.Reserva;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTree;
 
 public class MenuPesquisador extends JFrame {
 
@@ -54,9 +66,12 @@ public class MenuPesquisador extends JFrame {
 		JLabel lblPesquisador = new JLabel("Pesquisador");
 		lblPesquisador.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
-		JButton btnExcluir = new JButton("Editar");
-		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JButton btnAdd = new JButton("Add");
 		
@@ -65,50 +80,70 @@ public class MenuPesquisador extends JFrame {
 		JButton button = new JButton("Excluir");
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		String[][] listaPesquisadorTabela = new String[100][2];		
+		try {
+			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador();
+			for (int i = 0; i < listaPesquisadorTabela.length; i++) {
+				if(i < listaPesquisador.size()){
+				String id = String.valueOf(listaPesquisador.get(i).getIdPesquisador());
+				String nome = listaPesquisador.get(i).getNome();
+				listaPesquisadorTabela[i][0] = id;
+				listaPesquisadorTabela[i][1] = nome;
+				}
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ReservaNaoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		
+		String colunas []= {"ID", "Pesquisadores"};	
+		DefaultTableModel listar = new DefaultTableModel(listaPesquisadorTabela,colunas);
+		
+		table = new JTable();
+		table.setModel(listar);
+		
+		scrollPane.setViewportView(table);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnExcluir)
-								.addComponent(btnPerfil, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblPesquisador)
-							.addPreferredGap(ComponentPlacement.RELATED, 267, Short.MAX_VALUE))
-						.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-					.addGap(19))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(10)
+					.addComponent(lblPesquisador))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnPerfil, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+					.addGap(38)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(332)
+					.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(lblPesquisador)
 					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(btnAdd)
-							.addGap(18)
-							.addComponent(btnExcluir)
-							.addGap(18)
-							.addComponent(btnPerfil)
-							.addGap(18)
-							.addComponent(button)
-							.addContainerGap())
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-							.addGap(14)
-							.addComponent(btnVoltar)
-							.addGap(6))))
+							.addComponent(btnAdd)
+							.addGap(11)
+							.addComponent(btnPerfil)
+							.addGap(11)
+							.addComponent(button))
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
+					.addGap(43)
+					.addComponent(btnVoltar))
 		);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
