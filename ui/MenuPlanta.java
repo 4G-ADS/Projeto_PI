@@ -100,37 +100,36 @@ public class MenuPlanta extends JFrame {
 			}
 		});
 		
-		
 		rdbtnPequeno = new JRadioButton("Pequeno Porte");
+		rdbtnPequeno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnMedio.setSelected(false);
+				rdbtnGrande.setSelected(false);
+				preenceherTabelaPlantasPequenoPorte();
+				
+			}
+		});
+		
+		
 		rdbtnMedio = new JRadioButton("Medio Porte");
+		rdbtnMedio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnPequeno.setSelected(false);
+				rdbtnGrande.setSelected(false);
+					preenceherTabelaPlantasMedioPorte();
+					
+				
+			}
+		});
+		
 		rdbtnGrande = new JRadioButton("Grande Porte");
-
-				try {
-					ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena();
-					
-					for (int i = 0; i < listaPlantaTabela.length; i++) {
-					
-					
-					if(listaPlantaPequena.size() > i){
-						
-						String id = String.valueOf(listaPlantaPequena.get(i).getIdPlantaPequenaPorte());
-						String nome  = listaPlantaPequena.get(i).getNome();
-						
-						listaPlantaTabela[i][0] = id;
-						listaPlantaTabela[i][1] = nome;
-						
-					}
-				}
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			
-					
+		rdbtnGrande.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnPequeno.setSelected(false);
+				rdbtnMedio.setSelected(false);
+				preenceherTabelaPlantasGrandePorte();
+			}
+		});
 		
 		
 		table = new JTable(listaPlantaTabela,colunas);
@@ -184,5 +183,92 @@ public class MenuPlanta extends JFrame {
 					.addComponent(button))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void preenceherTabelaPlantasPequenoPorte(){
+		try {
+			ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena();
+			
+			for (int i = 0; i < listaPlantaTabela.length; i++) {
+			
+			
+			if(listaPlantaPequena.size() > i){
+				
+				String id = String.valueOf(listaPlantaPequena.get(i).getIdPlantaPequenaPorte());
+				String nome  = listaPlantaPequena.get(i).getNome();
+				
+				listaPlantaTabela[i][0] = id;
+				listaPlantaTabela[i][1] = nome;
+			table.updateUI();	
+			}
+		}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+	}
+	
+	public void preenceherTabelaPlantasMedioPorte(){
+		try {
+			ArrayList<PlantaMedioPorte> listaPlantaMedia= Fachada.getInstace().listarPlantaMedia();
+			
+			for (int i = 0; i < listaPlantaTabela.length; i++) {
+			
+			
+			if(listaPlantaMedia.size() > i){
+				
+				String id = String.valueOf(listaPlantaMedia.get(i).getIdPlantaMedioPorte());
+				String nome  = listaPlantaMedia.get(i).getNome();
+				
+				listaPlantaTabela[i][0] = id;
+				listaPlantaTabela[i][1] = nome;
+			table.updateUI();	
+			}
+		}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+	}
+	
+	public void preenceherTabelaPlantasGrandePorte(){
+		try {
+			ArrayList<PlantaGrandePorte> listaPlantaGrande = Fachada.getInstace().listarPlantaGrande();
+			
+			for (int i = 0; i < listaPlantaTabela.length; i++) {
+			
+			
+			if(listaPlantaGrande.size() > i){
+				
+				String id = String.valueOf(listaPlantaGrande.get(i).getIdPantaGrandePorte());
+				String nome  = listaPlantaGrande.get(i).getNome();
+				
+				listaPlantaTabela[i][0] = id;
+				listaPlantaTabela[i][1] = nome;
+			table.updateUI();	
+			}
+		}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
 	}
 }

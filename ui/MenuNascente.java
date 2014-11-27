@@ -12,6 +12,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
+import com.fafica.projeto_pi.excecoes.NascenteNaoEncontradaException;
 import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
@@ -35,6 +36,8 @@ public class MenuNascente extends JFrame {
 	private JPanel contentPane;
 	private Reserva reservaProvisoria;
 	private JTable table;
+	private String colunas []= {"ID", "Nascentes"};
+	private String[][] listaNascentesTabela = new String[100][2];
 	/**
 	 * Launch the application.
 	 */
@@ -81,6 +84,26 @@ public class MenuNascente extends JFrame {
 		JButton button_2 = new JButton("Perfil");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				int idNascente = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+				
+				NascenteAgua nascente = null;
+
+				try {
+					nascente = Fachada.getInstace().procurarNascente(idNascente);
+					dispose();
+					new EditarNascente(nascente,reservaProvisoria).setVisible(true);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NascenteNaoEncontradaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -90,36 +113,13 @@ public class MenuNascente extends JFrame {
 			}
 		});
 		
-		String[][] listaNascentesTabela = new String[100][2];		
-		try {
-			ArrayList<NascenteAgua> listaNascentes = Fachada.getInstace().listarNascente();
-			for (int i = 0; i < listaNascentesTabela.length; i++) {
-				if(i < listaNascentes.size()){
-				String id = String.valueOf(listaNascentes.get(i).getIdAgua());
-				String nome = listaNascentes.get(i).getNomeFonte();
-				listaNascentesTabela[i][0] = id;
-				listaNascentesTabela[i][1] = nome;
-				}
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ReservaNaoEncontradaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}	
+		carregarTabela();
 		
-		String colunas []= {"ID", "Nascentes"};	
-		DefaultTableModel listar = new DefaultTableModel(listaNascentesTabela,colunas);
-		
-		table = new JTable();
-		table.setModel(listar);
-		
+		table = new JTable(listaNascentesTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -158,4 +158,28 @@ public class MenuNascente extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	public void carregarTabela(){
+		try {
+			ArrayList<NascenteAgua> listaNascentes = Fachada.getInstace().listarNascente();
+			for (int i = 0; i < listaNascentesTabela.length; i++) {
+				if(i < listaNascentes.size()){
+				String id = String.valueOf(listaNascentes.get(i).getIdAgua());
+				String nome = listaNascentes.get(i).getNomeFonte();
+				listaNascentesTabela[i][0] = id;
+				listaNascentesTabela[i][1] = nome;
+				}
+			}
+			table.updateUI();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ReservaNaoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+	}
+	
 }

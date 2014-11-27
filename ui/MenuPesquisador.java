@@ -36,6 +36,8 @@ public class MenuPesquisador extends JFrame {
 	private JPanel contentPane;
 	private Reserva reservaProvisoria;
 	private JTable table;
+	private String[][] listaPesquisadorTabela = new String[100][2];
+	private String colunas []= {"ID", "Pesquisadores"};	
 	/**
 	 * Launch the application.
 	 */
@@ -79,37 +81,13 @@ public class MenuPesquisador extends JFrame {
 		
 		JButton button = new JButton("Excluir");
 		
+		
+		carregarTabela();	
+		
+		table = new JTable(listaPesquisadorTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
-		
-		String[][] listaPesquisadorTabela = new String[100][2];		
-		try {
-			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador();
-			for (int i = 0; i < listaPesquisadorTabela.length; i++) {
-				if(i < listaPesquisador.size()){
-				String id = String.valueOf(listaPesquisador.get(i).getIdPesquisador());
-				String nome = listaPesquisador.get(i).getNome();
-				listaPesquisadorTabela[i][0] = id;
-				listaPesquisadorTabela[i][1] = nome;
-				}
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ReservaNaoEncontradaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}	
-		
-		String colunas []= {"ID", "Pesquisadores"};	
-		DefaultTableModel listar = new DefaultTableModel(listaPesquisadorTabela,colunas);
-		
-		table = new JTable();
-		table.setModel(listar);
-		
 		scrollPane.setViewportView(table);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -146,4 +124,32 @@ public class MenuPesquisador extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	public void carregarTabela(){
+		try {
+			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador();
+			for (int i = 0; i < listaPesquisadorTabela.length; i++) {
+				if(i < listaPesquisador.size()){
+				String id = String.valueOf(listaPesquisador.get(i).getIdPesquisador());
+				String nome = listaPesquisador.get(i).getNome();
+				listaPesquisadorTabela[i][0] = id;
+				listaPesquisadorTabela[i][1] = nome;
+				}
+			}
+			table.updateUI();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ReservaNaoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		
+		
+	}
+	
+	
 }

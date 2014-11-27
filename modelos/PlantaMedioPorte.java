@@ -5,15 +5,15 @@ public class PlantaMedioPorte extends Planta {
 
 	private int idPlantaMedioPorte;
 	
-	public PlantaMedioPorte(String especie,
-			String nome, double tamanho, int idPlantaMedioPorte) {
+	public PlantaMedioPorte(int idPlantaMedioPorte,String especie,
+			String nome, double tamanho) {
 		super(especie, nome, tamanho);
 		this.idPlantaMedioPorte = idPlantaMedioPorte;
 	
 	}
 
-	public PlantaMedioPorte(int idReserva,String especie,
-			String nome, double tamanho) {
+	public PlantaMedioPorte(String especie,
+			String nome, double tamanho,int idReserva) {
 		super(especie, nome, tamanho);
 	}
 

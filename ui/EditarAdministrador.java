@@ -10,17 +10,24 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.fafica.projeto_pi.excecoes.AdministradorNaoEncontradoException;
+import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Administrador;
+import com.fafica.projeto_pi.modelos.Reserva;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class EditarAdministrador extends JFrame {
 
 	private JPanel contentPane;
+	private Administrador admProvisorio;
 
 	/**
 	 * Launch the application.
@@ -42,15 +49,35 @@ public class EditarAdministrador extends JFrame {
 	 * Create the frame.
 	 */
 	public EditarAdministrador(Administrador adm) {
+		admProvisorio = adm;
+		setTitle("Editar Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton button = new JButton("Avan\u00E7ar");
-		button.addActionListener(new ActionListener() {
+		JButton buttonVoltar = new JButton("Voltar");
+		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Fachada.getInstace().editarAdministrador(admProvisorio);
+					dispose();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (AdministradorNaoEncontradoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -64,15 +91,35 @@ public class EditarAdministrador extends JFrame {
 		
 		JLabel lblIdID = new JLabel("ID");
 		
-		JLabel carregarID = new JLabel("");
+		JLabel carregarID = new JLabel(""+adm.getId());
 		
-		JButton btnNewButton = new JButton("Editar");
+		JButton buttonEditarNome = new JButton("Editar");
+		buttonEditarNome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String nome = JOptionPane.showInputDialog("novo nome");
+				admProvisorio.setNome(nome);
+				
+			}
+		});
 		
-		JButton btnEditar = new JButton("Editar");
+		JButton buttonEditarLogin = new JButton("Editar");
+		buttonEditarLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+				String login = JOptionPane.showInputDialog("novo login");
+				admProvisorio.setLogin(login);
+				
+			}
+		});
 		
-		JButton btnEditar_1 = new JButton("Editar");
-		
-		JButton btnEditar_2 = new JButton("Editar");
+		JButton buttonEditarSenha = new JButton("Editar");
+		buttonEditarSenha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int senha = Integer.parseInt(JOptionPane.showInputDialog("nova senha"));
+				admProvisorio.setSenha(senha);
+			}
+		});
 		
 		JLabel carregarNome = new JLabel(adm.getNome());
 		
@@ -95,16 +142,11 @@ public class EditarAdministrador extends JFrame {
 											.addComponent(labelSenha, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 											.addComponent(labelLogin, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 											.addComponent(labelNome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.RELATED)
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(28)
-												.addComponent(carregarID))
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(carregarNome, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(carregarSenha, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))))
+											.addComponent(carregarSenha, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+											.addComponent(carregarID)
+											.addComponent(carregarNome, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addComponent(labelCPF, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -112,36 +154,35 @@ public class EditarAdministrador extends JFrame {
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addGap(45)
 										.addComponent(carregarLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-								.addPreferredGap(ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addComponent(btnNewButton)
-									.addComponent(btnEditar)
-									.addComponent(btnEditar_1)
-									.addComponent(btnEditar_2))
-								.addContainerGap(138, Short.MAX_VALUE))
+									.addComponent(buttonEditarNome)
+									.addComponent(buttonEditarLogin)
+									.addComponent(buttonEditarSenha))
+								.addContainerGap(141, Short.MAX_VALUE))
 							.addGroup(gl_contentPane.createSequentialGroup()
 								.addComponent(lblIdID)
 								.addContainerGap(403, Short.MAX_VALUE)))
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+							.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addContainerGap(22, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblIdID)
 						.addComponent(carregarID))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(labelNome)
-						.addComponent(btnNewButton)
+						.addComponent(buttonEditarNome)
 						.addComponent(carregarNome))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnEditar))
+							.addComponent(buttonEditarLogin))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(10)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -149,16 +190,15 @@ public class EditarAdministrador extends JFrame {
 								.addComponent(labelLogin))))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEditar_1)
+						.addComponent(buttonEditarSenha)
 						.addComponent(labelSenha)
 						.addComponent(carregarSenha))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEditar_2)
 						.addComponent(labelCPF)
 						.addComponent(carregarCPF))
 					.addGap(38)
-					.addComponent(button)
+					.addComponent(buttonVoltar)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);

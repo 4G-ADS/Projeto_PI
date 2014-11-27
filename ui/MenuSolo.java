@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 
 import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
+import com.fafica.projeto_pi.excecoes.SoloNaoEncontradorException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Reserva;
@@ -35,6 +36,8 @@ public class MenuSolo extends JFrame {
 	private JPanel contentPane;
 	private Reserva reservaProvisoria;
 	private JTable table;
+	private String[][] listaSoloTabela = new String[100][2];
+	private String colunas []= {"ID", "Solos"};	
 	/**
 	 * Launch the application.
 	 */
@@ -81,6 +84,24 @@ public class MenuSolo extends JFrame {
 		JButton button_2 = new JButton("Perfil");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				int idSolo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+				Solo solo = null;
+				try {
+					solo = Fachada.getInstace().procurarSolo(idSolo);
+					dispose();
+					new EditarSolo(solo,reservaProvisoria).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SoloNaoEncontradorException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -90,38 +111,13 @@ public class MenuSolo extends JFrame {
 			}
 		});
 		
-		String[][] listaSoloTabela = new String[100][2];		
-		try {
-			ArrayList<Solo> listaSolos = Fachada.getInstace().listarSolo();
-			for (int i = 0; i < listaSoloTabela.length; i++) {
-				if(i < listaSolos.size()){
-				String id = String.valueOf(listaSolos.get(i).getIdSolo());
-				String nome = listaSolos.get(i).getTipo();
-				listaSoloTabela[i][0] = id;
-				listaSoloTabela[i][1] = nome;
-				}
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ReservaNaoEncontradaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}	
-		
-		String colunas []= {"ID", "Solos"};	
-		DefaultTableModel listar = new DefaultTableModel(listaSoloTabela,colunas);
-		
-		table = new JTable();
-		table.setModel(listar);
-		
-		
+			
+		carregarTabela();
+	
+		table = new JTable(listaSoloTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
-		
 		scrollPane.setViewportView(table);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -160,4 +156,28 @@ public class MenuSolo extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	public void carregarTabela(){
+		try {
+			ArrayList<Solo> listaSolos = Fachada.getInstace().listarSolo();
+			for (int i = 0; i < listaSoloTabela.length; i++) {
+				if(i < listaSolos.size()){
+				String id = String.valueOf(listaSolos.get(i).getIdSolo());
+				String nome = listaSolos.get(i).getTipo();
+				listaSoloTabela[i][0] = id;
+				listaSoloTabela[i][1] = nome;
+				}
+			}
+			table.updateUI();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ReservaNaoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		
+	}
 }

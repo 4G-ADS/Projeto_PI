@@ -117,6 +117,7 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnPesquisadores = new JButton("Pesquisadores");
 		btnPesquisadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				new MenuPesquisador(reservaProvisoria).setVisible(true);;
 			}
 		});
@@ -124,6 +125,7 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnNascentes = new JButton("Nascentes");
 		btnNascentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				new MenuNascente(reservaProvisoria).setVisible(true);
 			}
 		});
@@ -131,6 +133,7 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnPlantas = new JButton("Plantas");
 		btnPlantas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				new MenuPlanta(reservaProvisoria).setVisible(true);
 			}
 		});
@@ -138,15 +141,9 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnSolos = new JButton("Solos");
 		btnSolos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				new MenuSolo(reservaProvisoria).setVisible(true);
 				}
-		});
-		
-		JButton btnInstituicao = new JButton("Instituicao");
-		btnInstituicao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new MenuInstituicao(reservaProvisoria).setVisible(true);
-			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -165,9 +162,7 @@ public class TelaPrincipalReserva extends JFrame {
 							.addGap(18)
 							.addComponent(labelTamanho)
 							.addGap(192))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnInstituicao, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(btnVoltar)
 							.addContainerGap())
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -202,13 +197,9 @@ public class TelaPrincipalReserva extends JFrame {
 					.addGap(18)
 					.addComponent(btnSolos)
 					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnInstituicao)
-						.addComponent(btnVoltar))
+					.addComponent(btnVoltar)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
-
 }

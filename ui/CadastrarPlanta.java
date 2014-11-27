@@ -159,9 +159,10 @@ public class CadastrarPlanta extends JFrame {
 		JButton btnCadastrar = new JButton("Finalizar cadastro");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				System.out.println("ok");
 				for (PlantaPequenoPorte plantaPequenoPorte : listaPlantaPequena) {
-					plantaPequenoPorte.getNome();
+					System.out.println(plantaPequenoPorte.getNome());
+					System.out.println("entro");
 				}
 				reservaProvisoria.setListaPlantaPequena(listaPlantaPequena);
 				
@@ -201,8 +202,8 @@ public class CadastrarPlanta extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(txtpnObsObrigatorio, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-					.addGap(61)
-					.addComponent(button, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+					.addGap(45)
+					.addComponent(button, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnCadastrar)
 					.addContainerGap(16, Short.MAX_VALUE))

@@ -35,6 +35,8 @@ public class MenuPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private Administrador administrador;
+	private String colunas []= {"ID", "Reservas"};
+	private String[][] listaReservaTabela = new String[100][2];
 	
 	/**
 	 * Launch the application.
@@ -62,8 +64,6 @@ public class MenuPrincipal extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
-		JScrollPane scrollPane = new JScrollPane();
 		
 		JButton btnCarregar = new JButton("Carregar Reserva");
 		btnCarregar.addActionListener(new ActionListener() {
@@ -117,6 +117,12 @@ public class MenuPrincipal extends JFrame {
 				new EditarAdministrador(administrador).setVisible(true);
 			}
 		});
+		
+		carregarTabela();
+		table = new JTable(listaReservaTabela,colunas);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(table);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -151,7 +157,11 @@ public class MenuPrincipal extends JFrame {
 							.addComponent(btnCriarReserva)))
 					.addContainerGap())
 		);
-		String[][] listaReservaTabela = new String[100][2];
+		contentPane.setLayout(gl_contentPane);
+	}
+	
+	
+	public void carregarTabela(){
 		
 		try {
 			ArrayList<Reserva> listaReserva = Fachada.getInstace().listarReserva();
@@ -163,6 +173,7 @@ public class MenuPrincipal extends JFrame {
 				listaReservaTabela[i][1] = nome;
 				}
 			}
+			table.updateUI();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -174,15 +185,6 @@ public class MenuPrincipal extends JFrame {
 			e1.printStackTrace();
 		}	
 		
-		
-		String colunas []= {"ID", "Reservas"};		
-		
-		DefaultTableModel listar = new DefaultTableModel(listaReservaTabela,colunas);
-		
-		table = new JTable();
-		table.setModel(listar);
-		
-		scrollPane.setViewportView(table);
-		contentPane.setLayout(gl_contentPane);
 	}
+	
 }

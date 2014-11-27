@@ -15,11 +15,17 @@ import java.awt.event.ActionEvent;
 public class EditarReserva extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField campoNome;
-	private JTextField campoTamanho;
-	private JTextField campoLatitude;
-	private JTextField campoLongitude;
-	private JLabel lblLongitude;
+	private JLabel labelTipo;
+	private JLabel labelLatitude;
+	private JLabel labelLongitude;
+	private JLabel labelCarregarTipo;
+	private JLabel labelCarregarLatitude;
+	private JLabel labelCarregarLongitude;
+	private JLabel labelId;
+	private JLabel labelCarregarId;
+	private JButton buttonEditarTipo;
+	private JButton buttonEditarLatitude;
+	private JButton buttonEditarLongitude;
 
 	/**
 	 * Launch the application.
@@ -49,49 +55,57 @@ public class EditarReserva extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label = new JLabel("Nome:");
-		label.setBounds(20, 88, 41, 16);
-		contentPane.add(label);
-		
-		campoNome = new JTextField();
-		campoNome.setColumns(10);
-		campoNome.setBounds(74, 82, 353, 28);
-		contentPane.add(campoNome);
-		
-		campoTamanho = new JTextField();
-		campoTamanho.setColumns(10);
-		campoTamanho.setBounds(74, 116, 134, 28);
-		contentPane.add(campoTamanho);
-		
-		JLabel label_1 = new JLabel("Tamanho:");
-		label_1.setBounds(6, 122, 62, 16);
-		contentPane.add(label_1);
-		
-		JLabel label_2 = new JLabel("Latitude:");
-		label_2.setBounds(6, 168, 55, 16);
-		contentPane.add(label_2);
-		
-		campoLatitude = new JTextField();
-		campoLatitude.setColumns(10);
-		campoLatitude.setBounds(74, 162, 134, 28);
-		contentPane.add(campoLatitude);
-		
-		campoLongitude = new JTextField();
-		campoLongitude.setColumns(10);
-		campoLongitude.setBounds(293, 162, 134, 28);
-		contentPane.add(campoLongitude);
-		
-		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.addActionListener(new ActionListener() {
+		JButton buttonVoltar = new JButton("Voltar");
+		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAlterar.setBounds(74, 202, 104, 29);
-		contentPane.add(btnAlterar);
+		buttonVoltar.setBounds(320, 221, 104, 29);
+		contentPane.add(buttonVoltar);
 		
-		lblLongitude = new JLabel("Longitude:");
-		lblLongitude.setBounds(220, 168, 72, 16);
-		contentPane.add(lblLongitude);
+		labelId = new JLabel("ID:");
+		labelId.setBounds(10, 28, 24, 16);
+		contentPane.add(labelId);
+		
+		labelTipo = new JLabel("Tipo:");
+		labelTipo.setBounds(10, 61, 24, 16);
+		contentPane.add(labelTipo);
+		
+		labelLatitude = new JLabel("Latitude:");
+		labelLatitude.setBounds(10, 101, 43, 16);
+		contentPane.add(labelLatitude);
+		
+		labelLongitude = new JLabel("Longitude:");
+		labelLongitude.setBounds(10, 150, 55, 16);
+		contentPane.add(labelLongitude);
+		
+		labelCarregarId = new JLabel("");
+		labelCarregarId.setBounds(33, 29, 46, 14);
+		contentPane.add(labelCarregarId);
+		
+		labelCarregarTipo = new JLabel("");
+		labelCarregarTipo.setBounds(44, 63, 46, 14);
+		contentPane.add(labelCarregarTipo);
+		
+		labelCarregarLatitude = new JLabel("");
+		labelCarregarLatitude.setBounds(75, 103, 46, 14);
+		contentPane.add(labelCarregarLatitude);
+		
+		labelCarregarLongitude = new JLabel("");
+		labelCarregarLongitude.setBounds(75, 152, 46, 14);
+		contentPane.add(labelCarregarLongitude);
+		
+		buttonEditarTipo = new JButton("Editar");
+		buttonEditarTipo.setBounds(189, 58, 89, 23);
+		contentPane.add(buttonEditarTipo);
+		
+		buttonEditarLatitude = new JButton("Editar");
+		buttonEditarLatitude.setBounds(189, 98, 89, 23);
+		contentPane.add(buttonEditarLatitude);
+		
+		buttonEditarLongitude = new JButton("Editar");
+		buttonEditarLongitude.setBounds(189, 147, 89, 23);
+		contentPane.add(buttonEditarLongitude);
 	}
 
 }

@@ -13,10 +13,6 @@ import javax.swing.JButton;
 public class EditarPesquisador extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -46,45 +42,61 @@ public class EditarPesquisador extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(67, 37, 358, 28);
-		contentPane.add(textField);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(67, 68, 134, 28);
-		contentPane.add(textField_1);
-		
 		JLabel label = new JLabel("CPF:");
-		label.setBounds(36, 74, 27, 16);
+		label.setBounds(22, 43, 27, 16);
 		contentPane.add(label);
 		
 		JLabel label_1 = new JLabel("Nome:");
-		label_1.setBounds(22, 43, 41, 16);
+		label_1.setBounds(22, 70, 32, 16);
 		contentPane.add(label_1);
 		
 		JLabel label_2 = new JLabel("Profissão:");
-		label_2.setBounds(6, 108, 67, 16);
+		label_2.setBounds(22, 124, 49, 16);
 		contentPane.add(label_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(69, 102, 222, 28);
-		contentPane.add(textField_2);
-		
 		JLabel label_3 = new JLabel("Idade:");
-		label_3.setBounds(203, 74, 41, 16);
+		label_3.setBounds(22, 97, 32, 16);
 		contentPane.add(label_3);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(251, 68, 60, 28);
-		contentPane.add(textField_3);
-		
 		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.setBounds(65, 155, 86, 29);
+		btnAlterar.setBounds(339, 221, 86, 29);
 		contentPane.add(btnAlterar);
+		
+		JLabel lblNewLabel = new JLabel("ID");
+		lblNewLabel.setBounds(22, 18, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel labelCarregarId = new JLabel("");
+		labelCarregarId.setBounds(47, 18, 46, 14);
+		contentPane.add(labelCarregarId);
+		
+		JLabel labelCarregarNome = new JLabel("");
+		labelCarregarNome.setBounds(64, 72, 46, 14);
+		contentPane.add(labelCarregarNome);
+		
+		JLabel labelCarregarCPF = new JLabel("");
+		labelCarregarCPF.setBounds(57, 43, 46, 14);
+		contentPane.add(labelCarregarCPF);
+		
+		JLabel labelCarregarIdade = new JLabel("");
+		labelCarregarIdade.setBounds(64, 98, 46, 14);
+		contentPane.add(labelCarregarIdade);
+		
+		JLabel labelCarregarProfissao = new JLabel("");
+		labelCarregarProfissao.setBounds(81, 125, 46, 14);
+		contentPane.add(labelCarregarProfissao);
+		
+		JButton buttonEditarNome = new JButton("Editar");
+		buttonEditarNome.setBounds(165, 63, 89, 23);
+		contentPane.add(buttonEditarNome);
+		
+		JButton buttonEditarIdade = new JButton("Editar");
+		buttonEditarIdade.setBounds(165, 94, 89, 23);
+		contentPane.add(buttonEditarIdade);
+		
+		JButton buttonProfissao = new JButton("Editar");
+		buttonProfissao.setBounds(165, 121, 89, 23);
+		contentPane.add(buttonProfissao);
 	}
 
 }
