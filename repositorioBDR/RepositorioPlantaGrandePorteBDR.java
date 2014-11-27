@@ -91,6 +91,7 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 						resultSet.getString("especie_planta_grande_porte"), 
 						resultSet.getString("nome_planta_grande_porte"),
 						resultSet.getDouble("tamanho_planta_grande_porte"));
+						plantaGrande.setIdReserva(resultSet.getInt("id_reserva"));
 				listaPlanta.add(plantaGrande);
 				
 			}

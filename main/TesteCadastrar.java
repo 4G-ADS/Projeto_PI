@@ -64,7 +64,7 @@ public class TesteCadastrar {
 		PlantaGrandePorte pGP = new PlantaGrandePorte( "planta", "PlantaGrande", 10.3);
 		listaPlantaGrande.add(pGP);
 		
-		Reserva reserva = new Reserva("Serra12", "serra12", 10, 55, 10, 
+		Reserva reserva = new Reserva(1,1,"Serra12", "serra12", 10, 55, 10, 
 				listaPlantaPequena, listaPlantaMedia, listaPlantaGrande, solos, nascenteAgua, pesquisadores);	 
 		
 		Instituicao instituicao = new Instituicao("Vale2", "mineradora", "46.013.715/0001-80");

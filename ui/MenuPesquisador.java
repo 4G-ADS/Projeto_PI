@@ -72,6 +72,7 @@ public class MenuPesquisador extends JFrame {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 			}
 		});
 		
@@ -130,13 +131,14 @@ public class MenuPesquisador extends JFrame {
 			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador();
 			for (int i = 0; i < listaPesquisadorTabela.length; i++) {
 				if(i < listaPesquisador.size()){
+					if(listaPesquisador.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPesquisador.get(i).getIdPesquisador());
 				String nome = listaPesquisador.get(i).getNome();
 				listaPesquisadorTabela[i][0] = id;
 				listaPesquisadorTabela[i][1] = nome;
+					}
 				}
 			}
-			table.updateUI();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

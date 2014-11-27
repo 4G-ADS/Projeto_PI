@@ -84,7 +84,7 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 						resultSet.getString("nome_pesquisador"),
 						resultSet.getString("cpf"), resultSet.getInt("idade"),
 						resultSet.getString("profissao"));
-
+				pesquisador.setIdReserva(resultSet.getInt("id_reserva"));
 				listaPesquisadores.add(pesquisador);
 
 			}

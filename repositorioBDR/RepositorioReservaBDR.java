@@ -42,7 +42,7 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 		ResultSet resultSet = null;
 
 		try {
-			sql = "INSERT INTO Reserva(clima,Latitude_reserva,Longitude_reserva,nome_reserva,tamanho_reserva)values(?,?,?,?,?)";
+			sql = "INSERT INTO Reserva(id_adm,clima,Latitude_reserva,Longitude_reserva,nome_reserva,tamanho_reserva)values(?,?,?,?,?,?)";
 			if (database == Database.ORACLE) {
 				stmt = this.connection.prepareStatement(sql,
 						new String[] { "id_reserva" });
@@ -51,12 +51,13 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 				stmt = this.connection.prepareStatement(sql,
 						Statement.RETURN_GENERATED_KEYS);
 			}
-
-			stmt.setString(1, reserva.getClima());
-			stmt.setDouble(2, reserva.getLatitude());
-			stmt.setDouble(3, reserva.getLongitude());
-			stmt.setString(4, reserva.getNome());
-			stmt.setDouble(5, reserva.getTamanho());
+			
+			stmt.setInt(1, reserva.getIdAdm());
+			stmt.setString(2, reserva.getClima());
+			stmt.setDouble(3, reserva.getLatitude());
+			stmt.setDouble(4, reserva.getLongitude());
+			stmt.setString(5, reserva.getNome());
+			stmt.setDouble(6, reserva.getTamanho());
 
 			stmt.execute();
 			resultSet = stmt.getGeneratedKeys();
@@ -141,7 +142,7 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 				 
 				
 				
-				Reserva reserva = new Reserva(resultSet.getInt("id_reserva"),resultSet.getString("clima"),resultSet.getString("nome_reserva"),
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"), resultSet.getInt("id_reserva"),resultSet.getString("clima"),resultSet.getString("nome_reserva"),
 						resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
 						resultSet.getDouble("longitude_reserva"));
 				listaReservas.add(reserva);
@@ -184,7 +185,8 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 			stmt = this.connection.prepareStatement(sql);
 			stmt.setInt(1, id_Reserva);
 			resultSet = stmt.executeQuery();
-
+			
+			int idAdmBanco = 0;
 			int id_reservaBanco = 0;
 			String climaBanco = "";
 			String nomeReservaBanco = "";
@@ -236,6 +238,7 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 				listaPlantasMedias.add(plantaMedia);
 				listaPlantasGrandes.add(plantaGrande);
 				
+				idAdmBanco = resultSet.getInt("id_adm");
 				id_reservaBanco =resultSet.getInt("id_reserva");
 				climaBanco = resultSet.getString("clima");
 				nomeReservaBanco = resultSet.getString("nome_reserva");
@@ -244,7 +247,7 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 				longitudeReservaBanco = resultSet.getDouble("longitude_reserva");
 			}
 			
-			Reserva reservaBanco = new Reserva(id_reservaBanco,climaBanco,
+			Reserva reservaBanco = new Reserva(idAdmBanco,id_reservaBanco,climaBanco,
 					nomeReservaBanco,tamanhoReservaBanco,
 					latitudeReservaBanco,longitudeReservaBanco,
 					listaPlantasPequenas, listaPlantasMedias,

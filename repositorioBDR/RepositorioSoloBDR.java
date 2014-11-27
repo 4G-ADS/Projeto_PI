@@ -94,7 +94,7 @@ public class RepositorioSoloBDR implements IRepositorioSolo{
 			while(resultSet.next()){
 				Solo solo =  new Solo(resultSet.getInt("id_solo"), resultSet.getString("tipo_solo"),
 						resultSet.getDouble("tamanho_solo"),resultSet.getString("recursos_solo"));
-				
+				solo.setIdReserva(resultSet.getInt("id_reserva"));
 				listaSolo.add(solo);
 				
 			}

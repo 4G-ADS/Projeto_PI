@@ -19,16 +19,27 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JTextPane;
 
+import com.fafica.projeto_pi.excecoes.AdministradorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.CPFInvalidoException;
+import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
+import com.fafica.projeto_pi.excecoes.IdadeInvalidoException;
+import com.fafica.projeto_pi.excecoes.NascenteJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.PesquisadorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.PlantaJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.SoloJaCadastradoException;
+import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
 import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
 import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
 import com.fafica.projeto_pi.modelos.Reserva;
 
 import javax.swing.JSpinner;
+import javax.swing.JSeparator;
 
 public class CadastrarPlanta extends JFrame {
 
@@ -61,6 +72,7 @@ public class CadastrarPlanta extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastrarPlanta(Reserva reserva) {
+		reservaProvisoria = reserva;
 		setTitle("Cadastrar Planta");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -159,18 +171,50 @@ public class CadastrarPlanta extends JFrame {
 		JButton btnCadastrar = new JButton("Finalizar cadastro");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("ok");
-				for (PlantaPequenoPorte plantaPequenoPorte : listaPlantaPequena) {
-					System.out.println(plantaPequenoPorte.getNome());
-					System.out.println("entro");
+
+				try {
+					
+					reservaProvisoria.setListaPlantaPequena(listaPlantaPequena);
+					reservaProvisoria.setListaPlantaMedia(listaPlantaMedia);
+					reservaProvisoria.setListaPlantaGrande(listaPlantaGrande);
+					
+					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
+					dispose();
+					
+					dispose();
+					new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CampoObritarorioInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (AdministradorJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IdadeInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CPFInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PlantaJaCadastradaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PesquisadorJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NascenteJaCadastradaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SoloJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				reservaProvisoria.setListaPlantaPequena(listaPlantaPequena);
-				
-				reservaProvisoria.setListaPlantaMedia(listaPlantaMedia);
-				reservaProvisoria.setListaPlantaGrande(listaPlantaGrande);
-				
-				dispose();
-				new TelaPrincipalReserva(reservaProvisoria);
+
 			}
 		});
 		

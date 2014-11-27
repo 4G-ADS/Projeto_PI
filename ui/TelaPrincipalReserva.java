@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.fafica.projeto_pi.excecoes.AdministradorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.AdministradorNaoEncontradoException;
 import com.fafica.projeto_pi.excecoes.CPFInvalidoException;
 import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
 import com.fafica.projeto_pi.excecoes.IdadeInvalidoException;
@@ -20,11 +21,13 @@ import com.fafica.projeto_pi.excecoes.PesquisadorJaCadastradoException;
 import com.fafica.projeto_pi.excecoes.PlantaJaCadastradaException;
 import com.fafica.projeto_pi.excecoes.SoloJaCadastradoException;
 import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Administrador;
 import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -57,6 +60,7 @@ public class TelaPrincipalReserva extends JFrame {
 	 */
 	public TelaPrincipalReserva(Reserva reserva) {
 		reservaProvisoria = reserva;
+		setTitle("Menu reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -78,39 +82,22 @@ public class TelaPrincipalReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
+					dispose();
+					Administrador adm = Fachada.getInstace().procurarAdministrador(reservaProvisoria.getIdAdm());
+					new MenuPrincipal(adm).setVisible(true);;
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (CampoObritarorioInvalidoException e1) {
+				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (AdministradorJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IdadeInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (CPFInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (PlantaJaCadastradaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (PesquisadorJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (NascenteJaCadastradaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SoloJaCadastradoException e1) {
+				} catch (AdministradorNaoEncontradoException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				dispose();
 			}
 		});
 		

@@ -22,6 +22,7 @@ import com.fafica.projeto_pi.excecoes.PesquisadorJaCadastradoException;
 import com.fafica.projeto_pi.excecoes.PlantaJaCadastradaException;
 import com.fafica.projeto_pi.excecoes.SoloJaCadastradoException;
 import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Administrador;
 import com.fafica.projeto_pi.modelos.Reserva;
 
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ public class CadastrarReserva extends JFrame {
 	private JTextField campoLatitude;
 	private JTextField campoLongitude;
 	private JTextField campoClima;
+	private Administrador admProvisorio;
 
 	/**
 	 * Launch the application.
@@ -44,7 +46,7 @@ public class CadastrarReserva extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastrarReserva frame = new CadastrarReserva();
+					CadastrarReserva frame = new CadastrarReserva(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +58,8 @@ public class CadastrarReserva extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarReserva() {
+	public CadastrarReserva(Administrador adm) {
+		admProvisorio = adm;
 		setTitle("Cadastrar Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -96,7 +99,7 @@ public class CadastrarReserva extends JFrame {
 					int tamanho = Integer.parseInt(campoTamanho.getText());
 					double latitude = Double.parseDouble(campoLatitude.getText());
 					double longitude = Double.parseDouble(campoLongitude.getText());
-					Reserva reserva = new Reserva (clima, nome, tamanho, latitude, longitude);
+					Reserva reserva = new Reserva (admProvisorio.getId(),clima, nome, tamanho, latitude, longitude);
 					
 					dispose();
 					new CadastrarPesquisador(reserva).setVisible(true);;

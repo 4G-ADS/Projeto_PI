@@ -85,6 +85,7 @@ public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
 						resultSet.getString("nome"),
 						resultSet.getString("tipo"),
 						resultSet.getString("cnpj"));
+				instituicao.setIdInstituicao(resultSet.getInt("id_reserva"));
 				listaInstituicao.add(instituicao);
 			}
 

@@ -65,6 +65,7 @@ public class MenuPlanta extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPlanta(Reserva reserva) {
+		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -79,12 +80,15 @@ public class MenuPlanta extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 			}
 		});
 		
 		JButton button_1 = new JButton("Add");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 			}
 		});
 		
@@ -193,16 +197,19 @@ public class MenuPlanta extends JFrame {
 			
 			
 			if(listaPlantaPequena.size() > i){
+				System.out.println(reservaProvisoria.getIdReserva());
+				//System.out.println(listaPlantaPequena.get(i).getIdReserva());
 				
+				if(listaPlantaPequena.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPlantaPequena.get(i).getIdPlantaPequenaPorte());
 				String nome  = listaPlantaPequena.get(i).getNome();
 				
 				listaPlantaTabela[i][0] = id;
 				listaPlantaTabela[i][1] = nome;
-			table.updateUI();	
+				}
 			}
 		}
-			
+			table.updateUI();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -222,16 +229,16 @@ public class MenuPlanta extends JFrame {
 			
 			
 			if(listaPlantaMedia.size() > i){
-				
+				if(listaPlantaMedia.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPlantaMedia.get(i).getIdPlantaMedioPorte());
 				String nome  = listaPlantaMedia.get(i).getNome();
 				
 				listaPlantaTabela[i][0] = id;
 				listaPlantaTabela[i][1] = nome;
-			table.updateUI();	
+				}
 			}
 		}
-			
+			table.updateUI();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -249,18 +256,17 @@ public class MenuPlanta extends JFrame {
 			
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
 			
-			
 			if(listaPlantaGrande.size() > i){
-				
+				if(listaPlantaGrande.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPlantaGrande.get(i).getIdPantaGrandePorte());
 				String nome  = listaPlantaGrande.get(i).getNome();
 				
 				listaPlantaTabela[i][0] = id;
-				listaPlantaTabela[i][1] = nome;
-			table.updateUI();	
+				listaPlantaTabela[i][1] = nome;	
 			}
 		}
-			
+	}	
+			table.updateUI();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -58,6 +58,7 @@ public class MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPrincipal(Administrador adm) {
+		setTitle("Menu Principal");
 		administrador = adm;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -75,7 +76,7 @@ public class MenuPrincipal extends JFrame {
 					System.out.println(id);	
 					Reserva reservaProvisoria = Fachada.getInstace().procurarReserva(id);
 					
-					
+					dispose();
 					new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -98,7 +99,7 @@ public class MenuPrincipal extends JFrame {
 		btnCriarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				new CadastrarReserva().setVisible(true);
+				new CadastrarReserva(administrador).setVisible(true);
 			}
 		});
 		
@@ -114,6 +115,7 @@ public class MenuPrincipal extends JFrame {
 		JButton btnPerfil = new JButton("Perfil");
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				new EditarAdministrador(administrador).setVisible(true);
 			}
 		});
@@ -167,13 +169,14 @@ public class MenuPrincipal extends JFrame {
 			ArrayList<Reserva> listaReserva = Fachada.getInstace().listarReserva();
 			for (int i = 0; i < listaReservaTabela.length; i++) {
 				if(i < listaReserva.size()){
+					if(administrador.getId() == listaReserva.get(i).getIdAdm()){
 				String id = String.valueOf(listaReserva.get(i).getIdReserva());
 				String nome = listaReserva.get(i).getNome();
 				listaReservaTabela[i][0] = id;
 				listaReservaTabela[i][1] = nome;
+					}
 				}
 			}
-			table.updateUI();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

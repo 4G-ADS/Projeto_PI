@@ -91,6 +91,8 @@ public class RepositorioPlantaPequenoPorteBDR implements
 						resultSet.getString("nome_planta_pequeno_porte"),
 						 resultSet.getString("especie_planta_pequeno_porte"),
 						 resultSet.getDouble("tamanho_planta_pequeno_porte"));
+				
+						planta.setIdReserva(resultSet.getInt("id_reserva"));
 				listaPlanta.add(planta);
 			}
 			

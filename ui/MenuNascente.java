@@ -72,6 +72,7 @@ public class MenuNascente extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 			}
 		});
 		
@@ -163,13 +164,14 @@ public class MenuNascente extends JFrame {
 			ArrayList<NascenteAgua> listaNascentes = Fachada.getInstace().listarNascente();
 			for (int i = 0; i < listaNascentesTabela.length; i++) {
 				if(i < listaNascentes.size()){
+					if(listaNascentes.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaNascentes.get(i).getIdAgua());
 				String nome = listaNascentes.get(i).getNomeFonte();
 				listaNascentesTabela[i][0] = id;
 				listaNascentesTabela[i][1] = nome;
+					}
 				}
 			}
-			table.updateUI();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -96,16 +96,17 @@ public class CadastrarPesquisador extends JFrame {
 		btnCadastrar = new JButton("Finalizar cadastro");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				if(listaPesquisador.size() == 0){
-//
-//					String nome = campoNome.getText();
-//					String cpf = campoCpf.getText();
-//					int idade = Integer.parseInt(campoIdade.getText());
-//					String profissao = campoProfissao.getText();
-//					
-//					Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
-//					listaPesquisador.add(p);
-//				}
+				
+				if(listaPesquisador.size() == 0){
+
+					String nome = campoNome.getText();
+					String cpf = campoCpf.getText();
+					int idade = Integer.parseInt(campoIdade.getText());
+					String profissao = campoProfissao.getText();
+					
+					Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
+					listaPesquisador.add(p);
+				}
 				
 				dispose();
 				reservaProvisoria.setPesquisadores(listaPesquisador);

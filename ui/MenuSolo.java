@@ -72,6 +72,7 @@ public class MenuSolo extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 			}
 		});
 		
@@ -161,13 +162,14 @@ public class MenuSolo extends JFrame {
 			ArrayList<Solo> listaSolos = Fachada.getInstace().listarSolo();
 			for (int i = 0; i < listaSoloTabela.length; i++) {
 				if(i < listaSolos.size()){
+					if(listaSolos.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaSolos.get(i).getIdSolo());
 				String nome = listaSolos.get(i).getTipo();
 				listaSoloTabela[i][0] = id;
 				listaSoloTabela[i][1] = nome;
+					}
 				}
 			}
-			table.updateUI();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

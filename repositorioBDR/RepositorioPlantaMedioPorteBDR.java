@@ -98,6 +98,7 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 						resultSet.getString("especie_planta_medio_porte"),
 						resultSet.getString("nome_planta_medio_porte"),
 						resultSet.getDouble("tamanho_planta_medio_porte"));
+						plantaMedia.setIdReserva(resultSet.getInt("id_reserva"));
 				listaPlanta.add(plantaMedia);
 				
 			}
