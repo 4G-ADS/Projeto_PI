@@ -79,6 +79,8 @@ public class MenuSolo extends JFrame {
 		JButton button_1 = new JButton("Add");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new AddSolo(reservaProvisoria).setVisible(true);
 			}
 		});
 		

@@ -18,6 +18,7 @@ import com.fafica.projeto_pi.excecoes.CPFInvalidoException;
 import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Instituicao;
+import com.fafica.projeto_pi.modelos.Reserva;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class CadastrarInstituicao extends JFrame {
 	private JTextField campoNome;
 	private JTextField campoTipo;
 	private JTextField campoCNPJ;
+	private Reserva reservaProvisoria;
 
 	/**
 	 * Launch the application.
@@ -38,7 +40,7 @@ public class CadastrarInstituicao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastrarInstituicao frame = new CadastrarInstituicao();
+					CadastrarInstituicao frame = new CadastrarInstituicao(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +52,8 @@ public class CadastrarInstituicao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarInstituicao() {
+	public CadastrarInstituicao(Reserva reserva) {
+		reservaProvisoria = reserva;
 		setTitle("Cadastrar Instituição");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

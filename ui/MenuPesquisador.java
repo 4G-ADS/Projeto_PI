@@ -79,6 +79,12 @@ public class MenuPesquisador extends JFrame {
 		});
 		
 		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new AddPesquisador(reservaProvisoria).setVisible(true);
+			}
+		});
 		
 		JButton btnPerfil = new JButton("Perfil");
 		
