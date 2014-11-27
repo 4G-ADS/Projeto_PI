@@ -143,7 +143,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 				NascenteAgua agua =  new NascenteAgua(resultSet.getInt("id_agua"),
 						resultSet.getDouble("Latitude_nascente_agua"),
 						resultSet.getDouble("Longitude_nascente_agua"), 
-						resultSet.getString("Nome_fonte_nascente_agua"), 
+						resultSet.getString("Nome_nascente_agua"), 
 						resultSet.getString("Tipo_nascente_agua"));
 				
 				listaNascenteAgua.add(agua);

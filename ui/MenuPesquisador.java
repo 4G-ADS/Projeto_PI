@@ -15,6 +15,7 @@ import java.awt.Font;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.fafica.projeto_pi.excecoes.PesquisadorNaoEncontradoException;
 import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Pesquisador;
@@ -25,6 +26,7 @@ import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -81,6 +83,11 @@ public class MenuPesquisador extends JFrame {
 		JButton btnPerfil = new JButton("Perfil");
 		
 		JButton button = new JButton("Excluir");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				excluirPesquisador();
+			}
+		});
 		
 		
 		carregarTabela();	
@@ -153,5 +160,28 @@ public class MenuPesquisador extends JFrame {
 		
 	}
 	
+	public void excluirPesquisador(){
+
+		try {
+			
+			int idPesquisador = Integer.parseInt(table.getValueAt(table.getSelectedColumn(), 0).toString());
+			Fachada.getInstace().removerPesquisador(idPesquisador);
+			carregarTabela();
+			table.updateUI();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PesquisadorNaoEncontradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
+	}
 }

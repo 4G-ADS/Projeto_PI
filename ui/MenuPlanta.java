@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
+import com.fafica.projeto_pi.excecoes.PlantaNaoEncontradaException;
 import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
@@ -101,6 +103,7 @@ public class MenuPlanta extends JFrame {
 		JButton button_3 = new JButton("Excluir");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				excluirPlanta();
 			}
 		});
 		
@@ -198,7 +201,6 @@ public class MenuPlanta extends JFrame {
 			
 			if(listaPlantaPequena.size() > i){
 				System.out.println(reservaProvisoria.getIdReserva());
-				//System.out.println(listaPlantaPequena.get(i).getIdReserva());
 				
 				if(listaPlantaPequena.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPlantaPequena.get(i).getIdPlantaPequenaPorte());
@@ -277,4 +279,39 @@ public class MenuPlanta extends JFrame {
 	
 		
 	}
+	
+	public void excluirPlanta(){
+	
+		try {
+			int idPlanta = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+			if(rdbtnPequeno.isSelected() == true && idPlanta != 0){
+				
+				Fachada.getInstace().removerPlantaPequenoPorte(idPlanta);
+				preenceherTabelaPlantasPequenoPorte();
+				table.updateUI();
+			}else if(rdbtnMedio.isSelected() == true && idPlanta != 0){
+				Fachada.getInstace().removerPlantaMedioPorte(idPlanta);
+				preenceherTabelaPlantasMedioPorte();
+				table.updateUI();
+			}else if(rdbtnGrande.isSelected() == true && idPlanta != 0){
+				Fachada.getInstace().removerPlantaGrandePorte(idPlanta);
+				preenceherTabelaPlantasGrandePorte();
+				table.updateUI();
+			}else{
+				JOptionPane.showMessageDialog(null, "selecione uma planta e seu porte");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PlantaNaoEncontradaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 }

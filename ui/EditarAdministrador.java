@@ -1,6 +1,5 @@
 package com.fafica.projeto_pi.ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,7 +10,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.fafica.projeto_pi.excecoes.AdministradorNaoEncontradoException;
@@ -28,7 +26,10 @@ public class EditarAdministrador extends JFrame {
 
 	private JPanel contentPane;
 	private Administrador admProvisorio;
-
+	private JLabel carregarID;
+	private JLabel carregarNome;
+	private JLabel carregarLogin;
+	private JLabel carregarSenha;
 	/**
 	 * Launch the application.
 	 */
@@ -63,7 +64,7 @@ public class EditarAdministrador extends JFrame {
 				try {
 					Fachada.getInstace().editarAdministrador(admProvisorio);
 					dispose();
-					
+					new MenuPrincipal(admProvisorio).setVisible(true);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -91,7 +92,7 @@ public class EditarAdministrador extends JFrame {
 		
 		JLabel lblIdID = new JLabel("ID");
 		
-		JLabel carregarID = new JLabel(""+adm.getId());
+		carregarCaracteristicas();
 		
 		JButton buttonEditarNome = new JButton("Editar");
 		buttonEditarNome.addActionListener(new ActionListener() {
@@ -99,6 +100,7 @@ public class EditarAdministrador extends JFrame {
 				
 				String nome = JOptionPane.showInputDialog("novo nome");
 				admProvisorio.setNome(nome);
+				carregarNome.setText(nome);
 				
 			}
 		});
@@ -109,7 +111,7 @@ public class EditarAdministrador extends JFrame {
 			
 				String login = JOptionPane.showInputDialog("novo login");
 				admProvisorio.setLogin(login);
-				
+				carregarLogin.setText(login);
 			}
 		});
 		
@@ -118,14 +120,9 @@ public class EditarAdministrador extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int senha = Integer.parseInt(JOptionPane.showInputDialog("nova senha"));
 				admProvisorio.setSenha(senha);
+				carregarSenha.setText(String.valueOf(senha));
 			}
 		});
-		
-		JLabel carregarNome = new JLabel(adm.getNome());
-		
-		JLabel carregarLogin = new JLabel(adm.getLogin());
-		
-		JLabel carregarSenha = new JLabel(String.valueOf(adm.getSenha()));
 		
 		JLabel carregarCPF = new JLabel(adm.getCpf());
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -204,4 +201,14 @@ public class EditarAdministrador extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	public void carregarCaracteristicas(){
+		
+		carregarID = new JLabel(""+admProvisorio.getId());
+		
+		carregarNome = new JLabel(admProvisorio.getNome());
+		
+		carregarLogin = new JLabel(admProvisorio.getLogin());
+		
+		carregarSenha = new JLabel(String.valueOf(admProvisorio.getSenha()));
+	}
 }

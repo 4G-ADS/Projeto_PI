@@ -22,13 +22,22 @@ import com.fafica.projeto_pi.excecoes.PesquisadorNaoEncontradoException;
 import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Administrador;
+import com.fafica.projeto_pi.modelos.NascenteAgua;
+import com.fafica.projeto_pi.modelos.Pesquisador;
+import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
+import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
+import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
 import com.fafica.projeto_pi.modelos.Reserva;
+import com.fafica.projeto_pi.modelos.Solo;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.swing.JSpinner;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class MenuPrincipal extends JFrame {
 
@@ -71,7 +80,7 @@ public class MenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					int id =	Integer.parseInt((table.getValueAt(table.getSelectedRow(), 0).toString()));
+					int id = Integer.parseInt((table.getValueAt(table.getSelectedRow(), 0).toString()));
 					
 					System.out.println(id);	
 					Reserva reservaProvisoria = Fachada.getInstace().procurarReserva(id);
@@ -125,22 +134,42 @@ public class MenuPrincipal extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		
+		JButton buttonExcluirReserva = new JButton("Excluir");
+		buttonExcluirReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				excluirReserva();
+			}
+		});
+		
+		JLabel lblNewLabel = new JLabel("Bem vindo:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JLabel labelBemVindo = new JLabel(administrador.getNome());
+		labelBemVindo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnPerfil)
-						.addComponent(btnCriarReserva))
+						.addComponent(btnCriarReserva, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(buttonExcluirReserva, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnCarregar)
-							.addGap(93))
-						.addComponent(btnSair)
+							.addComponent(lblNewLabel)
+							.addGap(18)
+							.addComponent(labelBemVindo)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnSair))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(212, Short.MAX_VALUE)
+					.addComponent(btnCarregar)
+					.addGap(93))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -148,16 +177,24 @@ public class MenuPrincipal extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSair)
 						.addComponent(btnPerfil))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addGap(18)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-							.addComponent(btnCarregar))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(103)
-							.addComponent(btnCriarReserva)))
-					.addContainerGap())
+							.addGap(74)
+							.addComponent(btnCriarReserva)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(buttonExcluirReserva)
+							.addPreferredGap(ComponentPlacement.RELATED, 74, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)))
+					.addComponent(btnCarregar))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(labelBemVindo))
+					.addContainerGap(221, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -189,5 +226,59 @@ public class MenuPrincipal extends JFrame {
 		}	
 		
 	}
+	public void excluirReserva(){
+
+		
+		
+		try {
+			int idReserva = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+			
+			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador(idReserva);
+			ArrayList<Solo> listaSolo = Fachada.getInstace().listarSolo(idReserva);
+			ArrayList<NascenteAgua> listaAgua = Fachada.getInstace().listarNascente(idReserva);
+			ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena(idReserva);
+			ArrayList<PlantaMedioPorte> listaPlantaMedio = Fachada.getInstace().listarPlantaMedia(idReserva);
+			ArrayList<PlantaGrandePorte> listaPlantaGrande = Fachada.getInstace().listarPlantaGrande(idReserva);
+			for (Pesquisador pesquisador : listaPesquisador) {
+				Fachada.getInstace().removerPesquisador(pesquisador.getIdPesquisador());
+			}
+			
+			for (Solo solo : listaSolo) {
+				Fachada.getInstace().removerSolo(solo.getIdSolo());
+			}
+			
+			for (NascenteAgua nascenteAgua : listaAgua) {
+				Fachada.getInstace().removerNascente(nascenteAgua.getIdAgua());
+			}
+			
+			for (PlantaPequenoPorte plantaPequenoPorte : listaPlantaPequena) {
+				Fachada.getInstace().removerPlantaPequenoPorte(plantaPequenoPorte.getIdPlantaPequenaPorte());
+			}
+			
+			for (PlantaMedioPorte plantaMedioPorte : listaPlantaMedio) {
+				Fachada.getInstace().removerPlantaMedioPorte(plantaMedioPorte.getIdPlantaMedioPorte());
+			}
+			
+			for (PlantaGrandePorte plantaGrandePorte : listaPlantaGrande) {
+				Fachada.getInstace().removerPlantaGrandePorte(plantaGrandePorte.getIdPantaGrandePorte());
+			}
+			
+			Fachada.getInstace().removerReserva(idReserva);
+			carregarTabela();
+			table.updateUI();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ReservaNaoEncontradaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PesquisadorNaoEncontradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
+	}
 }

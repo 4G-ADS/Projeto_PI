@@ -302,7 +302,7 @@ public class RepositorioReservaBDR implements IRepositorioReserva {
 
 		PreparedStatement stmt = null;
 		try {
-			String sql = "delete from Reserva where idReserva = ?";
+			String sql = "delete from Reserva where id_reserva = ?";
 			stmt = this.connection.prepareStatement(sql);
 			stmt.setInt(1, idReserva);
 			stmt.execute();
