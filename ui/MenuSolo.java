@@ -163,14 +163,18 @@ public class MenuSolo extends JFrame {
 
 	public void carregarTabela(){
 		try {
+			listaSoloTabela = new String[100][2];
 			ArrayList<Solo> listaSolos = Fachada.getInstace().listarSolo();
+			int contador =0;
+			
 			for (int i = 0; i < listaSoloTabela.length; i++) {
 				if(i < listaSolos.size()){
 					if(listaSolos.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaSolos.get(i).getIdSolo());
 				String nome = listaSolos.get(i).getTipo();
-				listaSoloTabela[i][0] = id;
-				listaSoloTabela[i][1] = nome;
+				listaSoloTabela[contador][0] = id;
+				listaSoloTabela[contador][1] = nome;
+				contador++;
 					}
 				}
 			}

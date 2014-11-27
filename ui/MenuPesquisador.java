@@ -138,13 +138,17 @@ public class MenuPesquisador extends JFrame {
 	public void carregarTabela(){
 		try {
 			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador();
+			listaPesquisadorTabela = new String[100][2];
+			int contador =0;
+			
 			for (int i = 0; i < listaPesquisadorTabela.length; i++) {
 				if(i < listaPesquisador.size()){
 					if(listaPesquisador.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPesquisador.get(i).getIdPesquisador());
 				String nome = listaPesquisador.get(i).getNome();
-				listaPesquisadorTabela[i][0] = id;
-				listaPesquisadorTabela[i][1] = nome;
+				listaPesquisadorTabela[contador][0] = id;
+				listaPesquisadorTabela[contador][1] = nome;
+				contador++;
 					}
 				}
 			}

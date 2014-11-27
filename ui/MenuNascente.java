@@ -165,14 +165,17 @@ public class MenuNascente extends JFrame {
 
 	public void carregarTabela(){
 		try {
+			listaNascentesTabela = new String[100][2];
 			ArrayList<NascenteAgua> listaNascentes = Fachada.getInstace().listarNascente();
+			int contador =0;
 			for (int i = 0; i < listaNascentesTabela.length; i++) {
 				if(i < listaNascentes.size()){
 					if(listaNascentes.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaNascentes.get(i).getIdAgua());
 				String nome = listaNascentes.get(i).getNomeFonte();
-				listaNascentesTabela[i][0] = id;
-				listaNascentesTabela[i][1] = nome;
+				listaNascentesTabela[contador][0] = id;
+				listaNascentesTabela[contador][1] = nome;
+				contador++;
 					}
 				}
 			}

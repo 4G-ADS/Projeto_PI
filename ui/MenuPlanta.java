@@ -45,7 +45,7 @@ public class MenuPlanta extends JFrame {
 	private JRadioButton rdbtnPequeno;
 	private JRadioButton rdbtnMedio;
 	private JRadioButton rdbtnGrande;
-	private String[][] listaPlantaTabela = new String [100][2] ;
+	private String[][] listaPlantaTabela = new String [100][2];
 	private String colunas []= {"ID", "Plantas"};
 	/**
 	 * Launch the application.
@@ -196,7 +196,8 @@ public class MenuPlanta extends JFrame {
 	public void preenceherTabelaPlantasPequenoPorte(){
 		try {
 			ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena();
-			
+			int contador = 0;
+			listaPlantaTabela = new String [100][2];
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
 			
 			
@@ -207,8 +208,9 @@ public class MenuPlanta extends JFrame {
 				String id = String.valueOf(listaPlantaPequena.get(i).getIdPlantaPequenaPorte());
 				String nome  = listaPlantaPequena.get(i).getNome();
 				
-				listaPlantaTabela[i][0] = id;
-				listaPlantaTabela[i][1] = nome;
+				listaPlantaTabela[contador][0] = id;
+				listaPlantaTabela[contador][1] = nome;
+				contador++;
 				}
 			}
 		}
@@ -227,17 +229,17 @@ public class MenuPlanta extends JFrame {
 	public void preenceherTabelaPlantasMedioPorte(){
 		try {
 			ArrayList<PlantaMedioPorte> listaPlantaMedia= Fachada.getInstace().listarPlantaMedia();
-			
+			int contador = 0;
+			listaPlantaTabela = new String [100][2];
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
-			
-			
 			if(listaPlantaMedia.size() > i){
 				if(listaPlantaMedia.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPlantaMedia.get(i).getIdPlantaMedioPorte());
 				String nome  = listaPlantaMedia.get(i).getNome();
 				
-				listaPlantaTabela[i][0] = id;
-				listaPlantaTabela[i][1] = nome;
+				listaPlantaTabela[contador][0] = id;
+				listaPlantaTabela[contador][1] = nome;
+				contador++;
 				}
 			}
 		}
@@ -256,16 +258,17 @@ public class MenuPlanta extends JFrame {
 	public void preenceherTabelaPlantasGrandePorte(){
 		try {
 			ArrayList<PlantaGrandePorte> listaPlantaGrande = Fachada.getInstace().listarPlantaGrande();
-			
+			listaPlantaTabela = new String [100][2];
+			int contador = 0;
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
-			
 			if(listaPlantaGrande.size() > i){
 				if(listaPlantaGrande.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPlantaGrande.get(i).getIdPantaGrandePorte());
 				String nome  = listaPlantaGrande.get(i).getNome();
 				
-				listaPlantaTabela[i][0] = id;
-				listaPlantaTabela[i][1] = nome;	
+				listaPlantaTabela[contador][0] = id;
+				listaPlantaTabela[contador][1] = nome;
+				contador++;
 			}
 		}
 	}	
