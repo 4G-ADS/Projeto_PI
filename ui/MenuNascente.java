@@ -112,19 +112,9 @@ public class MenuNascente extends JFrame {
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				try {
-					int idNascente = Integer.parseInt(table.getValueAt(table.getColumnCount(), 0).toString());
-					Fachada.getInstace().removerNascente(idNascente);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (NascenteNaoEncontradaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				excluirNascentes();
+				dispose();
+				new MenuNascente(reservaProvisoria).setVisible(true);;
 			}
 		});
 		
@@ -197,5 +187,24 @@ public class MenuNascente extends JFrame {
 			e1.printStackTrace();
 		}	
 	}
+	
+	
+	public void excluirNascentes(){
+		
+		try {
+			int idNascente = Integer.parseInt(table.getValueAt(table.getSelectedColumn(), 0).toString());
+			Fachada.getInstace().removerNascente(idNascente);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (NascenteNaoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
 	
 }

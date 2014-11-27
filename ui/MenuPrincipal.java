@@ -22,6 +22,7 @@ import com.fafica.projeto_pi.excecoes.PesquisadorNaoEncontradoException;
 import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Administrador;
+import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Pesquisador;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 
 import javax.swing.JSpinner;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 
 public class MenuPrincipal extends JFrame {
@@ -130,6 +132,7 @@ public class MenuPrincipal extends JFrame {
 		});
 		
 		carregarTabela();
+		
 		table = new JTable(listaReservaTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
@@ -138,6 +141,8 @@ public class MenuPrincipal extends JFrame {
 		buttonExcluirReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirReserva();
+				dispose();
+				new MenuPrincipal(administrador).setVisible(true);;
 			}
 		});
 		
@@ -226,10 +231,9 @@ public class MenuPrincipal extends JFrame {
 		}	
 		
 	}
-	public void excluirReserva(){
-
-		
-		
+	
+	
+	public void excluirReserva(){	
 		try {
 			int idReserva = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
 			
@@ -239,6 +243,11 @@ public class MenuPrincipal extends JFrame {
 			ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena(idReserva);
 			ArrayList<PlantaMedioPorte> listaPlantaMedio = Fachada.getInstace().listarPlantaMedia(idReserva);
 			ArrayList<PlantaGrandePorte> listaPlantaGrande = Fachada.getInstace().listarPlantaGrande(idReserva);
+			ArrayList<Instituicao> listaInstituicao = Fachada.getInstace().listarInstituicao(idReserva);
+			
+			for (Instituicao instituicao : listaInstituicao) {
+				Fachada.getInstace().removerInsituicao(instituicao.getIdInstituicao());
+			}
 			for (Pesquisador pesquisador : listaPesquisador) {
 				Fachada.getInstace().removerPesquisador(pesquisador.getIdPesquisador());
 			}
@@ -264,8 +273,6 @@ public class MenuPrincipal extends JFrame {
 			}
 			
 			Fachada.getInstace().removerReserva(idReserva);
-			carregarTabela();
-			table.updateUI();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

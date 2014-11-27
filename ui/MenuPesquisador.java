@@ -86,6 +86,8 @@ public class MenuPesquisador extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPesquisador();
+				dispose();
+				new MenuPesquisador(reservaProvisoria).setVisible(true);;
 			}
 		});
 		

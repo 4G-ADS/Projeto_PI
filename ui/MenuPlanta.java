@@ -89,8 +89,7 @@ public class MenuPlanta extends JFrame {
 		JButton button_1 = new JButton("Add");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
+				
 			}
 		});
 		
@@ -104,6 +103,8 @@ public class MenuPlanta extends JFrame {
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPlanta();
+				dispose();
+				new MenuPlanta(reservaProvisoria).setVisible(true);;
 			}
 		});
 		
@@ -211,7 +212,7 @@ public class MenuPlanta extends JFrame {
 				}
 			}
 		}
-			table.updateUI();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -240,7 +241,7 @@ public class MenuPlanta extends JFrame {
 				}
 			}
 		}
-			table.updateUI();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,7 +269,7 @@ public class MenuPlanta extends JFrame {
 			}
 		}
 	}	
-			table.updateUI();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -288,15 +289,12 @@ public class MenuPlanta extends JFrame {
 				
 				Fachada.getInstace().removerPlantaPequenoPorte(idPlanta);
 				preenceherTabelaPlantasPequenoPorte();
-				table.updateUI();
 			}else if(rdbtnMedio.isSelected() == true && idPlanta != 0){
 				Fachada.getInstace().removerPlantaMedioPorte(idPlanta);
 				preenceherTabelaPlantasMedioPorte();
-				table.updateUI();
 			}else if(rdbtnGrande.isSelected() == true && idPlanta != 0){
 				Fachada.getInstace().removerPlantaGrandePorte(idPlanta);
 				preenceherTabelaPlantasGrandePorte();
-				table.updateUI();
 			}else{
 				JOptionPane.showMessageDialog(null, "selecione uma planta e seu porte");
 			}

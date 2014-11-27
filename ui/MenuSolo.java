@@ -110,20 +110,9 @@ public class MenuSolo extends JFrame {
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				try {
-					int idSolo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
-					Fachada.getInstace().removerSolo(idSolo);
-					carregarTabela();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SoloNaoEncontradorException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				excluirSolo();
+				dispose();
+				new MenuSolo(reservaProvisoria).setVisible(true);
 			}
 		});
 		
@@ -196,5 +185,23 @@ public class MenuSolo extends JFrame {
 			e1.printStackTrace();
 		}	
 		
+	}
+	
+	public void excluirSolo(){
+		
+		try {
+			int idSolo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+			Fachada.getInstace().removerSolo(idSolo);
+			carregarTabela();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SoloNaoEncontradorException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 }
