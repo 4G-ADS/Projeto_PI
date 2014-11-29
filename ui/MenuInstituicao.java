@@ -7,20 +7,38 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.fafica.projeto_pi.excecoes.InstituicacaoNaoEncontrada;
+import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.Reserva;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.StreamCorruptedException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MenuInstituicao extends JFrame {
 
 	private JPanel contentPane;
 	private Reserva reservaProvisoria;
+	private JTable table;
+	private String []colunas ={"ID","nome"};
+	private String[][] linhas = new String[100][2];
+
 	/**
 	 * Launch the application.
 	 */
@@ -51,9 +69,11 @@ public class MenuInstituicao extends JFrame {
 		JLabel lblPesquisado = new JLabel("Instituicao");
 		lblPesquisado.setFont(new Font("Dialog", Font.BOLD, 22));
 		
+		
 		JButton button = new JButton("Add");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				dispose();
 				new CadastrarInstituicao(reservaProvisoria).setVisible(true);
 			}
@@ -62,15 +82,53 @@ public class MenuInstituicao extends JFrame {
 		JButton button_1 = new JButton("Perfil");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			dispose();	
+				
+				try {
+					int idInstituicao = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+					Instituicao instituicao = null;
+					instituicao = Fachada.getInstace().procurarInstituicao(idInstituicao);
+					
+					dispose();
+					new EditarInstituicao(instituicao,reservaProvisoria).setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InstituicacaoNaoEncontrada e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		
 		JButton button_2 = new JButton("Excluir");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluir();
+				dispose();
+				new MenuInstituicao(reservaProvisoria);
+			}
+		});
 		
-		JScrollPane scrollPane = new JScrollPane();
+		
 		
 		JButton button_3 = new JButton("Voltar");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
+			}
+		});
+		
+		carregarTabela();
+		
+		table = new JTable(linhas,colunas);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(table);
+	
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -108,5 +166,60 @@ public class MenuInstituicao extends JFrame {
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
+	
+	}
+	
+	public void carregarTabela(){
+		try {
+			linhas = new String [100][2];
+			ArrayList<Instituicao> lista = Fachada.getInstace().listarInstituicao();
+			int contador = 0;
+			
+			for (int i = 0; i < linhas.length; i++) {
+				if(i < lista.size()){
+					if(lista.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
+						String id = String.valueOf(lista.get(i).getIdInstituicao());
+						String nome = lista.get(i).getNome();
+						linhas[contador][0] = id;
+						linhas[contador][1] = nome;
+						contador++;
+					}
+				}
+				
+			} 
+				
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void excluir(){
+
+		int idInstituicao = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+		try {
+			Fachada.getInstace().removerInsituicao(idInstituicao);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InstituicacaoNaoEncontrada e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	
 	}
 }

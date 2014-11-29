@@ -81,11 +81,11 @@ public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
 
 			while (resultSet.next()) {
 				Instituicao instituicao = new Instituicao(
-						resultSet.getInt("id_Instituicao"),
+						resultSet.getInt("id_instituicao"),
 						resultSet.getString("nome"),
 						resultSet.getString("tipo"),
 						resultSet.getString("cnpj"));
-				instituicao.setIdInstituicao(resultSet.getInt("id_reserva"));
+				instituicao.setIdReserva(resultSet.getInt("id_reserva"));
 				listaInstituicao.add(instituicao);
 			}
 

@@ -125,7 +125,6 @@ public class MenuPlanta extends JFrame {
 				rdbtnPequeno.setSelected(false);
 				rdbtnGrande.setSelected(false);
 					preenceherTabelaPlantasMedioPorte();
-					
 				
 			}
 		});
@@ -136,6 +135,7 @@ public class MenuPlanta extends JFrame {
 				rdbtnPequeno.setSelected(false);
 				rdbtnMedio.setSelected(false);
 				preenceherTabelaPlantasGrandePorte();
+			
 			}
 		});
 		
@@ -195,26 +195,30 @@ public class MenuPlanta extends JFrame {
 	
 	public void preenceherTabelaPlantasPequenoPorte(){
 		try {
+			listaPlantaTabela = new String [100][2];
 			ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena();
 			int contador = 0;
-			listaPlantaTabela = new String [100][2];
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
 			
 			
 			if(listaPlantaPequena.size() > i){
+				System.out.println(listaPlantaPequena.get(i).getIdReserva());
 				System.out.println(reservaProvisoria.getIdReserva());
 				
 				if(listaPlantaPequena.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
+					System.out.println("ok");
+		
 				String id = String.valueOf(listaPlantaPequena.get(i).getIdPlantaPequenaPorte());
 				String nome  = listaPlantaPequena.get(i).getNome();
 				
 				listaPlantaTabela[contador][0] = id;
+				System.out.println(listaPlantaTabela[contador][0]);
 				listaPlantaTabela[contador][1] = nome;
+				System.out.println(listaPlantaTabela[contador][1]);
 				contador++;
 				}
 			}
 		}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -228,9 +232,9 @@ public class MenuPlanta extends JFrame {
 	
 	public void preenceherTabelaPlantasMedioPorte(){
 		try {
+			listaPlantaTabela = new String [100][2];
 			ArrayList<PlantaMedioPorte> listaPlantaMedia= Fachada.getInstace().listarPlantaMedia();
 			int contador = 0;
-			listaPlantaTabela = new String [100][2];
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
 			if(listaPlantaMedia.size() > i){
 				if(listaPlantaMedia.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
@@ -243,7 +247,7 @@ public class MenuPlanta extends JFrame {
 				}
 			}
 		}
-			
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -257,8 +261,8 @@ public class MenuPlanta extends JFrame {
 	
 	public void preenceherTabelaPlantasGrandePorte(){
 		try {
-			ArrayList<PlantaGrandePorte> listaPlantaGrande = Fachada.getInstace().listarPlantaGrande();
 			listaPlantaTabela = new String [100][2];
+			ArrayList<PlantaGrandePorte> listaPlantaGrande = Fachada.getInstace().listarPlantaGrande();
 			int contador = 0;
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
 			if(listaPlantaGrande.size() > i){
@@ -272,7 +276,6 @@ public class MenuPlanta extends JFrame {
 			}
 		}
 	}	
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

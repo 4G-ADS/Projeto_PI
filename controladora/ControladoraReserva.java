@@ -65,14 +65,14 @@ public class ControladoraReserva {
 		// Aqui fazemos a chamada do repositorio no metodo cadastrar para
 		// inserir no banco
 		
-		
+		if(reserva.getIdReserva() != 0){
 		if (reserva.getNome().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Nome � nulo ou inv�lido.");
 		if (reserva.getClima().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Clima � nulo ou inv�lido.");
 		if (reserva.getLatitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Latitude � nulo ou inv�lido.");
 		if (reserva.getLongitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Longitude � nulo ou inv�lido.");
 		
 		this.repositorioReserva.cadastrarReserva(reserva);
-		
+		}
 		
 		for (Pesquisador pesquisador : reserva.getPesquisadores()) {
 			pesquisador.setIdReserva(reserva.getIdReserva());

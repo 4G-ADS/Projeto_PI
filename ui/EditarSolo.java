@@ -19,12 +19,18 @@ import com.fafica.projeto_pi.modelos.Solo;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class EditarSolo extends JFrame {
 
 	private JPanel contentPane;
 	private Solo soloProvisorio;
 	private Reserva reservaProvisoria;
+	private JLabel labelCarregarID;
+	private JLabel labelCarregarTipo;
+	private JLabel labelCarregarTamanho;
+	private JLabel labelCarregarRecursos;
 	
 	/**
 	 * Launch the application.
@@ -54,23 +60,17 @@ public class EditarSolo extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JLabel labelId = new JLabel("ID:");
-		labelId.setBounds(16, 25, 32, 16);
-		contentPane.add(labelId);
 		
 		JLabel labelTipo = new JLabel("Tipo:");
-		labelTipo.setBounds(16, 52, 32, 16);
-		contentPane.add(labelTipo);
 		
 		JLabel labelTamanho = new JLabel("Tamanho:");
-		labelTamanho.setBounds(16, 79, 62, 16);
-		contentPane.add(labelTamanho);
 		
 		JLabel labelRecursos = new JLabel("Recursos:");
-		labelRecursos.setBounds(16, 107, 61, 16);
-		contentPane.add(labelRecursos);
+		
+		carregarCaracteristicas();
+		
 		
 		JButton buttonVoltar = new JButton("Voltar");
 		buttonVoltar.addActionListener(new ActionListener() {
@@ -95,53 +95,116 @@ public class EditarSolo extends JFrame {
 			}
 		});
 		
-		buttonVoltar.setBounds(349, 221, 75, 29);
-		contentPane.add(buttonVoltar);
-		
-		JLabel labelCarregarID = new JLabel(""+soloProvisorio.getIdSolo());
-		labelCarregarID.setBounds(82, 26, 32, 16);
-		contentPane.add(labelCarregarID);
-		
-		JLabel labelCarregarTipo = new JLabel(soloProvisorio.getTipo());
-		labelCarregarTipo.setBounds(82, 53, 62, 16);
-		contentPane.add(labelCarregarTipo);
-		
-		JLabel labelCarregarTamanho = new JLabel(""+solo.getTamanho());
-		labelCarregarTamanho.setBounds(82, 81, 32, 16);
-		contentPane.add(labelCarregarTamanho);
-		
-		JLabel labelCarregarRecursos = new JLabel(soloProvisorio.getResursos());
-		labelCarregarRecursos.setBounds(82, 108, 62, 16);
-		contentPane.add(labelCarregarRecursos);
 		
 		JButton buttonEditarRescursos = new JButton("Editar");
 		buttonEditarRescursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String recursos = JOptionPane.showInputDialog("novo recurso");
 				soloProvisorio.setResursos(recursos);
+				labelCarregarRecursos.setText(soloProvisorio.getResursos());
 			}
 		});
-		buttonEditarRescursos.setBounds(170, 104, 89, 23);
-		contentPane.add(buttonEditarRescursos);
 		
 		JButton buttonEditarTamanho = new JButton("Editar");
 		buttonEditarTamanho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double tamanho = Double.parseDouble(JOptionPane.showInputDialog("novo tamanho"));
 				soloProvisorio.setTamanho(tamanho);
+				labelCarregarTamanho.setText(""+soloProvisorio.getTamanho());
 			}
 		});
-		buttonEditarTamanho.setBounds(170, 76, 89, 23);
-		contentPane.add(buttonEditarTamanho);
 		
 		JButton buttonEditarTipo = new JButton("Editar");
 		buttonEditarTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = JOptionPane.showInputDialog("novo tipo");
 				soloProvisorio.setTipo(tipo);
+				labelCarregarTipo.setText(soloProvisorio.getTipo());
 			}
 		});
-		buttonEditarTipo.setBounds(170, 49, 89, 23);
-		contentPane.add(buttonEditarTipo);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(11)
+					.addComponent(labelId, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+					.addGap(34)
+					.addComponent(labelCarregarID, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(11)
+					.addComponent(labelTipo, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+					.addGap(34)
+					.addComponent(labelCarregarTipo, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
+					.addComponent(buttonEditarTipo, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(11)
+					.addComponent(labelTamanho, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+					.addGap(4)
+					.addComponent(labelCarregarTamanho, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+					.addGap(56)
+					.addComponent(buttonEditarTamanho, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(11)
+					.addComponent(labelRecursos, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+					.addGap(5)
+					.addComponent(labelCarregarRecursos, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
+					.addComponent(buttonEditarRescursos, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(344)
+					.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(20)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(labelId, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(1)
+							.addComponent(labelCarregarID, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
+					.addGap(7)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(3)
+							.addComponent(labelTipo, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(4)
+							.addComponent(labelCarregarTipo, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+						.addComponent(buttonEditarTipo))
+					.addGap(4)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(3)
+							.addComponent(labelTamanho, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(5)
+							.addComponent(labelCarregarTamanho, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+						.addComponent(buttonEditarTamanho))
+					.addGap(5)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(3)
+							.addComponent(labelRecursos, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(4)
+							.addComponent(labelCarregarRecursos, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+						.addComponent(buttonEditarRescursos))
+					.addGap(94)
+					.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+		);
+		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void carregarCaracteristicas(){
+		
+		labelCarregarID = new JLabel(""+soloProvisorio.getIdSolo());
+		
+		labelCarregarTipo = new JLabel(soloProvisorio.getTipo());
+		
+		labelCarregarTamanho = new JLabel(""+soloProvisorio.getTamanho());
+		
+		labelCarregarRecursos = new JLabel(soloProvisorio.getResursos());
 	}
 }

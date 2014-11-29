@@ -13,20 +13,35 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.fafica.projeto_pi.excecoes.AdministradorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.CPFInvalidoException;
+import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
+import com.fafica.projeto_pi.excecoes.IdadeInvalidoException;
+import com.fafica.projeto_pi.excecoes.NascenteJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.PesquisadorJaCadastradoException;
+import com.fafica.projeto_pi.excecoes.PlantaJaCadastradaException;
+import com.fafica.projeto_pi.excecoes.SoloJaCadastradoException;
+import com.fafica.projeto_pi.fachada.Fachada;
+import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Reserva;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AddNascente extends JFrame {
 
 	private JPanel contentPane;
-	private JButton button_1;
-	private JLabel label;
-	private JLabel label_1;
-	private JTextField textField;
-	private JLabel label_2;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JLabel label_3;
-	private JTextField textField_3;
+	private JButton buttonCadastrar;
+	private JLabel labelTipo;
+	private JLabel labelNome;
+	private JTextField campoNome;
+	private JLabel labelLatitude;
+	private JTextField campoTipo;
+	private JTextField campoLatitude;
+	private JLabel labelLongitude;
+	private JTextField campoLongitude;
 	private Reserva reservaProvisoria;
 
 	/**
@@ -56,83 +71,130 @@ public class AddNascente extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		button_1 = new JButton("Finalizar cadastro");
+		buttonCadastrar = new JButton("Adicionar");
+		buttonCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+
+					try {
+						double latitude = Double.parseDouble(campoLatitude.getText());
+						double longitude = Double.parseDouble(campoLongitude.getText());
+						String nomeFonte = campoNome.getText();
+						String tipo = campoTipo.getText();
+						NascenteAgua agua = new NascenteAgua(latitude, longitude, nomeFonte, tipo);
+						reservaProvisoria.getNascenteAgua().add(agua);
+						
+						Fachada.getInstace().cadastrarReserva(reservaProvisoria);
+						dispose();
+						new MenuNascente(reservaProvisoria);
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (CampoObritarorioInvalidoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (AdministradorJaCadastradoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IdadeInvalidoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (CPFInvalidoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (PlantaJaCadastradaException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (PesquisadorJaCadastradoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NascenteJaCadastradaException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SoloJaCadastradoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+			}});
 		
-		label = new JLabel("Tipo:");
+		labelTipo = new JLabel("Tipo:");
 		
-		label_1 = new JLabel("Nome da Fonte:");
+		labelNome = new JLabel("Nome da Fonte:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		campoNome = new JTextField();
+		campoNome.setColumns(10);
 		
-		label_2 = new JLabel("Latitude:");
+		labelLatitude = new JLabel("Latitude:");
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		campoTipo = new JTextField();
+		campoTipo.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		campoLatitude = new JTextField();
+		campoLatitude.setColumns(10);
 		
-		label_3 = new JLabel("Longitude:");
+		labelLongitude = new JLabel("Longitude:");
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		campoLongitude = new JTextField();
+		campoLongitude.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelTipo, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 							.addGap(29)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+							.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelLatitude, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
-							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+							.addComponent(campoLatitude, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 							.addGap(44)
-							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelLongitude, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+							.addComponent(campoLongitude, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(32, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(297, Short.MAX_VALUE)
-					.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonCadastrar, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGap(1)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(3)
-							.addComponent(label))
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(labelTipo))
+						.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(11)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(3)
-							.addComponent(label_2))
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelLatitude))
+						.addComponent(campoLatitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(3)
-							.addComponent(label_3))
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(labelLongitude))
+						.addComponent(campoLongitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(3)
-							.addComponent(label_1))
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-					.addComponent(button_1)
+							.addComponent(labelNome))
+						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+					.addComponent(buttonCadastrar)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);

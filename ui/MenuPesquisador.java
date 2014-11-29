@@ -87,6 +87,32 @@ public class MenuPesquisador extends JFrame {
 		});
 		
 		JButton btnPerfil = new JButton("Perfil");
+		btnPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int idPesquisador = Integer.parseInt(table.getValueAt(table.getSelectedColumn(), 0).toString());
+				Pesquisador pesquisador = null;
+				
+				try {
+					pesquisador = Fachada.getInstace().procurarPesquisador(idPesquisador);
+					dispose();
+					new EditarPesquisador(pesquisador, reservaProvisoria).setVisible(true);
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PesquisadorNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		JButton button = new JButton("Excluir");
 		button.addActionListener(new ActionListener() {
