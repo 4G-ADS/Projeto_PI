@@ -3,7 +3,6 @@ package com.fafica.projeto_pi.repositorioBDR.irepositorioBDR;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.fafica.projeto_pi.excecoes.NascenteNaoEncontradaException;
 import com.fafica.projeto_pi.excecoes.PesquisadorNaoEncontradoException;
 import com.fafica.projeto_pi.modelos.Pesquisador;
 

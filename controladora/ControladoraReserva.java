@@ -13,6 +13,7 @@ import com.fafica.projeto_pi.excecoes.PlantaJaCadastradaException;
 import com.fafica.projeto_pi.excecoes.ReservaNaoEncontradaException;
 import com.fafica.projeto_pi.excecoes.SoloJaCadastradoException;
 import com.fafica.projeto_pi.excecoes.Validacao;
+import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Pesquisador;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
@@ -65,14 +66,13 @@ public class ControladoraReserva {
 		// Aqui fazemos a chamada do repositorio no metodo cadastrar para
 		// inserir no banco
 		
-		if(reserva.getIdReserva() != 0){
+	
 		if (reserva.getNome().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Nome � nulo ou inv�lido.");
 		if (reserva.getClima().equals("") == true)	throw new CampoObritarorioInvalidoException("Campo Clima � nulo ou inv�lido.");
 		if (reserva.getLatitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Latitude � nulo ou inv�lido.");
 		if (reserva.getLongitude() == 0.0)	throw new CampoObritarorioInvalidoException("Campo Longitude � nulo ou inv�lido.");
-		
 		this.repositorioReserva.cadastrarReserva(reserva);
-		}
+		
 		
 		for (Pesquisador pesquisador : reserva.getPesquisadores()) {
 			pesquisador.setIdReserva(reserva.getIdReserva());
@@ -88,7 +88,9 @@ public class ControladoraReserva {
 			this.repositorioPesquisador.cadastrarPesquisadores(pesquisador);
 			
 		}
+	
 		
+
 		for (NascenteAgua nascente : reserva.getNascenteAgua()) {
 			nascente.setIdReserva(reserva.getIdReserva());
 			
@@ -101,6 +103,8 @@ public class ControladoraReserva {
 			this.repositorioNascenteAgua.cadastrarAgua(nascente);
 		}
 		
+		
+
 		for (Solo solo : reserva.getSolos()) {
 			solo.setIdReserva(reserva.getIdReserva());
 			
@@ -112,6 +116,8 @@ public class ControladoraReserva {
 			this.repositorioSolo.cadastrarSolo(solo);
 		}
 		
+		
+
 		for (PlantaPequenoPorte plantaPequena : reserva.getListaPlantaPequena()) {
 			plantaPequena.setIdReserva(reserva.getIdReserva());
 			
@@ -123,6 +129,7 @@ public class ControladoraReserva {
 			this.repositorioPlantaPequenoPorte.cadastrarPlantaPequenoPorte(plantaPequena);
 		}
 		
+
 		for (PlantaMedioPorte plantaMedia : reserva.getListaPlantaMedia()) {
 			plantaMedia.setIdReserva(reserva.getIdReserva());
 			
@@ -134,6 +141,8 @@ public class ControladoraReserva {
 			this.repositorioPlantaMedioPorte.cadastrarPlantaMedioPorte(plantaMedia);
 		}
 		
+		
+
 		for (PlantaGrandePorte plantaGrande : reserva.getListaPlantaGrande()) {
 			plantaGrande.setIdReserva(reserva.getIdReserva());
 			
@@ -144,9 +153,10 @@ public class ControladoraReserva {
 			
 			this.repositorioPlantaGrandePorte.cadastrarPlantaGrandePorte(plantaGrande);
 			
+		
 		}
+	
 	}
-
 	public ArrayList<Reserva> listarReserva()
 			throws SQLException,ReservaNaoEncontradaException {
 		System.out.println("Passando pela controladora listarReservas");

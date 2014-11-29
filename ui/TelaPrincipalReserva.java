@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.fafica.projeto_pi.excecoes.AdministradorJaCadastradoException;
@@ -120,8 +121,19 @@ public class TelaPrincipalReserva extends JFrame {
 		JButton btnPlantas = new JButton("Plantas");
 		btnPlantas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new MenuPlanta(reservaProvisoria).setVisible(true);
+				
+				int opcao = Integer.parseInt(JOptionPane.showInputDialog("1-> pequeno porte\n 2-> medio porte \n 3-> grande porte"));
+				
+				if(opcao == 1){
+					new MenuPlantaPequena(reservaProvisoria).setVisible(true);
+					dispose();
+				}else if(opcao == 2){
+					new MenuPlantaMedia(reservaProvisoria).setVisible(true);
+					dispose();
+				}else if(opcao == 3){
+					new MenuPlantaGrande(reservaProvisoria).setVisible(true);
+					dispose();
+				}
 			}
 		});
 		

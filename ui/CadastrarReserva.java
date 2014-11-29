@@ -100,7 +100,9 @@ public class CadastrarReserva extends JFrame {
 					int tamanho = Integer.parseInt(campoTamanho.getText());
 					double latitude = Double.parseDouble(campoLatitude.getText());
 					double longitude = Double.parseDouble(campoLongitude.getText());
+					
 					if(!nome.equals("") && !clima.equals("") && tamanho != 0 && longitude != 0 && latitude != 0){
+						
 					Reserva reserva = new Reserva (admProvisorio.getId(),clima, nome, tamanho, latitude, longitude);
 					
 					dispose();
