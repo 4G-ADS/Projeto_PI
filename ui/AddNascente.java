@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -76,17 +77,21 @@ public class AddNascente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {		
 
 					try {
+						
 						double latitude = Double.parseDouble(campoLatitude.getText());
 						double longitude = Double.parseDouble(campoLongitude.getText());
 						String nomeFonte = campoNome.getText();
 						String tipo = campoTipo.getText();
+						if(latitude !=0 && longitude != 0 && !nomeFonte.equals("") && !tipo.equals("")){
 						NascenteAgua agua = new NascenteAgua(latitude, longitude, nomeFonte, tipo);
 						reservaProvisoria.getNascenteAgua().add(agua);
 						
 						Fachada.getInstace().cadastrarReserva(reservaProvisoria);
 						dispose();
 						new MenuNascente(reservaProvisoria);
-						
+						}else{
+							JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+						}
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -97,12 +98,12 @@ public class CadastrarPesquisador extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				String nome = campoNome.getText();
+				String cpf = campoCpf.getText();
+				int idade = Integer.parseInt(campoIdade.getText());
+				String profissao = campoProfissao.getText();
+				if(!nome.equals("") && !cpf.equals("") && idade != 0){
 				if(listaPesquisador.size() == 0){
-
-					String nome = campoNome.getText();
-					String cpf = campoCpf.getText();
-					int idade = Integer.parseInt(campoIdade.getText());
-					String profissao = campoProfissao.getText();
 					
 					Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
 					listaPesquisador.add(p);
@@ -111,6 +112,9 @@ public class CadastrarPesquisador extends JFrame {
 				dispose();
 				reservaProvisoria.setPesquisadores(listaPesquisador);
 				new CadastrarSolo(reservaProvisoria).setVisible(true);
+				}else{
+					JOptionPane.showMessageDialog(null, "preenxer todos os campos");
+				}
 			}
 		});
 		btnCadastrar.setBounds(305, 221, 120, 29);
@@ -124,7 +128,8 @@ public class CadastrarPesquisador extends JFrame {
 				String cpf = campoCpf.getText();
 				int idade = Integer.parseInt(campoIdade.getText());
 				String profissao = campoProfissao.getText();
-				
+				if(!nome.equals("") && !cpf.equals("") && !profissao.equals("") && idade != 0){
+					
 				Pesquisador p  = new Pesquisador(nome, cpf, idade, profissao);
 				listaPesquisador.add(p);
 				
@@ -132,7 +137,9 @@ public class CadastrarPesquisador extends JFrame {
 				campoCpf.setText("");
 				campoIdade.setText("");
 				campoProfissao.setText("");
-				
+				}else{
+					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+				}
 			}
 		});
 		btnNovo.setBounds(198, 221, 97, 29);

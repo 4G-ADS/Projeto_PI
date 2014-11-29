@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
@@ -86,11 +87,14 @@ public class CadastrarInstituicao extends JFrame {
 					String nome = campoNome.getText();
 					String tipo = campoTipo.getText();
 					String cnpj = campoCNPJ.getText();
-					
+					if(!nome.equals("") && !tipo.equals("") && !cnpj.equals("")){
 					Instituicao instituicao = new Instituicao(nome, tipo, cnpj);
 					Fachada.getInstace().cadastrarInstituicao(instituicao);
-					
 					dispose();
+					new MenuInstituicao(reservaProvisoria).setVisible(true);
+					}else{
+						JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

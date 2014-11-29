@@ -10,6 +10,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 
@@ -69,12 +70,15 @@ public class CadastrarAdministrador extends JFrame {
 					String nome = campoNome.getText();
 					String login = campoLogin.getText();
 					String cpf = campoCPF.getText();
+					if(!nome.equals("") && !login.equals("") && !cpf.equals("")){
 					int senha = Integer.parseInt(campoSenha.getText());
 					adm = new Administrador(nome, login, cpf, senha);
 					Fachada.getInstace().cadastrarAdministrardor(adm);
 					dispose();
 					new MenuPrincipal(adm).setVisible(true);
-					
+					}else {
+						JOptionPane.showMessageDialog(null, "preencha todos os campos");
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

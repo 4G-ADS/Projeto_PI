@@ -98,6 +98,7 @@ public class AddPlanta extends JFrame {
 					String especie = campoEspecie.getText();
 					int tamanho = Integer.parseInt(campoTamanho.getText());
 					
+					if(!nome.equals("") && !especie.equals("") && tamanho !=0){
 					if(comboBox.getSelectedItem().equals("Pequeno Porte")){
 						
 						if(tamanho < 60 ){
@@ -162,6 +163,9 @@ public class AddPlanta extends JFrame {
 					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
 					dispose();
 					new MenuPlanta(reservaProvisoria).setVisible(true);
+					}else{
+						JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

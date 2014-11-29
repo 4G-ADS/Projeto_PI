@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
@@ -80,12 +81,13 @@ public class CadastrarNascente extends JFrame {
 		JButton btnCadastrar = new JButton("Finalizar cadastro");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String nomeFonte = campoNomeFonte.getText();
+				String tipo = campoTipo.getText();
+				double latitude = Double.parseDouble(campoLatitude.getText());
+				double longitude = Double.parseDouble(campoLatitude.getText());
 				
+				if(!nomeFonte.equals("") && !tipo.equals("") && latitude != 0 && longitude != 0){
 				if(listaNascentes.size() == 0){
-					String nomeFonte = campoNomeFonte.getText();
-					String tipo = campoTipo.getText();
-					double latitude = Double.parseDouble(campoLatitude.getText());
-					double longitude = Double.parseDouble(campoLatitude.getText());
 					
 					NascenteAgua nascente = new NascenteAgua(latitude, longitude, nomeFonte, tipo);
 					listaNascentes.add(nascente);
@@ -94,6 +96,10 @@ public class CadastrarNascente extends JFrame {
 				reservaProvisoria.setNascenteAgua(listaNascentes);
 				dispose();
 				new CadastrarPlanta(reservaProvisoria).setVisible(true);
+			
+			}else{
+				JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+			}
 			}
 		});
 		
@@ -105,7 +111,7 @@ public class CadastrarNascente extends JFrame {
 				String tipo = campoTipo.getText();
 				double latitude = Double.parseDouble(campoLatitude.getText());
 				double longitude = Double.parseDouble(campoLatitude.getText());
-				
+				if(!nomeFonte.equals("") && !tipo.equals("") && latitude != 0 && longitude != 0){
 				NascenteAgua nascente = new NascenteAgua(latitude, longitude, nomeFonte, tipo);
 				listaNascentes.add(nascente);
 				
@@ -113,6 +119,9 @@ public class CadastrarNascente extends JFrame {
 				campoTipo.setText("");
 				campoLatitude.setText("");
 				campoLongitude.setText("");
+				}else{
+					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+				}
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -97,13 +98,16 @@ public class AddPesquisador extends JFrame {
 					int idade = Integer.parseInt(campoIdade.getText());
 					String cpf = campoCFP.getText();
 					
+					if(!nome.equals("") && !profissao.equals("") && !cpf.equals("") && idade != 0){
 					Pesquisador pesquisador = new Pesquisador(nome, cpf, idade, profissao);
 					
 					reservaProvisoria.getPesquisadores().add(pesquisador);
 					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
 					dispose();
 					 new MenuPesquisador(reservaProvisoria);
-					
+					}else{
+						JOptionPane.showMessageDialog(null, "preencha todos os campos");
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

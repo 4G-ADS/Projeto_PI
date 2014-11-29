@@ -105,7 +105,7 @@ public class CadastrarPlanta extends JFrame {
 				String nome = campoNome.getText();
 				String especie = campoEspecie.getText();
 				int tamanho = Integer.parseInt(campoTamanho.getText());
-				
+				if(!nome.equals("") && !especie.equals("") && tamanho != 0){
 				if(comboBox.getSelectedItem().equals("Pequeno Porte")){
 					
 					if(tamanho < 60 ){
@@ -164,7 +164,10 @@ public class CadastrarPlanta extends JFrame {
 														+ 	"porte tem que ser maior que 180 cm\n"
 														+ 	"Lembrando tamanho em cm");
 					}
-				}	
+				}
+				}else{
+					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+				}
 		}
 		});
 		

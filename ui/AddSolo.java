@@ -23,6 +23,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -78,13 +79,16 @@ public class AddSolo extends JFrame {
 					String tipo = campoTamanho.getText();
 					String recursos = campoRecursos.getText();
 					int tamanho = Integer.parseInt(campoTamanho.getText());
-					
+					if(!tipo.equals("") && !recursos.equals("") && tamanho != 0){
 					Solo solo = new Solo(tipo, tamanho, recursos);
 					
 					reservaProvisoria.getSolos().add(solo);
 					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
 					dispose();
 					new MenuSolo(reservaProvisoria).setVisible(true);
+					}else{
+						JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
@@ -86,12 +87,14 @@ public class CadastrarSolo extends JFrame {
 		btnCadastrar.setBounds(310, 221, 104, 29);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+			String tipo = btnTipo.getText();
+			Double tamanho = Double.parseDouble(btnTamanho.getText());
+			String recursos = btnRecursos.getText();
+				if(!tipo.equals("") && !recursos.equals("") && tamanho != 0){
 				if(listaSolo.size() == 0){
-					
-				String tipo = btnTipo.getText();
-				Double tamanho = Double.parseDouble(btnTamanho.getText());
-				String recursos = btnRecursos.getText();
-					
+				
 				Solo s = new Solo(tipo, tamanho, recursos);
 				listaSolo.add(s);
 				
@@ -100,6 +103,9 @@ public class CadastrarSolo extends JFrame {
 				reservaProvisoria.setSolos(listaSolo);
 				dispose();
 				new CadastrarNascente(reservaProvisoria).setVisible(true);
+				}else{
+					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+				}
 			}
 		});
 		contentPane.setLayout(null);
@@ -118,13 +124,16 @@ public class CadastrarSolo extends JFrame {
 				String tipo = btnTipo.getText();
 				Double tamanho = Double.parseDouble(btnTamanho.getText());
 				String recursos = btnRecursos.getText();
-				
+				if(!tipo.equals("") && !recursos.equals("") && tamanho != 0){
 				Solo s = new Solo(tipo, tamanho, recursos);
 				listaSolo.add(s);	
 				
 				btnTipo.setText("");
 				btnTamanho.setText("");
 				btnRecursos.setText("");
+				}else{
+					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+				}
 			}
 		});
 		btnNovo.setBounds(193, 224, 104, 29);
