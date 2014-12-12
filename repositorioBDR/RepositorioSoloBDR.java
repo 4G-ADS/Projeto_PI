@@ -11,6 +11,7 @@ import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.modelos.Solo;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioSolo;
 
@@ -47,7 +48,7 @@ public class RepositorioSoloBDR implements IRepositorioSolo{
 				stmt = this.connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			}
 			
-			stmt.setInt(1, solo.getIdReserva());
+			stmt.setInt(1, solo.getReserva().getIdReserva());
 			stmt.setDouble(2, solo.getTamanho());
 			stmt.setString(3, solo.getTipo());
 			stmt.setString(4, solo.getResursos());
@@ -94,7 +95,7 @@ public class RepositorioSoloBDR implements IRepositorioSolo{
 			while(resultSet.next()){
 				Solo solo =  new Solo(resultSet.getInt("id_solo"), resultSet.getString("tipo_solo"),
 						resultSet.getDouble("tamanho_solo"),resultSet.getString("recursos_solo"));
-				solo.setIdReserva(resultSet.getInt("id_reserva"));
+	
 				listaSolo.add(solo);
 				
 			}
@@ -119,8 +120,7 @@ public class RepositorioSoloBDR implements IRepositorioSolo{
 		String sql = "";
 		
 		try{
-			sql = "select Solo.id_solo,Solo.recursos_solo,Solo.tamanho_solo,Solo.tipo_solo ";
-			sql += "from Reserva ";
+			sql = "select * from Reserva ";
 			sql += "inner join Solo ";
 			sql += "on Reserva.id_reserva = Solo.id_reserva ";
 			sql += "where Reserva.id_reserva = " + idReserva;
@@ -128,9 +128,13 @@ public class RepositorioSoloBDR implements IRepositorioSolo{
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"),resultSet.getInt("id_reserva"),resultSet.getString("clima"),
+						resultSet.getString("nome_reserva"),resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
+				
 				Solo solo =  new Solo(resultSet.getInt("id_solo"), resultSet.getString("tipo_solo"),
 						resultSet.getDouble("tamanho_solo"),resultSet.getString("recursos_solo"));
-				
+				solo.setReserva(reserva);
 				listaSolo.add(solo);
 				
 			}

@@ -54,12 +54,13 @@ public class Login extends JFrame {
 	public Login() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 276, 193);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JButton btnNewButton = new JButton("Entrar");
+		btnNewButton.setBounds(159, 119, 81, 29);
 			
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,23 +73,28 @@ public class Login extends JFrame {
 					new MenuPrincipal(adm).setVisible(true);
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "Usuario ou senha inválidos");
+					JOptionPane.showMessageDialog(null, "Usuario ou senha invï¿½lidos");
 				}
 				
 			}
 		});
 		
 		senha = new JTextField();
+		senha.setBounds(88, 73, 152, 28);
 		senha.setColumns(10);
 		
 		login = new JTextField();
+		login.setBounds(88, 27, 152, 28);
 		login.setColumns(10);
 		
 		JLabel lblL = new JLabel("Login");
+		lblL.setBounds(24, 33, 35, 16);
 		
 		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(24, 79, 46, 16);
 		
 		btnCadastrese = new JButton("Cadastre-se");
+		btnCadastrese.setBounds(39, 119, 121, 29);
 		btnCadastrese.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -96,46 +102,13 @@ public class Login extends JFrame {
 				new CadastrarAdministrador().setVisible(true);
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(198, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnNewButton)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblSenha, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(senha, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblL)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(login, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap())
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnCadastrese)
-					.addContainerGap(325, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(36)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(login, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblL))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(senha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSenha))
-					.addGap(18)
-					.addComponent(btnNewButton)
-					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-					.addComponent(btnCadastrese)
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(btnNewButton);
+		contentPane.add(lblSenha);
+		contentPane.add(senha);
+		contentPane.add(lblL);
+		contentPane.add(login);
+		contentPane.add(btnCadastrese);
 	}
 	
 	public boolean verificarUsuario() {
@@ -150,6 +123,7 @@ public class Login extends JFrame {
 				
 				if(login.getText().equals(administrador.getLogin()) && 
 						senha.getText().equals(String.valueOf(administrador.getSenha()))){
+					System.out.println(administrador.toString());
 					verifica = true;
 					System.out.println("aqui" + verifica);
 					adm = administrador;

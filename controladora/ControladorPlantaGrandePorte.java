@@ -3,7 +3,6 @@ package com.fafica.projeto_pi.controladora;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.fafica.projeto_pi.excecoes.PesquisadorNaoEncontradoException;
 import com.fafica.projeto_pi.excecoes.PlantaNaoEncontradaException;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
 import com.fafica.projeto_pi.repositorioBDR.RepositorioPlantaGrandePorteBDR;
@@ -18,6 +17,9 @@ public class ControladorPlantaGrandePorte {
 		repositorioPlantaGrandePorte = new RepositorioPlantaGrandePorteBDR();
 	}
 
+	public void cadastrarPlantaGrande(PlantaGrandePorte planta) throws SQLException{
+		this.repositorioPlantaGrandePorte.cadastrarPlantaGrandePorte(planta);
+	}
 	public ArrayList<PlantaGrandePorte> listarPlantaGrande() throws SQLException,Exception {
 		System.out.println("Pasando pela ControladorA lsitarPlantaGrandePorte");
 		this.repositorioPlantaGrandePorte = new RepositorioPlantaGrandePorteBDR();

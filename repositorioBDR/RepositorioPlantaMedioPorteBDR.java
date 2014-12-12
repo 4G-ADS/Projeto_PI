@@ -11,6 +11,7 @@ import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
 import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioPlantaMedioPorte;
 
 public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPorte{
@@ -57,7 +58,7 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 
 				}
 				
-				stmt.setInt(1, plantaMedia.getIdReserva());
+				stmt.setInt(1, plantaMedia.getReserva().getIdReserva());
 				stmt.setString(2, plantaMedia.getEspecie());
 				stmt.setString(3, plantaMedia.getNome());
 				stmt.setDouble(4, plantaMedia.getTamanho());
@@ -98,7 +99,6 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 						resultSet.getString("especie_planta_medio_porte"),
 						resultSet.getString("nome_planta_medio_porte"),
 						resultSet.getDouble("tamanho_planta_medio_porte"));
-						plantaMedia.setIdReserva(resultSet.getInt("id_reserva"));
 				listaPlanta.add(plantaMedia);
 				
 			}
@@ -122,11 +122,7 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 		String sql = "";
 		
 		try{
-			sql = "select Planta_medio_porte.id_planta_medio_porte,"
-					+ "Planta_medio_porte.nome_planta_medio_porte,"
-					+ "Planta_medio_porte.especie_planta_medio_porte, ";
-			sql += "Planta_medio_porte.tamanho_planta_medio_porte ";
-			sql += "from Reserva ";
+			sql = "select * from Reserva ";
 			sql += "inner join Planta_medio_porte ";
 			sql += "on Reserva.id_reserva = Planta_medio_porte.id_reserva ";
 			sql += "where Reserva.id_reserva = " + idReserva;
@@ -135,11 +131,15 @@ public class RepositorioPlantaMedioPorteBDR implements IRepositorioPlantaMedioPo
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-			
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"),resultSet.getInt("id_reserva"),resultSet.getString("clima"),
+						resultSet.getString("nome_reserva"),resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
+				
 				PlantaMedioPorte  plantaMedia = new PlantaMedioPorte(resultSet.getInt("id_planta_medio_porte"),
 						resultSet.getString("especie_planta_medio_porte"),
 						resultSet.getString("nome_planta_medio_porte"),
 						resultSet.getDouble("tamanho_planta_medio_porte"));
+				plantaMedia.setReserva(reserva);
 				listaPlanta.add(plantaMedia);
 				
 			}

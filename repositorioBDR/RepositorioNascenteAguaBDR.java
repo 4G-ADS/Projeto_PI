@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioNascenteAgua;
 
 
@@ -50,7 +51,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 				stmt = this.connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			}
 			
-			stmt.setInt(1, nascenteAgua.getIdReserva());
+			stmt.setInt(1, nascenteAgua.getReserva().getIdReserva());
 			stmt.setDouble(2, nascenteAgua.getLatitude());
 			stmt.setDouble(3, nascenteAgua.getLongitude());
 			stmt.setString(4, nascenteAgua.getNomeFonte());
@@ -101,7 +102,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 				NascenteAgua agua =  new NascenteAgua(resultSet.getInt("id_agua"), 
 						resultSet.getDouble("Latitude_nascente_agua"),resultSet.getDouble("Longitude_nascente_agua"), 
 						resultSet.getString("Nome_nascente_agua"), resultSet.getString("Tipo_nascente_agua"));
-						agua.setIdReserva(resultSet.getInt("id_reserva"));
+
 				listaNascenteAgua.add(agua);
 				
 			}
@@ -128,11 +129,7 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 		String sql = "";
 		
 		try{
-			sql = "select nascente_agua.Nome_nascente_agua,nascente_agua.id_agua,"
-					+ "nascente_agua.Latitude_nascente_agua"
-					+ ",nascente_agua.Longitude_nascente_agua,";
-			sql += "nascente_agua.Tipo_nascente_agua ";
-			sql += "from Reserva ";
+			sql = "select * from Reserva ";
 			sql += "inner join nascente_agua ";
 			sql += "on Reserva.id_reserva = nascente_agua.id_reserva ";
 			sql += "where Reserva.id_reserva = " + idReserva;
@@ -140,12 +137,16 @@ public class RepositorioNascenteAguaBDR implements IRepositorioNascenteAgua{
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"),resultSet.getInt("id_reserva"),resultSet.getString("clima"),
+						resultSet.getString("nome_reserva"),resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
+				
 				NascenteAgua agua =  new NascenteAgua(resultSet.getInt("id_agua"),
 						resultSet.getDouble("Latitude_nascente_agua"),
 						resultSet.getDouble("Longitude_nascente_agua"), 
 						resultSet.getString("Nome_nascente_agua"), 
 						resultSet.getString("Tipo_nascente_agua"));
-				
+				agua.setReserva(reserva);
 				listaNascenteAgua.add(agua);
 				
 			}

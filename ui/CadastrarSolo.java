@@ -22,6 +22,7 @@ import com.fafica.projeto_pi.repositorioBDR.RepositorioSoloBDR;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CadastrarSolo extends JFrame {
@@ -31,7 +32,6 @@ public class CadastrarSolo extends JFrame {
 	private JTextField btnTamanho;
 	private JTextField btnRecursos;
 	private Reserva reservaProvisoria;
-	private ArrayList<Solo> listaSolo = new ArrayList<Solo>();
 
 	
 	/**
@@ -57,55 +57,57 @@ public class CadastrarSolo extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Cadastrar Solo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 451, 170);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Tipo:");
-		lblNewLabel.setBounds(24, 75, 32, 16);
+		lblNewLabel.setBounds(36, 31, 32, 16);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
-		lblTamanho.setBounds(263, 75, 62, 16);
+		lblTamanho.setBounds(275, 31, 62, 16);
 		
 		JLabel lblRecursos = new JLabel("Recursos:");
-		lblRecursos.setBounds(5, 109, 61, 16);
+		lblRecursos.setBounds(17, 65, 61, 16);
 		
 		btnTipo = new JTextField();
-		btnTipo.setBounds(66, 69, 187, 28);
+		btnTipo.setBounds(78, 25, 187, 28);
 		btnTipo.setColumns(10);
 		
 		btnTamanho = new JTextField();
-		btnTamanho.setBounds(328, 69, 86, 28);
+		btnTamanho.setBounds(340, 25, 86, 28);
 		btnTamanho.setColumns(10);
 		
 		btnRecursos = new JTextField();
-		btnRecursos.setBounds(66, 103, 348, 28);
+		btnRecursos.setBounds(78, 59, 348, 28);
 		btnRecursos.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(310, 221, 104, 29);
+		btnCadastrar.setBounds(322, 98, 104, 29);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+			
+			try {
+				String tipo = btnTipo.getText();
+				Double tamanho = Double.parseDouble(btnTamanho.getText());
+				String recursos = btnRecursos.getText();
 				
-			String tipo = btnTipo.getText();
-			Double tamanho = Double.parseDouble(btnTamanho.getText());
-			String recursos = btnRecursos.getText();
-				if(!tipo.equals("") && !recursos.equals("") && tamanho != 0){
-				if(listaSolo.size() == 0){
-				
-				Solo s = new Solo(tipo, tamanho, recursos);
-				listaSolo.add(s);
-				
-				}
-				
-				reservaProvisoria.setSolos(listaSolo);
+				Solo solo = new Solo(tipo, tamanho, recursos);
+				solo.setReserva(reservaProvisoria);
+				Fachada.getInstace().cadastrarSolo(solo);
 				dispose();
 				new CadastrarNascente(reservaProvisoria).setVisible(true);
-				}else{
-					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
-				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}catch(Exception e2){
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+	
+				
 			}
 		});
 		contentPane.setLayout(null);
@@ -116,28 +118,6 @@ public class CadastrarSolo extends JFrame {
 		contentPane.add(lblTamanho);
 		contentPane.add(btnTamanho);
 		contentPane.add(btnRecursos);
-		
-		JButton btnNovo = new JButton("Novo");
-		btnNovo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				String tipo = btnTipo.getText();
-				Double tamanho = Double.parseDouble(btnTamanho.getText());
-				String recursos = btnRecursos.getText();
-				if(!tipo.equals("") && !recursos.equals("") && tamanho != 0){
-				Solo s = new Solo(tipo, tamanho, recursos);
-				listaSolo.add(s);	
-				
-				btnTipo.setText("");
-				btnTamanho.setText("");
-				btnRecursos.setText("");
-				}else{
-					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
-				}
-			}
-		});
-		btnNovo.setBounds(193, 224, 104, 29);
-		contentPane.add(btnNovo);
 	}
 	
 }

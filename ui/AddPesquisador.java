@@ -58,147 +58,85 @@ public class AddPesquisador extends JFrame {
 	 * Create the frame.
 	 */
 	public AddPesquisador(Reserva reserva) {
+		setTitle("Adicionar Pesquisador");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 382, 201);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel label = new JLabel("CPF:");
+		label.setBounds(41, 69, 27, 16);
 		
 		JLabel label_3 = new JLabel("Nome:");
+		label_3.setBounds(27, 18, 41, 16);
 		
 		JLabel label_1 = new JLabel("Idade:");
+		label_1.setBounds(242, 63, 41, 16);
 		
 		JLabel label_2 = new JLabel("Profiss\u00E3o:");
+		label_2.setBounds(6, 113, 62, 16);
 		
 		campoCFP = new JTextField();
+		campoCFP.setBounds(74, 57, 134, 28);
 		campoCFP.setColumns(10);
 		
 		campoIdade = new JTextField();
+		campoIdade.setBounds(283, 57, 75, 28);
 		campoIdade.setColumns(10);
 		
 		campoProfissao = new JTextField();
+		campoProfissao.setBounds(74, 101, 284, 28);
 		campoProfissao.setColumns(10);
 		
 		campoNome = new JTextField();
+		campoNome.setBounds(74, 6, 284, 28);
 		campoNome.setColumns(10);
 		
 		JButton buttonAdd = new JButton("Adicionar");
+		buttonAdd.setBounds(238, 141, 120, 29);
 		buttonAdd.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-;
-				
-				try {
-					
-					String nome = campoNome.getText();
-					String profissao = campoProfissao.getText();
-					int idade = Integer.parseInt(campoIdade.getText());
-					String cpf = campoCFP.getText();
-					
-					if(!nome.equals("") && !profissao.equals("") && !cpf.equals("") && idade != 0){
-					Pesquisador pesquisador = new Pesquisador(nome, cpf, idade, profissao);
-					
-					reservaProvisoria.getPesquisadores().add(pesquisador);
-					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
-					dispose();
-					 new MenuPesquisador(reservaProvisoria);
-					}else{
-						JOptionPane.showMessageDialog(null, "preencha todos os campos");
+
+
+					try {
+
+						String nome = campoNome.getText();
+						String profissao = campoProfissao.getText();
+						int idade = Integer.parseInt(campoIdade.getText());
+						String cpf = campoCFP.getText();
+						
+						
+						Pesquisador pesquisador = new Pesquisador(nome, cpf, idade, profissao);
+						pesquisador.setReserva(reservaProvisoria);
+						Fachada.getInstace().cadastrarPesquisador(pesquisador);
+						
+						dispose();
+						 new MenuPesquisador(reservaProvisoria);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}catch(Exception e2){
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
 					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CampoObritarorioInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (AdministradorJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IdadeInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CPFInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (PlantaJaCadastradaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (PesquisadorJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NascenteJaCadastradaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SoloJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+	
+	
+					
+					}
 		});
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-							.addGap(16)
-							.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 358, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-							.addGap(30)
-							.addComponent(campoCFP, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-							.addGap(20)
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-							.addGap(14)
-							.addComponent(campoIdade, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(57)
-								.addComponent(campoProfissao, GroupLayout.PREFERRED_SIZE, 284, GroupLayout.PREFERRED_SIZE))
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(295)
-							.addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(6)
-							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-					.addGap(23)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(6)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(campoCFP, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(6)
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(campoIdade, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-					.addGap(16)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(campoProfissao, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(6)
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
-					.addGap(87)
-					.addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(12, Short.MAX_VALUE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(label_3);
+		contentPane.add(campoNome);
+		contentPane.add(label);
+		contentPane.add(campoCFP);
+		contentPane.add(label_1);
+		contentPane.add(campoIdade);
+		contentPane.add(campoProfissao);
+		contentPane.add(label_2);
+		contentPane.add(buttonAdd);
 	}
 
 }

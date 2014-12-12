@@ -15,6 +15,10 @@ public class ControladorNascente {
 		this.repositorioNascenteAgua = new RepositorioNascenteAguaBDR();
 
 	}
+	
+	public void cadastrarNascente(NascenteAgua agua) throws SQLException{
+		this.repositorioNascenteAgua.cadastrarAgua(agua);
+	}
 
 	public ArrayList<NascenteAgua> listarNascentes() throws SQLException {
 		System.out.println("Passando pela controladora listarNascentes");

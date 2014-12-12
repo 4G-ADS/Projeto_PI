@@ -1,7 +1,5 @@
 package com.fafica.projeto_pi.modelos;
 
-import java.util.List;
-
 public class Reserva {
 
 	private int idReserva;
@@ -11,12 +9,7 @@ public class Reserva {
 	private double tamanho;
 	private double latitude;
 	private double longitude;
-	private List<PlantaPequenoPorte> listaPlantaPequena;
-	private List<PlantaMedioPorte> listaPlantaMedia;
-	private List<PlantaGrandePorte> listaPlantaGrande;
-	private List<Solo> Solos;
-	private List<NascenteAgua> nascenteAgua;
-	private List<Pesquisador> pesquisadores;
+
 	
 	public Reserva(int idAdm, String clima, String nome, double tamanho,
 			double latitude, double longitude) {
@@ -41,26 +34,6 @@ public class Reserva {
 		this.longitude = longitude;
 	}
 	
-	public Reserva(int idAdm ,int idReserva, String clima, String nome, double tamanho,
-			double latitude, double longitude,
-			List<PlantaPequenoPorte> listaPlantaPequena,
-			List<PlantaMedioPorte> listaPlantaMedia,
-			List<PlantaGrandePorte> listaPlantaGrande, List<Solo> solos,
-			List<NascenteAgua> nascenteAgua, List<Pesquisador> pesquisadores) {
-		this.idAdm = idAdm;
-		this.idReserva = idReserva;
-		this.clima = clima;
-		this.nome = nome;
-		this.tamanho = tamanho;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.listaPlantaPequena = listaPlantaPequena;
-		this.listaPlantaMedia = listaPlantaMedia;
-		this.listaPlantaGrande = listaPlantaGrande;
-		Solos = solos;
-		this.nascenteAgua = nascenteAgua;
-		this.pesquisadores = pesquisadores;
-	}
 
 	public int getIdReserva() {
 		return idReserva;
@@ -109,56 +82,6 @@ public class Reserva {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-
-	public List<PlantaPequenoPorte> getListaPlantaPequena() {
-		return listaPlantaPequena;
-	}
-
-	public void setListaPlantaPequena(
-			List<PlantaPequenoPorte> listaPlantaPequena) {
-		this.listaPlantaPequena = listaPlantaPequena;
-	}
-
-	public List<PlantaMedioPorte> getListaPlantaMedia() {
-		return listaPlantaMedia;
-	}
-
-	public void setListaPlantaMedia(List<PlantaMedioPorte> listaPlantaMedia) {
-		this.listaPlantaMedia = listaPlantaMedia;
-	}
-
-	public List<PlantaGrandePorte> getListaPlantaGrande() {
-		return listaPlantaGrande;
-	}
-
-	public void setListaPlantaGrande(List<PlantaGrandePorte> listaPlantaGrande) {
-		this.listaPlantaGrande = listaPlantaGrande;
-	}
-
-	public List<Solo> getSolos() {
-		return Solos;
-	}
-
-	public void setSolos(List<Solo> solos) {
-		Solos = solos;
-	}
-
-	public List<NascenteAgua> getNascenteAgua() {
-		return nascenteAgua;
-	}
-
-	public void setNascenteAgua(List<NascenteAgua> agua) {
-		this.nascenteAgua = agua;
-	}
-
-	public List<Pesquisador> getPesquisadores() {
-		return pesquisadores;
-	}
-
-	public void setPesquisadores(List<Pesquisador> pesquisadores) {
-		this.pesquisadores = pesquisadores;
-	}
-
 
 	public int getIdAdm() {
 		return idAdm;

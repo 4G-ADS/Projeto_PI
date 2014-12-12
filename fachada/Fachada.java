@@ -177,6 +177,12 @@ public class Fachada {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public void cadastrarPesquisador(Pesquisador pesquisador) throws SQLException ,Exception{
+		this.controladoraPesquisadores = new ControladorPesquisadores();
+		this.controladoraPesquisadores.cadastrarPesquisador(pesquisador);
+	}
+	
+	
 	public ArrayList<Pesquisador> listarPesquisador() throws SQLException, IOException ,Exception {
 		System.out.println("Passando pela Fachada listarPesquisador");
 		this.controladoraPesquisadores = new ControladorPesquisadores();
@@ -213,6 +219,11 @@ public class Fachada {
 
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public void cadastrarSolo(Solo solo) throws SQLException,Exception{
+		this.controladoraSolos = new ControladorSolo();
+		this.controladoraSolos.CadastrarSolo(solo);
+	}
+	
 	public ArrayList<Solo> listarSolo() throws SQLException,Exception {
 		System.out.println("Passando pela Fachada listarSolo");
 		this.controladoraSolos = new ControladorSolo();
@@ -247,6 +258,12 @@ public class Fachada {
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public void cadastrarNascente(NascenteAgua agua) throws SQLException,Exception{
+		this.controladoraNascente = new ControladorNascente();
+		this.controladoraNascente.cadastrarNascente(agua);
+	}
+	
+	
 	public ArrayList<NascenteAgua> listarNascente() throws SQLException,Exception {
 		System.out.println("Passando pela Fachada listarNascenteAgua");
 		this.controladoraNascente = new ControladorNascente();
@@ -283,6 +300,10 @@ public class Fachada {
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public void CadastrarPlantaPequena(PlantaPequenoPorte planta) throws SQLException,Exception{
+		this.controladoraPlantaPequenoPorte = new ControladorPlantaPequenoPorte();
+		this.controladoraPlantaPequenoPorte.cadastrarPlantaPequenoPorte(planta);
+	}
 	public ArrayList<PlantaPequenoPorte> listarPlantaPequena() throws SQLException, Exception   {
 		System.out.println("Pasando pela Fachada lsitarPlantaPequenoPorte");
 		this.controladoraPlantaPequenoPorte = new ControladorPlantaPequenoPorte();
@@ -307,6 +328,11 @@ public class Fachada {
 
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	public void cadastrarPlantaMedia(PlantaMedioPorte planta) throws SQLException,Exception{
+		this.controladorPlantaMedioPorte = new ControladorPlantaMedioPorte();
+		this.controladorPlantaMedioPorte.cadastrarPlantaMedia(planta);
+	}
 	public ArrayList<PlantaMedioPorte> listarPlantaMedia() throws SQLException, Exception {
 		System.out.println("Pasando pela Fachada lsitarPlantaMedioPorte");
 		this.controladorPlantaMedioPorte = new ControladorPlantaMedioPorte();
@@ -327,6 +353,11 @@ public class Fachada {
 	}
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void CadastrarPlantaGrande(PlantaGrandePorte planta) throws SQLException,Exception{
+		this.controladoraPlantaGrandePorte = new ControladorPlantaGrandePorte();
+		this.controladoraPlantaGrandePorte.cadastrarPlantaGrande(planta);
+	}
 	
 	public ArrayList<PlantaGrandePorte> listarPlantaGrande() throws SQLException, Exception {
 		System.out.println("Pasando pela Fachada lsitarPlantaGrandePorte");

@@ -13,8 +13,8 @@ public class PlantaPequenoPorte extends Planta {
 		this.idPlantaPequenaPorte = idPlantaPequenaPorte;
 	}
 
-	public PlantaPequenoPorte(String especie, String nome, double tamanho,int idReserva) {
-		super(idReserva,especie, nome, tamanho);
+	public PlantaPequenoPorte(Reserva reserva,String especie, String nome, double tamanho) {
+		super(reserva,especie, nome, tamanho);
 
 	}
 	

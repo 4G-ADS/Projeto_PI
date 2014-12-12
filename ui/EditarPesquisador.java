@@ -59,24 +59,30 @@ public class EditarPesquisador extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Editar Pesquisador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 316, 249);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel labelCPF = new JLabel("CPF:");
+		labelCPF.setBounds(45, 45, 27, 16);
 		
 		JLabel labelNome = new JLabel("Nome:");
+		labelNome.setBounds(26, 72, 46, 16);
 		
-		JLabel labelProfisso = new JLabel("Profiss„o");
+		JLabel labelProfisso = new JLabel("Profiss√£o:");
+		labelProfisso.setBounds(10, 138, 62, 16);
 		
 		JLabel labelIdade = new JLabel("Idade:");
+		labelIdade.setBounds(34, 105, 38, 16);
 		
 		JLabel labelID = new JLabel("ID");
+		labelID.setBounds(53, 18, 19, 16);
 		
 		carregarCaracteristicas();
 		
 		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(216, 183, 86, 29);
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
@@ -104,6 +110,7 @@ public class EditarPesquisador extends JFrame {
 		});
 		
 		JButton buttonEditarNome = new JButton("Editar");
+		buttonEditarNome.setBounds(213, 72, 89, 29);
 		buttonEditarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome = JOptionPane.showInputDialog("novo nome");
@@ -113,6 +120,7 @@ public class EditarPesquisador extends JFrame {
 		});
 		
 		JButton buttonEditarIdade = new JButton("Editar");
+		buttonEditarIdade.setBounds(213, 109, 89, 29);
 		buttonEditarIdade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int idade = Integer.parseInt(JOptionPane.showInputDialog("nova idade"));
@@ -122,6 +130,7 @@ public class EditarPesquisador extends JFrame {
 		});
 		
 		JButton buttonProfissao = new JButton("Editar");
+		buttonProfissao.setBounds(213, 142, 89, 29);
 		buttonProfissao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String profissao = JOptionPane.showInputDialog("nova profissoa");
@@ -129,108 +138,39 @@ public class EditarPesquisador extends JFrame {
 				labelCarregarProfissao.setText(pesquisadorTemporario.getProfissao());
 			}
 		});
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(38)
-							.addComponent(labelID, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(labelCarregarId, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(19)
-							.addComponent(labelIdade, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(labelCarregarIdade, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-							.addGap(66)
-							.addComponent(buttonEditarIdade, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(334)
-							.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(30)
-									.addComponent(labelCPF, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(labelCarregarCPF, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(17)
-									.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(labelCarregarNome, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-									.addGap(5)
-									.addComponent(labelProfisso, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-									.addGap(25)
-									.addComponent(labelCarregarProfissao, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)))
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(48)
-									.addComponent(buttonProfissao, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-									.addGap(48)
-									.addComponent(buttonEditarNome, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(4, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(13)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(labelID)
-						.addComponent(labelCarregarId, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(labelCPF, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-						.addComponent(labelCarregarCPF, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
-					.addGap(10)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(1)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelCarregarNome, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(buttonEditarNome))
-					.addGap(5)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(labelIdade, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-							.addComponent(labelCarregarIdade, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(buttonEditarIdade)))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(1)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(labelProfisso, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(3)
-									.addComponent(buttonProfissao)))
-							.addGap(71)
-							.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(2)
-							.addComponent(labelCarregarProfissao, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(labelID);
+		contentPane.add(labelCarregarId);
+		contentPane.add(labelIdade);
+		contentPane.add(labelCarregarIdade);
+		contentPane.add(buttonEditarIdade);
+		contentPane.add(btnAlterar);
+		contentPane.add(labelCPF);
+		contentPane.add(labelCarregarCPF);
+		contentPane.add(labelNome);
+		contentPane.add(labelCarregarNome);
+		contentPane.add(labelProfisso);
+		contentPane.add(labelCarregarProfissao);
+		contentPane.add(buttonProfissao);
+		contentPane.add(buttonEditarNome);
 	}
 
 	public void carregarCaracteristicas(){
 		
 		
 		labelCarregarId = new JLabel(""+ pesquisadorTemporario.getIdPesquisador());
+		labelCarregarId.setBounds(80, 19, 46, 14);
 		
 		labelCarregarNome = new JLabel(pesquisadorTemporario.getNome());
+		labelCarregarNome.setBounds(80, 73, 73, 14);
 		
 		labelCarregarCPF = new JLabel(""+pesquisadorTemporario.getCpf());
+		labelCarregarCPF.setBounds(80, 46, 73, 14);
 		
 		labelCarregarIdade = new JLabel(""+pesquisadorTemporario.getIdade());
+		labelCarregarIdade.setBounds(80, 106, 46, 14);
 		
 		labelCarregarProfissao = new JLabel(pesquisadorTemporario.getProfissao());
+		labelCarregarProfissao.setBounds(81, 139, 72, 14);
 	}
 }

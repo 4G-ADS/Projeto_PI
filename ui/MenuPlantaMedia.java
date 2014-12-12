@@ -67,6 +67,7 @@ public class MenuPlantaMedia extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPlantaMedia(Reserva reserva) {
+		setTitle("Menu Planta Media");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -75,9 +76,11 @@ public class MenuPlantaMedia extends JFrame {
 		setContentPane(contentPane);
 
 		JLabel lblPlanta = new JLabel("Planta Medio Porte");
+		lblPlanta.setBounds(121, 21, 211, 27);
 		lblPlanta.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 
 		JButton button = new JButton("Voltar");
+		button.setBounds(342, 244, 73, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -86,6 +89,7 @@ public class MenuPlantaMedia extends JFrame {
 		});
 
 		JButton button_1 = new JButton("Add");
+		button_1.setBounds(46, 69, 63, 29);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -95,6 +99,7 @@ public class MenuPlantaMedia extends JFrame {
 		});
 
 		JButton button_2 = new JButton("Perfil");
+		button_2.setBounds(46, 119, 63, 29);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			 perfil();
@@ -102,6 +107,7 @@ public class MenuPlantaMedia extends JFrame {
 		});
 
 		JButton button_3 = new JButton("Excluir");
+		button_3.setBounds(34, 167, 87, 29);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPlanta();
@@ -115,49 +121,15 @@ public class MenuPlantaMedia extends JFrame {
 		
 		table = new JTable(listaPlantaTabela, colunas);
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(121, 71, 288, 161);
 		scrollPane.setViewportView(table);
-
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(337)
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(5)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_3))
-									.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblPlanta)
-									.addPreferredGap(ComponentPlacement.RELATED)))))
-					.addGap(14))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGap(6)
-					.addComponent(lblPlanta, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button_1)
-							.addGap(21)
-							.addComponent(button_2)
-							.addGap(19)
-							.addComponent(button_3)))
-					.addGap(14)
-					.addComponent(button))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(button);
+		contentPane.add(button_1);
+		contentPane.add(button_2);
+		contentPane.add(button_3);
+		contentPane.add(scrollPane);
+		contentPane.add(lblPlanta);
 	}
 
 
@@ -166,11 +138,11 @@ public class MenuPlantaMedia extends JFrame {
 		try {
 			listaPlantaTabela = new String[100][2];
 			ArrayList<PlantaMedioPorte> listaPlantaMedia = Fachada.getInstace()
-					.listarPlantaMedia();
+					.listarPlantaMedia(reservaProvisoria.getIdReserva());
 			int contador = 0;
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
 				if (listaPlantaMedia.size() > i) {
-					if (listaPlantaMedia.get(i).getIdReserva() == reservaProvisoria
+					if (listaPlantaMedia.get(i).getReserva().getIdReserva() == reservaProvisoria
 							.getIdReserva()) {
 						String id = String.valueOf(listaPlantaMedia.get(i)
 								.getIdPlantaMedioPorte());

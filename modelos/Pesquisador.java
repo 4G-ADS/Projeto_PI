@@ -3,16 +3,16 @@ package com.fafica.projeto_pi.modelos;
 public class Pesquisador {
 
 	private int idPesquisador;
-	private int idReserva;
+	private Reserva reserva;
 	private String nome;
 	private String cpf;
 	private int idade;
 	private String profissao;
 
 	// construtor com campos
-	public Pesquisador( String nome,String cpf, int idade, String profissao,int idReserva) {
+	public Pesquisador( String nome,String cpf, int idade, String profissao,Reserva reserva) {
 		super();
-		this.idReserva = idReserva;
+		this.reserva = reserva;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
@@ -79,18 +79,18 @@ public class Pesquisador {
 		this.profissao = profissao;
 	}
 
-	public int getIdReserva() {
-		return idReserva;
+	public Reserva getReserva() {
+		return reserva;
 	}
 
-	public void setIdReserva(int idReserva) {
-		this.idReserva = idReserva;
+	public void setReserva(Reserva reserva) {
+		this.reserva = reserva;
 	}
 
 	@Override
 	public String toString() {
-		return "Pesquisador [idPesquisador=" + idPesquisador + ", idReserva="
-				+ idReserva + ", nome=" + nome + ", cpf=" + cpf + ", idade="
+		return "Pesquisador [idPesquisador=" + idPesquisador + ", Reserva="
+				+ reserva + ", nome=" + nome + ", cpf=" + cpf + ", idade="
 				+ idade + ", profissao=" + profissao + "]";
 	}
 

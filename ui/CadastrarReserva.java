@@ -63,109 +63,115 @@ public class CadastrarReserva extends JFrame {
 		admProvisorio = adm;
 		setTitle("Cadastrar Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 451, 192);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(32, 17, 41, 16);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
+		lblTamanho.setBounds(225, 57, 62, 16);
 		
 		JLabel lblLatitude = new JLabel("Latitude:");
+		lblLatitude.setBounds(19, 95, 55, 16);
 		
 		JLabel lblLongitude = new JLabel("Longitude:");
+		lblLongitude.setBounds(226, 95, 67, 16);
 		
 		campoNome = new JTextField();
+		campoNome.setBounds(79, 11, 348, 28);
 		campoNome.setColumns(10);
 		
 		campoTamanho = new JTextField();
+		campoTamanho.setBounds(293, 51, 134, 28);
 		campoTamanho.setColumns(10);
 		
 		campoLatitude = new JTextField();
+		campoLatitude.setBounds(80, 89, 134, 28);
 		campoLatitude.setColumns(10);
 		
 		campoLongitude = new JTextField();
+		campoLongitude.setBounds(299, 89, 128, 28);
 		campoLongitude.setColumns(10);
 		
 		campoClima = new JTextField();
+		campoClima.setBounds(79, 51, 134, 28);
 		campoClima.setColumns(10);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
+		JButton btnCadastrar = new JButton("Proximo");
+		btnCadastrar.setBounds(323, 129, 104, 29);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 					
-					String clima = campoClima.getText();
-					String nome = campoNome.getText();
-					int tamanho = Integer.parseInt(campoTamanho.getText());
-					double latitude = Double.parseDouble(campoLatitude.getText());
-					double longitude = Double.parseDouble(campoLongitude.getText());
-					
-					if(!nome.equals("") && !clima.equals("") && tamanho != 0 && longitude != 0 && latitude != 0){
+
+					try {
+						String clima = campoClima.getText();
+						String nome = campoNome.getText();
+						int tamanho = Integer.parseInt(campoTamanho.getText());
+						double latitude = Double.parseDouble(campoLatitude.getText());
+						double longitude = Double.parseDouble(campoLongitude.getText());
 						
-					Reserva reserva = new Reserva (admProvisorio.getId(),clima, nome, tamanho, latitude, longitude);
-					
-					dispose();
-					new CadastrarPesquisador(reserva).setVisible(true);
-					}else{
-						JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+						
+						
+						Reserva reserva = new Reserva (admProvisorio.getId(),clima, nome, tamanho, latitude, longitude);
+						Fachada.getInstace().cadastrarReserva(reserva);
+						
+						dispose();
+						new CadastrarPesquisador(reserva).setVisible(true);
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (CampoObritarorioInvalidoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (AdministradorJaCadastradoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IdadeInvalidoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (CPFInvalidoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (PlantaJaCadastradaException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (PesquisadorJaCadastradoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (NascenteJaCadastradaException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SoloJaCadastradoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
+	
+
 			}
 		});
 		
 		
 		
 		JLabel lblClima = new JLabel("Clima:");
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblLatitude)
-						.addComponent(lblTamanho)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblClima)
-							.addComponent(lblNome)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(campoClima, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCadastrar)
-						.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(campoLatitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblLongitude)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(campoLongitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 284, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(82, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNome)
-						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(campoClima, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblClima))
-					.addGap(14)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTamanho)
-						.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLatitude)
-						.addComponent(campoLatitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblLongitude)
-						.addComponent(campoLongitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnCadastrar)
-					.addContainerGap(89, Short.MAX_VALUE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		lblClima.setBounds(32, 57, 40, 16);
+		contentPane.setLayout(null);
+		contentPane.add(lblLatitude);
+		contentPane.add(lblTamanho);
+		contentPane.add(lblClima);
+		contentPane.add(lblNome);
+		contentPane.add(campoClima);
+		contentPane.add(btnCadastrar);
+		contentPane.add(campoTamanho);
+		contentPane.add(campoLatitude);
+		contentPane.add(lblLongitude);
+		contentPane.add(campoLongitude);
+		contentPane.add(campoNome);
 	}
 }

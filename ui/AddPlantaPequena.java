@@ -64,209 +64,77 @@ public class AddPlantaPequena extends JFrame {
 	 * Create the frame.
 	 */
 	public AddPlantaPequena(Reserva reserva) {
+		setTitle("Adicionar Planta Pequena");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 452, 211);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
 		JLabel label = new JLabel("Nome:");
+		label.setBounds(51, 14, 41, 16);
 
 		campoNome = new JTextField();
+		campoNome.setBounds(101, 14, 320, 28);
 		campoNome.setColumns(10);
 
 		JLabel label_1 = new JLabel("Esp\u00E9cie:");
+		label_1.setBounds(41, 60, 51, 16);
 
 		campoEspecie = new JTextField();
+		campoEspecie.setBounds(102, 60, 319, 28);
 		campoEspecie.setColumns(10);
 
 		JLabel label_2 = new JLabel("Tamanho:");
+		label_2.setBounds(30, 106, 62, 16);
 
 		campoTamanho = new JTextField();
+		campoTamanho.setBounds(102, 106, 319, 28);
 		campoTamanho.setColumns(10);
 
 		JButton buttonAdicionar = new JButton("Adicionar");
+		buttonAdicionar.setBounds(324, 146, 97, 29);
 		buttonAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				try {
-					ArrayList<PlantaPequenoPorte> lista = Fachada.getInstace().listarPlantaPequena();
-					String nome = campoNome.getText();
-					String especie = campoEspecie.getText();
-					int tamanho = Integer.parseInt(campoTamanho.getText());
 
-						PlantaPequenoPorte planataPequena = new PlantaPequenoPorte(
-								especie, nome, tamanho);
-						System.out.println(planataPequena.getNome());
-						lista.add(planataPequena);
-						reservaProvisoria.setListaPlantaPequena(lista);
+						try {
+							String nome = campoNome.getText();
+							String especie = campoEspecie.getText();
+							int tamanho = Integer.parseInt(campoTamanho.getText());
 
-						Fachada.getInstace()
-								.cadastrarReserva(reservaProvisoria);
-						dispose();
-						new MenuPlantaPequena(reservaProvisoria)
-								.setVisible(true);
+								PlantaPequenoPorte planataPequena = new PlantaPequenoPorte(
+										especie, nome, tamanho);
+								planataPequena.setReserva(reservaProvisoria);
+								System.out.println(planataPequena.getNome());
+							Fachada.getInstace().CadastrarPlantaPequena(planataPequena);
+							
+							dispose();
+							new MenuPlantaPequena(reservaProvisoria)
+									.setVisible(true);
+
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}catch(Exception e2){
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						
 
 					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CampoObritarorioInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (AdministradorJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IdadeInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CPFInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (PlantaJaCadastradaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (PesquisadorJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NascenteJaCadastradaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SoloJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane
-				.setHorizontalGroup(gl_contentPane
-						.createParallelGroup(Alignment.TRAILING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addContainerGap(16, Short.MAX_VALUE)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addComponent(
-																				label_1,
-																				GroupLayout.PREFERRED_SIZE,
-																				40,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(18)
-																		.addComponent(
-																				campoEspecie,
-																				GroupLayout.PREFERRED_SIZE,
-																				121,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addComponent(
-																				label_2,
-																				GroupLayout.PREFERRED_SIZE,
-																				48,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(10)
-																		.addComponent(
-																				campoTamanho,
-																				GroupLayout.PREFERRED_SIZE,
-																				121,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																gl_contentPane
-																		.createParallelGroup(
-																				Alignment.TRAILING)
-																		.addComponent(
-																				buttonAdicionar,
-																				GroupLayout.PREFERRED_SIZE,
-																				97,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGroup(
-																				gl_contentPane
-																						.createSequentialGroup()
-																						.addComponent(
-																								label,
-																								GroupLayout.PREFERRED_SIZE,
-																								31,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addGap(26)
-																						.addComponent(
-																								campoNome,
-																								GroupLayout.PREFERRED_SIZE,
-																								122,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addGap(215))))
-										.addGap(14)));
-		gl_contentPane
-				.setVerticalGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addGap(3)
-																		.addComponent(
-																				label))
-														.addComponent(
-																campoNome,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addGap(18)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addGap(3)
-																		.addComponent(
-																				label_1))
-														.addComponent(
-																campoEspecie,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addGap(18)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addGap(3)
-																		.addComponent(
-																				label_2))
-														.addComponent(
-																campoTamanho,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED,
-												110, Short.MAX_VALUE)
-										.addComponent(buttonAdicionar)
-										.addContainerGap()));
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(label_1);
+		contentPane.add(campoEspecie);
+		contentPane.add(label_2);
+		contentPane.add(campoTamanho);
+		contentPane.add(buttonAdicionar);
+		contentPane.add(label);
+		contentPane.add(campoNome);
 	}
 }

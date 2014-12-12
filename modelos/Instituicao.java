@@ -3,17 +3,17 @@ package com.fafica.projeto_pi.modelos;
 public class Instituicao {
 
 	private int idInstituicao;
-	private int idReserva;
+	private Reserva reserva;
 	private String nome;
 	private String tipo;
 	private String cnpj;
 
 	// construtor
-	public Instituicao(String nome,String tipo, String cnpj,int idreserva ) {
+	public Instituicao(String nome,String tipo, String cnpj,Reserva reserva ) {
 		this.nome = nome;
 		this.tipo = tipo;
 		this.cnpj = cnpj;
-		this.idReserva = idreserva;
+		this.reserva = reserva;
 	}
 
 	public Instituicao(int idInstituicao, String nome, String tipo, String cnpj) {
@@ -62,18 +62,18 @@ public class Instituicao {
 		this.cnpj = cnpj.replaceAll("\\.|\\.|\\/|\\-|\\","");
 	}
 
-	public int getIdReserva() {
-		return idReserva;
+	public Reserva getReserva() {
+		return reserva;
 	}
 
-	public void setIdReserva(int idReserva) {
-		this.idReserva = idReserva;
+	public void setReserva(Reserva reserva) {
+		this.reserva = reserva;
 	}
 
 	// toString
 	@Override
 	public String toString() {
-		return "Instituicao [IdReserva=" + idReserva+ "idInstituicao="
+		return "Instituicao [Reserva=" + reserva+ "idInstituicao="
 				+ idInstituicao + ", nome=" + nome + ", tipo=" + tipo
 				+ ", cnpj=" + cnpj + "]";
 	}

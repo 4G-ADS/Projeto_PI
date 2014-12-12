@@ -12,8 +12,8 @@ public class PlantaGrandePorte extends Planta{
 	}
 	
 
-	public PlantaGrandePorte(String especie,String nome, double tamanho,int idReserva) {
-		super(idReserva,especie, nome, tamanho);
+	public PlantaGrandePorte(Reserva reserva,String especie,String nome, double tamanho) {
+		super(reserva,especie, nome, tamanho);
 
 	}
 	

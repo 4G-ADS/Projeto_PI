@@ -56,24 +56,30 @@ public class EditarReserva extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Editar Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 318, 302);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblClima = new JLabel("Clima:");
+		lblClima.setBounds(47, 58, 40, 16);
 		
 		JLabel lblLatitude = new JLabel("Latitude:");
+		lblLatitude.setBounds(32, 132, 55, 16);
 		
 		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(41, 99, 46, 16);
 		
 		JLabel labelLongitude = new JLabel("Longitude:");
+		labelLongitude.setBounds(20, 165, 67, 16);
 		
 		JLabel lblId = new JLabel("ID:");
+		lblId.setBounds(63, 24, 24, 16);
 		
 		carregarCaracteristicas();
 		
 		JButton buttonVoltar = new JButton("Voltar");
+		buttonVoltar.setBounds(198, 228, 80, 29);
 		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -96,6 +102,7 @@ public class EditarReserva extends JFrame {
 		
 		
 		JButton buttonEditarClima = new JButton("Editar");
+		buttonEditarClima.setBounds(189, 54, 89, 29);
 		buttonEditarClima.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String clima = JOptionPane.showInputDialog("novo clima");
@@ -105,6 +112,7 @@ public class EditarReserva extends JFrame {
 		});
 		
 		JButton buttonEditarNome = new JButton("Editar");
+		buttonEditarNome.setBounds(189, 95, 89, 29);
 		buttonEditarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nome = JOptionPane.showInputDialog("novo nome");
@@ -114,6 +122,7 @@ public class EditarReserva extends JFrame {
 		});
 		
 		JButton buttonEditarLatitude = new JButton("Editar");
+		buttonEditarLatitude.setBounds(189, 128, 89, 29);
 		buttonEditarLatitude.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int lalitude = Integer.parseInt(JOptionPane.showInputDialog("nova latitude"));
@@ -123,6 +132,7 @@ public class EditarReserva extends JFrame {
 		});
 		
 		JButton buttonEditarLongitade = new JButton("Editar");
+		buttonEditarLongitade.setBounds(189, 161, 89, 29);
 		buttonEditarLongitade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int longitude = Integer.parseInt(JOptionPane.showInputDialog("nova longitude"));
@@ -132,6 +142,7 @@ public class EditarReserva extends JFrame {
 		});
 		
 		JButton buttonEditarTamanho = new JButton("Editar");
+		buttonEditarTamanho.setBounds(189, 198, 89, 29);
 		buttonEditarTamanho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				double tamanho = Double.parseDouble(JOptionPane.showInputDialog("novo tamanho"));
@@ -141,126 +152,47 @@ public class EditarReserva extends JFrame {
 		});
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblId, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-					.addGap(76)
-					.addComponent(labelCarregarID, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblClima, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-					.addGap(45)
-					.addComponent(labelCarregarClima, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-					.addGap(17)
-					.addComponent(buttonEditarClima, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-					.addGap(20)
-					.addComponent(labelCarregarNome, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-					.addGap(17)
-					.addComponent(buttonEditarNome, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblLatitude, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-					.addGap(45)
-					.addComponent(labelCarregarLatitude, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGap(33)
-					.addComponent(buttonEditarLatitude, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(labelLongitude, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-					.addGap(20)
-					.addComponent(labelCarregarLongitude, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGap(33)
-					.addComponent(buttonEditarLongitade, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblTamanho, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-					.addGap(20)
-					.addComponent(labelCarregarTamamho, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGap(33)
-					.addComponent(buttonEditarTamanho, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(339)
-					.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblId, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(1)
-							.addComponent(labelCarregarID)))
-					.addGap(14)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblClima, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelCarregarClima))
-						.addComponent(buttonEditarClima))
-					.addGap(12)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelCarregarNome))
-						.addComponent(buttonEditarNome))
-					.addGap(4)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblLatitude, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelCarregarLatitude))
-						.addComponent(buttonEditarLatitude))
-					.addGap(4)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(labelLongitude, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelCarregarLongitude))
-						.addComponent(buttonEditarLongitade))
-					.addGap(8)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblTamanho, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelCarregarTamamho))
-						.addComponent(buttonEditarTamanho))
-					.addGap(25)
-					.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		lblTamanho.setBounds(25, 202, 62, 16);
+		contentPane.setLayout(null);
+		contentPane.add(lblId);
+		contentPane.add(labelCarregarID);
+		contentPane.add(lblClima);
+		contentPane.add(labelCarregarClima);
+		contentPane.add(buttonEditarClima);
+		contentPane.add(lblNome);
+		contentPane.add(labelCarregarNome);
+		contentPane.add(buttonEditarNome);
+		contentPane.add(lblLatitude);
+		contentPane.add(labelCarregarLatitude);
+		contentPane.add(buttonEditarLatitude);
+		contentPane.add(labelLongitude);
+		contentPane.add(labelCarregarLongitude);
+		contentPane.add(buttonEditarLongitade);
+		contentPane.add(lblTamanho);
+		contentPane.add(labelCarregarTamamho);
+		contentPane.add(buttonEditarTamanho);
+		contentPane.add(buttonVoltar);
 	}
 
 	public void carregarCaracteristicas(){
 		
 		labelCarregarClima = new JLabel(reservaProvisoria.getClima());
+		labelCarregarClima.setBounds(99, 58, 73, 16);
 		
 		labelCarregarNome = new JLabel(reservaProvisoria.getNome());
+		labelCarregarNome.setBounds(99, 99, 73, 16);
 		
 		labelCarregarLatitude = new JLabel(""+reservaProvisoria.getLatitude());
+		labelCarregarLatitude.setBounds(99, 132, 46, 16);
 		
 		labelCarregarLongitude = new JLabel(""+reservaProvisoria.getLongitude());
+		labelCarregarLongitude.setBounds(99, 165, 46, 16);
 		
 		labelCarregarID = new JLabel(""+reservaProvisoria.getTamanho());
+		labelCarregarID.setBounds(99, 24, 46, 16);
 		
 		labelCarregarTamamho = new JLabel(""+reservaProvisoria.getTamanho());
+		labelCarregarTamamho.setBounds(99, 202, 46, 16);
 	}
 	
 }

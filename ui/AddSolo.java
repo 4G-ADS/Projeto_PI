@@ -60,9 +60,10 @@ public class AddSolo extends JFrame {
 	 * Create the frame.
 	 */
 	public AddSolo(Reserva reserva) {
+		setTitle("Adicionar Solo");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 451, 141);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -74,52 +75,28 @@ public class AddSolo extends JFrame {
 		JButton buttonAdicionar = new JButton("Adicionar");
 		buttonAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				try {
-					String tipo = campoTamanho.getText();
-					String recursos = campoRecursos.getText();
-					int tamanho = Integer.parseInt(campoTamanho.getText());
-					if(!tipo.equals("") && !recursos.equals("") && tamanho != 0){
-					Solo solo = new Solo(tipo, tamanho, recursos);
 					
-					reservaProvisoria.getSolos().add(solo);
-					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
-					dispose();
-					new MenuSolo(reservaProvisoria).setVisible(true);
-					}else{
-						JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+					try {
+						String tipo = campoTamanho.getText();
+						String recursos = campoRecursos.getText();
+						int tamanho = Integer.parseInt(campoTamanho.getText());
+						
+						Solo solo = new Solo(tipo, tamanho, recursos);
+						solo.setReserva(reservaProvisoria);
+						Fachada.getInstace().cadastrarSolo(solo);
+						
+						dispose();
+						new MenuSolo(reservaProvisoria).setVisible(true);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}catch(Exception e2){
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
 					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CampoObritarorioInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (AdministradorJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IdadeInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CPFInvalidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (PlantaJaCadastradaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (PesquisadorJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NascenteJaCadastradaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SoloJaCadastradoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					
+
+					
 			}
 		});
 		
@@ -137,25 +114,27 @@ public class AddSolo extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+								.addGap(29)
+								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+								.addGap(10)
+								.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+								.addGap(3)
+								.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap())
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+								.addComponent(campoRecursos, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()))
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addGap(29)
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-							.addGap(3)
-							.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(campoRecursos, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addContainerGap(310, Short.MAX_VALUE)
-							.addComponent(buttonAdicionar, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
+							.addComponent(buttonAdicionar, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -173,13 +152,13 @@ public class AddSolo extends JFrame {
 									.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
 								.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-					.addGap(24)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(campoRecursos, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(buttonAdicionar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addContainerGap(164, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

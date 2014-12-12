@@ -49,9 +49,7 @@ public class CadastrarPlanta extends JFrame {
 	private JTextField campoTamanho;
 	private JComboBox comboBox;
 	private Reserva reservaProvisoria;
-	private ArrayList<PlantaPequenoPorte> listaPlantaPequena = new ArrayList<PlantaPequenoPorte>();
-	private ArrayList<PlantaMedioPorte> listaPlantaMedia = new ArrayList<PlantaMedioPorte>();
-	private ArrayList<PlantaGrandePorte> listaPlantaGrande = new ArrayList<PlantaGrandePorte>();
+
 	/**
 	 * Launch the application.
 	 */
@@ -75,33 +73,41 @@ public class CadastrarPlanta extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Cadastrar Planta");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 430, 269);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(32, 38, 41, 16);
 		
-		JLabel lblEspcie = new JLabel("Espécie:");
+		JLabel lblEspcie = new JLabel("EspÃ©cie:");
+		lblEspcie.setBounds(22, 85, 51, 16);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
+		lblTamanho.setBounds(220, 85, 62, 16);
 		
 		campoNome = new JTextField();
+		campoNome.setBounds(78, 32, 136, 28);
 		campoNome.setColumns(10);
 		
 		campoEspecie = new JTextField();
+		campoEspecie.setBounds(80, 79, 134, 28);
 		campoEspecie.setColumns(10);
 		
 		campoTamanho = new JTextField();
+		campoTamanho.setBounds(287, 79, 121, 28);
 		campoTamanho.setColumns(10);
 		
 		comboBox = new JComboBox();
+		comboBox.setBounds(251, 34, 155, 27);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Pequeno Porte", "Medio Porte", "Grande Porte"}));
 		
-		JButton button = new JButton("Cadastrar");
-		button.addActionListener(new ActionListener() {
+		JButton btnProximo = new JButton("Proximo");
+		btnProximo.setBounds(307, 190, 97, 29);
+		btnProximo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
 				String nome = campoNome.getText();
 				String especie = campoEspecie.getText();
 				int tamanho = Integer.parseInt(campoTamanho.getText());
@@ -113,12 +119,12 @@ public class CadastrarPlanta extends JFrame {
 						
 					PlantaPequenoPorte planataPequena = new PlantaPequenoPorte(especie, nome, tamanho);
 					System.out.println(planataPequena.getNome());
+					planataPequena.setReserva(reservaProvisoria);
 					
-					listaPlantaPequena.add(planataPequena);
-					
-					campoNome.setText("");
-					campoEspecie.setText("");
-					campoTamanho.setText("");
+						Fachada.getInstace().CadastrarPlantaPequena(planataPequena);
+
+						dispose();
+						new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 					
 					}else{
 						JOptionPane.showMessageDialog(null, "para ser um planta de pequeno\n"
@@ -133,11 +139,11 @@ public class CadastrarPlanta extends JFrame {
 						System.out.println("medio");
 					PlantaMedioPorte planataMedia = new PlantaMedioPorte(especie, nome, tamanho);
 					System.out.println(planataMedia.getNome());
-					listaPlantaMedia.add(planataMedia);
+					planataMedia.setReserva(reservaProvisoria);
+					Fachada.getInstace().cadastrarPlantaMedia(planataMedia);
 					
-					campoNome.setText("");
-					campoEspecie.setText("");
-					campoTamanho.setText("");
+					dispose();
+					new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 					
 					}else{
 						JOptionPane.showMessageDialog(null, "para ser um planta de medio\n"
@@ -153,11 +159,11 @@ public class CadastrarPlanta extends JFrame {
 						System.out.println("grande");
 					PlantaGrandePorte planataGrade = new PlantaGrandePorte(especie, nome, tamanho);
 					System.out.println(planataGrade.getNome());
-					listaPlantaGrande.add(planataGrade);
+					planataGrade.setReserva(reservaProvisoria);
+					Fachada.getInstace().CadastrarPlantaGrande(planataGrade);
 					
-					campoNome.setText("");
-					campoEspecie.setText("");
-					campoTamanho.setText("");
+					dispose();
+					new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
 					
 					}else{
 						JOptionPane.showMessageDialog(null, "para ser um planta de pequeno\n"
@@ -168,117 +174,24 @@ public class CadastrarPlanta extends JFrame {
 				}else{
 					JOptionPane.showMessageDialog(null, "Preencher todos os campos");
 				}
-		}
-		});
-		
-		JButton btnCadastrar = new JButton("Finalizar cadastro");
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				try {
-					
-					reservaProvisoria.setListaPlantaPequena(listaPlantaPequena);
-					reservaProvisoria.setListaPlantaMedia(listaPlantaMedia);
-					reservaProvisoria.setListaPlantaGrande(listaPlantaGrande);
-					
-					Fachada.getInstace().cadastrarReserva(reservaProvisoria);
-					dispose();
-					
-					dispose();
-					new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
+				
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (CampoObritarorioInvalidoException e1) {
+				}catch(Exception e2){
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (AdministradorJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IdadeInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (CPFInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (PlantaJaCadastradaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (PesquisadorJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (NascenteJaCadastradaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SoloJaCadastradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e2.printStackTrace();
 				}
-
-			}
+		}
 		});
-		
-		JTextPane txtpnObsObrigatorio = new JTextPane();
-		txtpnObsObrigatorio.setText("OBS: \u00E9 obrigatorio ter pelo menos uma planta de cada porte para poder finalizar o cadastro");
-		
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNome)
-							.addGap(26)
-							.addComponent(campoNome))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblEspcie)
-							.addGap(18)
-							.addComponent(campoEspecie))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblTamanho)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)))
-					.addGap(105)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-					.addGap(20))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(txtpnObsObrigatorio, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-					.addGap(45)
-					.addComponent(button, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCadastrar)
-					.addContainerGap(16, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(27)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNome)
-						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblEspcie)
-						.addComponent(campoEspecie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTamanho))
-					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(button)
-							.addComponent(btnCadastrar))
-						.addComponent(txtpnObsObrigatorio, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(lblNome);
+		contentPane.add(campoNome);
+		contentPane.add(lblEspcie);
+		contentPane.add(campoEspecie);
+		contentPane.add(lblTamanho);
+		contentPane.add(campoTamanho);
+		contentPane.add(comboBox);
+		contentPane.add(btnProximo);
 	}
 }

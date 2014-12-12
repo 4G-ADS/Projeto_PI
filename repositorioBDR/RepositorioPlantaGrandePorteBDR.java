@@ -14,6 +14,7 @@ import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
 import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioPlantaGrandePorte;
 
 public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrandePorte{
@@ -54,7 +55,7 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 						Statement.RETURN_GENERATED_KEYS);
 			}			
 			
-			stmt.setInt(1, plantagrande.getIdReserva());
+			stmt.setInt(1, plantagrande.getReserva().getIdReserva());
 			stmt.setString(2, plantagrande.getEspecie());
 			stmt.setString(3, plantagrande.getNome());
 			stmt.setDouble(4, plantagrande.getTamanho());
@@ -91,7 +92,7 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 						resultSet.getString("especie_planta_grande_porte"), 
 						resultSet.getString("nome_planta_grande_porte"),
 						resultSet.getDouble("tamanho_planta_grande_porte"));
-						plantaGrande.setIdReserva(resultSet.getInt("id_reserva"));
+
 				listaPlanta.add(plantaGrande);
 				
 			}
@@ -120,10 +121,7 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 		String sql = "";
 		
 		try{
-			sql = "select Planta_grande_porte.id_planta_grande_porte,Planta_grande_porte.nome_planta_grande_porte,"
-					+ "Planta_grande_porte.especie_planta_grande_porte,";
-			sql += "Planta_grande_porte.tamanho_planta_grande_porte ";
-			sql += "from Reserva ";
+			sql = "select * from Reserva ";
 			sql += "inner join Planta_grande_porte ";
 			sql += "on Reserva.id_reserva = Planta_grande_porte.id_reserva ";
 			sql += "where Reserva.id_reserva = " + idReserva;
@@ -132,11 +130,15 @@ public class RepositorioPlantaGrandePorteBDR implements IRepositorioPlantaGrande
 			resultSet = stmt.executeQuery();
 			
 			while(resultSet.next()){
-			
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"),resultSet.getInt("id_reserva"),resultSet.getString("clima"),
+						resultSet.getString("nome_reserva"),resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
+				
 				PlantaGrandePorte  plantaGrande = new PlantaGrandePorte(resultSet.getInt("id_planta_grande_porte"),
 						resultSet.getString("especie_planta_grande_porte"), 
 						resultSet.getString("nome_planta_grande_porte"),
 						resultSet.getDouble("tamanho_planta_grande_porte"));
+				plantaGrande.setReserva(reserva);
 				listaPlanta.add(plantaGrande);
 				
 				listaPlanta.add(plantaGrande);

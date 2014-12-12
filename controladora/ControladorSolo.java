@@ -16,6 +16,9 @@ public class ControladorSolo {
 		this.repositorioSolo = new RepositorioSoloBDR();
 
 	}
+	public void CadastrarSolo(Solo solo) throws SQLException{
+		this.repositorioSolo.cadastrarSolo(solo);
+	}
 
 	public ArrayList<Solo> listarSolo() throws SQLException {
 		System.out.println("Passando pela controladora listarSolo");

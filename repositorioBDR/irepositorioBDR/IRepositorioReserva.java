@@ -10,10 +10,7 @@ public interface IRepositorioReserva {
 
 	public void cadastrarReserva(Reserva reserva) throws SQLException;
 	public Reserva procurarReserva(int idReserva) throws SQLException,ReservaNaoEncontradaException;
-	public Reserva recuperarReserva(int idReserva) throws SQLException,ReservaNaoEncontradaException;
 	public ArrayList<Reserva> listarReserva() throws SQLException, ReservaNaoEncontradaException;
 	public void editarReserva(Reserva reserva) throws SQLException, ReservaNaoEncontradaException;
 	public void removerReserva(int idReserva) throws SQLException, ReservaNaoEncontradaException;
-	ArrayList<Reserva> reculperarId() throws SQLException,
-			ReservaNaoEncontradaException;
 }

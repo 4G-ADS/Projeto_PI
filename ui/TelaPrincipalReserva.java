@@ -61,24 +61,30 @@ public class TelaPrincipalReserva extends JFrame {
 	 */
 	public TelaPrincipalReserva(Reserva reserva) {
 		reservaProvisoria = reserva;
-		setTitle("Menu reserva");
+		setTitle("Menu Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 371, 216);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel labelNomeReserva = new JLabel(reserva.getNome());
+		labelNomeReserva.setBounds(41, 17, 73, 16);
 		
 		JLabel labelClima = new JLabel(reserva.getClima());
+		labelClima.setBounds(126, 17, 73, 16);
 		
 		JLabel labelLatitude = new JLabel(String.valueOf(reserva.getLatitude()));
+		labelLatitude.setBounds(217, 17, 20, 16);
 		
 		JLabel labelLongitude = new JLabel(String.valueOf(reserva.getLongitude()));
+		labelLongitude.setBounds(255, 17, 20, 16);
 		
 		JLabel labelTamanho = new JLabel(String.valueOf(reserva.getTamanho()));
+		labelTamanho.setBounds(293, 17, 20, 16);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(248, 133, 81, 29);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -103,6 +109,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnPesquisadores = new JButton("Pesquisadores");
+		btnPesquisadores.setBounds(11, 45, 133, 29);
 		btnPesquisadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -111,6 +118,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnNascentes = new JButton("Nascentes");
+		btnNascentes.setBounds(11, 92, 133, 29);
 		btnNascentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -119,6 +127,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnPlantas = new JButton("Plantas");
+		btnPlantas.setBounds(225, 45, 127, 29);
 		btnPlantas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -138,6 +147,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnSolos = new JButton("Solos");
+		btnSolos.setBounds(227, 86, 123, 29);
 		btnSolos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -146,72 +156,24 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton buttonMenuInstituicao = new JButton("Instituicao");
+		buttonMenuInstituicao.setBounds(21, 133, 112, 29);
 		buttonMenuInstituicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new MenuInstituicao(reservaProvisoria).setVisible(true);
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(labelNomeReserva)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(labelClima)
-							.addGap(18)
-							.addComponent(labelLatitude)
-							.addGap(18)
-							.addComponent(labelLongitude)
-							.addGap(18)
-							.addComponent(labelTamanho)
-							.addGap(192))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnPesquisadores, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-							.addGap(302))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnNascentes, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-							.addGap(302))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnPlantas, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-							.addGap(302))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(buttonMenuInstituicao, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnSolos, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
-							.addComponent(btnVoltar)
-							.addContainerGap())))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(labelNomeReserva)
-						.addComponent(labelClima)
-						.addComponent(labelLatitude)
-						.addComponent(labelLongitude)
-						.addComponent(labelTamanho))
-					.addGap(18)
-					.addComponent(btnPesquisadores)
-					.addGap(18)
-					.addComponent(btnNascentes)
-					.addGap(18)
-					.addComponent(btnPlantas)
-					.addGap(18)
-					.addComponent(btnSolos)
-					.addGap(18)
-					.addComponent(buttonMenuInstituicao)
-					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(217, Short.MAX_VALUE)
-					.addComponent(btnVoltar)
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(labelNomeReserva);
+		contentPane.add(labelClima);
+		contentPane.add(labelLatitude);
+		contentPane.add(labelLongitude);
+		contentPane.add(labelTamanho);
+		contentPane.add(btnPesquisadores);
+		contentPane.add(btnNascentes);
+		contentPane.add(btnPlantas);
+		contentPane.add(buttonMenuInstituicao);
+		contentPane.add(btnSolos);
+		contentPane.add(btnVoltar);
 	}
 }

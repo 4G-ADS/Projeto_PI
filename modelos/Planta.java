@@ -3,13 +3,13 @@ package com.fafica.projeto_pi.modelos;
 
 public abstract class Planta {
 
-	private int idReserva;
+	private Reserva reserva;
 	private String especie;
 	private String nome;
 	private double tamanho;
 
-	public Planta(int idReserva, String especie, String nome, double tamanho) {
-		this.idReserva = idReserva;
+	public Planta(Reserva reserva, String especie, String nome, double tamanho) {
+		this.reserva = reserva;
 		this.especie = especie;
 		this.nome = nome;
 		this.tamanho = tamanho;
@@ -21,12 +21,12 @@ public abstract class Planta {
 		this.tamanho = tamanho;
 	}
 
-	public int getIdReserva() {
-		return idReserva;
+	public Reserva getReserva() {
+		return reserva;
 	}
 
-	public void setIdReserva(int idReserva) {
-		this.idReserva = idReserva;
+	public void setReserva(Reserva reserva) {
+		this.reserva = reserva;
 	}
 
 	public String getEspecie() {
@@ -56,7 +56,7 @@ public abstract class Planta {
 
 	@Override
 	public String toString() {
-		return "Planta [idReserva=" + idReserva + ", especie=" + especie
+		return "Planta [Reserva=" + reserva + ", especie=" + especie
 				+ ", nome=" + nome + ", tamanho=" + tamanho + "]";
 	}
 

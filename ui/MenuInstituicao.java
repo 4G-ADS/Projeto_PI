@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MenuInstituicao extends JFrame {
 
@@ -59,18 +60,21 @@ public class MenuInstituicao extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuInstituicao(Reserva reserva) {
+		setTitle("Menu Instituição");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 428, 284);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblPesquisado = new JLabel("Instituicao");
+		lblPesquisado.setBounds(150, 21, 128, 29);
 		lblPesquisado.setFont(new Font("Dialog", Font.BOLD, 22));
 		
 		
 		JButton button = new JButton("Add");
+		button.setBounds(30, 62, 69, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -80,6 +84,7 @@ public class MenuInstituicao extends JFrame {
 		});
 		
 		JButton button_1 = new JButton("Perfil");
+		button_1.setBounds(30, 102, 69, 29);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -105,6 +110,7 @@ public class MenuInstituicao extends JFrame {
 		});
 		
 		JButton button_2 = new JButton("Excluir");
+		button_2.setBounds(30, 142, 69, 29);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				excluir();
@@ -116,6 +122,7 @@ public class MenuInstituicao extends JFrame {
 		
 		
 		JButton button_3 = new JButton("Voltar");
+		button_3.setBounds(325, 212, 73, 29);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -127,57 +134,27 @@ public class MenuInstituicao extends JFrame {
 		
 		table = new JTable(linhas,colunas);
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(111, 62, 288, 138);
 		scrollPane.setViewportView(table);
-	
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(19, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblPesquisado, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addComponent(button, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-									.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-									.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-								.addGap(38)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(button_3, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(lblPesquisado, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button)
-							.addGap(11)
-							.addComponent(button_1)
-							.addGap(11)
-							.addComponent(button_2))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
-					.addGap(32)
-					.addComponent(button_3)
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(lblPesquisado);
+		contentPane.add(button);
+		contentPane.add(button_1);
+		contentPane.add(button_2);
+		contentPane.add(scrollPane);
+		contentPane.add(button_3);
 	
 	}
 	
 	public void carregarTabela(){
 		try {
 			linhas = new String [100][2];
-			ArrayList<Instituicao> lista = Fachada.getInstace().listarInstituicao();
+			ArrayList<Instituicao> lista = Fachada.getInstace().listarInstituicao(reservaProvisoria.getIdReserva());
 			int contador = 0;
 			
 			for (int i = 0; i < linhas.length; i++) {
 				if(i < lista.size()){
-					if(lista.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
+					if(lista.get(i).getReserva().getIdReserva() == reservaProvisoria.getIdReserva()){
 						String id = String.valueOf(lista.get(i).getIdInstituicao());
 						String nome = lista.get(i).getNome();
 						linhas[contador][0] = id;

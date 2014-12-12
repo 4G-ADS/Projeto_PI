@@ -12,9 +12,9 @@ public class PlantaMedioPorte extends Planta {
 	
 	}
 
-	public PlantaMedioPorte(String especie,
-			String nome, double tamanho,int idReserva) {
-		super(especie, nome, tamanho);
+	public PlantaMedioPorte(Reserva reserva,String especie,
+			String nome, double tamanho) {
+		super(reserva,especie, nome, tamanho);
 	}
 
 	

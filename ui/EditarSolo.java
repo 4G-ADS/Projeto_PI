@@ -56,23 +56,28 @@ public class EditarSolo extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Editar Solo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 295, 230);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel labelId = new JLabel("ID:");
+		labelId.setBounds(52, 26, 18, 16);
 		
 		JLabel labelTipo = new JLabel("Tipo:");
+		labelTipo.setBounds(38, 53, 32, 16);
 		
 		JLabel labelTamanho = new JLabel("Tamanho:");
+		labelTamanho.setBounds(8, 86, 62, 16);
 		
 		JLabel labelRecursos = new JLabel("Recursos:");
+		labelRecursos.setBounds(9, 120, 61, 16);
 		
 		carregarCaracteristicas();
 		
 		
 		JButton buttonVoltar = new JButton("Voltar");
+		buttonVoltar.setBounds(202, 160, 75, 29);
 		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -97,6 +102,7 @@ public class EditarSolo extends JFrame {
 		
 		
 		JButton buttonEditarRescursos = new JButton("Editar");
+		buttonEditarRescursos.setBounds(192, 119, 89, 29);
 		buttonEditarRescursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String recursos = JOptionPane.showInputDialog("novo recurso");
@@ -106,6 +112,7 @@ public class EditarSolo extends JFrame {
 		});
 		
 		JButton buttonEditarTamanho = new JButton("Editar");
+		buttonEditarTamanho.setBounds(192, 85, 89, 29);
 		buttonEditarTamanho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double tamanho = Double.parseDouble(JOptionPane.showInputDialog("novo tamanho"));
@@ -115,6 +122,7 @@ public class EditarSolo extends JFrame {
 		});
 		
 		JButton buttonEditarTipo = new JButton("Editar");
+		buttonEditarTipo.setBounds(192, 52, 89, 29);
 		buttonEditarTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = JOptionPane.showInputDialog("novo tipo");
@@ -122,89 +130,33 @@ public class EditarSolo extends JFrame {
 				labelCarregarTipo.setText(soloProvisorio.getTipo());
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(11)
-					.addComponent(labelId, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-					.addGap(34)
-					.addComponent(labelCarregarID, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(11)
-					.addComponent(labelTipo, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-					.addGap(34)
-					.addComponent(labelCarregarTipo, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-					.addGap(26)
-					.addComponent(buttonEditarTipo, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(11)
-					.addComponent(labelTamanho, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-					.addGap(4)
-					.addComponent(labelCarregarTamanho, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-					.addGap(56)
-					.addComponent(buttonEditarTamanho, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(11)
-					.addComponent(labelRecursos, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-					.addGap(5)
-					.addComponent(labelCarregarRecursos, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-					.addGap(26)
-					.addComponent(buttonEditarRescursos, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(344)
-					.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(20)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelId, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(1)
-							.addComponent(labelCarregarID, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
-					.addGap(7)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(labelTipo, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelCarregarTipo, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(buttonEditarTipo))
-					.addGap(4)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(labelTamanho, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(5)
-							.addComponent(labelCarregarTamanho, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(buttonEditarTamanho))
-					.addGap(5)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(labelRecursos, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelCarregarRecursos, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(buttonEditarRescursos))
-					.addGap(94)
-					.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(labelId);
+		contentPane.add(labelCarregarID);
+		contentPane.add(labelTipo);
+		contentPane.add(labelCarregarTipo);
+		contentPane.add(buttonEditarTipo);
+		contentPane.add(labelTamanho);
+		contentPane.add(labelCarregarTamanho);
+		contentPane.add(buttonEditarTamanho);
+		contentPane.add(labelRecursos);
+		contentPane.add(labelCarregarRecursos);
+		contentPane.add(buttonEditarRescursos);
+		contentPane.add(buttonVoltar);
 	}
 	
 	public void carregarCaracteristicas(){
 		
 		labelCarregarID = new JLabel(""+soloProvisorio.getIdSolo());
+		labelCarregarID.setBounds(82, 26, 32, 16);
 		
 		labelCarregarTipo = new JLabel(soloProvisorio.getTipo());
+		labelCarregarTipo.setBounds(82, 53, 79, 16);
 		
 		labelCarregarTamanho = new JLabel(""+soloProvisorio.getTamanho());
+		labelCarregarTamanho.setBounds(82, 87, 32, 16);
 		
 		labelCarregarRecursos = new JLabel(soloProvisorio.getResursos());
+		labelCarregarRecursos.setBounds(82, 120, 79, 16);
 	}
 }

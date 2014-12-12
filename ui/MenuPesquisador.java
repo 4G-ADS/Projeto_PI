@@ -60,9 +60,10 @@ public class MenuPesquisador extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPesquisador(Reserva reserva) {
+		setTitle("Menu Pesquisador");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 451, 261);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -134,19 +135,22 @@ public class MenuPesquisador extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(10)
-					.addComponent(lblPesquisador))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(10)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnPerfil, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-					.addGap(38)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(332)
-					.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(131)
+							.addComponent(lblPesquisador))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(36)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnPerfil, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+										.addComponent(button, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(35, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -154,28 +158,31 @@ public class MenuPesquisador extends JFrame {
 					.addComponent(lblPesquisador)
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnAdd)
 							.addGap(11)
 							.addComponent(btnPerfil)
 							.addGap(11)
-							.addComponent(button))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
-					.addGap(43)
-					.addComponent(btnVoltar))
+							.addComponent(button)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnVoltar)
+					.addGap(50))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 	
 	public void carregarTabela(){
 		try {
-			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador();
+			ArrayList<Pesquisador> listaPesquisador = Fachada.getInstace().listarPesquisador(reservaProvisoria.getIdReserva());
 			listaPesquisadorTabela = new String[100][2];
 			int contador =0;
 			
 			for (int i = 0; i < listaPesquisadorTabela.length; i++) {
 				if(i < listaPesquisador.size()){
-					if(listaPesquisador.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
+					System.out.println(reservaProvisoria.toString());
+					System.out.println(listaPesquisador.toString());
+					if(listaPesquisador.get(i).getReserva().getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaPesquisador.get(i).getIdPesquisador());
 				String nome = listaPesquisador.get(i).getNome();
 				listaPesquisadorTabela[contador][0] = id;

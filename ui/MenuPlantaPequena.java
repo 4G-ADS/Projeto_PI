@@ -67,18 +67,21 @@ public class MenuPlantaPequena extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPlantaPequena(Reserva reserva) {
+		setTitle("Menu Planta Pequena");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 427, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblPlanta = new JLabel("Planta Pequeno porte");
+		JLabel lblPlanta = new JLabel("Planta Pequeno Porte");
+		lblPlanta.setBounds(104, 19, 240, 27);
 		lblPlanta.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
 				
 		JButton button = new JButton("Voltar");
+		button.setBounds(326, 229, 73, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -87,6 +90,7 @@ public class MenuPlantaPequena extends JFrame {
 		});
 		
 		JButton button_1 = new JButton("Add");
+		button_1.setBounds(37, 69, 63, 29);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -96,6 +100,7 @@ public class MenuPlantaPequena extends JFrame {
 		});
 		
 		JButton button_2 = new JButton("Perfil");
+		button_2.setBounds(37, 119, 63, 29);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -104,6 +109,7 @@ public class MenuPlantaPequena extends JFrame {
 		});
 		
 		JButton button_3 = new JButton("Excluir");
+		button_3.setBounds(25, 167, 87, 29);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPlanta();
@@ -117,50 +123,15 @@ public class MenuPlantaPequena extends JFrame {
 		
 		table = new JTable(listaPlantaTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(111, 69, 288, 161);
 		scrollPane.setViewportView(table);
-		
-		
-		
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(337)
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(5)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblPlanta, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_3))
-									.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))))
-					.addGap(14))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGap(6)
-					.addComponent(lblPlanta, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button_1)
-							.addGap(21)
-							.addComponent(button_2)
-							.addGap(19)
-							.addComponent(button_3)))
-					.addGap(14)
-					.addComponent(button))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(button);
+		contentPane.add(lblPlanta);
+		contentPane.add(button_1);
+		contentPane.add(button_2);
+		contentPane.add(button_3);
+		contentPane.add(scrollPane);
 	}
 	
 	public void perfil(){
@@ -195,14 +166,14 @@ public class MenuPlantaPequena extends JFrame {
 	public void preenceherTabelaPlantasPequenoPorte(){
 		try {
 			listaPlantaTabela = new String [100][2];
-			ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena();
+			ArrayList<PlantaPequenoPorte> listaPlantaPequena = Fachada.getInstace().listarPlantaPequena(reservaProvisoria.getIdReserva());
 			int contador = 0;
 			for (int i = 0; i < listaPlantaTabela.length; i++) {
 			
 			
 			if(listaPlantaPequena.size() > i){
 				
-				if(listaPlantaPequena.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
+				if(listaPlantaPequena.get(i).getReserva().getIdReserva() == reservaProvisoria.getIdReserva()){
 		
 				String id = String.valueOf(listaPlantaPequena.get(i).getIdPlantaPequenaPorte());
 				String nome  = listaPlantaPequena.get(i).getNome();

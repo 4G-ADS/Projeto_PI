@@ -3,17 +3,17 @@ package com.fafica.projeto_pi.modelos;
 public class NascenteAgua {
 
 	private int idAgua;
-	private int idReserva;
+	private Reserva reserva;
 	private double latitude;
 	private double longitude;
 	private String nomeFonte;
 	private String tipo;
 	
-	public NascenteAgua(int idAgua, int idReserva, double latitude,
+	public NascenteAgua(int idAgua, Reserva reserva, double latitude,
 			double longitude, String nomeFonte, String tipo) {
 		super();
 		this.idAgua = idAgua;
-		this.setIdReserva(idReserva);
+		this.reserva = reserva;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.nomeFonte = nomeFonte;
@@ -82,17 +82,17 @@ public class NascenteAgua {
 		this.tipo = tipo;
 	}
 
-	public int getIdReserva() {
-		return idReserva;
+	public Reserva getReserva() {
+		return reserva;
 	}
 
-	public void setIdReserva(int idReserva) {
-		this.idReserva = idReserva;
+	public void setReserva(Reserva reserva) {
+		this.reserva = reserva;
 	}
 
 	@Override
 	public String toString() {
-		return "NascenteAgua [idAgua=" + idAgua + ", idReserva=" + idReserva
+		return "NascenteAgua [idAgua=" + idAgua + ", Reserva=" + reserva
 				+ ", latitude=" + latitude + ", longitude=" + longitude
 				+ ", nomeFonte=" + nomeFonte + ", tipo=" + tipo + "]";
 	}

@@ -11,6 +11,7 @@ import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
 import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioPlantaPequenoPorte;
 
 public class RepositorioPlantaPequenoPorteBDR implements
@@ -54,7 +55,7 @@ public class RepositorioPlantaPequenoPorteBDR implements
 
 			}
 
-			stmt.setInt(1, plantaPequena.getIdReserva());
+			stmt.setInt(1, plantaPequena.getReserva().getIdReserva());
 			stmt.setString(2, plantaPequena.getEspecie());
 			stmt.setString(3, plantaPequena.getNome());
 			stmt.setDouble(4, plantaPequena.getTamanho());
@@ -92,7 +93,6 @@ public class RepositorioPlantaPequenoPorteBDR implements
 						 resultSet.getString("especie_planta_pequeno_porte"),
 						 resultSet.getDouble("tamanho_planta_pequeno_porte"));
 				
-						planta.setIdReserva(resultSet.getInt("id_reserva"));
 				listaPlanta.add(planta);
 			}
 			
@@ -118,11 +118,7 @@ public class RepositorioPlantaPequenoPorteBDR implements
 		
 		try{
 			
-			sql = "select Planta_pequeno_porte.id_planta_pequeno_porte,"
-					+ "Planta_pequeno_porte.nome_planta_pequeno_porte"
-					+ ",Planta_pequeno_porte.especie_planta_pequeno_porte, ";
-			sql += "Planta_pequeno_porte.tamanho_planta_pequeno_porte ";
-			sql += "from Reserva ";
+			sql = "select * from Reserva ";
 			sql += "inner join Planta_pequeno_porte ";
 			sql += "on Reserva.id_reserva = Planta_pequeno_porte.id_reserva ";
 			sql += "where Reserva.id_reserva = " + idReserva;
@@ -130,10 +126,15 @@ public class RepositorioPlantaPequenoPorteBDR implements
 			resultSet = stmt.executeQuery();
 
 			while(resultSet.next()){
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"),resultSet.getInt("id_reserva"),resultSet.getString("clima"),
+						resultSet.getString("nome_reserva"),resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
+				
 				PlantaPequenoPorte planta = new PlantaPequenoPorte(	resultSet.getInt("id_planta_pequeno_porte"),
 						resultSet.getString("nome_planta_pequeno_porte"),
 						 resultSet.getString("especie_planta_pequeno_porte"),
 						 resultSet.getDouble("tamanho_planta_pequeno_porte"));
+				planta.setReserva(reserva);
 				
 				listaPlanta.add(planta);
 			}

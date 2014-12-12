@@ -20,10 +20,12 @@ import com.fafica.projeto_pi.excecoes.CampoObritarorioInvalidoException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.Administrador;
 
+import java.awt.color.CMMException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CadastrarAdministrador extends JFrame {
 
@@ -54,13 +56,14 @@ public class CadastrarAdministrador extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastrarAdministrador() {
+		setTitle("Cadastrar Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 392, 203);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnAvanar = new JButton("Avan\u00E7ar");
+		JButton btnAvanar = new JButton("Proximo");
 		btnAvanar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -74,6 +77,10 @@ public class CadastrarAdministrador extends JFrame {
 					int senha = Integer.parseInt(campoSenha.getText());
 					adm = new Administrador(nome, login, cpf, senha);
 					Fachada.getInstace().cadastrarAdministrardor(adm);
+					
+					adm = verificarUsuario();
+					System.out.println(adm);
+					System.out.println("ak");
 					dispose();
 					new MenuPrincipal(adm).setVisible(true);
 					}else {
@@ -123,39 +130,31 @@ public class CadastrarAdministrador extends JFrame {
 		campoCPF.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(341, Short.MAX_VALUE)
-					.addComponent(btnAvanar)
-					.addContainerGap())
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(55, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblLogin, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(campoLogin, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(55, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblCpf, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(campoCPF, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(55, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblSenha, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(campoSenha, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(55, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnAvanar)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblSenha, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblLogin, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNome, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
+								.addComponent(campoLogin, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(campoSenha, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblCpf)
+									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+									.addComponent(campoCPF, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -166,17 +165,46 @@ public class CadastrarAdministrador extends JFrame {
 						.addComponent(lblLogin))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(campoSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSenha))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
+						.addComponent(lblSenha)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(campoCPF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-							.addComponent(btnAvanar))
-						.addComponent(lblCpf))
-					.addContainerGap())
+							.addComponent(lblCpf))
+						.addComponent(campoSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+					.addComponent(btnAvanar))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public Administrador verificarUsuario() {
+		ArrayList<Administrador> listaAdm;
+		
+		Administrador administradorProvisorio = null;
+		
+		try {
+			listaAdm = Fachada.getInstace().listarAdministrador();
+			for (Administrador administrador : listaAdm) {
+				System.out.println("Senha: " + administrador.getSenha());
+				
+				if(campoLogin.getText().equals(administrador.getLogin()) && 
+						campoSenha.getText().equals(String.valueOf(administrador.getSenha()))){
+					System.out.println(administrador.toString());
+					System.out.println("aqui" + administradorProvisorio);
+					adm = administrador;
+					administradorProvisorio = adm;
+					break;
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return administradorProvisorio;
+		
+		
+		
 	}
 }

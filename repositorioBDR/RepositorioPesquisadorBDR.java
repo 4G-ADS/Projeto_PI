@@ -12,6 +12,7 @@ import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.modelos.Instituicao;
 import com.fafica.projeto_pi.modelos.Pesquisador;
 import com.fafica.projeto_pi.modelos.Administrador;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioPesquisador;
 
 public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
@@ -50,7 +51,7 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 						Statement.RETURN_GENERATED_KEYS);
 			}
 
-			stmt.setInt(1, pesquisador.getIdReserva());
+			stmt.setInt(1, pesquisador.getReserva().getIdReserva());
 			stmt.setString(2, pesquisador.getNome());
 			stmt.setString(3, pesquisador.getCpf());
 			stmt.setInt(4, pesquisador.getIdade());
@@ -84,7 +85,6 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 						resultSet.getString("nome_pesquisador"),
 						resultSet.getString("cpf"), resultSet.getInt("idade"),
 						resultSet.getString("profissao"));
-				pesquisador.setIdReserva(resultSet.getInt("id_reserva"));
 				listaPesquisadores.add(pesquisador);
 
 			}
@@ -109,8 +109,7 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 		String sql = "";
 
 		try {
-			sql = "select Pesquisador.id_pesquisador,Pesquisador.nome_pesquisador,Pesquisador.cpf,Pesquisador.idade,Pesquisador.profissao ";
-			sql += "from Reserva ";
+			sql = "select * from Reserva ";
 			sql += "inner join Pesquisador ";
 			sql += "on Reserva.id_reserva = Pesquisador.id_reserva ";
 			sql += "where Reserva.id_reserva = " + idReserva;
@@ -118,12 +117,16 @@ public class RepositorioPesquisadorBDR implements IRepositorioPesquisador {
 			resultSet = stmt.executeQuery();
 
 			while (resultSet.next()) {
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"),resultSet.getInt("id_reserva"),resultSet.getString("clima"),
+						resultSet.getString("nome_reserva"),resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
 				Pesquisador pesquisador = new Pesquisador(
 						resultSet.getInt("id_pesquisador"),
 						resultSet.getString("nome_pesquisador"),
 						resultSet.getString("cpf"), resultSet.getInt("idade"),
 						resultSet.getString("profissao"));
-
+				pesquisador.setReserva(reserva);
+				
 				listaPesquisadores.add(pesquisador);
 
 			}

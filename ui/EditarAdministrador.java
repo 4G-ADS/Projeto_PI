@@ -53,12 +53,13 @@ public class EditarAdministrador extends JFrame {
 		admProvisorio = adm;
 		setTitle("Editar Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 363, 274);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JButton buttonVoltar = new JButton("Voltar");
+		buttonVoltar.setBounds(215, 213, 97, 29);
 		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -83,18 +84,24 @@ public class EditarAdministrador extends JFrame {
 		});
 		
 		JLabel labelNome = new JLabel("Nome");
+		labelNome.setBounds(85, 60, 37, 16);
 		
 		JLabel labelLogin = new JLabel("Login");
+		labelLogin.setBounds(85, 95, 37, 16);
 		
 		JLabel labelSenha = new JLabel("Senha");
+		labelSenha.setBounds(85, 140, 37, 16);
 		
 		JLabel labelCPF = new JLabel("CPF");
+		labelCPF.setBounds(88, 176, 34, 16);
 		
 		JLabel lblIdID = new JLabel("ID");
+		lblIdID.setBounds(108, 22, 14, 16);
 		
 		carregarCaracteristicas();
 		
 		JButton buttonEditarNome = new JButton("Editar");
+		buttonEditarNome.setBounds(232, 58, 80, 29);
 		buttonEditarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -106,6 +113,7 @@ public class EditarAdministrador extends JFrame {
 		});
 		
 		JButton buttonEditarLogin = new JButton("Editar");
+		buttonEditarLogin.setBounds(232, 98, 80, 29);
 		buttonEditarLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
@@ -116,6 +124,7 @@ public class EditarAdministrador extends JFrame {
 		});
 		
 		JButton buttonEditarSenha = new JButton("Editar");
+		buttonEditarSenha.setBounds(232, 138, 80, 29);
 		buttonEditarSenha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int senha = Integer.parseInt(JOptionPane.showInputDialog("nova senha"));
@@ -125,94 +134,36 @@ public class EditarAdministrador extends JFrame {
 		});
 		
 		JLabel carregarCPF = new JLabel(adm.getCpf());
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(10)
-					.addComponent(lblIdID)
-					.addGap(32)
-					.addComponent(carregarID))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(10)
-					.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addComponent(carregarNome, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-					.addGap(102)
-					.addComponent(buttonEditarNome))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(10)
-					.addComponent(labelLogin, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(8)
-					.addComponent(carregarLogin, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addGap(91)
-					.addComponent(buttonEditarLogin))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(10)
-					.addComponent(labelSenha, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addComponent(carregarSenha, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-					.addGap(91)
-					.addComponent(buttonEditarSenha))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(10)
-					.addComponent(labelCPF, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addComponent(carregarCPF, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(317)
-					.addComponent(buttonVoltar, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(31)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblIdID)
-						.addComponent(carregarID))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelNome))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(carregarNome))
-						.addComponent(buttonEditarNome))
-					.addGap(10)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelLogin)
-						.addComponent(carregarLogin)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(1)
-							.addComponent(buttonEditarLogin)))
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(labelSenha))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(4)
-							.addComponent(carregarSenha))
-						.addComponent(buttonEditarSenha))
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelCPF)
-						.addComponent(carregarCPF))
-					.addGap(38)
-					.addComponent(buttonVoltar))
-		);
-		contentPane.setLayout(gl_contentPane);
+		carregarCPF.setBounds(129, 176, 75, 16);
+		contentPane.setLayout(null);
+		contentPane.add(lblIdID);
+		contentPane.add(carregarID);
+		contentPane.add(labelNome);
+		contentPane.add(carregarNome);
+		contentPane.add(buttonEditarNome);
+		contentPane.add(labelLogin);
+		contentPane.add(carregarLogin);
+		contentPane.add(buttonEditarLogin);
+		contentPane.add(labelSenha);
+		contentPane.add(carregarSenha);
+		contentPane.add(buttonEditarSenha);
+		contentPane.add(labelCPF);
+		contentPane.add(carregarCPF);
+		contentPane.add(buttonVoltar);
 	}
 
 	public void carregarCaracteristicas(){
 		
 		carregarID = new JLabel(""+admProvisorio.getId());
+		carregarID.setBounds(131, 22, 8, 16);
 		
 		carregarNome = new JLabel(admProvisorio.getNome());
+		carregarNome.setBounds(128, 60, 92, 16);
 		
 		carregarLogin = new JLabel(admProvisorio.getLogin());
+		carregarLogin.setBounds(130, 95, 97, 16);
 		
 		carregarSenha = new JLabel(String.valueOf(admProvisorio.getSenha()));
+		carregarSenha.setBounds(128, 140, 76, 16);
 	}
 }

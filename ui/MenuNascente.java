@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MenuNascente extends JFrame {
 
@@ -58,9 +59,10 @@ public class MenuNascente extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuNascente(Reserva reserva) {
+		setTitle("Menu Nascente");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 430, 285);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -131,26 +133,28 @@ public class MenuNascente extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNascente, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(15)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_3))
-					.addGap(44)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(337)
-					.addComponent(button, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(151)
+							.addComponent(lblNascente, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(15)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(button, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(button_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+										.addComponent(button_2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+										.addComponent(button_3, Alignment.TRAILING))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(8, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(6)
 					.addComponent(lblNascente, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
+					.addGap(17)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(button_1)
@@ -159,8 +163,9 @@ public class MenuNascente extends JFrame {
 							.addGap(11)
 							.addComponent(button_3))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
-					.addGap(14)
-					.addComponent(button))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(button)
+					.addGap(13))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -168,11 +173,11 @@ public class MenuNascente extends JFrame {
 	public void carregarTabela(){
 		try {
 			listaNascentesTabela = new String[100][2];
-			ArrayList<NascenteAgua> listaNascentes = Fachada.getInstace().listarNascente();
+			ArrayList<NascenteAgua> listaNascentes = Fachada.getInstace().listarNascente(reservaProvisoria.getIdReserva());
 			int contador =0;
 			for (int i = 0; i < listaNascentesTabela.length; i++) {
 				if(i < listaNascentes.size()){
-					if(listaNascentes.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
+					if(listaNascentes.get(i).getReserva().getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaNascentes.get(i).getIdAgua());
 				String nome = listaNascentes.get(i).getNomeFonte();
 				listaNascentesTabela[contador][0] = id;

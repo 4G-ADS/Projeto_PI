@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MenuSolo extends JFrame {
 
@@ -58,17 +59,20 @@ public class MenuSolo extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuSolo(Reserva reserva) {
+		setTitle("Menu Solo");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 434, 280);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblSolo = new JLabel("Solo");
+		lblSolo.setBounds(193, 11, 48, 27);
 		lblSolo.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
 		JButton button = new JButton("Voltar");
+		button.setBounds(334, 211, 73, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -77,6 +81,7 @@ public class MenuSolo extends JFrame {
 		});
 		
 		JButton button_1 = new JButton("Add");
+		button_1.setBounds(20, 49, 87, 29);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -85,6 +90,7 @@ public class MenuSolo extends JFrame {
 		});
 		
 		JButton button_2 = new JButton("Perfil");
+		button_2.setBounds(20, 89, 87, 29);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -109,6 +115,7 @@ public class MenuSolo extends JFrame {
 		});
 		
 		JButton button_3 = new JButton("Excluir");
+		button_3.setBounds(20, 129, 87, 29);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -123,55 +130,26 @@ public class MenuSolo extends JFrame {
 	
 		table = new JTable(listaSoloTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(119, 50, 288, 161);
 		scrollPane.setViewportView(table);
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblSolo, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(15)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(button_1, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-						.addComponent(button_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(button_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(35)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(337)
-					.addComponent(button, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(6)
-					.addComponent(lblSolo, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button_1)
-							.addGap(11)
-							.addComponent(button_2)
-							.addGap(11)
-							.addComponent(button_3))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
-					.addGap(14)
-					.addComponent(button))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(lblSolo);
+		contentPane.add(button_1);
+		contentPane.add(button_2);
+		contentPane.add(button_3);
+		contentPane.add(scrollPane);
+		contentPane.add(button);
 	}
 
 	public void carregarTabela(){
 		try {
 			listaSoloTabela = new String[100][2];
-			ArrayList<Solo> listaSolos = Fachada.getInstace().listarSolo();
+			ArrayList<Solo> listaSolos = Fachada.getInstace().listarSolo(reservaProvisoria.getIdReserva());
 			int contador =0;
 			
 			for (int i = 0; i < listaSoloTabela.length; i++) {
 				if(i < listaSolos.size()){
-					if(listaSolos.get(i).getIdReserva() == reservaProvisoria.getIdReserva()){
+					if(listaSolos.get(i).getReserva().getIdReserva() == reservaProvisoria.getIdReserva()){
 				String id = String.valueOf(listaSolos.get(i).getIdSolo());
 				String nome = listaSolos.get(i).getTipo();
 				listaSoloTabela[contador][0] = id;

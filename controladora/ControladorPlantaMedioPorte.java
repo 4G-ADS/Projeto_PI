@@ -18,6 +18,10 @@ public class ControladorPlantaMedioPorte {
 		
 	}
 	
+	public void cadastrarPlantaMedia(PlantaMedioPorte planta) throws SQLException{
+		this.repositorioPlantaMediaPorte.cadastrarPlantaMedioPorte(planta);
+	}
+	
 	public ArrayList<PlantaMedioPorte> listarPlantaMedia() throws SQLException,Exception {
 		System.out.println("Pasando pela ControladorA lsitarPlantaPequenoPorte");
 		this.repositorioPlantaMediaPorte = new RepositorioPlantaMedioPorteBDR();

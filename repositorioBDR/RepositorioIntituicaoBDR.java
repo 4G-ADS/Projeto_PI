@@ -11,6 +11,7 @@ import com.fafica.projeto_pi.conexao.Conexao;
 import com.fafica.projeto_pi.conexao.Database;
 import com.fafica.projeto_pi.excecoes.InstituicacaoNaoEncontrada;
 import com.fafica.projeto_pi.modelos.Instituicao;
+import com.fafica.projeto_pi.modelos.Reserva;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioInstituicao;
 
 public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
@@ -50,7 +51,7 @@ public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
 						Statement.RETURN_GENERATED_KEYS);
 			}
 
-			stmt.setInt(1, instituicao.getIdReserva());
+			stmt.setInt(1, instituicao.getReserva().getIdReserva());
 			stmt.setString(2, instituicao.getNome());
 			stmt.setString(3, instituicao.getCnpj());
 			stmt.setString(4, instituicao.getTipo());
@@ -85,7 +86,6 @@ public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
 						resultSet.getString("nome"),
 						resultSet.getString("tipo"),
 						resultSet.getString("cnpj"));
-				instituicao.setIdReserva(resultSet.getInt("id_reserva"));
 				listaInstituicao.add(instituicao);
 			}
 
@@ -108,8 +108,7 @@ public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
 		String sql = "";
 
 		try {
-			sql = "select Instituicao.id_instituicao, Instituicao.nome, Instituicao.tipo, Instituicao.cnpj ";
-			sql += "from Reserva ";
+			sql = "select * from Reserva ";
 			sql += "inner join Instituicao ";
 			sql += "on Reserva.id_reserva = Instituicao.id_reserva ";
 			sql += "where Reserva.id_reserva = " + idReserva;
@@ -118,11 +117,17 @@ public class RepositorioIntituicaoBDR implements IRepositorioInstituicao {
 			resultSet = stmt.executeQuery();
 
 			while (resultSet.next()) {
+				Reserva reserva = new Reserva(resultSet.getInt("id_adm"),resultSet.getInt("id_reserva"),resultSet.getString("clima"),
+						resultSet.getString("nome_reserva"),resultSet.getDouble("tamanho_reserva"),resultSet.getDouble("latitude_reserva"),
+						resultSet.getDouble("longitude_reserva"));
+				
 				Instituicao instituicao = new Instituicao(
 						resultSet.getInt("id_Instituicao"),
 						resultSet.getString("nome"),
 						resultSet.getString("tipo"),
 						resultSet.getString("cnpj"));
+				instituicao.setReserva(reserva);	
+				
 				listaInstituicao.add(instituicao);
 			}
 

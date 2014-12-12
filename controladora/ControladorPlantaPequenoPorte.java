@@ -3,17 +3,9 @@ package com.fafica.projeto_pi.controladora;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.fafica.projeto_pi.excecoes.PesquisadorNaoEncontradoException;
 import com.fafica.projeto_pi.excecoes.PlantaNaoEncontradaException;
-import com.fafica.projeto_pi.modelos.PlantaGrandePorte;
-import com.fafica.projeto_pi.modelos.PlantaMedioPorte;
 import com.fafica.projeto_pi.modelos.PlantaPequenoPorte;
-import com.fafica.projeto_pi.modelos.Reserva;
-import com.fafica.projeto_pi.repositorioBDR.RepositorioPlantaGrandePorteBDR;
-import com.fafica.projeto_pi.repositorioBDR.RepositorioPlantaMedioPorteBDR;
 import com.fafica.projeto_pi.repositorioBDR.RepositorioPlantaPequenoPorteBDR;
-import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioPlantaGrandePorte;
-import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioPlantaMedioPorte;
 import com.fafica.projeto_pi.repositorioBDR.irepositorioBDR.IRepositorioPlantaPequenoPorte;
 
 public class ControladorPlantaPequenoPorte {
@@ -26,6 +18,9 @@ public class ControladorPlantaPequenoPorte {
 
 	}
 	
+	public void cadastrarPlantaPequenoPorte(PlantaPequenoPorte planta) throws SQLException{
+		this.repositorioPlantaPequenaPorte.cadastrarPlantaPequenoPorte(planta);
+	}
 	
 	public ArrayList<PlantaPequenoPorte> listarPlantaPequena() throws SQLException,Exception {
 		System.out.println("Pasando pela Controladora lsitarPlantaPequenoPorte");
