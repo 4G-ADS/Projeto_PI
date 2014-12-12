@@ -56,6 +56,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		System.out.println("Pego");
 		setForeground(new Color(0, 255, 153));
 		setBackground(new Color(0, 255, 153));
 		setTitle("Login");
