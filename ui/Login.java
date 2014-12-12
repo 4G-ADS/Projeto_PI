@@ -22,14 +22,18 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField senha;
 	private JTextField login;
 	private JButton btnCadastrese;
 	private Administrador adm = null;
+	private JLabel lblImagem;
+	private JPasswordField campoSenha;
 
 
 	/**
@@ -52,15 +56,21 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setForeground(new Color(0, 255, 153));
+		setBackground(new Color(0, 255, 153));
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 276, 193);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 255, 51));
+		contentPane.setForeground(new Color(51, 255, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JButton btnNewButton = new JButton("Entrar");
-		btnNewButton.setBounds(159, 119, 81, 29);
+		btnNewButton.setBounds(902, 143, 152, 29);
 			
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -79,22 +89,18 @@ public class Login extends JFrame {
 			}
 		});
 		
-		senha = new JTextField();
-		senha.setBounds(88, 73, 152, 28);
-		senha.setColumns(10);
-		
 		login = new JTextField();
-		login.setBounds(88, 27, 152, 28);
+		login.setBounds(902, 38, 152, 28);
 		login.setColumns(10);
 		
 		JLabel lblL = new JLabel("Login");
-		lblL.setBounds(24, 33, 35, 16);
+		lblL.setBounds(902, 11, 35, 16);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(24, 79, 46, 16);
+		lblSenha.setBounds(902, 77, 46, 16);
 		
 		btnCadastrese = new JButton("Cadastre-se");
-		btnCadastrese.setBounds(39, 119, 121, 29);
+		btnCadastrese.setBounds(10, 641, 121, 29);
 		btnCadastrese.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -105,10 +111,18 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
 		contentPane.add(lblSenha);
-		contentPane.add(senha);
 		contentPane.add(lblL);
 		contentPane.add(login);
+		
+		campoSenha = new JPasswordField();
+		campoSenha.setBounds(902, 104, 152, 28);
+		contentPane.add(campoSenha);
 		contentPane.add(btnCadastrese);
+		
+		lblImagem = new JLabel("imagem");
+		lblImagem.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\imagesLogin.jpg"));
+		lblImagem.setBounds(0, 0, 1074, 691);
+		contentPane.add(lblImagem);
 	}
 	
 	public boolean verificarUsuario() {
@@ -122,7 +136,7 @@ public class Login extends JFrame {
 				System.out.println("Senha: " + administrador.getSenha());
 				
 				if(login.getText().equals(administrador.getLogin()) && 
-						senha.getText().equals(String.valueOf(administrador.getSenha()))){
+						String.valueOf(campoSenha.getPassword()).equals(String.valueOf(administrador.getSenha()))){
 					System.out.println(administrador.toString());
 					verifica = true;
 					System.out.println("aqui" + verifica);

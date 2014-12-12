@@ -25,6 +25,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class CadastrarInstituicao extends JFrame {
 
@@ -33,6 +35,7 @@ public class CadastrarInstituicao extends JFrame {
 	private JTextField campoTipo;
 	private JTextField campoCNPJ;
 	private Reserva reservaProvisoria;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -57,27 +60,39 @@ public class CadastrarInstituicao extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Cadastrar Instituição");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 451, 156);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNome.setBounds(17, 19, 68, 28);
 		
 		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTipo.setBounds(17, 114, 46, 24);
 		
 		JLabel lblCnpj = new JLabel("CNPJ:");
+		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblCnpj.setBounds(17, 68, 56, 23);
 		
 		campoNome = new JTextField();
+		campoNome.setBounds(83, 20, 567, 34);
 		campoNome.setColumns(10);
 		
 		campoTipo = new JTextField();
+		campoTipo.setBounds(83, 113, 567, 34);
 		campoTipo.setColumns(10);
 		
 		campoCNPJ = new JTextField();
+		campoCNPJ.setBounds(83, 66, 567, 34);
 		campoCNPJ.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(983, 657, 81, 23);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 	
@@ -117,47 +132,19 @@ public class CadastrarInstituicao extends JFrame {
 				}
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnCadastrar)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(12)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNome)
-								.addComponent(lblTipo))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-									.addGap(24)
-									.addComponent(lblCnpj)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(campoCNPJ, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
-								.addComponent(campoNome, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))))
-					.addGap(13))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNome))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(campoCNPJ, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblCnpj)
-						.addComponent(lblTipo))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCadastrar)
-					.addContainerGap(9, Short.MAX_VALUE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(btnCadastrar);
+		contentPane.add(lblNome);
+		contentPane.add(lblTipo);
+		contentPane.add(campoTipo);
+		contentPane.add(lblCnpj);
+		contentPane.add(campoCNPJ);
+		contentPane.add(campoNome);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 }

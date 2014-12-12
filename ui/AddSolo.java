@@ -30,6 +30,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class AddSolo extends JFrame {
 
@@ -38,6 +40,7 @@ public class AddSolo extends JFrame {
 	private JTextField campoTipo;
 	private JTextField campoTamanho;
 	private JTextField campoRecursos;
+	private JLabel planoDeFundo;
 
 
 	/**
@@ -63,16 +66,23 @@ public class AddSolo extends JFrame {
 		setTitle("Adicionar Solo");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 451, 141);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel label = new JLabel("Recursos:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label.setBounds(10, 111, 97, 22);
 		
 		JLabel label_1 = new JLabel("Tipo:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_1.setBounds(10, 16, 81, 22);
 		
 		JButton buttonAdicionar = new JButton("Adicionar");
+		buttonAdicionar.setBounds(960, 651, 104, 29);
 		buttonAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					
@@ -101,65 +111,32 @@ public class AddSolo extends JFrame {
 		});
 		
 		campoTipo = new JTextField();
+		campoTipo.setBounds(138, 11, 187, 28);
 		campoTipo.setColumns(10);
 		
 		JLabel label_2 = new JLabel("Tamanho:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_2.setBounds(9, 60, 98, 26);
 		
 		campoTamanho = new JTextField();
+		campoTamanho.setBounds(138, 63, 187, 28);
 		campoTamanho.setColumns(10);
 		
 		campoRecursos = new JTextField();
+		campoRecursos.setBounds(140, 105, 348, 28);
 		campoRecursos.setColumns(10);
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-								.addGap(29)
-								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-								.addGap(10)
-								.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-								.addGap(3)
-								.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap())
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(label, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-								.addComponent(campoRecursos, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap()))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(buttonAdicionar, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(1)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(6)
-									.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(6)
-									.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-								.addComponent(campoTamanho, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(campoRecursos, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(buttonAdicionar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(164, Short.MAX_VALUE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(label_1);
+		contentPane.add(campoTipo);
+		contentPane.add(label_2);
+		contentPane.add(campoTamanho);
+		contentPane.add(label);
+		contentPane.add(campoRecursos);
+		contentPane.add(buttonAdicionar);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 }

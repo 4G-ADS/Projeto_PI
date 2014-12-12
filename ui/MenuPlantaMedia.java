@@ -38,6 +38,7 @@ import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class MenuPlantaMedia extends JFrame {
 
@@ -70,17 +71,19 @@ public class MenuPlantaMedia extends JFrame {
 		setTitle("Menu Planta Media");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 
 		JLabel lblPlanta = new JLabel("Planta Medio Porte");
-		lblPlanta.setBounds(121, 21, 211, 27);
+		lblPlanta.setBounds(10, 11, 211, 27);
 		lblPlanta.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 
 		JButton button = new JButton("Voltar");
-		button.setBounds(342, 244, 73, 29);
+		button.setBounds(981, 623, 73, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -88,8 +91,9 @@ public class MenuPlantaMedia extends JFrame {
 			}
 		});
 
-		JButton button_1 = new JButton("Add");
-		button_1.setBounds(46, 69, 63, 29);
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconAdd.png"));
+		button_1.setBounds(390, 83, 63, 44);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -98,16 +102,18 @@ public class MenuPlantaMedia extends JFrame {
 			}
 		});
 
-		JButton button_2 = new JButton("Perfil");
-		button_2.setBounds(46, 119, 63, 29);
+		JButton button_2 = new JButton("");
+		button_2.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconEditar.png"));
+		button_2.setBounds(390, 193, 63, 44);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			 perfil();
 			}
 		});
 
-		JButton button_3 = new JButton("Excluir");
-		button_3.setBounds(34, 167, 87, 29);
+		JButton button_3 = new JButton("");
+		button_3.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconRemover.png"));
+		button_3.setBounds(392, 138, 61, 44);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPlanta();
@@ -121,7 +127,7 @@ public class MenuPlantaMedia extends JFrame {
 		
 		table = new JTable(listaPlantaTabela, colunas);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(121, 71, 288, 161);
+		scrollPane.setBounds(479, 87, 575, 525);
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(null);
 		contentPane.add(button);
@@ -130,6 +136,11 @@ public class MenuPlantaMedia extends JFrame {
 		contentPane.add(button_3);
 		contentPane.add(scrollPane);
 		contentPane.add(lblPlanta);
+		
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 

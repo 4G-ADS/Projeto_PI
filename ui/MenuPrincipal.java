@@ -40,6 +40,7 @@ import javax.swing.JSpinner;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class MenuPrincipal extends JFrame {
 
@@ -72,13 +73,15 @@ public class MenuPrincipal extends JFrame {
 		setTitle("Menu Principal");
 		administrador = adm;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 452, 257);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JButton btnCarregar = new JButton("Carregar Reserva");
-		btnCarregar.setBounds(275, 193, 149, 29);
+		btnCarregar.setBounds(915, 651, 149, 29);
 		btnCarregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -107,8 +110,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		
-		JButton btnCriarReserva = new JButton("Criar Reserva");
-		btnCriarReserva.setBounds(15, 33, 126, 29);
+		JButton btnCriarReserva = new JButton("");
+		btnCriarReserva.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconAdd.png"));
+		btnCriarReserva.setBounds(455, 68, 63, 40);
 		btnCriarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -116,8 +120,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		
-		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(200, 193, 75, 29);
+		JButton btnSair = new JButton("");
+		btnSair.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconSair.png"));
+		btnSair.setBounds(981, 8, 74, 49);
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -127,7 +132,7 @@ public class MenuPrincipal extends JFrame {
 		});
 		
 		JButton btnPerfil = new JButton("Perfil");
-		btnPerfil.setBounds(64, 6, 76, 29);
+		btnPerfil.setBounds(10, 8, 118, 29);
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -139,11 +144,12 @@ public class MenuPrincipal extends JFrame {
 		
 		table = new JTable(listaReservaTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(142, 37, 282, 154);
+		scrollPane.setBounds(539, 68, 525, 575);
 		scrollPane.setViewportView(table);
 		
-		JButton buttonExcluirReserva = new JButton("Excluir");
-		buttonExcluirReserva.setBounds(15, 74, 126, 29);
+		JButton buttonExcluirReserva = new JButton("");
+		buttonExcluirReserva.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconRemover.png"));
+		buttonExcluirReserva.setBounds(455, 119, 63, 39);
 		buttonExcluirReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirReserva();
@@ -157,7 +163,7 @@ public class MenuPrincipal extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JLabel labelBemVindo = new JLabel(administrador.getNome());
-		labelBemVindo.setBounds(272, 11, 76, 19);
+		labelBemVindo.setBounds(272, 11, 284, 19);
 		labelBemVindo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.setLayout(null);
 		contentPane.add(btnPerfil);
@@ -168,6 +174,11 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(btnSair);
 		contentPane.add(scrollPane);
 		contentPane.add(btnCarregar);
+		
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 720);
+		contentPane.add(planoDeFundo);
 	}
 	
 	

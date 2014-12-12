@@ -24,6 +24,8 @@ import java.sql.SQLException;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class EditarInstituicao extends JFrame {
 
@@ -59,27 +61,33 @@ public class EditarInstituicao extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Editar Institui\u00E7\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 321, 221);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel labelID = new JLabel("ID:");
-		labelID.setBounds(52, 23, 18, 16);
+		labelID.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelID.setBounds(466, 43, 46, 29);
 		
 		JLabel labelNome = new JLabel("Nome:");
-		labelNome.setBounds(29, 50, 41, 16);
+		labelNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelNome.setBounds(466, 83, 65, 25);
 		
 		JLabel labelTipo = new JLabel("Tipo:");
-		labelTipo.setBounds(38, 81, 32, 16);
+		labelTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelTipo.setBounds(466, 119, 53, 29);
 		
 		JLabel labelCnpj = new JLabel("CNPJ:");
-		labelCnpj.setBounds(36, 118, 34, 16);
+		labelCnpj.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCnpj.setBounds(466, 159, 65, 29);
 		
 		carregarCaracteristicas();
 		
 		JButton buttonEditarNome = new JButton("Editar");
-		buttonEditarNome.setBounds(178, 41, 89, 29);
+		buttonEditarNome.setBounds(975, 85, 89, 29);
 		buttonEditarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome = JOptionPane.showInputDialog("novo nome");
@@ -89,7 +97,7 @@ public class EditarInstituicao extends JFrame {
 		});
 		
 		JButton buttonEditarTipo = new JButton("Editar");
-		buttonEditarTipo.setBounds(178, 76, 89, 29);
+		buttonEditarTipo.setBounds(975, 123, 89, 29);
 		buttonEditarTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = JOptionPane.showInputDialog("novo tipo");
@@ -99,7 +107,7 @@ public class EditarInstituicao extends JFrame {
 		});
 		
 		JButton buttonVoltar = new JButton("Voltar");
-		buttonVoltar.setBounds(163, 152, 104, 29);
+		buttonVoltar.setBounds(960, 651, 104, 29);
 		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 	
@@ -135,20 +143,34 @@ public class EditarInstituicao extends JFrame {
 		contentPane.add(buttonEditarNome);
 		contentPane.add(buttonEditarTipo);
 		contentPane.add(labelCarregarID);
+		
+		JLabel imgem = new JLabel("New label");
+		imgem.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\User-icon.png"));
+		imgem.setBounds(0, 21, 461, 512);
+		contentPane.add(imgem);
+		
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 	
 	public void carregarCaracteristicas(){
 		
 		labelCarregarNome = new JLabel(instituicaoProvisoria.getNome());
-		labelCarregarNome.setBounds(82, 50, 96, 14);
+		labelCarregarNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarNome.setBounds(541, 88, 427, 20);
 		
 		labelCarregarTipo = new JLabel(instituicaoProvisoria.getTipo());
-		labelCarregarTipo.setBounds(82, 81, 96, 14);
+		labelCarregarTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarTipo.setBounds(538, 126, 430, 22);
 		
 		labelCarregarCNPJ = new JLabel(""+instituicaoProvisoria.getCnpj());
-		labelCarregarCNPJ.setBounds(82, 118, 96, 14);
+		labelCarregarCNPJ.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarCNPJ.setBounds(541, 166, 427, 22);
 
 		labelCarregarID = new JLabel(""+instituicaoProvisoria.getIdInstituicao());
-		labelCarregarID.setBounds(99, 23, 46, 16);
+		labelCarregarID.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarID.setBounds(541, 46, 427, 23);
 	}
 }

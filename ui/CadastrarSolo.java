@@ -24,6 +24,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class CadastrarSolo extends JFrame {
 
@@ -32,6 +34,7 @@ public class CadastrarSolo extends JFrame {
 	private JTextField btnTamanho;
 	private JTextField btnRecursos;
 	private Reserva reservaProvisoria;
+	private JLabel planoDeFundo;
 
 	
 	/**
@@ -57,34 +60,39 @@ public class CadastrarSolo extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Cadastrar Solo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 451, 170);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNewLabel = new JLabel("Tipo:");
-		lblNewLabel.setBounds(36, 31, 32, 16);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(23, 68, 82, 26);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
-		lblTamanho.setBounds(275, 31, 62, 16);
+		lblTamanho.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTamanho.setBounds(23, 31, 96, 26);
 		
 		JLabel lblRecursos = new JLabel("Recursos:");
-		lblRecursos.setBounds(17, 65, 61, 16);
+		lblRecursos.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblRecursos.setBounds(23, 115, 96, 22);
 		
 		btnTipo = new JTextField();
-		btnTipo.setBounds(78, 25, 187, 28);
+		btnTipo.setBounds(129, 71, 348, 28);
 		btnTipo.setColumns(10);
 		
 		btnTamanho = new JTextField();
-		btnTamanho.setBounds(340, 25, 86, 28);
+		btnTamanho.setBounds(129, 34, 348, 28);
 		btnTamanho.setColumns(10);
 		
 		btnRecursos = new JTextField();
-		btnRecursos.setBounds(78, 59, 348, 28);
+		btnRecursos.setBounds(129, 116, 348, 28);
 		btnRecursos.setColumns(10);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(322, 98, 104, 29);
+		JButton btnCadastrar = new JButton("Proximo");
+		btnCadastrar.setBounds(960, 651, 104, 29);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -118,6 +126,11 @@ public class CadastrarSolo extends JFrame {
 		contentPane.add(lblTamanho);
 		contentPane.add(btnTamanho);
 		contentPane.add(btnRecursos);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 	
 }

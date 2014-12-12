@@ -33,12 +33,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class TelaPrincipalReserva extends JFrame {
 
 	private JPanel contentPane;
 	private Reserva reservaProvisoria;
 	private ArrayList<Solo> listaSolo = new ArrayList<>();
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -63,28 +66,35 @@ public class TelaPrincipalReserva extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Menu Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 371, 216);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel labelNomeReserva = new JLabel(reserva.getNome());
-		labelNomeReserva.setBounds(41, 17, 73, 16);
+		labelNomeReserva.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelNomeReserva.setBounds(11, 59, 296, 36);
 		
 		JLabel labelClima = new JLabel(reserva.getClima());
-		labelClima.setBounds(126, 17, 73, 16);
+		labelClima.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelClima.setBounds(317, 59, 296, 36);
 		
 		JLabel labelLatitude = new JLabel(String.valueOf(reserva.getLatitude()));
-		labelLatitude.setBounds(217, 17, 20, 16);
+		labelLatitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelLatitude.setBounds(623, 59, 133, 36);
 		
 		JLabel labelLongitude = new JLabel(String.valueOf(reserva.getLongitude()));
-		labelLongitude.setBounds(255, 17, 20, 16);
+		labelLongitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelLongitude.setBounds(766, 59, 133, 36);
 		
 		JLabel labelTamanho = new JLabel(String.valueOf(reserva.getTamanho()));
-		labelTamanho.setBounds(293, 17, 20, 16);
+		labelTamanho.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelTamanho.setBounds(931, 59, 133, 36);
 		
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(248, 133, 81, 29);
+		btnVoltar.setBounds(983, 651, 81, 29);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -109,7 +119,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnPesquisadores = new JButton("Pesquisadores");
-		btnPesquisadores.setBounds(11, 45, 133, 29);
+		btnPesquisadores.setBounds(10, 145, 133, 29);
 		btnPesquisadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -118,7 +128,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnNascentes = new JButton("Nascentes");
-		btnNascentes.setBounds(11, 92, 133, 29);
+		btnNascentes.setBounds(10, 185, 133, 29);
 		btnNascentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -127,7 +137,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnPlantas = new JButton("Plantas");
-		btnPlantas.setBounds(225, 45, 127, 29);
+		btnPlantas.setBounds(10, 265, 133, 29);
 		btnPlantas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -147,7 +157,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton btnSolos = new JButton("Solos");
-		btnSolos.setBounds(227, 86, 123, 29);
+		btnSolos.setBounds(10, 225, 133, 29);
 		btnSolos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -156,7 +166,7 @@ public class TelaPrincipalReserva extends JFrame {
 		});
 		
 		JButton buttonMenuInstituicao = new JButton("Instituicao");
-		buttonMenuInstituicao.setBounds(21, 133, 112, 29);
+		buttonMenuInstituicao.setBounds(10, 305, 133, 29);
 		buttonMenuInstituicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -175,5 +185,35 @@ public class TelaPrincipalReserva extends JFrame {
 		contentPane.add(buttonMenuInstituicao);
 		contentPane.add(btnSolos);
 		contentPane.add(btnVoltar);
+		
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNome.setBounds(11, 11, 70, 37);
+		contentPane.add(lblNome);
+		
+		JLabel lblClima = new JLabel("Clima");
+		lblClima.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblClima.setBounds(317, 11, 70, 37);
+		contentPane.add(lblClima);
+		
+		JLabel lblTamanho = new JLabel("Tamanho");
+		lblTamanho.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTamanho.setBounds(623, 11, 102, 37);
+		contentPane.add(lblTamanho);
+		
+		JLabel lblLatitude = new JLabel("Latitude");
+		lblLatitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLatitude.setBounds(766, 11, 92, 37);
+		contentPane.add(lblLatitude);
+		
+		JLabel lblLongitude = new JLabel("Longitude");
+		lblLongitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLongitude.setBounds(931, 11, 102, 37);
+		contentPane.add(lblLongitude);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 }

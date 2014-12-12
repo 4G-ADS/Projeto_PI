@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTree;
+import javax.swing.ImageIcon;
 
 public class MenuPesquisador extends JFrame {
 
@@ -63,15 +64,19 @@ public class MenuPesquisador extends JFrame {
 		setTitle("Menu Pesquisador");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 451, 261);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblPesquisador = new JLabel("Pesquisador");
+		lblPesquisador.setBounds(10, 12, 128, 29);
 		lblPesquisador.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(991, 657, 73, 23);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -79,7 +84,9 @@ public class MenuPesquisador extends JFrame {
 			}
 		});
 		
-		JButton btnAdd = new JButton("Add");
+		JButton btnAdd = new JButton("");
+		btnAdd.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconAdd.png"));
+		btnAdd.setBounds(394, 57, 69, 53);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -87,7 +94,9 @@ public class MenuPesquisador extends JFrame {
 			}
 		});
 		
-		JButton btnPerfil = new JButton("Perfil");
+		JButton btnPerfil = new JButton("");
+		btnPerfil.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconEditar.png"));
+		btnPerfil.setBounds(394, 185, 69, 53);
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -115,7 +124,9 @@ public class MenuPesquisador extends JFrame {
 			}
 		});
 		
-		JButton button = new JButton("Excluir");
+		JButton button = new JButton("");
+		button.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconRemover.png"));
+		button.setBounds(394, 121, 69, 53);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPesquisador();
@@ -129,47 +140,20 @@ public class MenuPesquisador extends JFrame {
 		
 		table = new JTable(listaPesquisadorTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(489, 54, 575, 525);
 		scrollPane.setViewportView(table);
+		contentPane.setLayout(null);
+		contentPane.add(lblPesquisador);
+		contentPane.add(btnVoltar);
+		contentPane.add(btnAdd);
+		contentPane.add(btnPerfil);
+		contentPane.add(button);
+		contentPane.add(scrollPane);
 		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(131)
-							.addComponent(lblPesquisador))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(36)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnPerfil, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(35, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblPesquisador)
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnAdd)
-							.addGap(11)
-							.addComponent(btnPerfil)
-							.addGap(11)
-							.addComponent(button)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnVoltar)
-					.addGap(50))
-		);
-		contentPane.setLayout(gl_contentPane);
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 	
 	public void carregarTabela(){

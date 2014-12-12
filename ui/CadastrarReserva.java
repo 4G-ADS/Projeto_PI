@@ -29,6 +29,8 @@ import com.fafica.projeto_pi.modelos.Reserva;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class CadastrarReserva extends JFrame {
 
@@ -39,6 +41,7 @@ public class CadastrarReserva extends JFrame {
 	private JTextField campoLongitude;
 	private JTextField campoClima;
 	private Administrador admProvisorio;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -63,45 +66,51 @@ public class CadastrarReserva extends JFrame {
 		admProvisorio = adm;
 		setTitle("Cadastrar Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 451, 192);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(32, 17, 41, 16);
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNome.setBounds(10, 17, 84, 29);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
-		lblTamanho.setBounds(225, 57, 62, 16);
+		lblTamanho.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTamanho.setBounds(10, 94, 97, 26);
 		
 		JLabel lblLatitude = new JLabel("Latitude:");
-		lblLatitude.setBounds(19, 95, 55, 16);
+		lblLatitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLatitude.setBounds(10, 138, 97, 26);
 		
 		JLabel lblLongitude = new JLabel("Longitude:");
-		lblLongitude.setBounds(226, 95, 67, 16);
+		lblLongitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLongitude.setBounds(10, 175, 97, 28);
 		
 		campoNome = new JTextField();
-		campoNome.setBounds(79, 11, 348, 28);
+		campoNome.setBounds(117, 15, 348, 28);
 		campoNome.setColumns(10);
 		
 		campoTamanho = new JTextField();
-		campoTamanho.setBounds(293, 51, 134, 28);
+		campoTamanho.setBounds(117, 97, 134, 28);
 		campoTamanho.setColumns(10);
 		
 		campoLatitude = new JTextField();
-		campoLatitude.setBounds(80, 89, 134, 28);
+		campoLatitude.setBounds(117, 136, 134, 28);
 		campoLatitude.setColumns(10);
 		
 		campoLongitude = new JTextField();
-		campoLongitude.setBounds(299, 89, 128, 28);
+		campoLongitude.setBounds(117, 175, 128, 28);
 		campoLongitude.setColumns(10);
 		
 		campoClima = new JTextField();
-		campoClima.setBounds(79, 51, 134, 28);
+		campoClima.setBounds(117, 55, 134, 28);
 		campoClima.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Proximo");
-		btnCadastrar.setBounds(323, 129, 104, 29);
+		btnCadastrar.setBounds(960, 651, 104, 29);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 					
@@ -160,7 +169,8 @@ public class CadastrarReserva extends JFrame {
 		
 		
 		JLabel lblClima = new JLabel("Clima:");
-		lblClima.setBounds(32, 57, 40, 16);
+		lblClima.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblClima.setBounds(10, 57, 74, 25);
 		contentPane.setLayout(null);
 		contentPane.add(lblLatitude);
 		contentPane.add(lblTamanho);
@@ -173,5 +183,10 @@ public class CadastrarReserva extends JFrame {
 		contentPane.add(lblLongitude);
 		contentPane.add(campoLongitude);
 		contentPane.add(campoNome);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 }

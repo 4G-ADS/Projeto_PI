@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class CadastrarNascente extends JFrame {
 
@@ -32,6 +34,7 @@ public class CadastrarNascente extends JFrame {
 	private JTextField campoLongitude;
 	private JTextField campoNomeFonte;
 	private Reserva reservaProvisoria;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -56,32 +59,47 @@ public class CadastrarNascente extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Cadastrar Nascente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 452, 221);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTipo.setBounds(7, 15, 51, 33);
 		
 		JLabel lblLatitude = new JLabel("Latitude:");
+		lblLatitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLatitude.setBounds(10, 59, 81, 27);
 		
 		JLabel lblLongitude = new JLabel("Longitude:");
+		lblLongitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLongitude.setBounds(7, 95, 96, 27);
 		
-		JLabel lblNomeDaFonte = new JLabel("Nome\nda Fonte:");
+		JLabel lblNomeDaFonte = new JLabel("Nome \r\nda Fonte:");
+		lblNomeDaFonte.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNomeDaFonte.setBounds(8, 137, 144, 24);
 		
 		campoTipo = new JTextField();
+		campoTipo.setBounds(199, 20, 386, 30);
 		campoTipo.setColumns(10);
 		
 		campoLatitude = new JTextField();
+		campoLatitude.setBounds(198, 56, 386, 30);
 		campoLatitude.setColumns(10);
 		
 		campoLongitude = new JTextField();
+		campoLongitude.setBounds(199, 97, 385, 31);
 		campoLongitude.setColumns(10);
 		
 		campoNomeFonte = new JTextField();
+		campoNomeFonte.setBounds(198, 139, 386, 33);
 		campoNomeFonte.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Proximo");
+		btnCadastrar.setBounds(993, 657, 71, 23);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -110,61 +128,21 @@ public class CadastrarNascente extends JFrame {
 
 			}
 		});
+		contentPane.setLayout(null);
+		contentPane.add(lblTipo);
+		contentPane.add(lblLatitude);
+		contentPane.add(campoLatitude);
+		contentPane.add(lblLongitude);
+		contentPane.add(campoLongitude);
+		contentPane.add(campoTipo);
+		contentPane.add(lblNomeDaFonte);
+		contentPane.add(campoNomeFonte);
+		contentPane.add(btnCadastrar);
 		
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblTipo, Alignment.TRAILING)
-								.addComponent(lblLatitude, Alignment.TRAILING))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(campoLatitude, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-									.addComponent(lblLongitude)
-									.addGap(18)
-									.addComponent(campoLongitude, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
-								.addComponent(campoTipo, GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addGap(6)
-							.addComponent(lblNomeDaFonte, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(campoNomeFonte, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)))
-					.addGap(28))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(299, Short.MAX_VALUE)
-					.addComponent(btnCadastrar)
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(20)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTipo)
-						.addComponent(campoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLatitude)
-						.addComponent(campoLongitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblLongitude)
-						.addComponent(campoLatitude, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(12)
-							.addComponent(lblNomeDaFonte, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(campoNomeFonte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(34)
-					.addComponent(btnCadastrar))
-		);
-		contentPane.setLayout(gl_contentPane);
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 }

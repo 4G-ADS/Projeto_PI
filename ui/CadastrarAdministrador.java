@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class CadastrarAdministrador extends JFrame {
 
@@ -35,6 +37,7 @@ public class CadastrarAdministrador extends JFrame {
 	private JTextField campoSenha;
 	private JTextField campoCPF;
 	private Administrador adm;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -58,12 +61,15 @@ public class CadastrarAdministrador extends JFrame {
 	public CadastrarAdministrador() {
 		setTitle("Cadastrar Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 392, 203);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JButton btnAvanar = new JButton("Proximo");
+		btnAvanar.setBounds(993, 657, 71, 23);
 		btnAvanar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -109,71 +115,52 @@ public class CadastrarAdministrador extends JFrame {
 			}
 		});
 		
-		JLabel lblNome = new JLabel("Nome");
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNome.setBounds(25, 12, 71, 27);
 		
-		JLabel lblLogin = new JLabel("Login");
+		JLabel lblLogin = new JLabel("Login:");
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLogin.setBounds(25, 50, 71, 32);
 		
-		JLabel lblSenha = new JLabel("Senha");
+		JLabel lblSenha = new JLabel("Senha:");
+		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSenha.setBounds(25, 141, 71, 23);
 		
-		JLabel lblCpf = new JLabel("CPF");
+		JLabel lblCpf = new JLabel("CPF:");
+		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblCpf.setBounds(25, 97, 53, 23);
 		
 		campoNome = new JTextField();
+		campoNome.setBounds(99, 16, 304, 27);
 		campoNome.setColumns(10);
 		
 		campoLogin = new JTextField();
+		campoLogin.setBounds(99, 54, 304, 32);
 		campoLogin.setColumns(10);
 		
 		campoSenha = new JTextField();
+		campoSenha.setBounds(99, 139, 304, 35);
 		campoSenha.setColumns(10);
 		
 		campoCPF = new JTextField();
+		campoCPF.setBounds(99, 97, 304, 31);
 		campoCPF.setColumns(10);
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnAvanar)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblSenha, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblLogin, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNome, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-								.addComponent(campoLogin, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(campoSenha, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblCpf)
-									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-									.addComponent(campoCPF, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(campoNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNome))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(campoLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblLogin))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblSenha)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(campoCPF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblCpf))
-						.addComponent(campoSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-					.addComponent(btnAvanar))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(btnAvanar);
+		contentPane.add(lblSenha);
+		contentPane.add(lblLogin);
+		contentPane.add(lblNome);
+		contentPane.add(campoNome);
+		contentPane.add(campoLogin);
+		contentPane.add(campoSenha);
+		contentPane.add(lblCpf);
+		contentPane.add(campoCPF);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 	
 	public Administrador verificarUsuario() {

@@ -30,6 +30,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class AddNascente extends JFrame {
 
@@ -44,6 +46,7 @@ public class AddNascente extends JFrame {
 	private JLabel labelLongitude;
 	private JTextField campoLongitude;
 	private Reserva reservaProvisoria;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -68,13 +71,15 @@ public class AddNascente extends JFrame {
 		setTitle("Adicionar Nascente");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 409, 207);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		buttonCadastrar = new JButton("Adicionar");
-		buttonCadastrar.setBounds(276, 133, 117, 29);
+		buttonCadastrar.setBounds(947, 651, 117, 29);
 		buttonCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
 
@@ -105,31 +110,35 @@ public class AddNascente extends JFrame {
 			}});
 		
 		labelTipo = new JLabel("Tipo:");
-		labelTipo.setBounds(49, 11, 32, 16);
+		labelTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelTipo.setBounds(10, 11, 60, 22);
 		
-		labelNome = new JLabel("Nome\nda Fonte:");
-		labelNome.setBounds(11, 96, 107, 16);
+		labelNome = new JLabel("Nome \r\nda Fonte:");
+		labelNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelNome.setBounds(10, 134, 143, 22);
 		
 		campoNome = new JTextField();
-		campoNome.setBounds(116, 93, 277, 28);
+		campoNome.setBounds(200, 135, 277, 28);
 		campoNome.setColumns(10);
 		
 		labelLatitude = new JLabel("Latitude:");
-		labelLatitude.setBounds(21, 51, 60, 16);
+		labelLatitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelLatitude.setBounds(10, 47, 87, 27);
 		
 		campoTipo = new JTextField();
-		campoTipo.setBounds(83, 11, 120, 28);
+		campoTipo.setBounds(200, 12, 120, 28);
 		campoTipo.setColumns(10);
 		
 		campoLatitude = new JTextField();
-		campoLatitude.setBounds(83, 50, 120, 28);
+		campoLatitude.setBounds(200, 50, 120, 28);
 		campoLatitude.setColumns(10);
 		
 		labelLongitude = new JLabel("Longitude:");
-		labelLongitude.setBounds(227, 51, 70, 16);
+		labelLongitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelLongitude.setBounds(10, 85, 107, 31);
 		
 		campoLongitude = new JTextField();
-		campoLongitude.setBounds(297, 50, 96, 28);
+		campoLongitude.setBounds(200, 89, 120, 28);
 		campoLongitude.setColumns(10);
 		contentPane.setLayout(null);
 		contentPane.add(labelTipo);
@@ -141,6 +150,11 @@ public class AddNascente extends JFrame {
 		contentPane.add(labelNome);
 		contentPane.add(campoNome);
 		contentPane.add(buttonCadastrar);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 }

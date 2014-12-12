@@ -28,6 +28,8 @@ import com.fafica.projeto_pi.modelos.Reserva;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class AddPesquisador extends JFrame {
 
@@ -37,6 +39,7 @@ public class AddPesquisador extends JFrame {
 	private JTextField campoProfissao;
 	private JTextField campoNome;
 	private Reserva reservaProvisoria;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -61,41 +64,47 @@ public class AddPesquisador extends JFrame {
 		setTitle("Adicionar Pesquisador");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 382, 201);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel label = new JLabel("CPF:");
-		label.setBounds(41, 69, 27, 16);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label.setBounds(6, 45, 41, 34);
 		
 		JLabel label_3 = new JLabel("Nome:");
-		label_3.setBounds(27, 18, 41, 16);
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_3.setBounds(6, 18, 62, 16);
 		
 		JLabel label_1 = new JLabel("Idade:");
-		label_1.setBounds(242, 63, 41, 16);
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_1.setBounds(6, 90, 62, 22);
 		
 		JLabel label_2 = new JLabel("Profiss\u00E3o:");
-		label_2.setBounds(6, 113, 62, 16);
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_2.setBounds(6, 119, 91, 28);
 		
 		campoCFP = new JTextField();
-		campoCFP.setBounds(74, 57, 134, 28);
+		campoCFP.setBounds(106, 45, 134, 28);
 		campoCFP.setColumns(10);
 		
 		campoIdade = new JTextField();
-		campoIdade.setBounds(283, 57, 75, 28);
+		campoIdade.setBounds(106, 84, 134, 28);
 		campoIdade.setColumns(10);
 		
 		campoProfissao = new JTextField();
-		campoProfissao.setBounds(74, 101, 284, 28);
+		campoProfissao.setBounds(107, 123, 284, 28);
 		campoProfissao.setColumns(10);
 		
 		campoNome = new JTextField();
-		campoNome.setBounds(74, 6, 284, 28);
+		campoNome.setBounds(107, 6, 284, 28);
 		campoNome.setColumns(10);
 		
 		JButton buttonAdd = new JButton("Adicionar");
-		buttonAdd.setBounds(238, 141, 120, 29);
+		buttonAdd.setBounds(944, 651, 120, 29);
 		buttonAdd.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
@@ -137,6 +146,11 @@ public class AddPesquisador extends JFrame {
 		contentPane.add(campoProfissao);
 		contentPane.add(label_2);
 		contentPane.add(buttonAdd);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 }

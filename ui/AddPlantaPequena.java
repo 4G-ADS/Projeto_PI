@@ -35,6 +35,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class AddPlantaPequena extends JFrame {
 
@@ -43,6 +45,7 @@ public class AddPlantaPequena extends JFrame {
 	private JTextField campoEspecie;
 	private JTextField campoTamanho;
 	private Reserva reservaProvisoria;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -67,34 +70,39 @@ public class AddPlantaPequena extends JFrame {
 		setTitle("Adicionar Planta Pequena");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 452, 211);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 
 		JLabel label = new JLabel("Nome:");
-		label.setBounds(51, 14, 41, 16);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label.setBounds(10, 8, 69, 33);
 
 		campoNome = new JTextField();
-		campoNome.setBounds(101, 14, 320, 28);
+		campoNome.setBounds(117, 14, 320, 28);
 		campoNome.setColumns(10);
 
 		JLabel label_1 = new JLabel("Esp\u00E9cie:");
-		label_1.setBounds(41, 60, 51, 16);
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_1.setBounds(10, 56, 82, 28);
 
 		campoEspecie = new JTextField();
-		campoEspecie.setBounds(102, 60, 319, 28);
+		campoEspecie.setBounds(117, 60, 319, 28);
 		campoEspecie.setColumns(10);
 
 		JLabel label_2 = new JLabel("Tamanho:");
-		label_2.setBounds(30, 106, 62, 16);
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_2.setBounds(10, 108, 97, 28);
 
 		campoTamanho = new JTextField();
-		campoTamanho.setBounds(102, 106, 319, 28);
+		campoTamanho.setBounds(117, 112, 319, 28);
 		campoTamanho.setColumns(10);
 
 		JButton buttonAdicionar = new JButton("Adicionar");
-		buttonAdicionar.setBounds(324, 146, 97, 29);
+		buttonAdicionar.setBounds(967, 651, 97, 29);
 		buttonAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -136,5 +144,10 @@ public class AddPlantaPequena extends JFrame {
 		contentPane.add(buttonAdicionar);
 		contentPane.add(label);
 		contentPane.add(campoNome);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 }

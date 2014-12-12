@@ -21,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class EditarSolo extends JFrame {
 
@@ -56,28 +58,34 @@ public class EditarSolo extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Editar Solo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 295, 230);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel labelId = new JLabel("ID:");
-		labelId.setBounds(52, 26, 18, 16);
+		labelId.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelId.setBounds(366, 43, 37, 31);
 		
 		JLabel labelTipo = new JLabel("Tipo:");
-		labelTipo.setBounds(38, 53, 32, 16);
+		labelTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelTipo.setBounds(366, 85, 47, 35);
 		
 		JLabel labelTamanho = new JLabel("Tamanho:");
-		labelTamanho.setBounds(8, 86, 62, 16);
+		labelTamanho.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelTamanho.setBounds(366, 125, 99, 32);
 		
 		JLabel labelRecursos = new JLabel("Recursos:");
-		labelRecursos.setBounds(9, 120, 61, 16);
+		labelRecursos.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelRecursos.setBounds(367, 168, 89, 29);
 		
 		carregarCaracteristicas();
 		
 		
 		JButton buttonVoltar = new JButton("Voltar");
-		buttonVoltar.setBounds(202, 160, 75, 29);
+		buttonVoltar.setBounds(989, 651, 75, 29);
 		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -102,7 +110,7 @@ public class EditarSolo extends JFrame {
 		
 		
 		JButton buttonEditarRescursos = new JButton("Editar");
-		buttonEditarRescursos.setBounds(192, 119, 89, 29);
+		buttonEditarRescursos.setBounds(975, 172, 89, 29);
 		buttonEditarRescursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String recursos = JOptionPane.showInputDialog("novo recurso");
@@ -112,7 +120,7 @@ public class EditarSolo extends JFrame {
 		});
 		
 		JButton buttonEditarTamanho = new JButton("Editar");
-		buttonEditarTamanho.setBounds(192, 85, 89, 29);
+		buttonEditarTamanho.setBounds(975, 131, 89, 29);
 		buttonEditarTamanho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double tamanho = Double.parseDouble(JOptionPane.showInputDialog("novo tamanho"));
@@ -122,7 +130,7 @@ public class EditarSolo extends JFrame {
 		});
 		
 		JButton buttonEditarTipo = new JButton("Editar");
-		buttonEditarTipo.setBounds(192, 52, 89, 29);
+		buttonEditarTipo.setBounds(975, 92, 89, 29);
 		buttonEditarTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = JOptionPane.showInputDialog("novo tipo");
@@ -143,20 +151,29 @@ public class EditarSolo extends JFrame {
 		contentPane.add(labelCarregarRecursos);
 		contentPane.add(buttonEditarRescursos);
 		contentPane.add(buttonVoltar);
+		
+		JLabel planoDeFuno = new JLabel("New label");
+		planoDeFuno.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFuno.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFuno);
 	}
 	
 	public void carregarCaracteristicas(){
 		
 		labelCarregarID = new JLabel(""+soloProvisorio.getIdSolo());
-		labelCarregarID.setBounds(82, 26, 32, 16);
+		labelCarregarID.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarID.setBounds(494, 50, 455, 25);
 		
 		labelCarregarTipo = new JLabel(soloProvisorio.getTipo());
-		labelCarregarTipo.setBounds(82, 53, 79, 16);
+		labelCarregarTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarTipo.setBounds(494, 85, 455, 25);
 		
 		labelCarregarTamanho = new JLabel(""+soloProvisorio.getTamanho());
-		labelCarregarTamanho.setBounds(82, 87, 32, 16);
+		labelCarregarTamanho.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarTamanho.setBounds(494, 127, 455, 28);
 		
 		labelCarregarRecursos = new JLabel(soloProvisorio.getResursos());
-		labelCarregarRecursos.setBounds(82, 120, 79, 16);
+		labelCarregarRecursos.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarRecursos.setBounds(494, 174, 455, 23);
 	}
 }

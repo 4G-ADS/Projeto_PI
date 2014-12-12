@@ -31,6 +31,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
 
 public class MenuSolo extends JFrame {
 
@@ -62,17 +63,18 @@ public class MenuSolo extends JFrame {
 		setTitle("Menu Solo");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 434, 280);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+		setResizable(false);
+		setLocationRelativeTo(null);
 		JLabel lblSolo = new JLabel("Solo");
-		lblSolo.setBounds(193, 11, 48, 27);
+		lblSolo.setBounds(10, 11, 48, 27);
 		lblSolo.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
 		JButton button = new JButton("Voltar");
-		button.setBounds(334, 211, 73, 29);
+		button.setBounds(991, 635, 73, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -80,8 +82,9 @@ public class MenuSolo extends JFrame {
 			}
 		});
 		
-		JButton button_1 = new JButton("Add");
-		button_1.setBounds(20, 49, 87, 29);
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconAdd.png"));
+		button_1.setBounds(382, 89, 73, 42);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -89,8 +92,9 @@ public class MenuSolo extends JFrame {
 			}
 		});
 		
-		JButton button_2 = new JButton("Perfil");
-		button_2.setBounds(20, 89, 87, 29);
+		JButton button_2 = new JButton("");
+		button_2.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconEditar.png"));
+		button_2.setBounds(382, 195, 73, 42);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -114,8 +118,9 @@ public class MenuSolo extends JFrame {
 			}
 		});
 		
-		JButton button_3 = new JButton("Excluir");
-		button_3.setBounds(20, 129, 87, 29);
+		JButton button_3 = new JButton("");
+		button_3.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconRemover.png"));
+		button_3.setBounds(382, 142, 73, 42);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -130,7 +135,7 @@ public class MenuSolo extends JFrame {
 	
 		table = new JTable(listaSoloTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(119, 50, 288, 161);
+		scrollPane.setBounds(489, 89, 575, 525);
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(null);
 		contentPane.add(lblSolo);
@@ -139,6 +144,11 @@ public class MenuSolo extends JFrame {
 		contentPane.add(button_3);
 		contentPane.add(scrollPane);
 		contentPane.add(button);
+		
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 	public void carregarTabela(){

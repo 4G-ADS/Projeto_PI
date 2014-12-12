@@ -38,6 +38,7 @@ import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class MenuPlantaPequena extends JFrame {
 
@@ -70,18 +71,20 @@ public class MenuPlantaPequena extends JFrame {
 		setTitle("Menu Planta Pequena");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 427, 300);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblPlanta = new JLabel("Planta Pequeno Porte");
-		lblPlanta.setBounds(104, 19, 240, 27);
+		lblPlanta.setBounds(10, 11, 240, 27);
 		lblPlanta.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
 				
 		JButton button = new JButton("Voltar");
-		button.setBounds(326, 229, 73, 29);
+		button.setBounds(981, 624, 73, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -89,8 +92,9 @@ public class MenuPlantaPequena extends JFrame {
 			}
 		});
 		
-		JButton button_1 = new JButton("Add");
-		button_1.setBounds(37, 69, 63, 29);
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconAdd.png"));
+		button_1.setBounds(390, 54, 63, 43);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -99,8 +103,9 @@ public class MenuPlantaPequena extends JFrame {
 			}
 		});
 		
-		JButton button_2 = new JButton("Perfil");
-		button_2.setBounds(37, 119, 63, 29);
+		JButton button_2 = new JButton("");
+		button_2.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconEditar.png"));
+		button_2.setBounds(390, 162, 63, 43);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -108,8 +113,9 @@ public class MenuPlantaPequena extends JFrame {
 			}
 		});
 		
-		JButton button_3 = new JButton("Excluir");
-		button_3.setBounds(25, 167, 87, 29);
+		JButton button_3 = new JButton("");
+		button_3.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconRemover.png"));
+		button_3.setBounds(390, 108, 63, 43);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPlanta();
@@ -123,7 +129,7 @@ public class MenuPlantaPequena extends JFrame {
 		
 		table = new JTable(listaPlantaTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(111, 69, 288, 161);
+		scrollPane.setBounds(479, 54, 575, 525);
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(null);
 		contentPane.add(button);
@@ -132,6 +138,11 @@ public class MenuPlantaPequena extends JFrame {
 		contentPane.add(button_2);
 		contentPane.add(button_3);
 		contentPane.add(scrollPane);
+		
+		JLabel plandoDeFundo = new JLabel("New label");
+		plandoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		plandoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(plandoDeFundo);
 	}
 	
 	public void perfil(){

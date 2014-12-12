@@ -18,6 +18,8 @@ import com.fafica.projeto_pi.excecoes.NascenteNaoEncontradaException;
 import com.fafica.projeto_pi.fachada.Fachada;
 import com.fafica.projeto_pi.modelos.NascenteAgua;
 import com.fafica.projeto_pi.modelos.Reserva;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class EditarNascente extends JFrame {
 
@@ -54,32 +56,39 @@ public class EditarNascente extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Editar Nascente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 340, 273);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel labelTipo = new JLabel("Tipo:");
-		labelTipo.setBounds(76, 58, 32, 16);
+		labelTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelTipo.setBounds(419, 85, 67, 29);
 		
 		JLabel labelLatitude = new JLabel("Latitude:");
-		labelLatitude.setBounds(53, 132, 55, 16);
+		labelLatitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelLatitude.setBounds(419, 165, 89, 26);
 		
 		JLabel labelNome = new JLabel("Nome da Fonte:");
-		labelNome.setBounds(9, 99, 99, 16);
+		labelNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelNome.setBounds(419, 125, 150, 29);
 		
 		JLabel labelLongitude = new JLabel("Longitude:");
-		labelLongitude.setBounds(41, 165, 67, 16);
+		labelLongitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelLongitude.setBounds(419, 208, 100, 29);
 		
 		JLabel lblId = new JLabel("ID:");
-		lblId.setBounds(84, 24, 24, 16);
+		lblId.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblId.setBounds(419, 45, 34, 29);
 		
 		carregarCaracteristicas();
 		
 		
 		
 		JButton buttonVoltar = new JButton("Voltar");
-		buttonVoltar.setBounds(239, 205, 80, 29);
+		buttonVoltar.setBounds(984, 651, 80, 29);
 		buttonVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -102,7 +111,7 @@ public class EditarNascente extends JFrame {
 		
 		
 		JButton buttonEditarTipo = new JButton("Editar");
-		buttonEditarTipo.setBounds(229, 57, 89, 29);
+		buttonEditarTipo.setBounds(961, 88, 89, 29);
 		buttonEditarTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String tipo = JOptionPane.showInputDialog("novo tipo");
@@ -112,7 +121,7 @@ public class EditarNascente extends JFrame {
 		});
 		
 		JButton buttonEditarNome = new JButton("Editar");
-		buttonEditarNome.setBounds(229, 98, 89, 29);
+		buttonEditarNome.setBounds(961, 129, 89, 29);
 		buttonEditarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nome = JOptionPane.showInputDialog("novo nome");
@@ -122,7 +131,7 @@ public class EditarNascente extends JFrame {
 		});
 		
 		JButton buttonEditarLatitude = new JButton("Editar");
-		buttonEditarLatitude.setBounds(229, 131, 89, 29);
+		buttonEditarLatitude.setBounds(961, 162, 89, 29);
 		buttonEditarLatitude.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int lalitude = Integer.parseInt(JOptionPane.showInputDialog("nova latitude"));
@@ -132,7 +141,7 @@ public class EditarNascente extends JFrame {
 		});
 		
 		JButton buttonEditarLongitade = new JButton("Editar");
-		buttonEditarLongitade.setBounds(229, 164, 89, 29);
+		buttonEditarLongitade.setBounds(961, 195, 89, 29);
 		buttonEditarLongitade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int longitude = Integer.parseInt(JOptionPane.showInputDialog("nova longitude"));
@@ -156,23 +165,33 @@ public class EditarNascente extends JFrame {
 		contentPane.add(labelCarregarLongitude);
 		contentPane.add(buttonEditarLongitade);
 		contentPane.add(buttonVoltar);
+		
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 	
 	public void carregarCaracteristicas(){
 		
 		labelCarregarTipo = new JLabel(nascenteProvisoria.getTipo());
-		labelCarregarTipo.setBounds(120, 57, 80, 16);
+		labelCarregarTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarTipo.setBounds(579, 82, 372, 32);
 		
 		labelCarregarNome = new JLabel(nascenteProvisoria.getNomeFonte());
-		labelCarregarNome.setBounds(120, 98, 80, 16);
+		labelCarregarNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarNome.setBounds(584, 125, 363, 26);
 		
 		labelCarregarLatitude = new JLabel(""+nascenteProvisoria.getLatitude());
-		labelCarregarLatitude.setBounds(120, 131, 46, 16);
+		labelCarregarLatitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarLatitude.setBounds(584, 162, 363, 28);
 		
 		labelCarregarLongitude = new JLabel(""+nascenteProvisoria.getLongitude());
-		labelCarregarLongitude.setBounds(120, 164, 46, 16);
+		labelCarregarLongitude.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarLongitude.setBounds(584, 201, 363, 33);
 		
 		labelCarregarID = new JLabel(""+nascenteProvisoria.getIdAgua());
-		labelCarregarID.setBounds(110, 24, 46, 16);
+		labelCarregarID.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarID.setBounds(584, 55, 363, 19);
 	}
 }

@@ -40,6 +40,8 @@ import com.fafica.projeto_pi.modelos.Reserva;
 
 import javax.swing.JSpinner;
 import javax.swing.JSeparator;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class CadastrarPlanta extends JFrame {
 
@@ -49,6 +51,7 @@ public class CadastrarPlanta extends JFrame {
 	private JTextField campoTamanho;
 	private JComboBox comboBox;
 	private Reserva reservaProvisoria;
+	private JLabel planoDeFundo;
 
 	/**
 	 * Launch the application.
@@ -73,39 +76,44 @@ public class CadastrarPlanta extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Cadastrar Planta");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 430, 269);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(32, 38, 41, 16);
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNome.setBounds(32, 38, 62, 26);
 		
-		JLabel lblEspcie = new JLabel("Espécie:");
-		lblEspcie.setBounds(22, 85, 51, 16);
+		JLabel lblEspcie = new JLabel("Esp\u00E9cie");
+		lblEspcie.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblEspcie.setBounds(32, 117, 80, 26);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
-		lblTamanho.setBounds(220, 85, 62, 16);
+		lblTamanho.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTamanho.setBounds(32, 75, 92, 31);
 		
 		campoNome = new JTextField();
-		campoNome.setBounds(78, 32, 136, 28);
+		campoNome.setBounds(134, 41, 300, 28);
 		campoNome.setColumns(10);
 		
 		campoEspecie = new JTextField();
-		campoEspecie.setBounds(80, 79, 134, 28);
+		campoEspecie.setBounds(134, 120, 300, 28);
 		campoEspecie.setColumns(10);
 		
 		campoTamanho = new JTextField();
-		campoTamanho.setBounds(287, 79, 121, 28);
+		campoTamanho.setBounds(134, 76, 300, 28);
 		campoTamanho.setColumns(10);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(251, 34, 155, 27);
+		comboBox.setBounds(487, 42, 155, 27);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Pequeno Porte", "Medio Porte", "Grande Porte"}));
 		
-		JButton btnProximo = new JButton("Proximo");
-		btnProximo.setBounds(307, 190, 97, 29);
-		btnProximo.addActionListener(new ActionListener() {
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setBounds(967, 651, 97, 29);
+		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 				String nome = campoNome.getText();
@@ -192,6 +200,11 @@ public class CadastrarPlanta extends JFrame {
 		contentPane.add(lblTamanho);
 		contentPane.add(campoTamanho);
 		contentPane.add(comboBox);
-		contentPane.add(btnProximo);
+		contentPane.add(btnFinalizar);
+		
+		planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 }

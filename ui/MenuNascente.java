@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
 
 public class MenuNascente extends JFrame {
 
@@ -62,23 +63,20 @@ public class MenuNascente extends JFrame {
 		setTitle("Menu Nascente");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 430, 285);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNascente = new JLabel("Nascente");
+		lblNascente.setBounds(10, 29, 103, 27);
 		lblNascente.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		
-		JButton button = new JButton("Voltar");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
-			}
-		});
-		
-		JButton button_1 = new JButton("Add");
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconAdd.png"));
+		button_1.setBounds(459, 38, 63, 44);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -86,7 +84,9 @@ public class MenuNascente extends JFrame {
 			}
 		});
 		
-		JButton button_2 = new JButton("Perfil");
+		JButton button_2 = new JButton("");
+		button_2.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconEditar.png"));
+		button_2.setBounds(459, 148, 63, 44);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -112,7 +112,9 @@ public class MenuNascente extends JFrame {
 			}
 		});
 		
-		JButton button_3 = new JButton("Excluir");
+		JButton button_3 = new JButton("");
+		button_3.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconRemover.png"));
+		button_3.setBounds(459, 93, 63, 44);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -126,48 +128,29 @@ public class MenuNascente extends JFrame {
 		
 		table = new JTable(listaNascentesTabela,colunas);
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(539, 33, 525, 575);
 		scrollPane.setViewportView(table);
+		contentPane.setLayout(null);
+		contentPane.add(lblNascente);
+		contentPane.add(button_2);
+		contentPane.add(button_3);
 		
+		JButton button = new JButton("Voltar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				new TelaPrincipalReserva(reservaProvisoria).setVisible(true);
+			}
+		});
+		button.setBounds(991, 657, 73, 23);
+		contentPane.add(button);
+		contentPane.add(scrollPane);
+		contentPane.add(button_1);
 		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(151)
-							.addComponent(lblNascente, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(15)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(button, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(button_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_3, Alignment.TRAILING))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(8, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblNascente, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addGap(17)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button_1)
-							.addGap(11)
-							.addComponent(button_2)
-							.addGap(11)
-							.addComponent(button_3))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(button)
-					.addGap(13))
-		);
-		contentPane.setLayout(gl_contentPane);
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setBounds(0, 0, 1078, 691);
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		contentPane.add(planoDeFundo);
 	}
 
 	public void carregarTabela(){
@@ -215,6 +198,4 @@ public class MenuNascente extends JFrame {
 			e1.printStackTrace();
 		}
 	}
-	
-	
 }

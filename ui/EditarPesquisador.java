@@ -23,6 +23,8 @@ import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class EditarPesquisador extends JFrame {
 
@@ -59,30 +61,37 @@ public class EditarPesquisador extends JFrame {
 		reservaProvisoria = reserva;
 		setTitle("Editar Pesquisador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 316, 249);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel labelCPF = new JLabel("CPF:");
-		labelCPF.setBounds(45, 45, 27, 16);
+		labelCPF.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCPF.setBounds(377, 70, 46, 22);
 		
 		JLabel labelNome = new JLabel("Nome:");
-		labelNome.setBounds(26, 72, 46, 16);
+		labelNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelNome.setBounds(377, 103, 65, 23);
 		
-		JLabel labelProfisso = new JLabel("Profissão:");
-		labelProfisso.setBounds(10, 138, 62, 16);
+		JLabel labelProfisso = new JLabel("Profiss\u00E3o:");
+		labelProfisso.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelProfisso.setBounds(377, 163, 95, 29);
 		
 		JLabel labelIdade = new JLabel("Idade:");
-		labelIdade.setBounds(34, 105, 38, 16);
+		labelIdade.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelIdade.setBounds(377, 130, 65, 33);
 		
-		JLabel labelID = new JLabel("ID");
-		labelID.setBounds(53, 18, 19, 16);
+		JLabel labelID = new JLabel("ID:");
+		labelID.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelID.setBounds(377, 43, 33, 22);
 		
 		carregarCaracteristicas();
 		
 		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.setBounds(216, 183, 86, 29);
+		btnAlterar.setBounds(978, 651, 86, 29);
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
@@ -110,7 +119,7 @@ public class EditarPesquisador extends JFrame {
 		});
 		
 		JButton buttonEditarNome = new JButton("Editar");
-		buttonEditarNome.setBounds(213, 72, 89, 29);
+		buttonEditarNome.setBounds(963, 97, 89, 29);
 		buttonEditarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome = JOptionPane.showInputDialog("novo nome");
@@ -120,7 +129,7 @@ public class EditarPesquisador extends JFrame {
 		});
 		
 		JButton buttonEditarIdade = new JButton("Editar");
-		buttonEditarIdade.setBounds(213, 109, 89, 29);
+		buttonEditarIdade.setBounds(963, 134, 89, 29);
 		buttonEditarIdade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int idade = Integer.parseInt(JOptionPane.showInputDialog("nova idade"));
@@ -130,7 +139,7 @@ public class EditarPesquisador extends JFrame {
 		});
 		
 		JButton buttonProfissao = new JButton("Editar");
-		buttonProfissao.setBounds(213, 142, 89, 29);
+		buttonProfissao.setBounds(963, 167, 89, 29);
 		buttonProfissao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String profissao = JOptionPane.showInputDialog("nova profissoa");
@@ -153,24 +162,34 @@ public class EditarPesquisador extends JFrame {
 		contentPane.add(labelCarregarProfissao);
 		contentPane.add(buttonProfissao);
 		contentPane.add(buttonEditarNome);
+		
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 	public void carregarCaracteristicas(){
 		
 		
 		labelCarregarId = new JLabel(""+ pesquisadorTemporario.getIdPesquisador());
-		labelCarregarId.setBounds(80, 19, 46, 14);
+		labelCarregarId.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarId.setBounds(478, 43, 446, 18);
 		
 		labelCarregarNome = new JLabel(pesquisadorTemporario.getNome());
-		labelCarregarNome.setBounds(80, 73, 73, 14);
+		labelCarregarNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarNome.setBounds(478, 101, 446, 26);
 		
 		labelCarregarCPF = new JLabel(""+pesquisadorTemporario.getCpf());
-		labelCarregarCPF.setBounds(80, 46, 73, 14);
+		labelCarregarCPF.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarCPF.setBounds(478, 70, 446, 22);
 		
 		labelCarregarIdade = new JLabel(""+pesquisadorTemporario.getIdade());
-		labelCarregarIdade.setBounds(80, 106, 46, 14);
+		labelCarregarIdade.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarIdade.setBounds(478, 134, 73, 24);
 		
 		labelCarregarProfissao = new JLabel(pesquisadorTemporario.getProfissao());
-		labelCarregarProfissao.setBounds(81, 139, 72, 14);
+		labelCarregarProfissao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCarregarProfissao.setBounds(478, 163, 446, 29);
 	}
 }

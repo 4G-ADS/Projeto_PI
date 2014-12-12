@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
 
 public class MenuPlantaGrande extends JFrame {
 
@@ -61,17 +62,19 @@ public class MenuPlantaGrande extends JFrame {
 		setTitle("Menu Planta Grande");
 		reservaProvisoria = reserva;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 440, 293);
+		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
+		setLocationRelativeTo(null);
 
 		JLabel lblPlanta = new JLabel("Planta Grande Porte");
-		lblPlanta.setBounds(114, 16, 223, 27);
+		lblPlanta.setBounds(10, 11, 223, 27);
 		lblPlanta.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 
 		JButton button = new JButton("Voltar");
-		button.setBounds(340, 228, 73, 29);
+		button.setBounds(981, 628, 73, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -79,8 +82,9 @@ public class MenuPlantaGrande extends JFrame {
 			}
 		});
 
-		JButton button_1 = new JButton("Add");
-		button_1.setBounds(50, 55, 63, 29);
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconAdd.png"));
+		button_1.setBounds(384, 55, 63, 45);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -89,8 +93,9 @@ public class MenuPlantaGrande extends JFrame {
 			}
 		});
 
-		JButton button_2 = new JButton("Perfil");
-		button_2.setBounds(50, 84, 63, 29);
+		JButton button_2 = new JButton("");
+		button_2.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconEditar.png"));
+		button_2.setBounds(384, 167, 63, 45);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 	
@@ -98,8 +103,9 @@ public class MenuPlantaGrande extends JFrame {
 			}
 		});
 
-		JButton button_3 = new JButton("Excluir");
-		button_3.setBounds(38, 114, 75, 29);
+		JButton button_3 = new JButton("");
+		button_3.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\iconRemover.png"));
+		button_3.setBounds(384, 111, 63, 45);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirPlanta();
@@ -113,7 +119,7 @@ public class MenuPlantaGrande extends JFrame {
 
 		table = new JTable(listaPlantaTabela, colunas);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(125, 55, 288, 161);
+		scrollPane.setBounds(479, 55, 575, 525);
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(null);
 		contentPane.add(button);
@@ -122,6 +128,11 @@ public class MenuPlantaGrande extends JFrame {
 		contentPane.add(button_3);
 		contentPane.add(scrollPane);
 		contentPane.add(lblPlanta);
+		
+		JLabel planoDeFundo = new JLabel("New label");
+		planoDeFundo.setIcon(new ImageIcon("C:\\Users\\paulo_000\\Desktop\\PI\\Projeto\\imgens\\planoDeFundo.png"));
+		planoDeFundo.setBounds(0, 0, 1074, 691);
+		contentPane.add(planoDeFundo);
 	}
 
 	public void preenceherTabelaPlantasGrandePorte() {
