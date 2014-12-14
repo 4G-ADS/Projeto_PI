@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 public class Conexao {
 
-	//variaval para conexao com o banco
+	//variaval para conexao com o banco...
 	private static Connection connection;
 
 	public static Connection getConnection(int banco) throws Exception {
